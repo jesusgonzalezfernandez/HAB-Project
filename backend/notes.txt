@@ -1,0 +1,17 @@
+- He metido el email sengrid en .env
+- También he metido otro campo email y admin para crear el admin
+- Ojo a los errores de los catch. Si no se hace return despues de hacer un throw new Error o hacer el res.status.send a veces devuelve errores en el terminal
+- PerformQuery. Devuelve un array dentro de un array. Al acceder a ún único elemento, es necesario acceder al primer elemento del array.
+                Sin embargo, si se configura para obtener un único elemento, al obtener una lista de objetos, solo devolverá el primero de ellos.
+                Podemos hacer dos performQuery diferentes (uno con [[result]] y otro con [result]) o podemos procesar el resultado dentro del controlador
+                (añadiendo (await performQuery()) [0] en el retorno al controlador para obtener un único resultado, o dejándolo sin modificar para obtener todo el array)
+- Será mejor crear el reqData incluso cuando solo hay una variable? De esa forma los endpoints quedan todos igual, y permite hacer cambios muy facilmente a posteriori
+  si es necesario añadir más variables
+- getUser/question etc se podría hacer con el perform y devolviendo el resutlado directamente?
+- Hay una forma de obtener errores de vuelta al hacer el performQuery. Cuando se hace un SELECT se obtiene un registro de vuelta,
+  pero al hacer INSERTS o UPDATES también devuelve un objeto si ha tenido exito, o undefined si ha habido algún error. Así que podemos recogerlo y 
+  hacer cosas con el.
+
+- Hacer un solo delete para todo el contenido
+- Igual no hace falta utilizar dos endpoints en el listado de usuarios para registrados/anónimos.
+  Se puede chekear si hay token y hacer una query u otra según el resultado
