@@ -6,6 +6,7 @@ import Questions from './Content/Questions';
 import Recovery from './User/Recovery';
 import Reset from './User/Reset';
 import { Switch, Route } from 'react-router-dom';
+import CreateQuestion from './Content/CreateQuestion';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/recovery/:code" exact>
           <Reset />
+        </Route>
+        <Route path="/create-question" exact>
+          <CreateQuestion />
         </Route>
       </Switch>
     </div >
