@@ -14,6 +14,7 @@ const isSameUser = require ('./middlewares/isSameUser')
 const isExpert = require ('./middlewares/isExpert')
 const isAuthor = require ('./middlewares/isAuthor')
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
