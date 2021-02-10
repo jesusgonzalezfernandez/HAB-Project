@@ -1,0 +1,15 @@
+.quill {
+    width: 75%;
+    margin: auto;
+}
+
+.ql-toolbar.ql-snow {
+    padding: 25px;
+    background-color: lightsalmon;
+}
+
+.ql-container.ql-snow{
+    background-color: lightgray;
+    min-height: 500px;
+
+}
