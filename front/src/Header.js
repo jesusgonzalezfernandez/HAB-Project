@@ -12,8 +12,8 @@ function Header() {
 
   return (
     <header>
-        <h1><Link to="/">Preguntify</Link></h1>
-        <Link to="/about">¿Qué es Preguntify?</Link>
+        <h1><Link to="/">Howdoi</Link></h1>
+        <Link to="/about">¿Qué es Howdoi?</Link>
         <Link to="/questions">Preguntas</Link>
         {!login &&
             <Link to="/login">Iniciar sesión</Link>
