@@ -1,17 +1,34 @@
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import Header from './Header';
+import Home from './Home';
+import Login from './User/Login';
+import Questions from './Content/Questions';
+import Recovery from './User/Recovery';
+import Reset from './User/Reset';
+import { Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-        <Switch>
-          <Route path="/" exact>
-            <header className="App-header">
-              <h1>Welcome to Howdoi</h1>
-            </header>
-          </Route>
-        </Switch>
-    </div>
+      <Header />
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/questions">
+          <Questions />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/recovery" exact>
+          <Recovery />
+        </Route>
+        <Route path="/recovery/:code" exact>
+          <Reset />
+        </Route>
+      </Switch>
+    </div >
   );
 }
 
