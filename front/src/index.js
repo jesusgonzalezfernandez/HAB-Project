@@ -28,7 +28,7 @@ const saved = localStorage.getItem("session")
 // Si se han obtenido datos de localStorage, se guardan en initialStore
 const initialStore = saved ? JSON.parse(saved) : undefined
 
-// Poblar el store con el rootReducer, o el initialStore
+// Poblar el store
 const store = createStore(rootReducer, initialStore, applyMiddleware(localStorageMiddleware))
 
 /*

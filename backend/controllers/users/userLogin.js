@@ -90,7 +90,7 @@ const userLogin = async (req, res) => {
                 userID: user.id,
                 isAdmin: user.role === 'admin',
                 email: user.email,
-                userName: user.userName,
+                username: user.username,
                 name: user.name,
                 role: user.role,
                 isExpert: user.role === 'expert',
@@ -105,7 +105,12 @@ const userLogin = async (req, res) => {
             await updateTokenQuery(token, reqData.email)
 
             // Enviar al front
-            // res.json({token})
+            res.json({
+                token,
+                userID: user.id,
+                username: user.username,
+                role: user.role
+            })
 
     } catch (e) {
 
