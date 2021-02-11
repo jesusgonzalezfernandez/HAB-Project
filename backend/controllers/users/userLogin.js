@@ -105,7 +105,7 @@ const userLogin = async (req, res) => {
             await updateTokenQuery(token, reqData.email)
 
             // Enviar al front
-            res.json({token})
+            // res.json({token})
 
     } catch (e) {
 
