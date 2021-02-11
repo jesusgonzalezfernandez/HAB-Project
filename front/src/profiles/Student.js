@@ -3,14 +3,13 @@ import { useParams } from 'react-router-dom';
 import useFetch from '../useFetch'
 
 function Student() {
-    const { id } = useParams()
-    // const login = useSelector(l => l.login)
-    // const dispatch = useDispatch()  
-    const data = useFetch(`http://localhost:9999/users/profile/2`) || [] 
-    console.log(data)
+    // const { id } = useParams()
+
+    // const data = useFetch('http://localhost:9999/users/profile/1') || [] 
+    // console.log(data)
       return (
         <div>
-            {data.map(s => s.email)}
+            <h1>Hola</h1>
 
         </div>
       );

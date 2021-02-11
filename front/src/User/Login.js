@@ -8,7 +8,7 @@ function Login() {
 
   const login = useSelector(s => s.login)
   const dispatch = useDispatch()
-
+  
   const handleSubmit = async e => {
     e.preventDefault()
     const res = await fetch('http://localhost:9999/users/login', {
@@ -19,8 +19,14 @@ function Login() {
     const data = await res.json()
     dispatch({ type: 'login', data })
   }
-  if (login) return <Redirect to="/" />
+  // if (login) return <Redirect to="/" />
 
+  if (login) {
+    console.log('Logueado con los datos: ' + login.token)
+    return <Redirect to="/" />
+  }
+  
+  
   return (
     <form className="page login" onSubmit={handleSubmit}>
         <div>
