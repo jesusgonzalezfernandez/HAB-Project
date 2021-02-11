@@ -1,5 +1,5 @@
 // Conectarse a BD
-const getConnection = require('../db/getConnection');
+const getConnection = require('../getConnection');
 
 
 

@@ -7,7 +7,7 @@ import ErrorBoundary from './ErrorBoundary';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import loginReducer from './store/loginReducer';
+import loginReducer from './Store/loginReducer';
 
 const rootReducer = combineReducers({
   login: loginReducer

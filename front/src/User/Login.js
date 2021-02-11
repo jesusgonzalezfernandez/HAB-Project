@@ -19,7 +19,6 @@ function Login() {
     const data = await res.json()
     dispatch({ type: 'login', data })
   }
-
   if (login) return <Redirect to="/" />
 
   return (
