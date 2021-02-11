@@ -6,7 +6,7 @@ function Questions() {
     const [page, setPage] = useState(1)
     const [title, setTitle] = useState('')
     const [language, setLanguage] = useState('')
-    // const [results, setResults] = useState('')
+    const [results, setResults] = useState('')
 
     const data = useFetch('http://localhost:9999/questions?') || []
 
@@ -14,19 +14,19 @@ function Questions() {
     const paginatedData = filteredData.slice(5 * (page - 1), 5 * page)
     const max = Math.ceil(filteredData.length / 5)
 
-    // const handleSubmit = async e => {
-    //     e.preventDefault()
-    //     const url = (`http://localhost:9999/questions?` + `title=${title}&language=${language}`) || []
-    //     const res = await fetch(url)
-    //     const data = await res.json()
-    //     setResults(data)
-    //     console.log(results)
-    // }
+    const handleSubmit = async e => {
+        e.preventDefault()
+        // const url = (`http://localhost:9999/questions?` + `title=${title}&language=${language}`) || []
+        // const res = await fetch(url)
+        // const data = await res.json()
+        setResults(data)
+        console.log(results)
+    }
 
     return (
         <div className="page questions">
             <h1>Preguntas</h1>
-            <form >
+            <form onClick={handleSubmit}>
                 <label>
                     Consultar preguntas:
                 <input value={title} onChange={e => setTitle(e.target.value)} />
