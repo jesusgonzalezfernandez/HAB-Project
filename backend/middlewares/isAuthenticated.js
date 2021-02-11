@@ -33,7 +33,7 @@ const isAuthenticated = async (req, res, next) => {
         // Error
         if (!user){
             
-            throw new Error('Data Error')
+            throw new Error('Authorization Error')
             
         }
         
@@ -41,7 +41,7 @@ const isAuthenticated = async (req, res, next) => {
         
         if (user.token !== auth){
             
-            throw new Error('Data Error')
+            throw new Error('Authorization Error')
             
         }
 
