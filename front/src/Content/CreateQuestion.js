@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
+import { useSelector } from 'react-redux'
 import './CreateQuestion.css'
+
+
 
 function CreateQuestion() {
 
     // Obtener usuario del redux
-    // const user = useSelector(state => state.user)
-
+    const user = useSelector(state => state.user)
+console.log(user);
     // Usuario fake:
-    const user = {username: 'demo', isAdmin: true, userID: 1}
+    // const user = {username: 'demo', isAdmin: true, userID: 1}
 
     const [content, setContent] = useState('')
     
