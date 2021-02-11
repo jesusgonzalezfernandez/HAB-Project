@@ -5,13 +5,19 @@ import './CreateQuestion.css'
 
 function CreateQuestion() {
 
-    const [content, setContent] = useState('')
+    // Obtener usuario del redux
+    // const user = useSelector(state => state.user)
 
+    // Usuario fake:
+    const user = {username: 'demo', isAdmin: true, userID: 1}
+
+    const [content, setContent] = useState('')
+    
     const modules = {
 
-        // Opciones de la barra de herramientas:
-
+        // Opciones del toolbar
         toolbar: [
+    
             [{ 'header': [1, 2, false] }],                                         // Opción para utilizar títulos, y número de opciones de título
             ['bold', 'italic', 'underline','strike', 'blockquote', 'code-block'],  // Opciones de edición de texto
             [{'list': 'ordered'}, {'list': 'bullet'}],                             // Opciones para crear listas
@@ -23,26 +29,71 @@ function CreateQuestion() {
             [{ 'font': [] }],
             [{ 'align': [] }],
             ['clean']
-        ],
-      }
-    
+        ]
+            
+    }
 
+    const handleSubmit = async e => {
+        
+        e.preventDefault()
+        
+        // Reiniciar el contenido
+        setContent('')
+        
+        // Error. Usuario no logueado
+        if (!user) {
+            
+            return alert('Please log in first!')
+            
+        }
+        
+        const questionData = {
+            content: content,
+            userID: user.userID
+        }
+
+        const res = await fetch('http://localhost:9999/', {
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(questionData),
+            method: 'POST'
+        })
+        
+        console.log(res);
+        
+        // Enviar a back
+        // fetch.post('api/...', questionData)
+        
+        
+        
+        console.log(questionData);
+        
+        
+    }
+        
     return (
-
+        
         <div>
 
             <h1>Formula tu Pregunta:</h1>
 
             <ReactQuill 
                 theme="snow"
-                modules = {modules}
-                value={content}
-                onChange={setContent}
+                modules={modules}
+                value= {content}
+                placeholder= 'Post your question here...'
+                onChange= {setContent}
             />  
+
+            <form onSubmit={handleSubmit}>
+                <button>
+                    Submit
+                </button>
+
+            </form>
 
             <div>
                 <h1>Test..</h1>
-                {content}
+                Contenido: {content}
             </div>
         </div>
     )
