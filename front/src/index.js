@@ -9,6 +9,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import loginReducer from './Store/loginReducer';
 
+
+
+// Reducers combinados
 const rootReducer = combineReducers({
   login: loginReducer
 })
@@ -19,9 +22,22 @@ const localStorageMiddleware = store => next => action => {
   return result
 }
 
+// Obtener datos guardados en localStorage
 const saved = localStorage.getItem("session")
+
+// Si se han obtenido datos de localStorage, se guardan en initialStore
 const initialStore = saved ? JSON.parse(saved) : undefined
+
+// Poblar el store con el rootReducer, o el initialStore
 const store = createStore(rootReducer, initialStore, applyMiddleware(localStorageMiddleware))
+
+/*
+
+  El objeto store contiene tantos campos como reducers
+  existen en el combinador. Para acceder a los datos
+  del login se utilizaría la expresión store.login.data
+
+*/
 
 ReactDOM.render(
   <React.StrictMode>
