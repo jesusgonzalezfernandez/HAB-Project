@@ -2,7 +2,8 @@ import './App.css';
 import Header from './Header';
 import Home from './Home';
 import Login from './User/Login';
-import Questions from './Content/Questions';
+import FilterQuestions from './Content/FilterQuestions';
+import LatestQuestions from './Content/LatestQuestions'
 import Recovery from './User/Recovery';
 import Reset from './User/Reset';
 import { Switch, Route } from 'react-router-dom';
@@ -18,7 +19,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/questions">
-          <Questions />
+          <LatestQuestions />
         </Route>
         <Route path="/login">
           <Login />
