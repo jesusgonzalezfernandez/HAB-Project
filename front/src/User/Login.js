@@ -38,7 +38,8 @@ function Login() {
   // if (login) return <Redirect to="/" />
 
   if (login) {
-    console.log(`Logueado con los datos: ${JSON.stringify(login)}`)
+    console.log('Logueado con éxito, redirigiendo...')
+    console.log(`Username: ${login.username}, Role: ${login.role}, userID: ${login.userID}`);
     return <Redirect to="/" />
   }
   
