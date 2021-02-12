@@ -12,7 +12,7 @@ const isAuthenticated = async (req, res, next) => {
     console.log('Verifying Token');
     // Obtener variables
     const { auth } = req.headers;
-    
+
     try {
         
         // Verificar y descifrar el token

@@ -68,9 +68,6 @@ function CreateQuestion() {
         
         console.log(res);
         
-        // Enviar a back
-        // fetch.post('api/...', questionData)        
-        
     }
         
     return (
