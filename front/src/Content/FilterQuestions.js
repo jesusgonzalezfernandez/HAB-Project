@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useFetch from '../useFetch'
+import LatestQuestions from "./LatestQuestions";
 
 
 function Questions() {
@@ -41,7 +42,17 @@ function Questions() {
                 </label>
                 <button>Buscar</button>
             </form>
-                
+            {results &&
+                <div>
+                    <h2>Resultados:</h2>
+                    {results && results.map(r =>
+                        <div key={r.id}>
+                            {r.title}
+                        </div>
+                    )}
+                </div>
+            }
+            <LatestQuestions/>
         </div>
     );
 }

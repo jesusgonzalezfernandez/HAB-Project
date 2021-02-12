@@ -9,11 +9,11 @@ function LatestQuestions() {
 
     return (
     <div>
-                    <h2>Preguntas:</h2>
+                    <h2>Últimas Preguntas:</h2>
                     <div>
                     {paginatedData && paginatedData.map(question =>
                         <div key={question.id}>
-                            {question.creationDate} {question.title}
+                            {question.creationDate} {question.languages} {question.title}
                         </div>
                     )}
                     {!paginatedData &&

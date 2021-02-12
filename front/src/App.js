@@ -21,6 +21,9 @@ function App() {
         <Route path="/questions">
           <LatestQuestions />
         </Route>
+        <Route path="/search">
+          <FilterQuestions/>
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
