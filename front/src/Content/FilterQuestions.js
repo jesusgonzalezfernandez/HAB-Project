@@ -5,7 +5,6 @@ import LatestQuestions from './LatestQuestions'
 
 function Questions() {
 
-    const [page, setPage] = useState(1)
     const [results, setResults] = useState([])
     const [title, setTitle] = useState('')
     const [languages, setLanguages] = useState('')
@@ -45,24 +44,33 @@ function Questions() {
 
         })
         
-        console.log(`Array de parámetros de búsqueda: ${array}`);
-
+        // Crear URL concatenando campos y valores
         for (let i = 0; i < array.length; i++ ){
 
             const [ key ] = Object.keys(array[i])
             const [ value ] = Object.values(array[i])
 
+            console.log(`Key ${i} del array: ${key}`);
+            console.log(`Value ${i} del array: ${value}`);
+            
             if (i === 0) {
-                URL = URL.concat(`?`)
+                URL = URL.concat(`?${key}=${value}`)
+            }
+
+            if (i > 0) {
+                URL = URL.concat(`&${key}=${value}`)
             }
 
         }
 
+        console.log(`Dirección de búsqueda: ${URL}`);
+
+        // Enviar consulta a BD
         const res = await fetch(URL)
         const data = await res.json()
-        // console.log(data)
-        setResults({ ...data, URL })
-        // console.log(results)
+
+        setResults({...data})
+
     }
 
     return (
