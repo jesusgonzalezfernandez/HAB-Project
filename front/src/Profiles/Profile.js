@@ -30,7 +30,7 @@ function Profile() {
 
     const data = await res.json();
 
-    console.log(`Resultado de la búsqueda: ${data}`)
+    console.log(`Resultado de la búsqueda: ${JSON.stringify(data)}`)
   
   }, [])
     

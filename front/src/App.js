@@ -7,7 +7,7 @@ import Recovery from './User/Recovery';
 import Reset from './User/Reset';
 import { Switch, Route } from 'react-router-dom';
 import CreateQuestion from './Content/CreateQuestion';
-import GetUserProfileData from './Profiles/GetUserProfileData';
+import Profile from './Profiles/Profile';
 
 
 
@@ -35,7 +35,7 @@ function App() {
         <Route path="/create-question" exact>
           <CreateQuestion />
         </Route>
-        <Route path="/profile">
+        <Route path="/users/profile/:userID">
           <Profile />
         </Route>
       </Switch>
