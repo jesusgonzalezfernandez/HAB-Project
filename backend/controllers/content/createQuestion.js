@@ -84,6 +84,7 @@ const createQuestion = async (req, res) => {
 
     } catch (e) {
 
+        console.log(`Error: ${e.message}`);
         res.status(400).send(e.message)
         return
 
