@@ -8,11 +8,9 @@ import './CreateQuestion.css'
 
 function CreateQuestion() {
 
-    // Obtener usuario del redux
-    const user = useSelector(state => state.user)
-console.log(user);
-    // Usuario fake:
-    // const user = {username: 'demo', isAdmin: true, userID: 1}
+    // Obtener usuario del store
+    const login = useSelector(state => state.login)
+    if(login) console.log(`*CreateQuestion* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
     const [content, setContent] = useState('')
     
@@ -44,7 +42,7 @@ console.log(user);
         setContent('')
         
         // Error. Usuario no logueado
-        if (!user) {
+        if (!login) {
             
             return alert('Please log in first!')
             
@@ -52,7 +50,7 @@ console.log(user);
         
         const questionData = {
             content: content,
-            userID: user.userID
+            userID: login.userID
         }
 
         const res = await fetch('http://localhost:9999/', {
