@@ -3,12 +3,13 @@ import Header from './Header';
 import Home from './Home';
 import Login from './User/Login';
 import FilterQuestions from './Content/FilterQuestions';
-import LatestQuestions from './Content/LatestQuestions'
 import Recovery from './User/Recovery';
 import Reset from './User/Reset';
 import { Switch, Route } from 'react-router-dom';
 import CreateQuestion from './Content/CreateQuestion';
 import Profile from './Profiles/Profile'
+
+
 
 function App() {
   return (
@@ -20,9 +21,6 @@ function App() {
           <Home />
         </Route>
         <Route path="/questions">
-          <LatestQuestions />
-        </Route>
-        <Route path="/search">
           <FilterQuestions/>
         </Route>
         <Route path="/login">

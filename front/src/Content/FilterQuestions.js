@@ -1,38 +1,37 @@
 import { useState } from "react";
 import useFetch from '../useFetch'
-import LatestQuestions from "./LatestQuestions";
-
+import LatestQuestions from './LatestQuestions'
 
 function Questions() {
-    // const [page, setPage] = useState(1)
+    const [page, setPage] = useState(1)
     const [title, setTitle] = useState('')
     const [language, setLanguage] = useState('')
     const [results, setResults] = useState('')
 
-
-    // const filteredData = data.filter(e => e.title.toLowerCase().includes(title.toLowerCase()))
-
+    // const filteredData = Object.values(results).filter(e => e.title.toLowerCase().includes(title.toLowerCase()))
+    // const paginatedData = filteredData.slice(5 * (page - 1), 5 * page)
+    // const max = Math.ceil(filteredData.length / 5)
 
     const handleSubmit = async e => {
         e.preventDefault()
-        const url = (`http://localhost:9999/questions?` + `title=${title}&language=${language}`) || []
+        const url = (`http://localhost:9999/questions?` + `title=${title}&languages=${language}`) || []
         const res = await fetch(url)
         const data = await res.json()
-        setResults(data)
+        setResults({ ...data, url })
         console.log(results)
     }
 
     return (
         <div className="page questions">
             <h1>Preguntas</h1>
-            <form onClick={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <label>
                     Consultar preguntas:
                 <input value={title} onChange={e => setTitle(e.target.value)} />
                 </label>
                 <label>
                     Lenguaje:
-            <select value={language} onChange={e => setLanguage(e.target.value)}>
+                    <select value={language} onChange={e => setLanguage(e.target.value)}>
                         <option value="" hidden>Selecciona...</option>
                         <option value="css">css</option>
                         <option value="html">html</option>
@@ -40,20 +39,31 @@ function Questions() {
                         <option value="sql">sql</option>
                     </select>
                 </label>
-                <button>Buscar</button>
+                <label>
+                    <button>Buscar</button>
+                </label>
             </form>
             {results &&
                 <div>
                     <h2>Resultados:</h2>
-                    {results && results.map(r =>
+                    {results && Object.values(results).map(r =>
                         <div key={r.id}>
                             {r.title}
                         </div>
                     )}
                 </div>
             }
-            <LatestQuestions/>
-        </div>
+            {/* {!paginatedData &&
+                        <div><i>Sin resultados</i></div>
+                    }
+                </div> */}
+            {/* <div className="pagination">
+            <span onClick={() => setPage(page > 1 ? page - 1 : 1)}>◄</span>
+            <span>{page} / {max}</span>
+            <span onClick={() => setPage(page < max ? page + 1 : max)}>►</span>
+          </div> */}
+            <LatestQuestions />
+        </div >
     );
 }
 

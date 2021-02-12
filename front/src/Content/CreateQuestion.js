@@ -8,13 +8,13 @@ import './CreateQuestion.css'
 
 function CreateQuestion() {
 
-    // Obtener usuario del redux
-    const user = useSelector(state => state.user)
-console.log(user);
-    // Usuario fake:
-    // const user = {username: 'demo', isAdmin: true, userID: 1}
+    // Obtener usuario del store
+    const login = useSelector(state => state.login)
+    if(login) console.log(`*CreateQuestion* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
     const [content, setContent] = useState('')
+    const [title, setTitle] = useState('')
+    const [languages, setLanguages] = useState('')
     
     const modules = {
 
@@ -44,32 +44,32 @@ console.log(user);
         setContent('')
         
         // Error. Usuario no logueado
-        if (!user) {
+        if (!login) {
             
             return alert('Please log in first!')
             
         }
         
         const questionData = {
-            content: content,
-            userID: user.userID
+            body: content,
+            title: title,
+            languages: languages,
         }
 
-        const res = await fetch('http://localhost:9999/', {
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(questionData),
-            method: 'POST'
-        })
+        const res = await fetch(
+            // Dirección
+            'http://localhost:3001/questions', 
+            // Contenido
+            {
+                headers: { 'Content-Type': 'application/json', auth: login.token },
+                body: JSON.stringify(questionData),
+                method: 'POST'
+            })
         
         console.log(res);
         
         // Enviar a back
-        // fetch.post('api/...', questionData)
-        
-        
-        
-        console.log(questionData);
-        
+        // fetch.post('api/...', questionData)        
         
     }
         
@@ -79,6 +79,13 @@ console.log(user);
 
             <h1>Formula tu Pregunta:</h1>
 
+            <input
+                className='question-title'
+                value= {title} 
+                placeholder='Título de la pregunta...'
+                onChange= {e => setTitle(e.target.value)}
+            />
+
             <ReactQuill 
                 theme="snow"
                 modules={modules}
@@ -86,6 +93,14 @@ console.log(user);
                 placeholder= 'Post your question here...'
                 onChange= {setContent}
             />  
+
+            <select value={languages} onChange={e => setLanguages(e.target.value)}>
+                <option value='' hidden>Seleciona una opción...</option>
+                <option value='javascript'>Javascript</option>
+                <option value='python'>Python</option>
+                <option value='mysql'>MySQL</option>
+                <option value='html'>HTML</option>
+            </select>
 
             <form onSubmit={handleSubmit}>
                 <button>

@@ -129,7 +129,7 @@ const deleteAnswer = require ('./controllers/content/deleteAnswer')
 // Servidor de .env
 const envPort = process.env.PORT
 // Servidor por defecto
-const defaultPort = 3333
+const defaultPort = 3002
 
 const currentPort = envPort || defaultPort    
 

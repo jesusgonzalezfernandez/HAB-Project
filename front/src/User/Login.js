@@ -20,11 +20,15 @@ function Login() {
     e.preventDefault()
 
     // Enviar una consulta a la API con el email y la password
-    const res = await fetch('http://localhost:9999/users/login', {
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-      method: 'POST'
-    })
+    const res = await fetch(
+      // Dirección:
+      `http://localhost:3001/users/login`, 
+      // Contenido:
+      {
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+        method: 'POST'
+      })
 
     // Parsear los datos que devuelve la API (token, role, username, userID, avatar)
     const data = await res.json()
