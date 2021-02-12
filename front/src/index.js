@@ -9,6 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import loginReducer from './Store/loginReducer';
 
+
 // Reducers combinados
 const rootReducer = combineReducers({
   login: loginReducer

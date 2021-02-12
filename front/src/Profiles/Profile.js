@@ -29,9 +29,8 @@ function Profile() {
     })
 
     const data = await res.json();
-
     console.log(`Resultado de la búsqueda: ${JSON.stringify(data)}`)
-  
+
   }, [])
     
   return (

@@ -13,7 +13,11 @@ function Questions() {
 
     const handleSubmit = async e => {
         e.preventDefault()
+<<<<<<< HEAD
         const url = (`http://localhost:3001/questions?`) || []
+=======
+        const url = (`http://localhost:3001/questions?` + `title=${title}&languages=${language}`) || []
+>>>>>>> 2fe670c7457b54d19797fee5f7ecb0be4d37c42d
         const res = await fetch(url)
         const data = await res.json()
         console.log(data)
