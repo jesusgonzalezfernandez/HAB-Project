@@ -2,7 +2,7 @@
 
 
 
-function ExpertProfile( {user} ) {
+function ExpertProfile( {data} ) {
 
   return (
     
@@ -10,7 +10,7 @@ function ExpertProfile( {user} ) {
     
       <h1>Perfil de Usuario</h1>
       <h2>Admin</h2>
-      {user.username}
+      {data.username}
 
     </div>
 

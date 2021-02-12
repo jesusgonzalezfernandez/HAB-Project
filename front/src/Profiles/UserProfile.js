@@ -1,6 +1,6 @@
 
 
-function ExpertProfile( {user} ) {
+function ExpertProfile( {data} ) {
 
     
   return (
@@ -9,7 +9,7 @@ function ExpertProfile( {user} ) {
     
       <h1>Perfil de Usuario</h1>
       <h2>Usuario</h2>
-      {user.username}
+      {data.username}
       <button onClick={() => console.log('Era broma, no se puede editar aun')}>Editar Perfil</button>
     </div>
 
