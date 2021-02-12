@@ -13,12 +13,12 @@ function Questions() {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        const url = (`http://localhost:3001/questions?`) || []
+        const url = (`http://localhost:3001/questions?` + `title=${title}&languages=${language}`) || []
         const res = await fetch(url)
         const data = await res.json()
         console.log(data)
-        // setResults({ ...data, url })
-        // console.log(results)
+        setResults({ ...data, url })
+        console.log(results)
     }
 
     return (

@@ -11,10 +11,10 @@ function useFetch(url, key) {
       opts.headers = { 'Authorization': 'Bearer ' + login.token }
     }
     await fetch(url, opts)
-    // .then(res => res.json())
-    // .then(data => {
-    //   setData(data)
-    // })
+    .then(res => res.json())
+    .then(data => {
+      setData(data)
+    })
   }, [url, login, key])
 
   return data

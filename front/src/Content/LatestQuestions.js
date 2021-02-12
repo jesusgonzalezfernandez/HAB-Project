@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 function LatestQuestions() {
     const [page, setPage] = useState(1)
-    const data = useFetch('http://localhost:3001/questions?') || []
+    const data = useFetch('http://localhost:3001/questions') || []
     const paginatedData = data.slice(5 * (page - 1), 5 * page)
     const max = Math.ceil(data.length / 5)
 
