@@ -2,6 +2,8 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
+import ExpertProfile from './ExpertProfile';
+import UserProfile from './UserProfile'
 
 
 
@@ -38,21 +40,17 @@ function Profile() {
   return (
     
     <div>
-    
-      <h1>Perfil de Usuario</h1>
-
       {login.role === 'admin' && <div> 
 
-        <h1>Eres admin, tienes acceso</h1>
+        <ExpertProfile user={login}/>
 
       </div>}
 
       {login.role === 'student' && <div>
         
-        <h1>Eres un bastardo</h1>
+        <UserProfile user={login}/>
         </div>
       }
-
     </div>
 
   );
