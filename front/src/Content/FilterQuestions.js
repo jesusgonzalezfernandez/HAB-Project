@@ -8,17 +8,17 @@ function Questions() {
     const [language, setLanguage] = useState('')
     const [results, setResults] = useState('')
 
-    // const filteredData = Object.values(results).filter(e => e.title.toLowerCase().includes(title.toLowerCase()))
     // const paginatedData = filteredData.slice(5 * (page - 1), 5 * page)
     // const max = Math.ceil(filteredData.length / 5)
 
     const handleSubmit = async e => {
         e.preventDefault()
-        const url = (`http://localhost:9999/questions?` + `title=${title}&languages=${language}`) || []
+        const url = (`http://localhost:3001/questions?`) || []
         const res = await fetch(url)
         const data = await res.json()
-        setResults({ ...data, url })
-        console.log(results)
+        console.log(data)
+        // setResults({ ...data, url })
+        // console.log(results)
     }
 
     return (

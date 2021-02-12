@@ -8,6 +8,7 @@ import Reset from './User/Reset';
 import { Switch, Route } from 'react-router-dom';
 import CreateQuestion from './Content/CreateQuestion';
 import Profile from './Profiles/Profile';
+import LatestQuestions from './Content/LatestQuestions';
 
 
 
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route path="/questions">
           <FilterQuestions/>
+        </Route>
+        <Route path="/search">
+          <LatestQuestions/>
         </Route>
         <Route path="/login">
           <Login />
