@@ -22,7 +22,7 @@ function Header() {
         {login &&
             <div>
                 <button onClick={handleLogout}>Logout</button>
-                <NavLink to={'/profile'}> Perfil {login.username} </NavLink>
+                <NavLink to={`/users/profile/${login.userID}`}> Perfil {login.username} </NavLink>
             </div>
         }
     </header>

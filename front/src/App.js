@@ -35,7 +35,7 @@ function App() {
         <Route path="/create-question" exact>
           <CreateQuestion />
         </Route>
-        <Route path="/users/profile/:userID">
+        <Route path="/users/profile/:userID" exact>
           <Profile />
         </Route>
       </Switch>
