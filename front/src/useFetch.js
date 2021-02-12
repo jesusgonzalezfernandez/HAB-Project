@@ -4,18 +4,17 @@ import { useSelector } from 'react-redux'
 function useFetch(url, key) {
     const [data, setData] = useState()
     const login = useSelector(s => s.login)
-    console.log(login)
 
-    useEffect(() => {
+    useEffect(async() => {
       const opts = {}
       if (login) {
         opts.headers = { 'Authorization': 'Bearer ' + login.token }
       }
-      fetch(url, opts)
-        .then(res => res.json())
-        .then(data => {
-          setData(data)
-        })
+      await fetch(url, opts)
+        // .then(res => res.json())
+        // .then(data => {
+        //   setData(data)
+        // })
     }, [url, login, key])
 
     return data

@@ -35,8 +35,8 @@ function App() {
         <Route path="/create-question" exact>
           <CreateQuestion />
         </Route>
-        <Route path="/users/profile/:userID" exact>
-          <GetUserProfileData />
+        <Route path="/profile">
+          <Profile />
         </Route>
       </Switch>
     </div >

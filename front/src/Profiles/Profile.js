@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 
 
-function GetUserProfileData() {
+function Profile() {
 
   const login = useSelector(state => state.login)
   if(login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
@@ -45,4 +45,5 @@ function GetUserProfileData() {
   );
 }  
 
-export default GetUserProfileData;
+export default Profile;
+
