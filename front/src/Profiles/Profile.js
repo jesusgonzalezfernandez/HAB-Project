@@ -1,7 +1,7 @@
 // import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 
 
 
@@ -32,12 +32,26 @@ function Profile() {
     console.log(`Resultado de la búsqueda: ${JSON.stringify(data)}`)
 
   }, [])
+
+  if(!login) return  <Redirect to='/'/>
     
   return (
     
     <div>
     
       <h1>Perfil de Usuario</h1>
+
+      {login.role === 'admin' && <div> 
+
+        <h1>Eres admin, tienes acceso</h1>
+
+      </div>}
+
+      {login.role === 'student' && <div>
+        
+        <h1>Eres un bastardo</h1>
+        </div>
+      }
 
     </div>
 
