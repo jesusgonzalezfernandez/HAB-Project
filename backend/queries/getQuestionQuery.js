@@ -1,6 +1,6 @@
 const getQuestionQuery = data => {
 
-    console.log('Getting Question');
+    console.log('Getting Question From Database');
 
     // Obtener el nombre del tipo de dato recibido en el objeto
     let type = ( Object.keys(data) ) [0] 

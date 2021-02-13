@@ -30,11 +30,14 @@ const castVoteQuery = async data => {
         )
     `
 
-    await performQuery (query)
-
+    const result = await performQuery(query) 
+    return result
+    
 }
 
 const castVote = async (req, res) => {
+
+    console.log('*Caste Vote*');
 
     let query;
 
@@ -43,7 +46,16 @@ const castVote = async (req, res) => {
     let { value } = req.query
     let { userID } = req.auth
 
-    // Crear objeto data
+    /*
+    
+        Crear objeto reqData. Contiene:
+
+            - answerID
+            - value
+            - userID
+
+    */
+    
     const reqData = { answerID, value, userID }
 
     try {
@@ -80,7 +92,7 @@ const castVote = async (req, res) => {
             // Error
             if (!user) {
 
-                throw new Error('No Existe el Usuario')
+                throw new Error('User does not exist')
 
             }
 
@@ -98,18 +110,27 @@ const castVote = async (req, res) => {
             // Error
             if(vote) {
 
-                throw new Error('Error en los Datos')
+                throw new Error('Vote already exists')
 
             }
 
         // Enviar a BD
         const result = await castVoteQuery(reqData)
-        console.log(result);
+
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }        
+
+        console.log(`Successfully Inserted. Affected Rows: ${result.affectedRows}`);
             
     } 
         
     catch (e) {
 
+        console.log(`Error casting vote: ${e.message}`)
         res.status(400).send(e.message)
         return
 

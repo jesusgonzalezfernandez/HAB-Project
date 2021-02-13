@@ -162,8 +162,8 @@ const createUser = async (req, res) => {
 
     } catch (e) {
 
-        res.status(400).send(e.message)
         console.log(`Error creating user: ${e.message}`)
+        res.status(400).send(e.message)
         return
     }
 

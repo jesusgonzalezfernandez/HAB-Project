@@ -5,10 +5,22 @@ const performQuery = require ('../db/performQuery')
 
 const isExpert = async (req, res, next) => {
 
+    console.log('* Checking User Role *');
+
     let query;
 
     // Obtener variables
     const token = req.auth
+
+    /*
+    
+        Crear objeto reqData. Contiene:
+
+            - questionID
+            - token
+
+    */
+    
     const reqData = {...req.params, token}
 
     try {
@@ -35,7 +47,8 @@ const isExpert = async (req, res, next) => {
         // Si el usuario que pregunta es el autor del post || es experto || o es admin...
         if (token.userID === questionData.userID || token.role === 'expert' || token.isAdmin ){
             
-            console.log('User is authorized');
+            console.log('- User Has Expert Role -');
+            next()
 
         } else {
 
@@ -43,17 +56,14 @@ const isExpert = async (req, res, next) => {
 
         }
 
-
-
     } catch (e) {
-        
+
+        console.log('X Role Error X');
         res.status(401).send(e.message)
         return
 
     }
-
-    next()
-
+    
 }
 
 module.exports = isExpert;
