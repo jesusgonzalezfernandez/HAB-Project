@@ -30,13 +30,15 @@ const updateUserQuery = async data => {
 
     `
 
-    await performQuery(query)
-    return
+    const result = await performQuery(query) 
+    return result
     
 }
 
 
 const updateUser = async (req, res) => {
+
+    console.log('*Update User*');
 
     let query;
     let user;
@@ -50,7 +52,19 @@ const updateUser = async (req, res) => {
         // Validar y Corregir
         reqData = await updateUserValidation.validateAsync(reqData)
 
-        // Añadir userID
+        /*
+
+            Crear objeto reqData. Contiene:
+
+                - username
+                - name
+                - surname
+                - birthDate
+                - country
+                - userID
+        
+        */
+        
         reqData = {...reqData, userID: userID}
 
         // Comprobar si el username ya existe
@@ -104,10 +118,20 @@ const updateUser = async (req, res) => {
             reqData = {...reqData, email:user.email}
 
             // Enviar a BD
-            await updateUserQuery(reqData)
+            const result = await updateUserQuery(reqData)
+
+            // Error
+            if (!result) {
+
+                throw new Error ('Database Error')
+
+            }
+
+            console.log(`Successfully Updated. Affected Rows: ${result.affectedRows}`);
 
     } catch (e) {
 
+        console.log(`Error updating user: ${e.message}`)
         res.status(401).send(e.message)
         return
 
