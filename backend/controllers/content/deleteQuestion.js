@@ -11,7 +11,8 @@ const deleteQuestionQuery = async data => {
             DELETE FROM questions WHERE id = ${data.questionID}
         `
 
-    await performQuery(query)
+    const result = await performQuery(query)
+    return result
 
 }
 
@@ -19,7 +20,9 @@ const deleteQuestionQuery = async data => {
 
 const deleteQuestion = async (req, res) => {
 
-    // Obtener variables
+    console.log('*Delete Question*');
+
+    // Crear objeto reqData. Contiene: - questionID
     const reqData = req.params
 
     try {
@@ -41,11 +44,22 @@ const deleteQuestion = async (req, res) => {
             }
 
         // Enviar a BD
-        await deleteQuestionQuery (reqData)
+        const result = await deleteQuestionQuery (reqData)
         
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }
+
+        console.log(`Successfully Deleted. Affected Rows: ${result.affectedRows}`);
+   
     } catch (e) {
      
+        console.log(`Error deleting question: ${e.message}`)
         res.satus(500).send(e.message)
+        return
 
     }
 

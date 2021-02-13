@@ -136,7 +136,7 @@ const castVote = async (req, res) => {
 
     }
 
-    res.send('Registered vote')
+    res.send('Vote Registered')
 
 }
 

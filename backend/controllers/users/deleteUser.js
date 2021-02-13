@@ -1,4 +1,8 @@
+// Dependencias
 const bcrypt = require('bcrypt');
+
+// Módulos
+const deleteUserValidation = require('../../validators/deleteUserValidation')
 
 // Queries
 const getUserQuery = require('../../queries/getUserQuery')
@@ -26,7 +30,8 @@ const deactivateUserQuery = async data => {
 
         `
 
-    await performQuery(query)
+    const result = await performQuery(query) 
+    return result
 
 }
 
@@ -52,18 +57,35 @@ const createOffUserQuery = async data => {
         
         `
 
-    await performQuery(query)
+    const result = await performQuery(query) 
+    return result
 
 }
 
 
 const deleteUser = async (req, res) => {
 
+    console.log('*Delete User*');
+
     // Obtener variables
     let { userID } = req.params;
-    const reqData = {...req.body, userID: userID}
 
     try {
+
+        // Validar y corregir
+        let reqData = await deleteUserValidation.validateAsync(req.body) 
+    
+        /*
+        
+            Crear objeto reqData. Contiene:
+
+                - password
+                - reason
+                - userID
+
+        */
+    
+        reqData = {...reqData, userID: userID}
 
         // Comprobar si el usuario existe / Obtener sus datos
 
@@ -98,14 +120,32 @@ const deleteUser = async (req, res) => {
             }
 
         // Actualizar el registro
-        await deactivateUserQuery (reqData)
+        let result = await deactivateUserQuery (reqData)
+
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }
+
+        console.log(`Successfully Deleted. Affected Rows: ${result.affectedRows}`);
 
         // Enviar a la tabla Off Users
-        await createOffUserQuery (reqData)
+        result = await createOffUserQuery (reqData)
 
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }        
+
+        console.log(`Successfully Inserted. Affected Rows: ${result.affectedRows}`);
 
     } catch (e) {
 
+        console.log(`Error deleting user: ${e.message}`)
         res.status(401).send(e.message)
         return
 

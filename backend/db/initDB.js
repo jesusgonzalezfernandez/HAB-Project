@@ -203,7 +203,7 @@ async function main() {
                         int unsigned auto_increment primary key,
                     userID 
                         int unsigned,
-                    comment 
+                    reason 
                         varchar(500),
                         
                     constraint offUser_userID_fk1

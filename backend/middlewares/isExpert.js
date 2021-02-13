@@ -47,7 +47,7 @@ const isExpert = async (req, res, next) => {
         // Si el usuario que pregunta es el autor del post || es experto || o es admin...
         if (token.userID === questionData.userID || token.role === 'expert' || token.isAdmin ){
             
-            console.log('- User Has Expert Role -');
+            console.log('- User Has Expert Role, Is Admin, Or Is Autho -');
             next()
 
         } else {

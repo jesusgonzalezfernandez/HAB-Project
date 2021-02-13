@@ -9,13 +9,24 @@ const deleteAnswerQuery = async data => {
             DELETE FROM answers WHERE id = ${data.answerID}
         `
 
-    await performQuery(query)
+    const result = await performQuery(query)
+    return result
 
 }
 
 const deleteAnswer = async (req, res) => {
 
-    // Obtener variables
+    console.log('*Delete Answer*');
+
+    /* 
+    
+        Crear objeto reqData. Contiene: 
+        
+            - questionID
+            - answerID 
+    
+    */
+
     const reqData = req.params
 
     try {
@@ -37,12 +48,22 @@ const deleteAnswer = async (req, res) => {
             }
         
         // Enviar a BD
-        await deleteAnswerQuery (reqData)
+        const result = await deleteAnswerQuery (reqData)
+
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }
+
+        console.log(`Successfully Deleted. Affected Rows: ${result.affectedRows}`);
 
     } catch (e) {
 
+        console.log(`Error deleting answer: ${e.message}`)
         res.satus(500).send(e.message)
-        
+        return
     }
 
     res.send('Answer Deleted')
