@@ -11,7 +11,7 @@ const getUserQuery = data => {
 
     */
 
-    console.log('Getting User');
+    console.log('Getting User From Database');
 
     // Object Version
     

@@ -1,4 +1,3 @@
-// const { , , , getVoteQuery } = require ('../../db/queriesDB')
 const getAnswerQuery = require ('../../queries/getAnswerQuery')
 const getUserQuery = require ('../../queries/getUserQuery')
 const getVoteQuery = require ('../../queries/getVoteQuery')
@@ -104,7 +103,8 @@ const castVote = async (req, res) => {
             }
 
         // Enviar a BD
-        await castVoteQuery(reqData)
+        const result = await castVoteQuery(reqData)
+        console.log(result);
             
     } 
         

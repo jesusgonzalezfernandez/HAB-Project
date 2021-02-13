@@ -18,13 +18,16 @@ const recoverAccountQuery = async (email, code) => {
             UPDATE users SET validationCode = '${code}', updateDate = UTC_TIMESTAMP WHERE email = '${email}'
         `
 
-    await performQuery(query)
+    const result = await performQuery(query) 
+    return result
 
 }
 
 const recoverAccount = async (req, res) => {
 
-    // Obtener variables
+    console.log('*Recover Account*');
+
+    // Crear reqData. Contiene: - email
     const reqData = req.body
 
     try {
@@ -44,8 +47,7 @@ const recoverAccount = async (req, res) => {
             // Error
             if (!user) {
 
-                res.status(401).send('User not found')
-                return
+                throw new Error('User not found')
             
             }
 
@@ -55,8 +57,16 @@ const recoverAccount = async (req, res) => {
             const validationCode = randomstring.generate(40);
 
             // Procesar query
-            await recoverAccountQuery(reqData.email, validationCode)
-            console.log('User validation code updated');
+            const result = await recoverAccountQuery(reqData.email, validationCode)
+            
+            // Error
+            if (!result) {
+
+                throw new Error ('Database Error')
+
+            }
+            
+            console.log(`Successfully Updated. Affected Rows: ${result.affectedRows}`);
 
             // Enviar un correo de verificación
             await sendRecoveryMail(reqData.email, validationCode)
@@ -64,12 +74,13 @@ const recoverAccount = async (req, res) => {
 
     } catch (e) {
 
-        res.status(401).send('Reset password error')
+        res.status(401).send(e.message)
+        console.log(`Error recovering account: ${e.message}`)
         return
     
     }
 
-    res.send('Recover password. Please check your email')
+    res.send('Please check your email to recover access')
 
 }
 

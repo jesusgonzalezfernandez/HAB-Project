@@ -6,11 +6,21 @@ const performQuery = require('../db/performQuery')
 
 const isSameUser = async (req, res, next) => {
 
+    console.log('* Checking User Permission *');
+
     // Obtener variables
     let { userID } = req.params;
     const token = req.auth
 
-    // Crear objeto reqData con todos los datos
+    /*
+    
+        Crear objeto reqData. Contiene:
+
+            - token
+            - reqID
+    
+    */
+
     let reqData = {...token, reqID: userID}
 
     try {
@@ -38,16 +48,18 @@ const isSameUser = async (req, res, next) => {
         // Si el usuario del req y el token coindicen / Si es admin
             if (parseInt(reqData.reqID) === reqData.userID || token.isAdmin) {
 
+                console.log('- User Has Permission -');
                 next()
 
             } else {
     
-                throw new Error('Not authorized')
+                throw new Error('User does not have permission')
 
             }
 
     } catch (e) {
 
+        console.log('X Permission Error X');
         res.status(403).send(e.message)
         return
     
