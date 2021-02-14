@@ -57,7 +57,7 @@ async function main() {
                     avatar 
                         varchar(500) default 'undefined',
                     languages 
-                        set ('html', 'css', 'javascript', 'sql'),
+                        set ('html', 'css', 'javascript', 'mysql', 'python', 'react', 'vue' ),
                     lastConnection 
                         timestamp,
                     status 
@@ -95,7 +95,7 @@ async function main() {
                     file 
                         varchar(500),
                     languages
-                        set ('html', 'css', 'javascript', 'sql') not null,
+                        set ('html', 'css', 'javascript', 'mysql', 'python', 'react', 'vue' ) not null,
                     tags 
                         varchar (200),
                     status
