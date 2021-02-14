@@ -29,26 +29,42 @@ const getQuestionsListQuery = async data => {
 
     })
 
+    // Si el array tiene al menos un elemento...
+    if(array.length > 0) {
+
+        // ...concatena el where
+        query = query.concat(' WHERE')
+
+    }
+
     // Recorrer el array de elementos definidos
     for (let i = 0; i < array.length; i++) {
 
         // Obtener key y valor de cada objeto
         const [ key ] = Object.keys(array[i])
-        const [ value ] = Object.values(array[i])
-        
-        // Para el primer valor...
-        if ( i === 0 ) {            
+        let [ value ] = Object.values(array[i])
 
-            // ...concatena WHERE, el nombre del campo y el valor
-            query = query.concat(` WHERE ${key} = '${value}'`)
+        // Si el key es para una búsqueda sin comparación estricta...
+        if(key === 'title' || key === 'languages' || key === 'tags'){
+
+            // ...añade % a ambos lados
+            value = '%' + value + '%'
 
         }
+        
+        // Para el primer elemento...
+        if ( i === 0 ) {            
 
+            // ...concatena el nombre del campo y el valor
+            query = query.concat(` ${key} LIKE '${value}'`)
+        
+        }
+        
         // Para los demás...
         if ( i > 0 ) {
 
             // ...concatena AND, el nombre del campo y el valor
-            query = query.concat(` AND ${key} = '${value}'`)
+            query = query.concat(` AND ${key} LIKE '${value}'`)
         }
 
     }
@@ -70,6 +86,7 @@ const getQuestionsList = async (req, res) => {
 
         // Enviar a BD
         questionsList = await getQuestionsListQuery (reqData)
+        console.log(`Has obtenido: ${questionsList.length} resultados`);
 
     } catch (e) {
 
