@@ -57,3 +57,18 @@ function QuestionPreview({ question }) {
 }
 
 export default QuestionPreview
+
+
+                        // <div key={question.id}>
+                        // <div>
+                        //     {question.creationDate}
+                        // </div>
+                        // <span>
+                        //     {question.languages}
+                        // </span>
+                        // {question &&
+                        //     <div>
+                        //         <NavLink to={`/question/${question.id}`}> {question.title} </NavLink>
+                        //     </div>
+                        // }
+                        // </div>

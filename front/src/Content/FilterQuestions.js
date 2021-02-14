@@ -63,9 +63,9 @@ function FilterQuestions() {
         console.log(`Dirección de búsqueda: ${URL}`);
 
         // Descarga, parseado y envio del resultado.
-        const data = await fetch(URL).then(res => res.json())
-
-        setResults(data)
+        await fetch(URL)
+            .then(res => res.json())
+            .then(data => setResults(data))
 
     }
 
@@ -111,22 +111,34 @@ function FilterQuestions() {
             </form>
 
             {/* Resultados */}
-            {results.length >= 1 && 
+            <div>
 
-                <div className="search results">
+                {results.length >= 1 && 
 
-                    <h2>Resultados:</h2>
-                    {Object.values(results).map(question => 
+                    <div className="search results">
+
+                        <h2>Resultados:</h2>
+                            {results.map(question => 
                         
-                        <div key={question.id}>
-                           <QuestionPreview question={question}/>
-                        </div>
-                        
-                    )}
+                                <div key={question.id}>
+                                   <QuestionPreview question={question}/>
+                                </div>
+                            )}
 
-                </div>
+                    </div> 
+                }
+
+                {results.length < 1 &&
+                
+                    <div>
+                        <i>Sin Resultados</i>
+                    </div>
+                
+                }
             
-            }
+            </div>
+            
+            
 
                 {/* <div className='search-results'>
                     {results && 
