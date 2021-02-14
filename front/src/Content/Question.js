@@ -45,6 +45,7 @@ function Question() {
             <div>
                 {data.body}
             </div>
+            {}
             <div>
                 <Answers></Answers>
             </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import './QuestionPreview.css'
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -35,9 +36,7 @@ function QuestionPreview({ question }) {
             {/* Extracto de la pregunta */}
             <main className='question preview'>
                 <h3>
-                    <a className='question title' href="/">
-                        {question.title}
-                    </a>
+                <NavLink to={`/question/${question.id}`} className="question title"> {question.title} </NavLink>
                 </h3>
                 <div className='question excerpt'>
                     {question.body.substring(0, 150) + ' ...'}
