@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 
+
 function LatestQuestions() {
 
     // Obtiene listado de preguntas
@@ -17,7 +18,7 @@ function LatestQuestions() {
 
         <div>
 
-            <h2>Últimas Preguntas:</h2>
+            <h2>Últimas preguntas:</h2>
 
             <div>
 

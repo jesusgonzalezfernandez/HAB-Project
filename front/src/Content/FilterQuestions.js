@@ -1,9 +1,9 @@
-import { useState } from "react";
-import GetQuestions from './GetQuestions'
+import React, { useState } from 'react'
+import QuestionPreview from './QuestionPreview'
 
 
 
-function Questions() {
+function FilterQuestions() {
 
     const [results, setResults] = useState([])
     const [title, setTitle] = useState('')
@@ -12,10 +12,7 @@ function Questions() {
     const [creationDate, setCreationDate] = useState('')
     const [status, setStatus] = useState('')
 
-    // const paginatedData = filteredData.slice(5 * (page - 1), 5 * page)
-    // const max = Math.ceil(filteredData.length / 5)
-
-    // ?title=Titulo&languages=javascript&tags=tag&status=closed
+    console.log(`Resultado de la búsqueda: ${results.length} preguntas`);
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -65,19 +62,19 @@ function Questions() {
 
         console.log(`Dirección de búsqueda: ${URL}`);
 
-        // Enviar consulta a BD
-        const res = await fetch(URL)
-        const data = await res.json()
+        // Descarga, parseado y envio del resultado.
+        const data = await fetch(URL).then(res => res.json())
 
-        setResults({...data})
+        setResults(data)
 
     }
 
     return (
-        <div className="page questions">
-            <h1>Preguntas</h1>
+        <div>
+            {/* Formulario de búsqueda */}
             <form onSubmit={handleSubmit}>
-                <h1>Filtrar Preguntas:</h1>
+
+                <h1>Encuentra lo que estás buscando:</h1>
                 <label>
                     Título:
                     <input value={title} onChange={e => setTitle(e.target.value)} />
@@ -112,30 +109,44 @@ function Questions() {
                     <button>Buscar</button>
                 </label>
             </form>
-            {results &&
-                <div>
+
+            {/* Resultados */}
+            {results.length >= 1 && 
+
+                <div className="search results">
+
                     <h2>Resultados:</h2>
-                    {results && 
-                    Object.values(results).map(question =>
+                    {Object.values(results).map(question => 
+                        
                         <div key={question.id}>
-                            {question.title}
+                           <QuestionPreview question={question}/>
                         </div>
+                        
                     )}
+
                 </div>
+            
             }
-            {/* {!paginatedData &&
-                        <div><i>Sin resultados</i></div>
+
+                {/* <div className='search-results'>
+                    {results && 
+                    
+                    <div>
+                        <h2>Resultados:</h2>
+                            {Object.values(results).map(question =>
+                                <div className='questions' key={question.id}>
+                                    {question.userID}
+                                    {question.title}
+                                </div>)}
+
+                        </div>
                     }
-                </div> */}
-            {/* <div className="pagination">
-            <span onClick={() => setPage(page > 1 ? page - 1 : 1)}>◄</span>
-            <span>{page} / {max}</span>
-            <span onClick={() => setPage(page < max ? page + 1 : max)}>►</span>
-          </div> */}
-            <GetQuestions />
-        </div >
-    );
+
+                </div>}
+
+            */}
+        </div> 
+    )
 }
 
-
-export default Questions;
+export default FilterQuestions
