@@ -6,9 +6,10 @@ const getQuestionsListQuery = async data => {
     // Array de objetos con valor definido
     let array = [];
     // String base
-    let query = `SELECT title, languages, tags, status, creationDate FROM questions`
+    let query = `SELECT id, title, languages, tags, status, creationDate FROM questions`
     // Array de objetos, cada uno formado por un par key:valor (Permite leer el nombre del valor para enviarlo a la query)
     const objects = [
+        { id: data.id },
         { title: data.title },
         { languages: data.languages },
         { tags: data.tags },

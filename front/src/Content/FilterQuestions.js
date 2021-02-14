@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LatestQuestions from './LatestQuestions'
+import GetQuestions from './GetQuestions'
 
 
 
@@ -85,7 +85,7 @@ function Questions() {
                 <label>
                     Lenguaje:
                     <select value={languages} onChange={e => setLanguages(e.target.value)}>
-                        <option value='' hidden>Selecciona...</option>
+                        <option value="" hidden>Selecciona...</option>
                         <option value="css">css</option>
                         <option value="html">html</option>
                         <option value="javascript">javascript</option>
@@ -99,7 +99,7 @@ function Questions() {
                 <label>
                     Status:
                     <select value={status} onChange={e => setStatus(e.target.value)}>
-                        <option value='' hidden>Selecciona...</option>
+                        <option value="">Selecciona...</option>
                         <option>Pending</option>
                         <option>Closed</option>
                     </select>
@@ -132,7 +132,7 @@ function Questions() {
             <span>{page} / {max}</span>
             <span onClick={() => setPage(page < max ? page + 1 : max)}>►</span>
           </div> */}
-            <LatestQuestions />
+            <GetQuestions />
         </div >
     );
 }
