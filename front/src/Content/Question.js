@@ -2,8 +2,12 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GetAnswers from './GetAnswers';
+<<<<<<< HEAD
+import './Question.css'
+=======
 import PostAnswer from './PostAnswer';
 
+>>>>>>> 1e90ad2fc63c88e3a3747116120a3c6f9cce370d
 
 
 function Question() {
@@ -49,9 +53,9 @@ function Question() {
         <div key={data.id}>
             <div> {data.creationDate}
             </div>
-            <div> {data.title}
-            </div>
-            <div>
+            <h2 className="question title"> {data.title}
+            </h2>
+            <div className="question body">
                 {data.body}
             </div>
             {}
