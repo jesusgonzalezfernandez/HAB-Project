@@ -11,15 +11,17 @@ import './Question.css'
 function Question() {
 
     const login = useSelector(state => state.login)
+    
+    if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
     const [data, setData] = useState()
     const [tags, setTags] = useState([])
+    
+    // Obtener id de la pregunta
+    const { questionID } = useParams()
+    console.log(`Buscando la pregunta con ID: ${questionID}`);
 
-    console.log(`Tags: ${tags}`);
-
-    if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
-
-    // Ejecutar fetch al cargar la página
+    // Obtener pregunta al cargar la página
     useEffect(async () => {
 
         // Enviar consulta a la API
@@ -34,6 +36,7 @@ function Question() {
             })
 
         const data = await res.json();
+
         setData(data)
         setTags(data.tags.split(','))
 
@@ -41,39 +44,44 @@ function Question() {
 
     }, [])
 
-    // Obtener id de la pregunta
-    const { questionID } = useParams()
-    console.log(`Buscando la pregunta con ID: ${questionID}`);
-
     if (!data) return 'Loading ...'
 
     return (
 
         <div key={data.id}>
-            <div>
+
+            {/* Fecha */}
+            <div className='question-creation-date'>
                 <Moment format='YYYY/MM/DD'>
                     {data.creationDate}
                 </Moment> 
             </div>
-            <h2 className="question title"> {data.title}
-            </h2>
-            <div className="question body">
+            
+            {/* Título */}
+            <h2 className="question-title"> {data.title}</h2>
+
+            {/* Cuerpo */}
+            <div className="question-body">
                 {data.body}
             </div>
-            <div className='question tags'>
+
+            {/* Tags */}
+            <div className='question-tags'>
                 {tags && tags.map(tag => 
                     <a href={'http://localhost:3001/questions?tags=' + tag}>
-                    {tag}
-                </a>
+                        {tag}
+                    </a>
                 )}
 
             </div>
+
             <div>
 
                 <GetAnswers />
                 <PostAnswer />
             
             </div>
+
         </div>
 
     )
