@@ -7,7 +7,6 @@ import Reset from './User/Reset';
 import { Switch, Route } from 'react-router-dom';
 import CreateQuestion from './Content/CreateQuestion';
 import Profile from './Profiles/Profile';
-import Answers from './Content/Answers';
 import Question from './Content/Question'
 import Questions from './Content/QuestionsPortal';
 
@@ -23,9 +22,6 @@ function App() {
         </Route>
         <Route path="/questions">
           <Questions/>
-        </Route>
-        <Route path="/answers">
-          <Answers/>
         </Route>
         <Route path="/question/:questionID">
           <Question/>
