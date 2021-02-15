@@ -58,7 +58,10 @@ function Question() {
             <div className="question body">
                 {data.body}
             </div>
-            {}
+            <div className='question tags'>
+                {data.tags}
+
+            </div>
             <div>
 
                 <GetAnswers />
