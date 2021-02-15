@@ -39,7 +39,7 @@ function QuestionPreview({ question }) {
                 <NavLink to={`/question/${question.id}`} className="question-preview-title"> {question.title} </NavLink>
                 </h3>
                 <div className='question-preview-excerpt'>
-                    {question.body.substring(0, 150) + ' ...'}
+                    {question.body.substring(0, 250) + ' ...'}
                 </div>
                 <div className='question-preview-tags'>
                     {tags.length >= 1 && 
