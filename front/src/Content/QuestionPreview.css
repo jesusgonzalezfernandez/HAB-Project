@@ -1,4 +1,4 @@
-.question.summary {
+.question.preview.summary {
     border-bottom: 1px solid #D6D9DC;
     padding: 20px;
     width: 65%;
@@ -6,7 +6,7 @@
     display: flex;
 }
 
-.question.stats {
+.question.preview.stats {
     display: flex;
     flex-direction: column;
     justify-content:space-evenly;
@@ -15,12 +15,12 @@
     font-size: small;
 }
 
-.question.votes {
+.question.preview.votes {
     display: flex;
     flex-direction: column;
 }
 
-.question.answers.count {
+.question.preview.answers.count {
     display: flex;
     flex-direction: column;
 }
@@ -40,11 +40,11 @@
     text-decoration: none;
 }
 
-.question.excerpt {
+.question.preview.excerpt {
     padding: 20px;
 }
 
-.question.tags {
+.question.preview.tags {
     display: flex;
     width: 75%;
     margin: auto 0 auto auto;
@@ -52,7 +52,7 @@
     flex-wrap: wrap;
 }
 
-.question.tags a {
+.question.preview.tags a {
     background-color: #d1e5f1;
     padding: 5px;
     border-radius: 10%;

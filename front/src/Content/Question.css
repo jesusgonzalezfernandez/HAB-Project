@@ -1,5 +1,7 @@
 .question.title{
-    color:aquamarine
+    color: #0077cc;
+    border-bottom: 1px solid grey;
+    padding: 10px;
 }
 
 .question.body{
