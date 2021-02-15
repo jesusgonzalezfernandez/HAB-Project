@@ -17,7 +17,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <h1>Welcome to Howdoi!</h1>
       <Switch>
         <Route path="/" exact>
           <Home />
