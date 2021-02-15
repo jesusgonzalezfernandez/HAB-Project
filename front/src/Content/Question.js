@@ -48,7 +48,7 @@ function Question() {
 
     return (
         
-        <div className="question-main" key={data.id}>
+        <main className="question-main" key={data.id}>
 
             {/* Fecha */}
             <div>
@@ -82,7 +82,7 @@ function Question() {
             
             </div>
 
-        </div>
+        </main>
 
     )
 }
