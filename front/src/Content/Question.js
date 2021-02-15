@@ -1,12 +1,13 @@
-import useFetch from '../useFetch';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Answers from './Answers';
 import GetAnswers from './GetAnswers';
+import PostAnswer from './PostAnswer';
+
 
 
 function Question() {
+
     const [data, setData] = useState()
     const login = useSelector(state => state.login)
     if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
@@ -48,8 +49,10 @@ function Question() {
             </div>
             {}
             <div>
-                <GetAnswers/>
-                <Answers></Answers>
+
+                <GetAnswers />
+                <PostAnswer />
+            
             </div>
         </div>
 
