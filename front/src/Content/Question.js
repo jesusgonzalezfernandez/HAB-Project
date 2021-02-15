@@ -7,10 +7,16 @@ import Moment from 'react-moment';
 import './Question.css'
 
 
+
 function Question() {
 
-    const [data, setData] = useState()
     const login = useSelector(state => state.login)
+
+    const [data, setData] = useState()
+    const [tags, setTags] = useState([])
+
+    console.log(`Tags: ${tags}`);
+
     if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
     // Ejecutar fetch al cargar la página
@@ -29,6 +35,7 @@ function Question() {
 
         const data = await res.json();
         setData(data)
+        setTags(data.tags.split(','))
 
         console.log(`Resultado de la búsqueda: ${JSON.stringify(data)}`)
 
@@ -38,16 +45,15 @@ function Question() {
     const { questionID } = useParams()
     console.log(`Buscando la pregunta con ID: ${questionID}`);
 
-    if (data) {
-
-        console.log(`Date sin formato: ${data.creationDate}`);
-        
-    }
-
     if (!data) return 'Loading ...'
 
     return (
+<<<<<<< HEAD
         <div className="question-main" key={data.id}>
+=======
+
+        <div key={data.id}>
+>>>>>>> d8c8f9e894d64467ca711bb234116b0f009cc3e4
             <div>
                 <Moment format='YYYY/MM/DD'>
                     {data.creationDate}
@@ -58,7 +64,14 @@ function Question() {
             <div className="question body">
                 {data.body}
             </div>
-            {}
+            <div className='question tags'>
+                {tags && tags.map(tag => 
+                    <a href={'http://localhost:3001/questions?tags=' + tag}>
+                    {tag}
+                </a>
+                )}
+
+            </div>
             <div>
             <h4>Respuestas:</h4>
                 <GetAnswers />
