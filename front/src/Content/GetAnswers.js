@@ -38,9 +38,14 @@ function GetAnswers() {
         <div>
             {data &&
                 <div className="get answers">
-                        { data.body }
-        </div>
-}
+                    {/* Esto está mal, sólo devuelve la primera */}
+                    {Object.values(data).map(answer =>
+                        <div key={answer.id}>
+                            {answer}
+                        </div>
+                    )}
+                </div>
+            }
         </div>
     )
 }
