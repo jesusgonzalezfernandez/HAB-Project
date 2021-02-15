@@ -39,7 +39,7 @@ function GetAnswers() {
             {data &&
                 <div className="get answers">
                     {/* Esto está mal, sólo devuelve la primera */}
-                    {Object.values(data).map(answer =>
+                    {data.map(answer =>
                         <div key={answer.id}>
                             {answer}
                         </div>
