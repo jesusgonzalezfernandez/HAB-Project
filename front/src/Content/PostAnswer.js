@@ -10,9 +10,8 @@ function PostAnswer() {
     const login = useSelector(state => state.login)
     if (login) console.log(`*CreateAnswer* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
-    // Obtener id de la pregunta
-    // const { questionID } = useParams()
-    // console.log(`Respuesta asociada a la pregunta con ID: ${questionID}`);
+    const { questionID } = useParams()
+    console.log(`Buscando la pregunta con ID: ${questionID}`);
 
     const [content, setContent] = useState('')
 
@@ -53,9 +52,10 @@ function PostAnswer() {
         const answerData = {
             body: content,
         }
+
         const res = await fetch(
             // Dirección
-            'http://localhost:3001/questions/3',
+            `http://localhost:3001/questions/${questionID}`,
             // Contenido
             {
                 headers: { 'Content-Type': 'application/json', auth: login.token },
