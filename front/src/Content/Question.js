@@ -47,11 +47,11 @@ function Question() {
     if (!data) return 'Loading ...'
 
     return (
-
-        <div key={data.id}>
+        
+        <div className="question-main" key={data.id}>
 
             {/* Fecha */}
-            <div className='question-creation-date'>
+            <div>
                 <Moment format='YYYY/MM/DD'>
                     {data.creationDate}
                 </Moment> 
@@ -76,7 +76,7 @@ function Question() {
             </div>
 
             <div>
-
+            <h4>Respuestas:</h4>
                 <GetAnswers />
                 <PostAnswer />
             

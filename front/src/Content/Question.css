@@ -1,10 +1,17 @@
-.question.title{
+.question.title {
     color: #0077cc;
     border-bottom: 1px solid grey;
     padding: 10px;
 }
 
-.question.body{
+.question.body {
     text-align: left;
     padding: 10px;
+}
+
+.question-main {
+    border-bottom: 1px solid #D6D9DC;
+    padding: 20px;
+    width: 65%;
+    margin: auto;
 }

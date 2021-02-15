@@ -9,18 +9,22 @@ const getQuestionDataQuery = async data => {
 
             SELECT 
                 
-                title, 
-                body,  
-                file, 
-                languages, 
-                tags, 
-                status,
-                views,
-                closeDate,
-                creationDate,
-                updateDate 
+                questions.title, 
+                questions.body,  
+                questions.file, 
+                questions.languages, 
+                questions.tags, 
+                questions.status,
+                questions.views,
+                questions.closeDate,
+                questions.creationDate,
+                questions.updateDate,
+                users.username 
                 
-            FROM questions WHERE id = ${data.questionID}
+            FROM questions 
+            JOIN users
+            ON users.id = questions.userID
+            WHERE questions.id = ${data.questionID}
             
         `
 
