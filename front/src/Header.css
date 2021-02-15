@@ -1,20 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap');
+
 header {
     display: flex;
-    border-bottom: 1px solid #ccc;
     align-items: center;
     justify-content: space-between;
-    max-width: 768px;
     margin: 0 auto 30px;
     padding: 10px 30px;
 }
 
-header h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 150%;
+header a {
+    color: #3c4547;
+    text-decoration: none;
+    margin-right: 30px;
 }
 
-header a {
-    color: black;
-    text-decoration: none;
+.menu-nav {
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Jost', sans-serif;
+}
+
+.selected {
+    font-weight: 600;
+}
+
+.user-nav {
+    margin-left: 30px;
+}
+
+/* Hay que darle estilo al boton */
+.user-nav button {
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    color: #3c4547;
+    cursor: pointer;
+}
+
+img.logo {
+    max-width: 160px;
 }

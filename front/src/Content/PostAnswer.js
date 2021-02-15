@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 
-function Answers() {
+function PostAnswer() {
 
     // Obtener usuario del store
     const login = useSelector(state => state.login)
@@ -90,4 +90,4 @@ function Answers() {
     )
 }
 
-export default Answers;
+export default PostAnswer;
