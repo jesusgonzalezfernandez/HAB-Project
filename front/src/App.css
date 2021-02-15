@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 
+html {
+  --amarillo: #F9EA3B;
+  --morado: #3307ad;
+}
+
 body {
   background-color: #F5F5F7;
   font-family: 'Open Sans', sans-serif;
