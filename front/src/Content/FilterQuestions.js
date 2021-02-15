@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import QuestionPreview from './QuestionPreview'
 
 
-
 function FilterQuestions() {
 
     const [results, setResults] = useState([])
