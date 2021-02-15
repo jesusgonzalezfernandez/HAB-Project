@@ -2,12 +2,8 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GetAnswers from './GetAnswers';
-<<<<<<< HEAD
-import './Question.css'
-=======
-import PostAnswer from './PostAnswer';
-
->>>>>>> 1e90ad2fc63c88e3a3747116120a3c6f9cce370d
+import './Question.css';
+import PostAnswer from './PostAnswer'
 
 
 function Question() {
