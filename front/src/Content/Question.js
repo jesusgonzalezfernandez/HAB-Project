@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Answers from './Answers';
+import GetAnswers from './GetAnswers';
 
 
 function Question() {
@@ -47,10 +48,10 @@ function Question() {
             </div>
             {}
             <div>
+                <GetAnswers/>
                 <Answers></Answers>
             </div>
         </div>
-
 
     )
 }

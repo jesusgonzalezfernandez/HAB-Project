@@ -47,6 +47,7 @@ const updateAnswer = require ('./controllers/content/updateAnswer')
 const updateVote = require ('./controllers/content/updateVote')
 const deleteQuestion = require ('./controllers/content/deleteQuestion')
 const deleteAnswer = require ('./controllers/content/deleteAnswer')
+const getAnswerDetails = require ('./controllers/content/getAnswerDetails')
 
 
 // 1. User Endpoints
@@ -122,6 +123,9 @@ const deleteAnswer = require ('./controllers/content/deleteAnswer')
 
     // 2.11 Eliminar una Respuesta
     app.delete('/questions/:questionID/:answerID', isAuthenticated, isAuthor, deleteAnswer)
+
+    // 2.12 Obtener una Respuesta
+    app.get ('/answers/:questionID', isAuthenticated, getAnswerDetails)
 
 
 // Servidor

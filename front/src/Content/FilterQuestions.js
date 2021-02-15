@@ -137,26 +137,6 @@ function FilterQuestions() {
                 }
             
             </div>
-            
-            
-
-                {/* <div className='search-results'>
-                    {results && 
-                    
-                    <div>
-                        <h2>Resultados:</h2>
-                            {Object.values(results).map(question =>
-                                <div className='questions' key={question.id}>
-                                    {question.userID}
-                                    {question.title}
-                                </div>)}
-
-                        </div>
-                    }
-
-                </div>}
-
-            */}
         </div> 
     )
 }
