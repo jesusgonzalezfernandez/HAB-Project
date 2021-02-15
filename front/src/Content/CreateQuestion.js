@@ -46,7 +46,7 @@ function CreateQuestion() {
         // Error. Usuario no logueado
         if (!login) {
             
-            return alert('Please log in first!')
+            return alert('Debes iniciar sesión para realizar esta acción')
             
         }
         
@@ -87,7 +87,7 @@ function CreateQuestion() {
                 theme="snow"
                 modules={modules}
                 value= {content}
-                placeholder= 'Post your question here...'
+                placeholder= 'Haz tu pregunta aquí...'
                 onChange= {setContent}
             />  
 
@@ -100,8 +100,8 @@ function CreateQuestion() {
             </select>
 
             <form onSubmit={handleSubmit}>
-                <button>
-                    Submit
+                <button class="submit">
+                    Enviar
                 </button>
 
             </form>

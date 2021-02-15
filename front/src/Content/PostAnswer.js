@@ -77,13 +77,13 @@ function PostAnswer() {
                 theme="snow"
                 modules={modules}
                 value={content}
-                placeholder='Post your answer here...'
+                placeholder='Publica tu respuesta aquí...'
                 onChange={setContent}
             />
 
             <form onSubmit={handleSubmit}>
-                <button>
-                    Submit
+                <button className="submit">
+                    Enviar
             </button>
             </form>
         </div>

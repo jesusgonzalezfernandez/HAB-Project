@@ -26,7 +26,6 @@ function GetAnswers() {
 
         const data = await res.json();
         setData(data)
-        console.log(res)
         console.log(`Resultado de la pregunta: ${JSON.stringify(data)}`)
 
     }, [])
@@ -38,7 +37,10 @@ function GetAnswers() {
             {data.length >= 1 &&
                 <div className="get answers">
                     {data.map(answer =>
-                        <div className="answer box"> {answer.body} </div>
+                        <div className="answer box">
+                            <div> {answer.userID} </div>
+                        <div> {answer.body} </div>
+                        </div>
                     )}
                 </div>
             }
@@ -53,19 +55,3 @@ function GetAnswers() {
 }
 
 export default GetAnswers;
-
-{/* {data.length >= 1 &&
-                <div className="get answers">
-                    {data.map(answer =>
-                        <div key={answer.id}>
-                            {answer}
-                        </div>
-                    )}
-                </div>
-            }
-            {data.length < 1 &&
-
-                <div>
-                    <i>Todavía no hay respuestas</i>
-                </div>
-            } */}
