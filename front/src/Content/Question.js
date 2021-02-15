@@ -2,12 +2,9 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GetAnswers from './GetAnswers';
-<<<<<<< HEAD
-import './Question.css'
-=======
 import PostAnswer from './PostAnswer';
-
->>>>>>> 1e90ad2fc63c88e3a3747116120a3c6f9cce370d
+import Moment from 'react-moment';
+import './Question.css'
 
 
 function Question() {
@@ -43,7 +40,9 @@ function Question() {
 
     if (data) {
 
-        console.log(`Data sin formato: ${data.creationDate}`);
+        console.log(`Date sin formato: ${data.creationDate}`);
+
+
         
     }
 
@@ -51,7 +50,10 @@ function Question() {
 
     return (
         <div key={data.id}>
-            <div> {data.creationDate}
+            <div>
+                <Moment format='YYYY/MM/DD'>
+                    {data.creationDate}
+                </Moment> 
             </div>
             <h2 className="question title"> {data.title}
             </h2>
