@@ -41,8 +41,6 @@ function Question() {
     if (data) {
 
         console.log(`Date sin formato: ${data.creationDate}`);
-
-
         
     }
 
