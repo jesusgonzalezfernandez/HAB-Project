@@ -6,8 +6,7 @@ const getAnswerDataQuery = async data => {
 
         `
 
-            SELECT 
-                
+            SELECT   
                 questionID,  
                 userID, 
                 body, 
@@ -15,11 +14,11 @@ const getAnswerDataQuery = async data => {
                 creationDate,
                 updateDate 
                 
-            FROM answers WHERE id = ${data.questionID}
+            FROM answers
             
         `
     const objects = [
-        { questionID: data.id },
+        { questionID: data.questionID },
         { userID: data.userID },
         { body: data.body },
         { file: data.file },

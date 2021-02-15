@@ -125,7 +125,7 @@ const getAnswerDetails = require ('./controllers/content/getAnswerDetails')
     app.delete('/questions/:questionID/:answerID', isAuthenticated, isAuthor, deleteAnswer)
 
     // 2.12 Obtener una Respuesta
-    app.get ('/answers/:questionID', isAuthenticated, getAnswerDetails)
+    app.get ('/answers/:questionID', getAnswerDetails)
 
 
 // Servidor
