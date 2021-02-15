@@ -1,9 +1,9 @@
-import useFetch from '../useFetch';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Answers from './Answers';
 import GetAnswers from './GetAnswers';
+import './Question.css'
 
 
 function Question() {
@@ -41,9 +41,9 @@ function Question() {
         <div key={data.id}>
             <div> {data.creationDate}
             </div>
-            <div> {data.title}
-            </div>
-            <div>
+            <h2 className="question title"> {data.title}
+            </h2>
+            <div className="question body">
                 {data.body}
             </div>
             {}

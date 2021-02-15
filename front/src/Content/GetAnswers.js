@@ -1,4 +1,3 @@
-import useFetch from '../useFetch';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -39,7 +38,7 @@ function GetAnswers() {
             {data.length >= 1 &&
                 <div className="get answers">
                     {data.map(answer =>
-                        <div> {answer.body} </div>
+                        <div className="answer box"> {answer.body} </div>
                     )}
                 </div>
             }
