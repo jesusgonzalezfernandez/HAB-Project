@@ -48,12 +48,7 @@ function Question() {
     if (!data) return 'Loading ...'
 
     return (
-<<<<<<< HEAD
         <div className="question-main" key={data.id}>
-=======
-
-        <div key={data.id}>
->>>>>>> d8c8f9e894d64467ca711bb234116b0f009cc3e4
             <div>
                 <Moment format='YYYY/MM/DD'>
                     {data.creationDate}
