@@ -18,14 +18,26 @@ const resetAccountQuery = async (password, userID) => {
             UPDATE users SET password = '${password}', validationCode = '', updateDate = UTC_TIMESTAMP WHERE id = ${userID} AND active = 1
         `
 
-    await performQuery(query)
+    const result = await performQuery(query) 
+    return result
 
 }
 
 
 const resetAccount = async (req, res) => {
 
-    // Obtener variables
+    console.log('*Reset Account*');
+
+    /*
+    
+        Crear objeto reqData. Contiene:
+
+            - email
+            - password
+            - code
+
+    */ 
+
     let reqData = req.body
 
     try {
@@ -66,11 +78,21 @@ const resetAccount = async (req, res) => {
                 // Encriptar password y sustituir en reqData
                 reqData.password = await bcrypt.hash(reqData.password, 10)
                 
-                // Enviar a BD
-                await resetAccountQuery(reqData.password, user.id)
+        // Enviar a BD
+        const result = await resetAccountQuery(reqData.password, user.id)
+
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }
+
+        console.log(`Successfully Updated. Affected Rows: ${result.affectedRows}`);
 
     } catch (e) {
 
+        console.log(`Error reseting account: ${e.message}`)
         res.status(401).send(e.message)
         return
     

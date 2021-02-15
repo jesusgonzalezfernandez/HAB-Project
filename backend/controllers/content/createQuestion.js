@@ -41,18 +41,31 @@ const createQuestionQuery = async data => {
         
         `
 
-    await performQuery(query)
+    const result = await performQuery(query) 
+    return result
 
 }
 
 const createQuestion = async (req, res) => {
 
+    console.log('*Create Question*');
+
     let query;
     let question;
 
     try {
+
+        /*
+            Obtener, validar y corregir los datos &
+            crear objeto reqData. Contiene:
+
+                - title
+                - body
+                - languages
+                - tags
+
+        */
         
-        // Obtener, validar y corregir los datos
         const reqData = await questionValidation.validateAsync(req.body, {abortEarly: false})
 
         // Comprobar si la pregunta ya existe en BD
@@ -80,11 +93,20 @@ const createQuestion = async (req, res) => {
             reqData.userID = req.auth.userID
         
         // Enviar a BD
-        await createQuestionQuery (reqData)
+        const result = await createQuestionQuery (reqData)
+
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }
+
+        console.log(`Successfully Inserted. Affected Rows: ${result.affectedRows}`);
 
     } catch (e) {
 
-        console.log(`Error: ${e.message}`);
+        console.log(`Error Creating Question: ${e.message}`);
         res.status(400).send(e.message)
         return
 

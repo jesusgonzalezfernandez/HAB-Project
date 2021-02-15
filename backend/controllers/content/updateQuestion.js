@@ -21,12 +21,15 @@ const updateQuestionQuery = async data => {
 
         `
                 
-    await performQuery(query)
+    const result = await performQuery(query) 
+    return result
 
 }
 
 
 const updateQuestion = async (req, res) => {
+
+    console.log('*Update Question*');
 
     // Obtener variables
     let reqData = req.params
@@ -36,14 +39,35 @@ const updateQuestion = async (req, res) => {
         // Obtener, validar y corregir los datos de la pregunta
         const questionData = await questionValidation.validateAsync(req.body, {abortEarly: false})
 
-        // Añadir a reqData
+        /*
+        
+            Crear objeto reqData. Contiene:
+
+                - title
+                - body
+                - languages
+                - tags
+                - questionID
+    
+        */
+        
         reqData = {...questionData, questionID: reqData.questionID}
 
         // Enviar a BD
-        await updateQuestionQuery (reqData)
+        const result = await updateQuestionQuery (reqData)
+
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }        
+
+        console.log(`Successfully Updated. Affected Rows: ${result.affectedRows}`);
         
     } catch (e) {
         
+        console.log(`Error updating question: ${e.message}`)
         res.status(400).send(e.message)
         return
 

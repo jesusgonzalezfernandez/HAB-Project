@@ -37,7 +37,8 @@ const createAnswerQuery = async data => {
 
     `
 
-    await performQuery (query)
+    const result = await performQuery(query) 
+    return result
 
 }
 
@@ -45,35 +46,50 @@ const createAnswerQuery = async data => {
 
 const createAnswer = async (req, res) => {
 
-    let query;
+    console.log('*Create Answer*');
 
     // Obtener variables
-    const { questionID, file } = req.params
+    const { questionID } = req.params
     const token = req.auth
-    let reqData = req.body
 
     try {
 
-        // Obtener, validar y corregir los datos de la pregunta
-        reqData = await answerValidation.validateAsync(reqData)
-console.log(reqData);
-        // Procesar los datos
+        // Obtener, validar y corregir los datos
+        let reqData = await answerValidation.validateAsync(req.body)
 
-            // Añadir el ID del usuario & ID de la pregunta & File
-            reqData = {
-                ...reqData, 
-                userID: token.userID, 
-                questionID: questionID,
-                file: file 
-            }
+        /*
+        
+            Crear objeto reqData. Contiene:
+    
+                - body
+                - userID
+                - questionID
+    
+        */
+
+        reqData = {
+            ...reqData, 
+            userID: token.userID, 
+            questionID: questionID,
+        }
 
         // Enviar a BD
-        await createAnswerQuery (reqData)
+        const result = await createAnswerQuery (reqData)
+
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }        
+
+        console.log(`Successfully Inserted. Affected Rows: ${result.affectedRows}`);
 
     } 
     
     catch (e) {
-        
+
+        console.log(`Error creating answer: ${e.message}`)
         res.status(400).send(e.message)
         return
 

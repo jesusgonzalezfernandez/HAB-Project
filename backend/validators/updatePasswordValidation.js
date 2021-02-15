@@ -8,9 +8,7 @@ const updatePasswordValidation = joi.object({
         .min(6)
         .max(15)
         .required()
-        .error(
-            new Error('Invalid Old Password')
-        ),
+        .messages(),
     
     newPassword: joi
         .string()
@@ -18,9 +16,7 @@ const updatePasswordValidation = joi.object({
         .min(6)
         .max(15)
         .required()
-        .error(
-            new Error('Invalid New Password')
-        )
+        .messages(),
         
     })
 

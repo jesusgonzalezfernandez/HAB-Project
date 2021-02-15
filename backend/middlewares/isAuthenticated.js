@@ -9,7 +9,8 @@ const performQuery = require('../db/performQuery')
 
 const isAuthenticated = async (req, res, next) => {
 
-    console.log('Verifying Token');
+    console.log('* Checking Authentication *');
+
     // Obtener variables
     const { auth } = req.headers;
 
@@ -52,12 +53,13 @@ const isAuthenticated = async (req, res, next) => {
 
     } catch (e) {
 
+        console.log('X Authentication Error X');
         res.status(401).send(e.message)
         return
     
     }
 
-    console.log('User Verified');
+    console.log('- User Is Authenticated -');
     next()
 
 }

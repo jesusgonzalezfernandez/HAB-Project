@@ -1,11 +1,10 @@
-import { useState } from "react";
-import LatestQuestions from './LatestQuestions'
+import React, { useState } from 'react'
+import QuestionPreview from './QuestionPreview'
 
 
 
-function Questions() {
+function FilterQuestions() {
 
-    const [page, setPage] = useState(1)
     const [results, setResults] = useState([])
     const [title, setTitle] = useState('')
     const [languages, setLanguages] = useState('')
@@ -13,10 +12,7 @@ function Questions() {
     const [creationDate, setCreationDate] = useState('')
     const [status, setStatus] = useState('')
 
-    // const paginatedData = filteredData.slice(5 * (page - 1), 5 * page)
-    // const max = Math.ceil(filteredData.length / 5)
-
-    // ?title=Titulo&languages=javascript&tags=tag&status=closed
+    console.log(`Resultado de la búsqueda: ${results.length} preguntas`);
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -45,31 +41,40 @@ function Questions() {
 
         })
         
-        console.log(`Array de parámetros de búsqueda: ${array}`);
-
+        // Crear URL concatenando campos y valores
         for (let i = 0; i < array.length; i++ ){
 
             const [ key ] = Object.keys(array[i])
             const [ value ] = Object.values(array[i])
 
+            console.log(`Key ${i} del array: ${key}`);
+            console.log(`Value ${i} del array: ${value}`);
+            
             if (i === 0) {
-                URL = URL.concat(`?`)
+                URL = URL.concat(`?${key}=${value}`)
+            }
+
+            if (i > 0) {
+                URL = URL.concat(`&${key}=${value}`)
             }
 
         }
 
-        const res = await fetch(URL)
-        const data = await res.json()
-        // console.log(data)
-        setResults({ ...data, URL })
-        // console.log(results)
+        console.log(`Dirección de búsqueda: ${URL}`);
+
+        // Descarga, parseado y envio del resultado.
+        await fetch(URL)
+            .then(res => res.json())
+            .then(data => setResults(data))
+
     }
 
     return (
-        <div className="page questions">
-            <h1>Preguntas</h1>
+        <div>
+            {/* Formulario de búsqueda */}
             <form onSubmit={handleSubmit}>
-                <h1>Filtrar Preguntas:</h1>
+
+                <h1>Encuentra lo que estás buscando:</h1>
                 <label>
                     Título:
                     <input value={title} onChange={e => setTitle(e.target.value)} />
@@ -77,7 +82,7 @@ function Questions() {
                 <label>
                     Lenguaje:
                     <select value={languages} onChange={e => setLanguages(e.target.value)}>
-                        <option value='' hidden>Selecciona...</option>
+                        <option value="" hidden>Selecciona...</option>
                         <option value="css">css</option>
                         <option value="html">html</option>
                         <option value="javascript">javascript</option>
@@ -91,7 +96,7 @@ function Questions() {
                 <label>
                     Status:
                     <select value={status} onChange={e => setStatus(e.target.value)}>
-                        <option value='' hidden>Selecciona...</option>
+                        <option value="">Selecciona...</option>
                         <option>Pending</option>
                         <option>Closed</option>
                     </select>
@@ -104,30 +109,36 @@ function Questions() {
                     <button>Buscar</button>
                 </label>
             </form>
-            {results &&
-                <div>
-                    <h2>Resultados:</h2>
-                    {results && 
-                    Object.values(results).map(question =>
-                        <div key={question.id}>
-                            {question.title}
-                        </div>
-                    )}
-                </div>
-            }
-            {/* {!paginatedData &&
-                        <div><i>Sin resultados</i></div>
-                    }
-                </div> */}
-            {/* <div className="pagination">
-            <span onClick={() => setPage(page > 1 ? page - 1 : 1)}>◄</span>
-            <span>{page} / {max}</span>
-            <span onClick={() => setPage(page < max ? page + 1 : max)}>►</span>
-          </div> */}
-            <LatestQuestions />
-        </div >
-    );
+
+            {/* Resultados */}
+            <div>
+
+                {results.length >= 1 && 
+
+                    <div className="search results">
+
+                        <h2>Resultados:</h2>
+                            {results.map(question => 
+                        
+                                <div key={question.id}>
+                                   <QuestionPreview question={question}/>
+                                </div>
+                            )}
+
+                    </div> 
+                }
+
+                {results.length < 1 &&
+                
+                    <div>
+                        <i>Sin Resultados</i>
+                    </div>
+                
+                }
+            
+            </div>
+        </div> 
+    )
 }
 
-
-export default Questions;
+export default FilterQuestions

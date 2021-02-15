@@ -21,24 +21,30 @@ const userLogoutQuery = async userID => {
             WHERE id = ${userID}
         `
 
-    await performQuery(query)
+    const result = await performQuery(query) 
+    return result
     
 }
 
 const userLogout = async (req, res) => {
 
-    /*
+    console.log('*User Logout*');
+
+    // Obtener variables
+    const { auth } = req.headers;
+    const { userID } = req.params;
     
-        Pablo. He cambiado la forma de acceder al 
-        ID del usuario. Creo que el controlador queda más limpio
-        si en lugar de pedir un ID en el params
-        cogemos ese ID directamente del token
+    /* 
     
+        Crear objeto reqData. Contiene
+
+            - token
+            - userID
+
     */
 
-    // Obtener token
-    const { auth } = req.headers;
-    
+    let reqData = { auth, userID}
+
     try {
     
         // Decodificar token
@@ -59,18 +65,26 @@ const userLogout = async (req, res) => {
             
             }
 
-        await userLogoutQuery(token.userID)
+        const result = await userLogoutQuery(token.userID)
+
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }
+
+        console.log(`Succesfully Updated. Affected Rows: ${result.affectedRows} `);
 
     } catch (e) {
 
-        console.log(e.message);
-        res.status(401).send('Still logged')
+        res.status(401).send(e.message)
+        console.log(`Error Logging Out: ${e.message}`);
         return
     
     }
 
     res.send('Bye. See you soon')
-    console.log('Logged-out user')
 
 }
 

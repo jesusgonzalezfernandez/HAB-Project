@@ -23,14 +23,26 @@ const updateTokenQuery = async (token, email) => {
             WHERE email = '${email}' AND active = true 
         `
 
-    await performQuery(query)
+    const result = await performQuery(query) 
+    return result
 
 }
 
 const userLogin = async (req, res) => {
 
+    console.log('*User Login*');
+
     let query;
 
+    /*
+    
+        Crear objeto reqData. Contiene:
+
+            - email
+            - password
+
+    */
+    
     const reqData = req.body
 
     try {
@@ -102,7 +114,16 @@ const userLogin = async (req, res) => {
             const token = jwt.sign(tokenPayload, process.env.SECRET, {expiresIn: '1d'});
 
             // Enviar a BD
-            await updateTokenQuery(token, reqData.email)
+            const result = await updateTokenQuery(token, reqData.email)
+
+            // Error
+            if (!result) {
+
+                throw new Error ('Database Error')
+
+            }
+
+            console.log(`Successfully Authenticated. Affected Rows: ${result.affectedRows} `);
 
             // Enviar al front
             res.json({

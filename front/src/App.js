@@ -2,13 +2,14 @@ import './App.css';
 import Header from './Header';
 import Home from './Home';
 import Login from './User/Login';
-import FilterQuestions from './Content/FilterQuestions';
 import Recovery from './User/Recovery';
 import Reset from './User/Reset';
 import { Switch, Route } from 'react-router-dom';
 import CreateQuestion from './Content/CreateQuestion';
 import Profile from './Profiles/Profile';
-import LatestQuestions from './Content/LatestQuestions';
+import Answers from './Content/Answers';
+import Question from './Content/Question'
+import Questions from './Content/QuestionsPortal';
 
 
 
@@ -21,10 +22,13 @@ function App() {
           <Home />
         </Route>
         <Route path="/questions">
-          <FilterQuestions/>
+          <Questions/>
         </Route>
-        <Route path="/search">
-          <LatestQuestions/>
+        <Route path="/answers">
+          <Answers/>
+        </Route>
+        <Route path="/question/:questionID">
+          <Question/>
         </Route>
         <Route path="/login">
           <Login />

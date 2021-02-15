@@ -16,7 +16,7 @@ const performQuery = require ('../../db/performQuery')
 
 
 // Crear y enviar query
-const createUserQuery = data => {
+const createUserQuery = async data => {
 
     const query = 
 
@@ -52,42 +52,34 @@ const createUserQuery = data => {
         )
     `
     
-    performQuery(query)
+    const result = await performQuery(query) 
+    return result
 
 }
 
 // Controlador
 const createUser = async (req, res) => {
 
+    console.log('*Create User*');
+
     let query;
     let user;
 
-    // Obtener variables / Crear objeto data
-    let reqData = req.body
-
     /*
 
-        Pablo:
+        Crear objeto reqData. Contiene:
 
-            El objeto reqData tiene todas las variables
-            con su nombre y su valor. 
-            
-            Si es necesario acceder a una variable en concreto
-            es más cómodo hacer reqData.variable que obtener
-            y utilizar cada una de las variables por separado, 
-            y a la hora de enviarlo a la query solo envias reqData, 
-            y no un listado de todas las variables (mucho testo)
-
-            Luego, al crear la query, en lugar de recibir todas las variables
-            por separado (mucho testo again), solo recibe reqData (data),
-            y vuelve a acceder a los valores con data.variable
-
-            Además, al encriptar la contraseña,
-            se sustituye el valor reqData.password
-            y queda mucho más limpio (Hace imposible
-            acceder a la contraseña original, la sustituye)
-
-    */
+            - email
+            - password
+            - username
+            - name
+            - surname
+            - birthDate
+            - country
+    
+    */ 
+    
+    let reqData = req.body
 
     try {
 
@@ -153,8 +145,16 @@ const createUser = async (req, res) => {
                     console.log(`Formatted date: ${reqData.birthDate}`);
 
         // Enviar a BD
-        await createUserQuery(reqData)
-        console.log('Sent to database');
+        const result = await createUserQuery(reqData)
+        
+        // Error
+        if (!result) {
+
+            throw new Error ('Database Error')
+
+        }
+
+        console.log(`Successfully Inserted. Affected Rows: ${result.affectedRows}`);
 
         // Enviar mail de confirmación
         await sendConfirmationMail(reqData.email, `http://${process.env.PUBLIC_DOMAIN}/users/validate/${reqData.validationCode}`)
@@ -162,12 +162,13 @@ const createUser = async (req, res) => {
 
     } catch (e) {
 
-        res.status(400).send(e.message)
         console.log(`Error creating user: ${e.message}`)
+        res.status(400).send(e.message)
         return
     }
 
-    res.send('Please, check your email for email validation')
+    res.send('Please, check your inbox for email validation')
+
 }
 
 module.exports = createUser

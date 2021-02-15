@@ -25,8 +25,9 @@ const updatePasswordQuery = async data => {
                 id = ${data.userID} AND active = 1 
         `
 
-    await performQuery(query)
-
+    const result = await performQuery(query) 
+    return result
+    
 }
 
 const updatePassword = async (req, res) => {
@@ -58,7 +59,16 @@ const updatePassword = async (req, res) => {
             
             }
 
-        // Añadir email y id
+        /*
+        
+            Crear objeto reqData. Contiene
+
+                - oldPassword
+                - newPassword
+                - userID
+        
+        */
+        
         reqData = {...reqData, userID: user.id}
 
         // Comprobar la contraseña
@@ -79,14 +89,24 @@ const updatePassword = async (req, res) => {
             reqData.newPassword = await bcrypt.hash(reqData.newPassword, 10);
             
             // Enviar a BD
-            await updatePasswordQuery (reqData)
+            const result = await updatePasswordQuery (reqData)
+
+            // Error
+            if (!result) {
+
+                throw new Error ('Database Error')
+
+            }
+
+            console.log(`Successfully Updated. Affected Rows: ${result.affectedRows}`);
 
     } catch (e) {
 
+        console.log(`Error updating password: ${e.message}`)
         res.status(401).send(e.message)
         return
 
-    }
+    }   
 
     res.send('Password updated')
 
