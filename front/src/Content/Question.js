@@ -30,11 +30,18 @@ function Question() {
         setData(data)
 
         console.log(`Resultado de la búsqueda: ${JSON.stringify(data)}`)
+
     }, [])
 
     // Obtener id de la pregunta
     const { questionID } = useParams()
     console.log(`Buscando la pregunta con ID: ${questionID}`);
+
+    if (data) {
+
+        console.log(`Data sin formato: ${data.creationDate}`);
+        
+    }
 
     if (!data) return 'Loading ...'
 
