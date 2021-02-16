@@ -48,6 +48,8 @@ const updateVote = require ('./controllers/content/updateVote')
 const deleteQuestion = require ('./controllers/content/deleteQuestion')
 const deleteAnswer = require ('./controllers/content/deleteAnswer')
 const getAnswerDetails = require ('./controllers/content/getAnswerDetails')
+const getUserAnswers = require('./controllers/content/getUserAnswers')
+
 
 
 // 1. User Endpoints
@@ -126,6 +128,9 @@ const getAnswerDetails = require ('./controllers/content/getAnswerDetails')
 
     // 2.12 Obtener una Respuesta
     app.get ('/answers/:questionID', getAnswerDetails)
+
+    // 2.13 Obtener Respuestas de un Usuario
+    app.get ('/answers/:userID', isAuthenticated, isAuthor, getUserAnswers)
 
 
 // Servidor
