@@ -1,5 +1,47 @@
 .questions-portal {
-    width: 65%;
+    width: 80%;
     margin: auto;
-    padding: 25px;
+    display: flex;
 }
+
+.questions-portal .left-aside {
+    width: 25%;
+}
+
+.questions-portal .links {
+    display: flex;
+    flex-direction: column;
+}
+
+.questions-portal .right-aside {
+    width: 25%;
+}
+
+.right-aside .blog {
+    font-size: small;
+    background-color: #cccccc;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.right-aside .blog > h6 {
+    background-color: var(--morado);
+    color: var(--blanco);
+    padding: 15px 10px;
+}
+
+.right-aside .blog ul {
+    list-style: none;
+    text-indent: none;
+    padding: 0;
+    margin: 0;
+}
+
+.right-aside .blog p {
+    border-bottom: 1px solid black;
+}
+
+.right-aside .tags li {
+    list-style: none;
+}
+

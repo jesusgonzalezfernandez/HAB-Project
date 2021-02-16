@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import filterQuestionsQuery from '../Functions/filterQuestionQuery'
 import QuestionPreview from './QuestionPreview'
-import './FilterQuestions.css'
+import './QuestionsFilter.css'
 
 
-function FilterQuestions() {
+function QuestionsFilter() {
 
     // Resultados
     const [results, setResults] = useState()
@@ -112,4 +112,4 @@ function FilterQuestions() {
     )
 }
 
-export default FilterQuestions
+export default QuestionsFilter;
