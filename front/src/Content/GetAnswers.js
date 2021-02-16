@@ -38,7 +38,7 @@ function GetAnswers() {
                 <div className="get answers">
                     {data.map(answer =>
                         <div className="answer box">
-                            <div> {answer.userID} </div>
+                            <div> {answer.username} </div>
                         <div> {answer.body} </div>
                         </div>
                     )}
