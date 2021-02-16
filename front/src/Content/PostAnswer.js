@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 
-function PostAnswer() {
+function PostAnswer({ reload }) {
 
     // Obtener usuario del store
     const login = useSelector(state => state.login)
@@ -39,8 +39,7 @@ function PostAnswer() {
 
         e.preventDefault()
 
-        // Reiniciar el contenido
-        setContent('')
+        // setTimeout(function(){window.location.reload();},20)
 
         // Error. Usuario no logueado
         if (!login) {
@@ -62,6 +61,11 @@ function PostAnswer() {
                 body: JSON.stringify(answerData),
                 method: 'POST'
             })
+        
+        // Reiniciar el contenido
+        setContent('')
+        
+        reload()
 
         console.log(res);
 
@@ -85,7 +89,7 @@ function PostAnswer() {
                 <button className="submit">
                     Enviar
                     <div class="success"></div>
-            </button>
+                </button>
             </form>
         </div>
     )

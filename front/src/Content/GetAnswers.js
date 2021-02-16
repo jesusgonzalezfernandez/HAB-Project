@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import './GetAnswers.css'
 
 
-function GetAnswers() {
+function GetAnswers({key}) {
     const [data, setData] = useState([])
     const login = useSelector(state => state.login)
     if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
@@ -28,8 +28,7 @@ function GetAnswers() {
         setData(data)
         console.log(`Resultado de la pregunta: ${JSON.stringify(data)}`)
 
-    }, [])
-
+    }, [key])
 
 
     return (

@@ -11,12 +11,13 @@ import './Question.css'
 function Question() {
 
     const login = useSelector(state => state.login)
-    
+
     if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
     const [data, setData] = useState()
     const [tags, setTags] = useState([])
-    
+    const [key, setKey] = useState(0)
+
     // Obtener id de la pregunta
     const { questionID } = useParams()
     console.log(`Buscando la pregunta con ID: ${questionID}`);
@@ -35,6 +36,7 @@ function Question() {
                 method: 'GET'
             })
 
+
         const data = await res.json();
 
         setData(data)
@@ -47,16 +49,16 @@ function Question() {
     if (!data) return 'Loading ...'
 
     return (
-        
+
         <main className="question-main" key={data.id}>
 
             {/* Fecha */}
             <div>
                 <Moment format='YYYY/MM/DD'>
                     {data.creationDate}
-                </Moment> 
+                </Moment>
             </div>
-            
+
             {/* Título */}
             <h2 className="question-title"> {data.title}</h2>
 
@@ -67,7 +69,7 @@ function Question() {
 
             {/* Tags */}
             <div className='question-tags'>
-                {tags && tags.map(tag => 
+                {tags && tags.map(tag =>
                     <a href={'http://localhost:3001/questions?tags=' + tag}>
                         {tag}
                     </a>
@@ -76,10 +78,10 @@ function Question() {
             </div>
 
             <div>
-            <h4>Respuestas:</h4>
-                <GetAnswers />
-                <PostAnswer />
-            
+                <h4>Respuestas:</h4>
+                <GetAnswers key={key} />
+                <PostAnswer reload={() => setKey(key + 1)} />
+
             </div>
 
         </main>

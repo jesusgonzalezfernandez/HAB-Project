@@ -106,10 +106,6 @@ function CreateQuestion() {
 
             </form>
 
-            <div>
-                <h1>Test..</h1>
-                Contenido: {content}
-            </div>
         </div>
     )
 }
