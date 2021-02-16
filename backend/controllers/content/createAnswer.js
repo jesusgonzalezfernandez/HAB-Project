@@ -18,6 +18,7 @@ const createAnswerQuery = async data => {
             creationDate,
             updateDate,
             userID,
+            parentID,
             questionID,
             body,
             file 
@@ -28,7 +29,8 @@ const createAnswerQuery = async data => {
 
             UTC_TIMESTAMP, 
             UTC_TIMESTAMP, 
-            '${data.userID}', 
+            '${data.userID}',
+             ${data.parentID},
             '${data.questionID}',
             '${data.body}',
             '${data.file}'
@@ -49,7 +51,7 @@ const createAnswer = async (req, res) => {
     console.log('*Create Answer*');
 
     // Obtener variables
-    const { questionID } = req.params
+    const { questionID, parentID } = req.params
     const token = req.auth
 
     try {
@@ -71,6 +73,7 @@ const createAnswer = async (req, res) => {
             ...reqData, 
             userID: token.userID, 
             questionID: questionID,
+            parentID: parentID || null,
         }
 
         // Enviar a BD

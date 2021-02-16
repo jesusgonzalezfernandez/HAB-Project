@@ -79,6 +79,10 @@ function Question() {
 
             <div>
                 <h4>Respuestas:</h4>
+                {/* Para que recargue al enviar necesitamos avisarle al useEffect
+                de que hay un cambio, lo hacemos con key. En este caso lo que tiene
+                que recargarse es el camponente de las respuestas, por lo que recibe
+                ese prop además del propio componente de crear respuestas */}
                 <GetAnswers key={key} />
                 <PostAnswer reload={() => setKey(key + 1)} />
 
