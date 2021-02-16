@@ -4,7 +4,6 @@ import expert from './imagenes/expert.png';
 import code from './imagenes/manos-coding.png';
 import developer from './imagenes/desarrollador.png';
 import howdoi from './imagenes/expert-student.png';
-import Login from './User/Login';
 
 function Home() {
   return (
