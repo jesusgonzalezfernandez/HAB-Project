@@ -131,6 +131,8 @@ async function main() {
                         int unsigned,
                     userID 
                         int unsigned,
+                    parentID
+                        int unsigned null,
                     body 
                         text not null,
                     file 
@@ -143,8 +145,9 @@ async function main() {
                     constraint answer_questionID_fk1
                         foreign key(questionID) references questions (id) on delete cascade,
                     constraint answer_userID_fk2
-                        foreign key(userID) references users (id) on delete cascade
-        
+                        foreign key(userID) references users (id) on delete cascade,
+                    constraint answer_parentID_fk3
+                        foreign key(parentID) references answers (id) on delete cascade
                 )           
             `
         );

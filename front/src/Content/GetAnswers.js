@@ -39,6 +39,7 @@ function GetAnswers({key}) {
                         <div className="answer box">
                             <div> {answer.username} </div>
                         <div> {answer.body} </div>
+                        <a>Añade un comentario</a>
                         </div>
                     )}
                 </div>

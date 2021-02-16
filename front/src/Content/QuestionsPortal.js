@@ -12,10 +12,7 @@ function QuestionsPortal() {
     let data = useFetch('http://localhost:3001/questions') || []
     
     // Contador de tags
-    // let counter = {}
     let counter = []
-
-    const mockTags = ['tag', 'tag', 'tag', 'tag', 'tag', 'tag', 'tag']
 
     console.log(`data para obtener tags: ${data}`);
 
@@ -28,43 +25,15 @@ function QuestionsPortal() {
 
             for(const tag of questionTags){
 
-                let found = counter.find(count => count[tag] === tag)
+                const index = counter.findIndex(count => count.tag === tag)
                 
-                if(!found) {
+                if(index === -1) {
                     counter.push({tag, count: 1})
                 } else {
-                    counter[found].count ++
+                    counter[index].count ++
                 }
-
-                console.log(counter);
-                // if(!found) {
-                //     counter2.push({tag, count: 1})
-                // } else {
-                //     counter2[found].count ++
-                // }
-
-                // console.log(counter);
-
             }
-
         }
-
-        // for (const question of data) {
-
-        //     const questionTags = question.tags.split(',')
-
-        //     for(const tag of questionTags){
-        //         if (!counter[tag]) {
-        //             counter[tag] = 1
-        //         } else {
-        //             counter[tag] ++
-        //         }
-        //     }
-
-        //     console.log(counter);
-
-        // }
-        
     }
 
     return (
@@ -104,14 +73,14 @@ function QuestionsPortal() {
                     </ul>
                 </section>
                 <section className="tags">
-                    <h6>Common Tags:</h6>
-                    <ul>
-                        {mockTags && mockTags.map(mockTag => 
-                            <a href={'http://localhost:3001/questions?tags=' + mockTag}>
-                                {mockTag}
+                    {counter && counter.map(count =>             
+                        <div className='tag-counter'>
+                            <a href={'http://localhost:3001/questions?tags=' + count.tag}>
+                                {count.tag} 
                             </a>
-                        )}
-                    </ul>
+                            <span>x {count.count}</span>
+                        </div>
+                    )}
                 </section>
             </aside>
         </div >
