@@ -84,6 +84,7 @@ function PostAnswer() {
             <form onSubmit={handleSubmit}>
                 <button className="submit">
                     Enviar
+                    <div class="success"></div>
             </button>
             </form>
         </div>
