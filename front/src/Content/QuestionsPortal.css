@@ -49,20 +49,16 @@
     border-bottom: 1px solid #e4d8b3;
 }
 
-.right-aside .tags li {
-    list-style: none;
-    border-bottom: 1px solid #e4d8b3;
-}
 
 .right-aside .tags {
+    border-bottom: 1px solid #e4d8b3;
     display: flex;
-    width: 50%;
     flex-wrap: wrap;
 }
 
-.right-aside .tags h6 {
-    margin: 20px 0px;
-}
+.right-aside .tag-counter {
+    margin: 10px 5px;
+} 
 
 .right-aside .tags a {
     background-color: var(--amarillo);
@@ -70,6 +66,11 @@
     padding: 5px 10px;
     border-radius: 10%;
     text-decoration: none;
-    margin: 2px;
+    margin-bottom: 5px;
+}
+
+.right-aside .tags span {
+    font-size: x-small;
+    margin-left: 10px;
 }
 
