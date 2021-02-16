@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
 import ExpertProfile from './ExpertProfile';
-import UserProfile from './UserProfile'
+import UserProfile from './UserProfile';
 
 
 
@@ -19,24 +19,22 @@ function Profile() {
   console.log(`Buscando el usuario con ID: ${userID}`);
 
   // Ejecutar fetch al cargar la página
-  useEffect ( async () => {
+  useEffect ( () => {
+    async function fetchData() {
+      const res = await fetch(
 
-    // Enviar consulta a la API
-    const res = await fetch(
-
-    // Dirección
-    `http://localhost:3001/users/profile/${userID}`,
-    // Contenido
-    {
-      headers: { 'Content-Type': 'application/json', auth: login.token },
-      method: 'GET'
-    })
-
-    const data = await res.json();
-    setData(data)
-
-    console.log(`Resultado de la búsqueda: ${JSON.stringify(data)}`)
-
+        `http://localhost:3001/users/profile/${userID}`,
+        {
+          headers: { 'Content-Type': 'application/json', auth: login.token },
+          method: 'GET'
+        })
+    
+        const data = await res.json();
+        setData(data)
+    
+        console.log(`Resultado de la búsqueda: ${JSON.stringify(data)}`)
+    }
+    fetchData()
   }, [])
 
   if(!login) return  <Redirect to='/'/>
