@@ -12,8 +12,8 @@ function QuestionsPortal() {
     let data = useFetch('http://localhost:3001/questions') || []
     
     // Contador de tags
-    let counter = {}
-    let counter2 = []
+    // let counter = {}
+    let counter = []
 
     const mockTags = ['tag', 'tag', 'tag', 'tag', 'tag', 'tag', 'tag']
 
@@ -28,16 +28,22 @@ function QuestionsPortal() {
 
             for(const tag of questionTags){
 
-                let found = counter2.find(tag)
+                let found = counter.find(count => count[tag] === tag)
                 
-                console.log(found);
+                if(!found) {
+                    counter.push({tag, count: 1})
+                } else {
+                    counter[found].count ++
+                }
+
+                console.log(counter);
                 // if(!found) {
                 //     counter2.push({tag, count: 1})
                 // } else {
                 //     counter2[found].count ++
                 // }
 
-                console.log(counter2);
+                // console.log(counter);
 
             }
 
