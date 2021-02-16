@@ -14,34 +14,62 @@
 }
 
 .questions-portal .right-aside {
-    width: 25%;
+    width: 50%;
 }
 
 .right-aside .blog {
     font-size: small;
-    background-color: #cccccc;
-    margin: 0 auto;
-    padding: 0;
+    background-color: #FCF2D4;
+    margin: 0 auto 30px auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 }
 
 .right-aside .blog > h6 {
-    background-color: var(--morado);
-    color: var(--blanco);
+    background-color: #FCF2D4;
+    color: #6A7392;
     padding: 15px 10px;
+    border-bottom: 1px solid #e4d8b3;
+    font-size: medium;
 }
 
 .right-aside .blog ul {
     list-style: none;
     text-indent: none;
-    padding: 0;
-    margin: 0;
 }
 
-.right-aside .blog p {
-    border-bottom: 1px solid black;
+.right-aside .post-list h6 {
+    background-color: #FCF2D4;
+    color: #6A7392;
+    padding: 10px;
+}
+
+.right-aside .post-list p {
+    background-color: #FDF7E3;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e4d8b3;
 }
 
 .right-aside .tags li {
     list-style: none;
+    border-bottom: 1px solid #e4d8b3;
+}
+
+.right-aside .tags {
+    display: flex;
+    width: 50%;
+    flex-wrap: wrap;
+}
+
+.right-aside .tags h6 {
+    margin: 20px 0px;
+}
+
+.right-aside .tags a {
+    background-color: var(--amarillo);
+    color: var(--morado);
+    padding: 5px 10px;
+    border-radius: 10%;
+    text-decoration: none;
+    margin: 2px;
 }
 
