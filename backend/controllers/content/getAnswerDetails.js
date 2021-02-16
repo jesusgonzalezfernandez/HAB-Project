@@ -8,13 +8,14 @@ const getAnswerDataQuery = async data => {
 
             SELECT   
                 questionID,  
-                userID, 
+                userID,
+                parentID,
                 body, 
                 file, 
                 creationDate,
                 updateDate 
                 
-            FROM answers
+            FROM answers where parentID is null
             
         `
     const objects = [
@@ -36,13 +37,6 @@ const getAnswerDataQuery = async data => {
         }
 
     })
-    // Si el array tiene al menos un elemento...
-    if(array.length > 0) {
-
-        // ...concatena el where
-        query = query.concat(' WHERE')
-
-    }
 
     // Recorrer el array de elementos definidos
     for (let i = 0; i < array.length; i++) {
@@ -51,24 +45,12 @@ const getAnswerDataQuery = async data => {
         const [ key ] = Object.keys(array[i])
         let [ value ] = Object.values(array[i])
         
-        // Para el primer elemento...
-        if ( i === 0 ) {            
-
-            // ...concatena el nombre del campo y el valor
-            query = query.concat(` ${key} LIKE '${value}'`)
-        
-        }
-        
-        // Para los demás...
-        if ( i > 0 ) {
-
-            // ...concatena AND, el nombre del campo y el valor
-            query = query.concat(` AND ${key} LIKE '${value}'`)
-        }
+        query = query.concat(` AND ${key} LIKE '${value}'`)
 
     }
 
     const result = await performQuery (query)
+    console.log(result)
     return result
 
 }

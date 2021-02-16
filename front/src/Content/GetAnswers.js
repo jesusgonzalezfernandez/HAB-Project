@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './GetAnswers.css'
+import Acordeon from '../utils/Acordeon'
+import PostAnswer from './PostAnswer';
 
 
-function GetAnswers({key}) {
+function GetAnswers({key, reload}) {
     const [data, setData] = useState([])
     const login = useSelector(state => state.login)
     if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
@@ -39,7 +41,7 @@ function GetAnswers({key}) {
                         <div className="answer box">
                             <div> {answer.username} </div>
                         <div> {answer.body} </div>
-                        <a>Añade un comentario</a>
+                        <Acordeon><PostAnswer reload={reload} /></Acordeon>
                         </div>
                     )}
                 </div>
