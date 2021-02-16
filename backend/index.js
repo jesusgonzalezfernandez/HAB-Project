@@ -132,6 +132,7 @@ const getUserAnswers = require('./controllers/content/getUserAnswers')
     // 2.13 Obtener Respuestas de un Usuario
     app.get ('/answers/user/:userID', isAuthenticated, getUserAnswers)
 
+    //2.14 Obtener Preguntas de un Usuario
 
 // Servidor
 

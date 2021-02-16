@@ -1,11 +1,9 @@
 import Moment from 'react-moment';
-import avatarPic from '../imagenes/avatar-experto.png';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
-
-
+import avatarPic from '../imagenes/avatar-experto.png';
+import './ExpertProfile.css'
 
 
 function ExpertProfile({ data }) {
@@ -38,7 +36,7 @@ function ExpertProfile({ data }) {
 
   return (
 
-    <div>
+    <div className='expert-profile-component'>
       <h2>Admin</h2>
       <aside className='expert-profile'>
         <img src={avatarPic} alt="avatar-expert" />
@@ -50,7 +48,7 @@ function ExpertProfile({ data }) {
         </Moment>
       </aside>
       <div className='panel-preguntas'>
-        Tus últimas respuestas
+        <h3>Tus últimas respuestas</h3>
         <ul>
           {question.map(q =>
             <li key={q.id}>{q.body}</li>
