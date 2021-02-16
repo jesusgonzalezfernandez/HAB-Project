@@ -1,13 +1,14 @@
 const performQuery = require('../../db/performQuery')
 
 const getAnswerDataQuery = async data => {
-    let array = []
     let query =
 
         `
 
             SELECT   
-                id,   
+                id,
+                questionID,
+                userID,   
                 body, 
                 file, 
                 creationDate,

@@ -1,37 +1,42 @@
 import Moment from 'react-moment';
-import avatarPic from '../imagenes/avatar-experto.png';
 import { useEffect, useState } from 'react';
-
-
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import avatarPic from '../imagenes/avatar-experto.png';
+import './ExpertProfile.css'
 
 
 function ExpertProfile({ data }) {
-  // const [question, setQuestion] = useState()
-  
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const res = await fetch(
+  const [question, setQuestion] = useState()
+  const login = useSelector(state => state.login)
 
-  //       `http://localhost:3001/users/profile/${userID}`,
-  //       {
-  //         headers: { 'Content-Type': 'application/json', auth: login.token },
-  //         method: 'GET'
-  //       })
+  if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
-  //     const data = await res.json();
-  //     setData(data)
+  const { userID } = useParams()
 
-  //     console.log(`Resultado de la búsqueda: ${JSON.stringify(data)}`)
-  //   }
-  //   fetchData()
-  // }, [])
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(
 
-  if (!data) return 'Loading...'
+        `http://localhost:3001/answers/user/${userID}`,
+        {
+          headers: { 'Content-Type': 'application/json', auth: login.token },
+          method: 'GET'
+        })
 
+      const question = await res.json();
+      setQuestion(question)
+
+      console.log(`Resultado de la búsqueda: ${JSON.stringify(question)}`)
+    }
+    fetchData()
+  }, [])
+
+  if (!question) return 'Loading...'
 
   return (
 
-    <div>
+    <div className='expert-profile-component'>
       <h2>Admin</h2>
       <aside className='expert-profile'>
         <img src={avatarPic} alt="avatar-expert" />
@@ -42,7 +47,13 @@ function ExpertProfile({ data }) {
           {data.birthDate}
         </Moment>
       </aside>
-      <div className='panel'>
+      <div className='panel-preguntas'>
+        <h3>Tus últimas respuestas</h3>
+        <ul>
+          {question.map(q =>
+            <li key={q.id}>{q.body}</li>
+          )}
+        </ul>
 
       </div>
 

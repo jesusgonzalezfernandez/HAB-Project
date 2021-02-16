@@ -10,7 +10,7 @@ import UserProfile from './UserProfile';
 function Profile() {
 
   const [data, setData] = useState()
-
+  
   const login = useSelector(state => state.login)
   if(login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 

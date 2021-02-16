@@ -1,9 +1,9 @@
-import './Home.css'
 import { HashLink as Link } from 'react-router-hash-link';
 import expert from './imagenes/expert.png';
 import code from './imagenes/manos-coding.png';
 import developer from './imagenes/desarrollador.png';
 import howdoi from './imagenes/expert-student.png';
+import './Home.css'
 
 function Home() {
   return (

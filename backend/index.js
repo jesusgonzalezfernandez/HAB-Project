@@ -135,6 +135,7 @@ const getUserAnswers = require('./controllers/content/getUserAnswers')
     // 2.14 Publicar una Respuesta a otra Respuesta
     app.post('/questions/:questionID/:parentID', isAuthenticated, isExpert, createAnswer)
 
+    //2.14 Obtener Preguntas de un Usuario
 
 // Servidor
 
