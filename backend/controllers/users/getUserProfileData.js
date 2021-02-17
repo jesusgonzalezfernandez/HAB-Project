@@ -11,19 +11,25 @@ const getUserProfileDataQuery = async userID => {
 
             SELECT 
                 
-                email, 
-                username,  
-                name, 
-                surname, 
-                role, 
-                birthDate,
-                country,
-                languages,
-                avatar,
-                registrationDate,
-                lastConnection 
+                users.email, 
+                users.name, 
+                users.username,  
+                users.surname, 
+                users.role, 
+                users.birthDate,
+                users.country,
+                users.languages,
+                users.avatar,
+                users.registrationDate,
+                users.lastConnection,
+                questions.title AS questions,
+                answers.body AS answers
+
+                FROM users
+                INNER JOIN questions ON questions.userID = users.id
+                INNER JOIN answers ON answers.userID = users.id
                 
-            FROM users WHERE id = ${userID}
+                WHERE users.id = ${userID}
             
         `
 

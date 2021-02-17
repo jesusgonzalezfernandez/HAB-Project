@@ -48,7 +48,6 @@ const updateVote = require ('./controllers/content/updateVote')
 const deleteQuestion = require ('./controllers/content/deleteQuestion')
 const deleteAnswer = require ('./controllers/content/deleteAnswer')
 const getAnswerDetails = require ('./controllers/content/getAnswerDetails')
-const getUserAnswers = require('./controllers/content/getUserAnswers')
 
 
 
@@ -128,11 +127,8 @@ const getUserAnswers = require('./controllers/content/getUserAnswers')
 
     // 2.12 Obtener una Respuesta
     app.get ('/answers/:questionID', getAnswerDetails)
-
-    // 2.13 Obtener Respuestas de un Usuario
-    app.get ('/answers/:userID', isAuthenticated, isAuthor, getUserAnswers)
         
-    // 2.14 Publicar una Respuesta a otra Respuesta
+    // 2.13 Publicar una Respuesta a otra Respuesta
     app.post('/questions/:questionID/:parentID', isAuthenticated, isExpert, createAnswer)
 
     //2.14 Obtener Preguntas de un Usuario
