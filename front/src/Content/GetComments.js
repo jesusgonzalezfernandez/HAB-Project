@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import './GetComment.css'
 
 function GetComments({parentID}) {
     const [data, setData] = useState([])

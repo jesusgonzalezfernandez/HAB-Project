@@ -5,6 +5,7 @@ import './GetAnswers.css'
 import Acordeon from '../utils/Acordeon'
 import PostAnswer from './PostAnswer';
 import GetComments from './GetComments';
+import PostComment from './PostComment';
 
 
 function GetAnswers({key, reload}) {
@@ -45,7 +46,7 @@ function GetAnswers({key, reload}) {
                         <div className='get comments'>
                         <GetComments parentID = { answer.id }/>
                         </div>
-                        <Acordeon><PostAnswer reload={reload} /></Acordeon>
+                        <Acordeon><PostComment reload={reload} parentID = {answer.id} /></Acordeon>
                         </div>
                     )}
                 </div>

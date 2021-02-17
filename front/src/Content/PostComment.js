@@ -4,11 +4,11 @@ import 'react-quill/dist/quill.snow.css'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 
-function PostAnswer({ reload }) {
+function PostComment({ reload, parentID }) {
 
     // Obtener usuario del store
     const login = useSelector(state => state.login)
-    if (login) console.log(`*CreateAnswer* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
+    if (login) console.log(`*CreateComment* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
     const { questionID } = useParams()
     console.log(`Buscando la pregunta con ID: ${questionID}`);
@@ -45,17 +45,17 @@ function PostAnswer({ reload }) {
 
         }
 
-        const answerData = {
+        const commentData = {
             body: content,
         }
 
         const res = await fetch(
             // Dirección
-            `http://localhost:3001/questions/${questionID}`,
+            `http://localhost:3001/questions/${questionID}/${parentID}`,
             // Contenido
             {
                 headers: { 'Content-Type': 'application/json', auth: login.token },
-                body: JSON.stringify(answerData),
+                body: JSON.stringify(commentData),
                 method: 'POST'
             })
         
@@ -64,7 +64,7 @@ function PostAnswer({ reload }) {
         
         reload()
 
-        console.log(res);
+        console.log(`Res del fetch ${res}`);
 
     }
 
@@ -92,4 +92,4 @@ function PostAnswer({ reload }) {
     )
 }
 
-export default PostAnswer;
+export default PostComment;
