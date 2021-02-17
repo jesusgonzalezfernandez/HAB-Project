@@ -1,0 +1,13 @@
+.page.login{
+    display: inline-block;
+    padding: 0;
+    width: 222px;
+    height: 49px;
+    line-height: 49px;
+    color: #3C1E1E;
+    background-color: #FFEB00;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    text-align: center;
+}

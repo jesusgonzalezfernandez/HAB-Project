@@ -6,7 +6,8 @@ const getAnswerDataQuery = async data => {
 
         `
 
-            SELECT   
+            SELECT
+                id,   
                 questionID,  
                 userID,
                 parentID,
@@ -15,7 +16,7 @@ const getAnswerDataQuery = async data => {
                 creationDate,
                 updateDate 
                 
-            FROM answers where parentID is null
+            FROM answers WHERE parentID is null
             
         `
     const objects = [

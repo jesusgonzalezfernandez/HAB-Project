@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import './GetAnswers.css'
 import Acordeon from '../utils/Acordeon'
 import PostAnswer from './PostAnswer';
+import GetComments from './GetComments';
 
 
 function GetAnswers({key, reload}) {
@@ -41,6 +42,9 @@ function GetAnswers({key, reload}) {
                         <div className="answer box">
                             <div> {answer.username} </div>
                         <div> {answer.body} </div>
+                        <div className='get comments'>
+                        <GetComments parentID = { answer.id }/>
+                        </div>
                         <Acordeon><PostAnswer reload={reload} /></Acordeon>
                         </div>
                     )}
