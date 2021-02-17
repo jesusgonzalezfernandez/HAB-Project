@@ -66,28 +66,6 @@ const getUserProfileData = async (req, res) => {
         
         } 
 
-        const user = {
-            email: userData.email,
-            username: userData.username,
-            name: userData.name,
-            surname: userData.surname,
-            role: userData.role,
-            birthDate: userData.birthDate,
-            country: userData.country,
-            languages: userData.languages,
-            avatar: userData.avatar,
-            registrationDate: userData.registrationDate,
-            lastConnection: userData.lastConnection,
-            answers: [],
-            questions: []
-        }
-        
-        for (let i = 0; i < userData.length; i++) {
-            user.answers.push(userData[i].answers)
-            user.questions.push(userData[i].questions)
-        }
-        console.log(user)
-
 
     } catch (e) {
 
@@ -95,8 +73,29 @@ const getUserProfileData = async (req, res) => {
         return
     
     }
+    const userInfo = {
+        email: userData.email,
+        username: userData.username,
+        name: userData.name,
+        surname: userData.surname,
+        role: userData.role,
+        birthDate: userData.birthDate,
+        country: userData.country,
+        languages: userData.languages,
+        avatar: userData.avatar,
+        registrationDate: userData.registrationDate,
+        lastConnection: userData.lastConnection,
+        answers: [],
+        questions: []
+    }
+    
+    for (let i = 0; i < userData.length; i++) {
+        userInfo.answers.push(userData[i].answers)
+        userInfo.questions.push(userData[i].questions)
+    }
+    console.log(userInfo)
 
-    res.send(user)
+    res.send(userInfo)
 }
 
 module.exports = getUserProfileData;
