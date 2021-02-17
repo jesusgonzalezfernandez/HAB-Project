@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-
+import './Login.css'
 
 
 function Login() {
@@ -49,18 +49,21 @@ function Login() {
   
   
   return (
-    <form className="page login" onSubmit={handleSubmit}>
+    <main className = "login main">
+    <form className="login form" onSubmit={handleSubmit}>
+      <h2>Inicia sesión:</h2>
         <div>
-            <input placeholder="E-mail ..." value={email} onChange={e => setEmail(e.target.value)} />
+            <input className="login input" placeholder="E-mail ..." value={email} onChange={e => setEmail(e.target.value)} />
         </div>
         <div>
-            <input placeholder="Password ..." type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            <input className="login input" placeholder="Password ..." type="password" value={password} onChange={e => setPassword(e.target.value)} />
         </div>
-        <button>Iniciar sesión</button>
+        <button className="submit">Iniciar sesión</button>
         <p>
-            <Link to="/recovery">No recuerdas tu contraseña?</Link>
+            <Link to="/recovery">Recordar contraseña</Link>
         </p>
     </form>
+    </main>
   );
 }
 

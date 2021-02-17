@@ -72,7 +72,7 @@ function PostComment({ reload, parentID }) {
 
         <div>
 
-            <h1>Respuesta:</h1>
+            <h4>Respuesta:</h4>
 
             <ReactQuill
                 theme="snow"

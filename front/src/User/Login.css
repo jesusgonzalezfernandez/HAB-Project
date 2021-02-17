@@ -1,13 +1,36 @@
-.page.login{
-    display: inline-block;
-    padding: 0;
-    width: 222px;
-    height: 49px;
+.login.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
     line-height: 49px;
-    color: #3C1E1E;
-    background-color: #FFEB00;
-    border: 1px solid transparent;
-    border-radius: 3px;
+    border-radius: 20px;
     font-size: 16px;
-    text-align: center;
+
+}
+
+.login.input {
+    font-size:  16px; 
+    padding:  20px; 
+    height:  56px; 
+    border:  none; 
+    border-bottom:  solid 1px rgba(0,0,0,.1);
+    border-radius: 15px;
+    background: transparent; 
+    width:  280px; 
+    box-sizing:  border-box; 
+    transition:  all .3s linear; 
+    color:  #000; 
+    font-weight:  400;
+}
+
+p a {
+    text-decoration: none;
 }
