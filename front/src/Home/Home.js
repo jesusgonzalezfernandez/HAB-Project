@@ -1,8 +1,8 @@
 import { HashLink as Link } from 'react-router-hash-link';
-import expert from './imagenes/expert.png';
-import code from './imagenes/manos-coding.png';
-import developer from './imagenes/desarrollador.png';
-import howdoi from './imagenes/expert-student.png';
+import expert from '../imagenes/expert.png';
+import code from '../imagenes/manos-coding.png';
+import developer from '../imagenes/desarrollador.png';
+import howdoi from '../imagenes/expert-student.png';
 import './Home.css'
 
 function Home() {
@@ -40,7 +40,6 @@ function Home() {
       <div id='registro'>
         <h1>Próximamente ...</h1>
       </div>
-
     </div>
   );
 }

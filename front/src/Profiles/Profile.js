@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
+import Loading from '../Home/Loading';
 import ExpertProfile from './ExpertProfile';
 import UserProfile from './UserProfile';
 
@@ -39,7 +40,7 @@ function Profile() {
 
   if(!login) return  <Redirect to='/'/>
 
-  if(!data) return 'Loading ...'
+  if(!data) return <Loading />
     
   return (
     

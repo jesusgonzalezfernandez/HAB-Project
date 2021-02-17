@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './Header';
-import Home from './Home';
+import Home from './Home/Home';
 import Login from './User/Login';
 import Recovery from './User/Recovery';
 import Reset from './User/Reset';
@@ -9,6 +9,7 @@ import CreateQuestion from './Content/CreateQuestion';
 import Profile from './Profiles/Profile';
 import Question from './Content/Question'
 import Questions from './Content/QuestionsPortal';
+import Loading from './Home/Loading';
 
 
 
@@ -18,6 +19,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" exact>
+          <Loading />
           <Home />
         </Route>
         <Route path="/questions">
@@ -45,5 +47,6 @@ function App() {
     </div >
   );
 }
+
 
 export default App;

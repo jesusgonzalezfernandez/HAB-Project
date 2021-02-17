@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import avatarPic from '../imagenes/avatar-experto.png';
 import './ExpertProfile.css'
+import Loading from '../Home/Loading';
 
 
 function ExpertProfile({ data }) {
@@ -32,7 +33,7 @@ function ExpertProfile({ data }) {
     fetchData()
   }, [])
 
-  if (!question) return 'Loading...'
+  if (!question) return <Loading />
 
   return (
 

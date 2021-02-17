@@ -5,6 +5,7 @@ import GetAnswers from './GetAnswers';
 import PostAnswer from './PostAnswer';
 import Moment from 'react-moment';
 import './Question.css'
+import Loading from '../Home/Loading';
 
 
 
@@ -46,7 +47,7 @@ function Question() {
 
     }, [])
 
-    if (!data) return 'Loading ...'
+    if (!data) return <Loading />
 
     return (
 

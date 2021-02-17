@@ -16,6 +16,7 @@
     "react-router-hash-link": "^2.4.0",
     "react-scripts": "4.0.2",
     "redux": "^4.0.5",
+    "use-dencrypt-effect": "^1.0.2",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
