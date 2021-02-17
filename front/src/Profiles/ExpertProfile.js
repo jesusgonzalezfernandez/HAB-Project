@@ -8,32 +8,32 @@ import Loading from '../Home/Loading';
 
 
 function ExpertProfile({ data }) {
-  const [question, setQuestion] = useState()
+  // const [question, setQuestion] = useState()
   const login = useSelector(state => state.login)
 
   if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
-  const { userID } = useParams()
+  // const { userID } = useParams()
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch(
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await fetch(
 
-        `http://localhost:3001/answers/user/${userID}`,
-        {
-          headers: { 'Content-Type': 'application/json', auth: login.token },
-          method: 'GET'
-        })
+  //       `http://localhost:3001/answers/user/${userID}`,
+  //       {
+  //         headers: { 'Content-Type': 'application/json', auth: login.token },
+  //         method: 'GET'
+  //       })
 
-      const question = await res.json();
-      setQuestion(question)
+  //     const question = await res.json();
+  //     setQuestion(question)
 
-      console.log(`Resultado de la búsqueda: ${JSON.stringify(question)}`)
-    }
-    fetchData()
-  }, [])
+  //     console.log(`Resultado de la búsqueda: ${JSON.stringify(question)}`)
+  //   }
+  //   fetchData()
+  // }, [])
 
-  if (!question) return <Loading />
+  // if (!question) return <Loading />
 
   return (
 
@@ -50,11 +50,12 @@ function ExpertProfile({ data }) {
       </aside>
       <div className='panel-preguntas'>
         <h3>Tus últimas respuestas</h3>
-        <ul>
-          {question.map(q =>
-            <li key={q.id}>{q.body}</li>
+        {/* <ul>
+          {data && data.map(q =>
+            <li key={q.id}>{q.answers}</li>
           )}
-        </ul>
+        </ul> */}
+        {data.answers}
 
       </div>
 

@@ -11,23 +11,29 @@ const getUserProfileDataQuery = async userID => {
 
             SELECT 
                 
-                email, 
-                username,  
-                name, 
-                surname, 
-                role, 
-                birthDate,
-                country,
-                languages,
-                avatar,
-                registrationDate,
-                lastConnection 
+                users.email, 
+                users.name, 
+                users.username,  
+                users.surname, 
+                users.role, 
+                users.birthDate,
+                users.country,
+                users.languages,
+                users.avatar,
+                users.registrationDate,
+                users.lastConnection,
+                questions.title AS questions,
+                answers.body AS answers
+
+                FROM users
+                INNER JOIN questions ON questions.userID = users.id
+                INNER JOIN answers ON answers.userID = users.id
                 
-            FROM users WHERE id = ${userID}
+                WHERE users.id = ${userID}
             
         `
 
-    const result = ( await performQuery(query) ) [0]
+    const result = ( await performQuery(query) )
     return result
 
 }
@@ -67,8 +73,29 @@ const getUserProfileData = async (req, res) => {
         return
     
     }
+    const userInfo = {
+        email: userData.email,
+        username: userData.username,
+        name: userData.name,
+        surname: userData.surname,
+        role: userData.role,
+        birthDate: userData.birthDate,
+        country: userData.country,
+        languages: userData.languages,
+        avatar: userData.avatar,
+        registrationDate: userData.registrationDate,
+        lastConnection: userData.lastConnection,
+        answers: [],
+        questions: []
+    }
+    
+    for (let i = 0; i < userData.length; i++) {
+        userInfo.answers.push(userData[i].answers)
+        userInfo.questions.push(userData[i].questions)
+    }
+    console.log(userInfo)
 
-    res.send(userData)
+    res.send(userInfo)
 }
 
 module.exports = getUserProfileData;
