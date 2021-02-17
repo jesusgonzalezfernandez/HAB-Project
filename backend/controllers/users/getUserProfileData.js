@@ -33,7 +33,7 @@ const getUserProfileDataQuery = async userID => {
             
         `
 
-    const result = ( await performQuery(query) ) [0]
+    const result = ( await performQuery(query) )
     return result
 
 }
@@ -66,6 +66,28 @@ const getUserProfileData = async (req, res) => {
         
         } 
 
+        const user = {
+            email: userData.email,
+            username: userData.username,
+            name: userData.name,
+            surname: userData.surname,
+            role: userData.role,
+            birthDate: userData.birthDate,
+            country: userData.country,
+            languages: userData.languages,
+            avatar: userData.avatar,
+            registrationDate: userData.registrationDate,
+            lastConnection: userData.lastConnection,
+            answers: [],
+            questions: []
+        }
+        
+        for (let i = 0; i < userData.length; i++) {
+            user.answers.push(userData[i].answers)
+            user.questions.push(userData[i].questions)
+        }
+        console.log(user)
+
 
     } catch (e) {
 
@@ -74,7 +96,7 @@ const getUserProfileData = async (req, res) => {
     
     }
 
-    res.send(userData)
+    res.send(user)
 }
 
 module.exports = getUserProfileData;
