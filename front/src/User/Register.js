@@ -6,12 +6,15 @@ function Register() {
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
     const [birthDate, setBirthDate] = useState('')
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [country, setCountry] = useState('')
 
     const handleSubmit = async e => {
         e.preventDefault()
         await fetch('http://localhost:3001/users/', {
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email }),
+            body: JSON.stringify({ email, username, password, birthDate, name, surname, country }),
             method: 'POST'
         })
     }
@@ -31,9 +34,21 @@ return (
             <input placeholder="Password ..." type="password" required
                 value={password} onChange={e => setPassword(e.target.value)} />
         </div>
-        <div>
+        {/* <div>
             <input placeholder="Repeat Password ..." type="password" required
                 value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
+        </div> */}
+        <div>
+            <input placeholder="Nombre ..." required
+                value={name} onChange={e => setName(e.target.value)} />
+        </div>
+        <div>
+            <input placeholder="Apellidos ..." required
+                value={surname} onChange={e => setSurname(e.target.value)} />
+        </div>
+        <div>
+            <input placeholder="País ..." required
+                value={country} onChange={e => setCountry(e.target.value)} />
         </div>
         <div>
             <input placeholder="Fecha de nacimiento ..." type="date" required

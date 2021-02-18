@@ -26,7 +26,7 @@ const createUserQuery = async data => {
             creationDate, 
             updateDate, 
             email, 
-            password, 
+            password,
             username,
             name,
             surname,
