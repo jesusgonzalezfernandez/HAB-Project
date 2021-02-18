@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import './Login.css'
+import logo from '../logo.png'
 
 
 function Login() {
@@ -15,14 +16,14 @@ function Login() {
   const login = useSelector(s => s.login)
   console.log(`Objeto login del store: ${JSON.stringify(login)}`);
 
-  
+
   const handleSubmit = async e => {
     e.preventDefault()
 
     // Enviar una consulta a la API con el email y la password
     const res = await fetch(
       // Dirección:
-      `http://localhost:3001/users/login`, 
+      `http://localhost:3001/users/login`,
       // Contenido:
       {
         headers: { 'Content-Type': 'application/json' },
@@ -36,7 +37,7 @@ function Login() {
 
     // Enviar objeto action al redux, con el type y los datos obtenidos de la API
     dispatch({ type: 'login', data })
-  
+
   }
 
   // if (login) return <Redirect to="/" />
@@ -46,26 +47,27 @@ function Login() {
     console.log(`Username: ${login.username}, Role: ${login.role}, userID: ${login.userID}`);
     return <Redirect to="/" />
   }
-  
-  
+
+
   return (
-    <main className = "login main">
-    <form className="login form" onSubmit={handleSubmit}>
-      <h2>Inicia sesión:</h2>
+    <main className="login main">
+      <form className="login form" onSubmit={handleSubmit}>
+        <img src={logo} className={'logo'} alt={'logo'} />
+        <h2>Inicia sesión:</h2>
         <div>
-            <input className="login input" placeholder="E-mail ..." value={email} onChange={e => setEmail(e.target.value)} />
+          <input className="login input" placeholder="E-mail ..." value={email} onChange={e => setEmail(e.target.value)} />
         </div>
         <div>
-            <input className="login input" placeholder="Password ..." type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          <input className="login input" placeholder="Password ..." type="password" value={password} onChange={e => setPassword(e.target.value)} />
         </div>
         <button className="submit">Iniciar sesión</button>
         <p>
-            <Link to="/recovery">Recordar contraseña</Link>
+          <Link to="/recovery">Recordar contraseña</Link>
         </p>
         <p>
-        ¿Todavía no tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
+          ¿Todavía no tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
         </p>
-    </form>
+      </form>
     </main>
   );
 }

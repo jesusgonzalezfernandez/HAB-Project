@@ -4,7 +4,7 @@ function Register() {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [repeatPassword, setRepeatPassword] = useState('')
+    // const [repeatPassword, setRepeatPassword] = useState('')
     const [birthDate, setBirthDate] = useState('')
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
