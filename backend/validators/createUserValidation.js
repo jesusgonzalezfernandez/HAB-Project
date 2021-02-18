@@ -10,7 +10,7 @@ const createUserValidation = joi.object({
         .email()
         .required()
         .messages(),
-    
+
     password: joi
         .string()
         .trim()
@@ -18,6 +18,14 @@ const createUserValidation = joi.object({
         .max(15)
         .required()
         .messages(),
+
+    repeatPassword: joi
+        .string()
+        .equal(joi.ref('password'))
+        .required()
+        .messages(
+            new Error('password does not match')
+        ),
 
     username: joi
         .string()
@@ -59,7 +67,7 @@ const createUserValidation = joi.object({
         .required()
         .regex(RegExp(exp))
         .messages(),
-        
-    })
+
+})
 
 module.exports = createUserValidation

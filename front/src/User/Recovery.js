@@ -15,19 +15,21 @@ function Recovery() {
   }
 
   if (sent) return (
-    <div className="page recovery sent">
-      Te hemos enviado un correo. Revisa tu bandeja de entrada...
+    <div className="register sent">
+      <p>Te hemos enviado un correo para restablecer tu contraseña.<br/> 
+      Por favor, revisa tu bandeja de entrada.</p>
     </div>
   )
 
   return (
-    <form className="page recovery" onSubmit={handleSubmit}>
-      Introduce tu email para enviarte instrucciones...
+    <form className="register form" onSubmit={handleSubmit}>
+      <h1>Recuperar contraseña</h1>
+      Introduce tu email:
       <div>
-        <input placeholder="Email ..." type="email" required
+        <input className="register input" placeholder="Email ..." type="email" required
           value={email} onChange={e => setEmail(e.target.value)} />
       </div>
-      <button>Iniciar sesión</button>
+      <button className="submit">Iniciar sesión</button>
     </form>
   );
 }
