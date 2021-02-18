@@ -8,14 +8,17 @@ import GetComments from './GetComments';
 import PostComment from './PostComment';
 
 
-function GetAnswers({key, reload}) {
+function GetAnswers({ key, reload }) {
     const [data, setData] = useState([])
-    const login = useSelector(state => state.login)
-    if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
+    const [active, setActive] = useState(1)
 
+    const login = useSelector(state => state.login)
+    // if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
     // Obtener el ID de la pregunta
     const { questionID } = useParams()
-    console.log(`Asociando a la pregunta con ID: ${questionID}`);
+    // console.log(`Asociando a la pregunta con ID: ${questionID}`);
+    console.log(`Active: ${active}`)
+
 
     // Ejecutar fetch al cargar la página
     useEffect(async () => {
@@ -42,11 +45,16 @@ function GetAnswers({key, reload}) {
                     {data.map(answer =>
                         <div className="answer box">
                             <div> {answer.username} </div>
-                        <div> {answer.body} </div>
-                        <div className='get comments'>
-                        <GetComments parentID = { answer.id }/>
-                        </div>
-                        <Acordeon><PostComment reload={reload} parentID = {answer.id} /></Acordeon>
+                            <div> {answer.body} </div>
+                            <div className='get comments'>
+                                <GetComments parentID={answer.id} />
+                            </div>
+                            {active &&
+                                <Acordeon onChange={value => setActive(value)} parentID={answer.id}>
+                                    {active === answer.id &&
+                                        <PostComment reload={reload} parentID={answer.id} />}
+                                </Acordeon>
+                            }
                         </div>
                     )}
                 </div>

@@ -4,7 +4,7 @@ function Register() {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    // const [repeatPassword, setRepeatPassword] = useState('')
+    const [repeatPassword, setRepeatPassword] = useState('')
     const [birthDate, setBirthDate] = useState('')
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
@@ -14,7 +14,7 @@ function Register() {
         e.preventDefault()
         await fetch('http://localhost:3001/users/', {
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, username, password, birthDate, name, surname, country }),
+            body: JSON.stringify({ email, username, password, repeatPassword, birthDate, name, surname, country }),
             method: 'POST'
         })
     }
@@ -34,10 +34,10 @@ return (
             <input placeholder="Password ..." type="password" required
                 value={password} onChange={e => setPassword(e.target.value)} />
         </div>
-        {/* <div>
+        <div>
             <input placeholder="Repeat Password ..." type="password" required
                 value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
-        </div> */}
+        </div>
         <div>
             <input placeholder="Nombre ..." required
                 value={name} onChange={e => setName(e.target.value)} />

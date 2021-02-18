@@ -9,7 +9,7 @@ function GetComments({parentID}) {
 
     // Obtener el ID de la pregunta y de la respuesta
     const { questionID } = useParams()
-    console.log(`Asociando a la pregunta con ID: ${questionID} y a la respuesta con ID: ${parentID}`);
+    // console.log(`Asociando a la pregunta con ID: ${questionID} y a la respuesta con ID: ${parentID}`);
 
     // Ejecutar fetch al cargar la página
     useEffect(async () => {
