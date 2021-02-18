@@ -74,17 +74,17 @@ const getUserProfileData = async (req, res) => {
     
     }
     const userInfo = {
-        email: userData.email,
-        username: userData.username,
-        name: userData.name,
-        surname: userData.surname,
-        role: userData.role,
-        birthDate: userData.birthDate,
-        country: userData.country,
-        languages: userData.languages,
-        avatar: userData.avatar,
-        registrationDate: userData.registrationDate,
-        lastConnection: userData.lastConnection,
+        email: userData[0].email,
+        username: userData[0].username,
+        name: userData[0].name,
+        surname: userData[0].surname,
+        role: userData[0].role,
+        birthDate: userData[0].birthDate,
+        country: userData[0].country,
+        languages: userData[0].languages,
+        avatar: userData[0].avatar,
+        registrationDate: userData[0].registrationDate,
+        lastConnection: userData[0].lastConnection,
         answers: [],
         questions: []
     }

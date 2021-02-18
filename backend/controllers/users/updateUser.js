@@ -1,3 +1,6 @@
+const uuid = require('uuid');
+const fsPromises = require('fs').promises
+
 // Dependencias
 const moment = require('moment')
 
@@ -16,18 +19,15 @@ const updateUserQuery = async data => {
     const query = 
 
     `
-
         UPDATE users SET 
-
             updateDate = UTC_TIMESTAMP,
             userName = '${data.username}',
             name = '${data.name}',
             surname = '${data.surname}',
             birthDate = '${data.birthDate}',            
-            country = '${data.country}'
-
+            country = '${data.country}',
+            avatar = '${data.avatar}'
         WHERE id = '${data.userID}'
-
     `
 
     const result = await performQuery(query) 
@@ -49,23 +49,28 @@ const updateUser = async (req, res) => {
 
     try {
 
+        const fileID = uuid.v4()
+        const outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
+ 
+        await fsPromises.writeFile(outputFileName, req.files.avatar.data)
+
         // Validar y Corregir
         reqData = await updateUserValidation.validateAsync(reqData)
 
         /*
-
             Crear objeto reqData. Contiene:
-
                 - username
                 - name
                 - surname
                 - birthDate
                 - country
                 - userID
+                - url de avatar
         
         */
         
-        reqData = {...reqData, userID: userID}
+        reqData = {...reqData, userID: userID, avatar: outputFileName}
+        console.log(reqData)
 
         // Comprobar si el username ya existe
 
