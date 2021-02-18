@@ -3,24 +3,29 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './GetAnswers.css'
 import Acordeon from '../utils/Acordeon'
-import PostAnswer from './PostAnswer';
 import GetComments from './GetComments';
 import PostComment from './PostComment';
 
 
-function GetAnswers({ key, reload }) {
-    const [data, setData] = useState([])
-    const [active, setActive] = useState(1)
 
+function GetAnswers({ key, reload }) {
+
+    const [data, setData] = useState([])
+
+    // Definir el estado del acordeon activo
+    const [active, setActive] = useState()
+    
+    // Obtener información de login
     const login = useSelector(state => state.login)
-    // if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
+    if (login) console.log(`*GetUserProfile* 
+        - Usuario registrado con el ID: ${login.userID}, 
+        - username: ${login.username}
+        - rol: ${login.role} `);
+    
     // Obtener el ID de la pregunta
     const { questionID } = useParams()
-    // console.log(`Asociando a la pregunta con ID: ${questionID}`);
-    console.log(`Active: ${active}`)
 
-
-    // Ejecutar fetch al cargar la página
+    // Obtener los datos de la pregunta
     useEffect(async () => {
 
         // Enviar consulta a la API
@@ -33,37 +38,55 @@ function GetAnswers({ key, reload }) {
 
         const data = await res.json();
         setData(data)
-        console.log(`Resultado de la pregunta: ${JSON.stringify(data)}`)
 
     }, [key])
 
 
     return (
         <div>
+
+            {/* Si hay resultados los muestra */}
             {data.length >= 1 &&
                 <div className="get answers">
+                    {/* Y recorre el array de resultados */}
                     {data.map(answer =>
                         <div className="answer box">
                             <div> {answer.username} </div>
                             <div> {answer.body} </div>
+
                             <div className='get comments'>
+                                {/* Obtener los comentarios a partir del id de respuesta */}
                                 <GetComments parentID={answer.id} />
                             </div>
-                            {active &&
-                                <Acordeon onChange={value => setActive(value)} parentID={answer.id}>
-                                    {active === answer.id &&
-                                        <PostComment reload={reload} parentID={answer.id} />}
-                                </Acordeon>
-                            }
+
+                            {/* Obtener el formulario para realizar un comentario */}
+                            <Acordeon 
+
+                                // Función para cambiar el estado de la respuesta activa
+                                onChange={value => setActive(value)} 
+                                // ID de la respuesta actual
+                                parentID={answer.id}
+                                // ID de la respuesta activa
+                                active={active} >
+
+                                {/* Contenido del acordeon */}    
+                                <PostComment 
+                                    reload={reload} 
+                                    parentID={answer.id} />
+
+                            </Acordeon>
+
                         </div>
                     )}
                 </div>
             }
+
             {data.length < 1 &&
 
                 <div>
                     <i>Todavía no hay respuestas</i>
                 </div>
+                
             }
         </div>
     )
