@@ -10,7 +10,7 @@ import Profile from './Profiles/Profile';
 import Question from './Content/Question'
 import Questions from './Content/QuestionsPortal';
 import Loading from './Home/Loading';
-
+import Register from './User/Register'
 
 
 function App() {
@@ -30,6 +30,9 @@ function App() {
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/register">
+          <Register/>
         </Route>
         <Route path="/recovery" exact>
           <Recovery />

@@ -6,7 +6,7 @@ function Recovery() {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    await fetch('http://localhost:9999/users/recover-account', {
+    await fetch('http://localhost:3001/users/recover-account', {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
       method: 'POST'

@@ -62,6 +62,9 @@ function Login() {
         <p>
             <Link to="/recovery">Recordar contraseña</Link>
         </p>
+        <p>
+        ¿Todavía no tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
+        </p>
     </form>
     </main>
   );
