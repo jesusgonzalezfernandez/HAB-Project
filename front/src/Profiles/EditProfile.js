@@ -8,6 +8,8 @@ function EditProfile( {reload, data} ) {
     const login = useSelector(state => state.login)
     const { userID } = useParams()
 
+    console.log('Perfil de login -->>     ' + JSON.stringify(login))
+
     const [displayName, setDisplayName] = useState(data.name || '')
     const [displaySurname, setDisplaySurname] = useState(data.surname || '')
     const [displayUsername, setDisplayUsername] = useState(data.avatar || '')
