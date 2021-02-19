@@ -1,0 +1,41 @@
+.register.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    line-height: 49px;
+    border-radius: 20px;
+    font-size: 16px;
+
+}
+
+.register.input {
+    font-size:  16px; 
+    padding:  20px; 
+    height:  56px; 
+    border:  none; 
+    border-bottom:  solid 1px rgba(0,0,0,.1);
+    border-radius: 15px;
+    background: transparent; 
+    width:  280px; 
+    box-sizing:  border-box; 
+    transition:  all .3s linear; 
+    color:  #000; 
+    font-weight:  400;
+}
+
+.register.sent p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 28px;
+    padding: 80px;
+}

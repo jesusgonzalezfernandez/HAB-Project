@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
+import './Register.css'
+import logo from '../logo.png'
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -9,6 +12,7 @@ function Register() {
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [country, setCountry] = useState('')
+    const [sent, setSent] = useState('')
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -17,46 +21,59 @@ function Register() {
             body: JSON.stringify({ email, username, password, repeatPassword, birthDate, name, surname, country }),
             method: 'POST'
         })
+        setSent(true)
     }
 
-return (
-    <form className="register form" onSubmit={handleSubmit}>
-        <h2>Bienvenido a Howdoi</h2>
-        <div>
-            <input placeholder="Email ..." type="email" required
-                value={email} onChange={e => setEmail(e.target.value)} />
+    if (sent) return (
+        <div className="register sent">
+            <p>Gracias por registrarte en Howdoi.<br/>
+            Por favor, revisa tu bandeja de entrada para validar el registro.</p>
         </div>
-        <div>
-            <input placeholder="Nombre de usuario ..." required
-                value={username} onChange={e => setUsername(e.target.value)} />
-        </div>
-        <div>
-            <input placeholder="Password ..." type="password" required
-                value={password} onChange={e => setPassword(e.target.value)} />
-        </div>
-        <div>
-            <input placeholder="Repeat Password ..." type="password" required
-                value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
-        </div>
-        <div>
-            <input placeholder="Nombre ..." required
-                value={name} onChange={e => setName(e.target.value)} />
-        </div>
-        <div>
-            <input placeholder="Apellidos ..." required
-                value={surname} onChange={e => setSurname(e.target.value)} />
-        </div>
-        <div>
-            <input placeholder="País ..." required
-                value={country} onChange={e => setCountry(e.target.value)} />
-        </div>
-        <div>
-            <input placeholder="Fecha de nacimiento ..." type="date" required
-                value={birthDate} onChange={e => setBirthDate(e.target.value)} />
-        </div>
-        <button>Enviar</button>
-    </form>
-);
+    )
+
+
+    return (
+        <main className="register main">
+            <form className="register form" onSubmit={handleSubmit}>
+                <h1>Registro</h1>
+                <img src={logo} className={'logo'} alt={'logo'} />
+                <h2>¡Bienvenido a Howdoi!</h2>
+                <div>
+                    <input className="register input" placeholder="Email ..." type="email" required
+                        value={email} onChange={e => setEmail(e.target.value)} />
+                </div>
+                <div>
+                    <input className="register input" placeholder="Nombre de usuario ..." required
+                        value={username} onChange={e => setUsername(e.target.value)} />
+                </div>
+                <div>
+                    <input className="register input" placeholder="Contraseña ..." type="password" required
+                        value={password} onChange={e => setPassword(e.target.value)} />
+                </div>
+                <div>
+                    <input className="register input" placeholder="Repite tu contraseña ..." type="password" required
+                        value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
+                </div>
+                <div>
+                    <input className="register input" placeholder="Nombre ..." required
+                        value={name} onChange={e => setName(e.target.value)} />
+                </div>
+                <div>
+                    <input className="register input" placeholder="Apellidos ..." required
+                        value={surname} onChange={e => setSurname(e.target.value)} />
+                </div>
+                <div>
+                    <input className="register input" placeholder="País ..." required
+                        value={country} onChange={e => setCountry(e.target.value)} />
+                </div>
+                <div>
+                    <input className="register input" placeholder="Fecha de nacimiento ..." type="date" required
+                        value={birthDate} onChange={e => setBirthDate(e.target.value)} />
+                </div>
+                <button className="submit">Enviar</button>
+            </form>
+        </main>
+    );
 }
 
 export default Register;
