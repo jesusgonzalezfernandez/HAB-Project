@@ -37,7 +37,7 @@ const updateUserQuery = async data => {
 
 
 const updateUser = async (req, res) => {
-
+    console.log(req.body)
     console.log('*Update User*');
 
     let query;
@@ -46,6 +46,7 @@ const updateUser = async (req, res) => {
     // Obtener variables 
     let { userID } = req.params
     let reqData = req.body
+    console.log(reqData)
 
     try {
 
@@ -53,6 +54,8 @@ const updateUser = async (req, res) => {
         const outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
  
         await fsPromises.writeFile(outputFileName, req.files.avatar.data)
+        console.log(req.files)
+        console.log('---->>>>     ' + req.body.avatar)
 
         // Validar y Corregir
         reqData = await updateUserValidation.validateAsync(reqData)
@@ -73,7 +76,7 @@ const updateUser = async (req, res) => {
         console.log(reqData)
 
         // Comprobar si el username ya existe
-
+            console.log(reqData.user)
             // Crear objeto userName
             let username = reqData.username
             username = { username }

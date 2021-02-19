@@ -9,11 +9,9 @@ import UserProfile from './UserProfile';
 
 
 function Profile() {
-
   const [data, setData] = useState()
   
   const login = useSelector(state => state.login)
-  if(login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
   // Obtener id del usuario buscado
   const { userID } = useParams()
@@ -33,7 +31,7 @@ function Profile() {
         const data = await res.json();
         setData(data)
     
-        console.log(`Resultado de la búsqueda: ${JSON.stringify(data)}`)
+        console.log(`Resultado del perfil del usuario: ${JSON.stringify(login)}`)
     }
     fetchData()
   }, [])

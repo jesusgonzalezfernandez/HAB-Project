@@ -9,38 +9,36 @@ function EditProfile( {reload, data} ) {
     const { userID } = useParams()
 
     const [displayName, setDisplayName] = useState(data.name || '')
-    const [displayUserName, setDisplayUserName] = useState(data.username || '')
     const [displaySurname, setDisplaySurname] = useState(data.surname || '')
-    const [displayBirth, setDisplayBirth] = useState(data.birthData || '')
-    const [displayCountry, setDisplayCountry] = useState(data.country || '')
+    const [displayUsername, setDisplayUsername] = useState(data.avatar || '')
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = e => {
         e.preventDefault()
         const avatar = e.target.avatar.files[0]
-        console.log('esto es e.target     ' + e.target.files)
-
         const fd = new FormData()
         fd.append('avatar', avatar)
-        fd.append('displayName', displayName)
-        fd.append('displayUserName', displayUserName)
-        fd.append('displaySurname', displaySurname)
-        fd.append('displayBirth', displayBirth)
-        fd.append('displayCountry', displayCountry)
+        fd.append('name', displayName)
+        fd.append('surname', displaySurname)
+        fd.append('username', displayUsername)
         
-        const res = await fetch(`http://localhost:3001/users/${userID}`,
+        const res = fetch(`http://localhost:3001/users/${userID}`,
         {
-            headers: { 'Content-Type': 'application/json', auth: login.token },
+        
+            headers: { 'auth': login.token },
             method: 'PUT',
-            body: fd,
-
-          }
-        )
+            body: fd
+        })
+            .then(res => res.json)
+            // .then(data => 
+                
+            // )         
         console.log(res);
 
         reload()
+
     }
 
-    const avatarStyle = data && data.avatar && { backgroundImage: 'url(' + data.avatar + ')' }
+    const avatarStyle = login && login.avatar && {backgroundImage: 'url(' + login.avatar + ')' }
 
 
     return (
@@ -48,11 +46,9 @@ function EditProfile( {reload, data} ) {
             <form onSubmit={handleSubmit}>
                 <div className='avatar' style={avatarStyle} />
                 <input name='avatar' type='file' accept='image/*' />
+                <input type="text" placeholder='Username...' value={displayUsername} onChange={e => setDisplayUsername(e.target.value)} />
                 <input type="text" placeholder='Nombre...' value={displayName} onChange={e => setDisplayName(e.target.value)} />
                 <input type="text" placeholder='Apellido...' value={displaySurname} onChange={e => setDisplaySurname(e.target.value)} />
-                <input type="text" placeholder='Nombre de usuario' value={displayUserName} onChange={e => setDisplayUserName(e.target.value)} />
-                <input type="text" placeholder='País...' value={displayCountry} onChange={e => setDisplayCountry(e.target.value)} />
-                <input type="text" placeholder='Fecha de nacimiento...' value={displayBirth} onChange={e => setDisplayBirth(e.target.value)} />
                 <button>Guardar</button>
             </form>
             <button onClick={() => reload()}>Cancelar</button>
