@@ -104,14 +104,9 @@ const userLogin = async (req, res) => {
                 email: user.email,
                 username: user.username,
                 name: user.name,
-                surname: user.surname,
-                birthDate: user.birthDate,
                 role: user.role,
                 isExpert: user.role === 'expert',
-                isStudent: user.role === 'student',
-                avatar: user.avatar,
-                country: user.country,
-                password: user.password,
+                password: user.password
 
             }
 
@@ -145,7 +140,7 @@ const userLogin = async (req, res) => {
                 isStudent: user.role === 'student',
                 avatar: user.avatar,
                 country: user.country,
-                password: user.password,
+                password: user.password
             })
 
     } catch (e) {

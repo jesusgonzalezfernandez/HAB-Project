@@ -7,24 +7,14 @@ import EditProfile from './EditProfile';
 
 function ExpertProfile({ data }) {
   const [editMode, setEditMode] = useState(false)
-  const login = useSelector(l => l.login)
-  const [displayName, setDisplayName] = useState(data.name || '')
-  const [displaySurname, setDisplaySurname] = useState(data.surname || '')
-  const [displayUsername, setDisplayUsername] = useState(data.avatar || '')
-
-  console.log('Esto es login -->      ' + login.name)
-  console.log('Esto es login -->      ' + JSON.stringify(login))
-
-
-  const avatarStyle = login && login.avatar && { backgroundImage: 'url(' + login.avatar + ')' }
-
+  
   return (
     <div className='expert-profile-component'>
       <h2>Admin</h2>
       <aside className='expert-profile'>
-        <div className="avatar" style={avatarStyle} />
-        <h3>{displayName} {displaySurname}</h3>
-        <h4>{displayUsername}</h4>
+      <img src={data.avatar} alt="avatar"/>
+        <h3>{data.name} {data.surname}</h3>
+        {/* <h4>{data.username}</h4> */}
         <button onClick={() => setEditMode(true)}>Editar</button>
         {editMode && <EditProfile reload={() => setEditMode(!editMode)} data={data} />}
       </aside>
