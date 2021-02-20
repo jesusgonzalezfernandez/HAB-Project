@@ -101,13 +101,12 @@ const userLogin = async (req, res) => {
 
                 userID: user.id,
                 isAdmin: user.role === 'admin',
+                isExpert: user.role === 'expert',
                 email: user.email,
                 username: user.username,
                 name: user.name,
                 role: user.role,
-                isExpert: user.role === 'expert',
                 password: user.password
-
             }
 
             // Encriptar token

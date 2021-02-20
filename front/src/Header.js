@@ -11,7 +11,6 @@ function Header() {
     dispatch({ type: 'logout' })
     return <Redirect to="/" />
   }
-
   return (
     <header>
       <Link to="/"><img src={logo} className={'logo'} alt={'logo'} /></Link>
