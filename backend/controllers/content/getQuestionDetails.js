@@ -19,7 +19,8 @@ const getQuestionDataQuery = async data => {
                 questions.closeDate,
                 questions.creationDate,
                 questions.updateDate,
-                users.username 
+                users.username,
+                users.avatar
                 
             FROM questions 
             JOIN users

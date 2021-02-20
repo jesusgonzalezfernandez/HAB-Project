@@ -1,8 +1,8 @@
-.get.answers {
+.get-answers {
     padding: 20px;
 }
 
-.answer.box {
+.answer-box {
     border: 1px solid rgb(201, 191, 191);
     border-radius: 15px;
     padding: 20px 20px 20px 30px;
@@ -16,23 +16,23 @@
 
 }
 
-.answer.avatar {
-    max-height: 32px;
-    border-radius: 50px;
-}
-
-.answer.publish {
+.answer-publish {
     border-bottom: 1px grey solid;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.answer.author {
+.answer-avatar {
+    max-height: 32px;
+    border-radius: 50px;
+}
+
+.answer-author {
     flex: 1 1 auto;
     color: rgb(145, 135, 135);
 }
 
-.answer.body {
+.answer-body {
     padding: 20px 0px;
 }
