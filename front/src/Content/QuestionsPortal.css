@@ -21,7 +21,7 @@
 
 .questions-portal .main-content {
     width: 50%;
-    margin: 0px 50px;
+    margin: 0px 80px 0px 20px;
 }
 
 .questions-portal .main-content header {
@@ -32,14 +32,14 @@
     width: 25%;
 }
 
-.right-aside .blog {
+.questions-portal .right-aside .blog {
     font-size: small;
     background-color: #FCF2D4;
     margin: 0 auto 30px auto;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 }
 
-.right-aside .blog > h6 {
+.questions-portal .right-aside .blog > h6 {
     background-color: #FCF2D4;
     color: #6A7392;
     padding: 15px 10px;
@@ -47,35 +47,35 @@
     font-size: medium;
 }
 
-.right-aside .blog ul {
+.questions-portal .right-aside .blog ul {
     list-style: none;
     text-indent: none;
 }
 
-.right-aside .post-list h6 {
+.questions-portal .right-aside .post-list h6 {
     background-color: #FCF2D4;
     color: #6A7392;
     padding: 10px;
 }
 
-.right-aside .post-list p {
+.questions-portal .right-aside .post-list p {
     background-color: #FDF7E3;
     padding: 10px 20px;
     border-bottom: 1px solid #e4d8b3;
 }
 
-.right-aside .tags {
+.questions-portal .right-aside .tags {
     border-bottom: 1px solid #e4d8b3;
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 10px;
 }
 
-.right-aside .tag-counter {
+.questions-portal .right-aside .tag-counter {
     margin: 10px 5px;
 }
 
-.right-aside .tags a {
+.questions-portal .right-aside .tags a {
     background-color: var(--amarillo);
     color: var(--morado);
     padding: 3px 7px;
@@ -85,19 +85,19 @@
     font-size: medium;
 }
 
-.right-aside .tags .big {
+.questions-portal .right-aside .tags .big {
     padding: 6px 14px;
     margin-bottom: 10px;
     font-size: large;
 }
 
-.right-aside .tags .small {
+.questions-portal .right-aside .tags .small {
     padding: 2px 3px;
     margin-bottom: 2px;
     font-size: small;
 }
 
-.right-aside .tags span {
+.questions-portal .right-aside .tags span {
     font-size: xx-small;
     margin-left: 5px;
 }

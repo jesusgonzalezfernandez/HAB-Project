@@ -3,10 +3,9 @@
 }
 
 .question-filter-form {
-    border-bottom: 1px solid #D6D9DC;
     padding: 20px 0px;
-    margin-right: 50px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
    
 }
@@ -23,14 +22,4 @@
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
-    
-}
-
-.question-filter-form-button {
-    padding: 10px;
-}
-
-.question-filter-form-button button {
-    padding: 5px;
-    width: 150%;
 }

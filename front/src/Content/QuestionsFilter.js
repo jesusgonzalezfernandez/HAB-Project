@@ -75,9 +75,12 @@ function QuestionsFilter() {
                 <label className='question-filter-form-date'>
                     <input placeholder='Fecha de Creación...' value={creationDate} onChange={e => setCreationDate(e.target.value)}></input>
                 </label>
-                <label className='question-filter-form-button'>
-                    <button>Buscar</button>
-                </label>
+                <div className='arrow-button'>
+
+                    asdasdasdassd
+                    <div className='arrow-top'></div>
+                    <div className='arrow-bottom'></div>
+                </div>
             </form>
 
             {/* Resultados */}
