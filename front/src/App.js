@@ -40,7 +40,7 @@ function App() {
         <Route path="/recovery/:code" exact>
           <Reset />
         </Route>
-        <Route path="/create-question" exact>
+        <Route path="/create/question" exact>
           <CreateQuestion />
         </Route>
         <Route path="/users/profile/:userID" exact>

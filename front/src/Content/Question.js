@@ -52,34 +52,37 @@ function Question() {
     return (
 
         <main className="question-main" key={data.id}>
+            <div className="question box">
+                {/* Título */}
+                <h2 className="question-title"> {data.title}</h2>
+                {/* Fecha */}
+                <div className="question-publish">
+                    <div className="question-author">
+                        <img className="question-avatar" src={`http://localhost:3001/${data.avatar}`} alt="avatar" />
+                        {data.username}
+                    </div>
+                    <div className="question-date">
+                        <Moment format='YYYY/MM/DD'>
+                            {data.creationDate}
+                        </Moment>
+                    </div>
+                </div>
+                {/* Cuerpo */}
+                <div className="question-body">
+                    {data.body}
+                </div>
+                {/* Tags */}
+                <div className='question-tags'>
+                    {tags && tags.map(tag =>
+                        <a href={'http://localhost:3001/questions?tags=' + tag}>
+                            {tag}
+                        </a>
+                    )}
+                </div>
+            </div>
 
-            {/* Fecha */}
             <div>
-                <Moment format='YYYY/MM/DD'>
-                    {data.creationDate}
-                </Moment>
-            </div>
-
-            {/* Título */}
-            <h2 className="question-title"> {data.title}</h2>
-
-            {/* Cuerpo */}
-            <div className="question-body">
-                {data.body}
-            </div>
-
-            {/* Tags */}
-            <div className='question-tags'>
-                {tags && tags.map(tag =>
-                    <a href={'http://localhost:3001/questions?tags=' + tag}>
-                        {tag}
-                    </a>
-                )}
-
-            </div>
-
-            <div>
-                <h4>Respuestas:</h4>
+                {/* <h4>Respuestas:</h4> */}
                 {/* Para que recargue al enviar necesitamos avisarle al useEffect
                 de que hay un cambio, lo hacemos con key. En este caso lo que tiene
                 que recargarse es el camponente de las respuestas, por lo que recibe
@@ -88,7 +91,6 @@ function Question() {
                 <PostAnswer reload={() => setKey(key + 1)} />
 
             </div>
-
         </main>
 
     )

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Acordeon.css'
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReply } from '@fortawesome/free-solid-svg-icons'
 
 function Acordeon({ children, onChange, parentID, active }) {
 
@@ -30,7 +30,9 @@ function Acordeon({ children, onChange, parentID, active }) {
     return (
 
         <div className="acordeon">
-            <button onClick={handleClick}>Añade un comentario</button>
+            <button onClick={handleClick}>Añade un comentario
+            <FontAwesomeIcon icon={faReply} size="sm" />
+            </button>
 
             {/* 
             
