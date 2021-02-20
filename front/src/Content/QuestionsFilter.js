@@ -43,9 +43,9 @@ function QuestionsFilter() {
     
     return (
 
-        <div>
+        <div className='question-filter'>
 
-            <h1>Encuentra lo que estás buscando:</h1>
+            <h1>Encuentra lo que estás buscando</h1>
             
             {/* Formulario de búsqueda */}
             <form className='question-filter-form' onSubmit={handleSubmit}>

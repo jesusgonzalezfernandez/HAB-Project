@@ -1,17 +1,29 @@
+.question-filter > h1 {
+    margin-top: 20px;
+}
+
 .question-filter-form {
     border-bottom: 1px solid #D6D9DC;
-    padding: 20px;
+    padding: 20px 0px;
+    margin-right: 50px;
     display: flex;
     flex-wrap: wrap;
+   
 }
 
 .question-filter-form label {
-    margin: 2px;
+    margin: 2px 0px;
 }
 
-.question-filter-form input, select {
+.question-filter-form input, 
+.question-filter-form select {
     padding: 5px;
-    margin: 10px;
+    margin: 10px 0px;
+    width: 100%;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    
 }
 
 .question-filter-form-button {

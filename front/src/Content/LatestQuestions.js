@@ -32,10 +32,10 @@ function LatestQuestions() {
 
     return (
 
-        <div className='latest questions'>
+        <div className='latest-questions'>
 
             {/* Control de Paginación */}
-            <div className='pagination set'>
+            {/* <div className='pagination-set'>
                 <h6>Número de resultados por página:</h6>
                 <select name="pagination" id="pagination" value={pagination} onChange={e => setPagination(e.target.value)}>
                     <option value="5">5</option>
@@ -43,9 +43,9 @@ function LatestQuestions() {
                     <option value="20">20</option>
                 </select>
 
-            </div>
+            </div> */}
 
-            <div className='question list'>
+            <div className='questions-list'>
 
                 {data &&
 

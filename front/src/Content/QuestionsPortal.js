@@ -27,15 +27,19 @@ function QuestionsPortal() {
                     <a href="">Courses</a>
                     <a href="">Software</a>
                 </div>
+
                 <QuestionsFilter />
+            
             </aside>
-            <main>
+
+            <main className='main-content'>
                 <header>
                     <h1 className=''>Últimas Preguntas</h1>
                     <div className=''>
                         <a className='create-question-button' href='http://localhost:3000/create/question'>Haz Tu Consulta</a>
                     </div>
                 </header>
+
                 <LatestQuestions />
 
             </main>
