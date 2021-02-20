@@ -45,10 +45,7 @@ function GetAnswers({ key, reload }) {
 
 
     return (
-        <div className="answer main">
-            <aside className="answer aside">
-                <a href="http://localhost:3000/questions">Volver</a>
-            </aside>
+        <div>
 
             {/* Si hay resultados los muestra */}
             {data.length >= 1 &&

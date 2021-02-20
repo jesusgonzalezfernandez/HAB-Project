@@ -1,3 +1,28 @@
+.question.top {
+    background-color: #3307ad;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.question.top a {
+    color: white;
+}
+
+.question.back {
+    flex: 1 1 auto;
+}
+
+.question.language {
+    color: white;
+}
+
+.question.language.tag {
+    background-color: white;
+    color: #3307ad;
+    padding: 2px 4px;
+}
+
 .question.title {
     color: #3307ad;
     background-color: white;
@@ -15,7 +40,6 @@
 }
 
 .question.box {
-    padding: 20px;
     border-radius: 2px;
 }
 

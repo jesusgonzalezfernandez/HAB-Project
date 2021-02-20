@@ -44,3 +44,7 @@ body {
   max-height: 32px;
   border-radius: 15px;
 }
+
+a {
+  text-decoration: none;
+}

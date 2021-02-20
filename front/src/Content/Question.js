@@ -1,18 +1,17 @@
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GetAnswers from './GetAnswers';
 import PostAnswer from './PostAnswer';
 import Moment from 'react-moment';
 import './Question.css'
 import Loading from '../Home/Loading';
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 function Question() {
 
     const login = useSelector(state => state.login)
-
     if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
     const [data, setData] = useState()
@@ -22,6 +21,7 @@ function Question() {
     // Obtener id de la pregunta
     const { questionID } = useParams()
     console.log(`Buscando la pregunta con ID: ${questionID}`);
+
 
     // Obtener pregunta al cargar la página
     useEffect(async () => {
@@ -37,7 +37,6 @@ function Question() {
                 method: 'GET'
             })
 
-
         const data = await res.json();
 
         setData(data)
@@ -47,10 +46,17 @@ function Question() {
 
     }, [])
 
+    if (!login) return <Redirect to='/login' />
     if (!data) return <Loading />
 
     return (
         <main className="question main" key={data.id}>
+            <div className="question top">
+                <div className="question back">
+                    <a href="http://localhost:3000/questions"><FontAwesomeIcon icon={faArrowCircleLeft} color="white" size="lg" /> Volver </a>
+                </div>
+                <div className="question language">Posteado en: <span className="question language tag"> {data.languages} </span></div>
+            </div>
             <div className="question box">
                 {/* Título */}
                 <h2 className="question title"> {data.title}</h2>

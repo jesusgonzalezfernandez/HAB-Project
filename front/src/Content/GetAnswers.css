@@ -37,20 +37,3 @@
     min-height: 200px;
 
 }
-
-.answer.main {
-    display:flex;
-}
-
-.answer.aside {
-    display: inline-block;
-    flex-direction: row;
-    justify-content:space-evenly;
-}
-
-.answer.aside a {
-    text-decoration: none;
-    color: white;
-    background: #3307ad;
-    padding: 10px 30px;
-}
