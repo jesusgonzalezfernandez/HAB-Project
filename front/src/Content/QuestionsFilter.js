@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import filterQuestionsQuery from '../Functions/filterQuestionQuery'
-import QuestionPreview from './QuestionPreview'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import './QuestionsFilter.css'
 
 
-function QuestionsFilter() {
-
-    // Resultados
-    const [results, setResults] = useState()
+function QuestionsFilter({ reload }) {
 
     // Variables
     const [title, setTitle] = useState('')
@@ -35,17 +33,16 @@ function QuestionsFilter() {
         // Descarga, parseado y envio del resultado.
         await fetch(URL)
         .then(res => res.json())
-        .then(data => setResults(data))
+        // Avisar al padre para cambiar el display y enviarle el data de vuelta        
+        .then(data => reload(data))
 
     }
-    
-    if (results && results.length >= 1) console.log(`Resultado de la búsqueda: ${results.length} preguntas`);
-    
+        
     return (
 
-        <div>
+        <div className='question-filter'>
 
-            <h1>Encuentra lo que estás buscando:</h1>
+            <h1>Encuentra lo que estás buscando</h1>
             
             {/* Formulario de búsqueda */}
             <form className='question-filter-form' onSubmit={handleSubmit}>
@@ -75,38 +72,12 @@ function QuestionsFilter() {
                 <label className='question-filter-form-date'>
                     <input placeholder='Fecha de Creación...' value={creationDate} onChange={e => setCreationDate(e.target.value)}></input>
                 </label>
-                <label className='question-filter-form-button'>
-                    <button>Buscar</button>
-                </label>
+                <div className='next-button-container'>
+                    <button className='next-button'>
+                        <FontAwesomeIcon icon={faAngleDoubleRight} color="#3307ad" size="2x" />
+                    </button>
+                </div>
             </form>
-
-            {/* Resultados */}
-            <div>
-
-                {results && results.length >= 1 && 
-
-                    <div className="search results">
-
-                        <h2>Resultados:</h2>
-                            {results.map(question => 
-                        
-                                <div key={question.id}>
-                                   <QuestionPreview question={question}/>
-                                </div>
-                            )}
-
-                    </div> 
-                }
-
-                {results && results.length < 1 &&
-                
-                    <div>
-                        <i>Sin Resultados</i>
-                    </div>
-                
-                }
-            
-            </div>
             
         </div> 
     )

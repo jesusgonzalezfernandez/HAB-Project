@@ -1,7 +1,6 @@
 .question-preview-summary {
     border-bottom: 1px solid #D6D9DC;
-    padding: 20px;
-    width: 65%;
+    padding: 20px 0px;
     margin: auto;
     display: flex;
 }
