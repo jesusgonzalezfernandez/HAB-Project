@@ -2,8 +2,6 @@ import useFetch from '../useFetch';
 import { useState } from 'react';
 import QuestionPreview from './QuestionPreview';
 
-
-
 function LatestQuestions() {
 
     // Obtiene listado de preguntas

@@ -50,29 +50,28 @@ function Question() {
     if (!data) return <Loading />
 
     return (
-
-        <main className="question-main" key={data.id}>
+        <main className="question main" key={data.id}>
             <div className="question box">
                 {/* Título */}
-                <h2 className="question-title"> {data.title}</h2>
+                <h2 className="question title"> {data.title}</h2>
                 {/* Fecha */}
-                <div className="question-publish">
-                    <div className="question-author">
-                        <img className="question-avatar" src={`http://localhost:3001/${data.avatar}`} alt="avatar" />
+                <div className="question publish">
+                    <div className="question author">
+                        <img className="question avatar" src={`http://localhost:3001/${data.avatar}`} alt="avatar" />
                         {data.username}
                     </div>
-                    <div className="question-date">
+                    <div className="question date">
                         <Moment format='YYYY/MM/DD'>
                             {data.creationDate}
                         </Moment>
                     </div>
                 </div>
                 {/* Cuerpo */}
-                <div className="question-body">
+                <div className="question body">
                     {data.body}
                 </div>
                 {/* Tags */}
-                <div className='question-tags'>
+                <div className='question tags'>
                     {tags && tags.map(tag =>
                         <a href={'http://localhost:3001/questions?tags=' + tag}>
                             {tag}

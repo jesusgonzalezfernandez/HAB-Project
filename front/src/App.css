@@ -39,3 +39,8 @@ body {
   background-color: var(--morado);
   color:var(--amarillo);
 }
+
+.avatar {
+  max-height: 32px;
+  border-radius: 15px;
+}

@@ -45,7 +45,10 @@ function GetAnswers({ key, reload }) {
 
 
     return (
-        <div>
+        <div className="answer main">
+            <aside className="answer aside">
+                <a href="http://localhost:3000/questions">Volver</a>
+            </aside>
 
             {/* Si hay resultados los muestra */}
             {data.length >= 1 &&
@@ -53,20 +56,20 @@ function GetAnswers({ key, reload }) {
                     <h4>{data.length} {data.length > 1 ? 'Respuestas' : 'Respuesta'} </h4>
                         {/* Y recorre el array de resultados */}
                         {data.map(answer =>
-                            <div className="answer-box">
+                            <div className="answer box">
                                 {/* En la caja de respuestas muestra avatar, autor, fecha y body */}
-                                <div className="answer-publish">
-                                    <div className="answer-author">
-                                        <img className="answer-avatar" src={`http://localhost:3001/${answer.avatar}`} alt="avatar" />
+                                <div className="answer publish">
+                                    <div className="answer author">
+                                        <img className="answer avatar" src={`http://localhost:3001/${answer.avatar}`} alt="avatar" />
                                         {answer.username} dice:
                                 </div>
-                                    <div className="answer-date">
+                                    <div className="answer date">
                                         <Moment format='YYYY/MM/DD'>
                                             {answer.creationDate}
                                         </Moment>
                                     </div>
                                 </div>
-                                <div className="answer-body"> {answer.body} </div>
+                                <div className="answer body"> {answer.body} </div>
                                 <div className='get-comments'>
                                     {/* Obtener los comentarios a partir del id de respuesta */}
                                     <GetComments parentID={answer.id} />
