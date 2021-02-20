@@ -6,7 +6,6 @@ import QuestionPreview from './QuestionPreview';
 
 function LatestQuestions() {
 
-    
     // Obtiene listado de preguntas
     let data = useFetch('http://localhost:3001/questions') || []
     
@@ -34,8 +33,6 @@ function LatestQuestions() {
     return (
 
         <div className='latest questions'>
-                
-            <h2>Últimas preguntas:</h2>
 
             {/* Control de Paginación */}
             <div className='pagination set'>
@@ -49,7 +46,6 @@ function LatestQuestions() {
             </div>
 
             <div className='question list'>
-
 
                 {data &&
 
