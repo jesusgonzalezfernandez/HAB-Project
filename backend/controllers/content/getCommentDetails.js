@@ -7,15 +7,20 @@ const getCommentDataQuery = async data => {
         `
 
             SELECT   
-                questionID,  
-                userID,
-                parentID,
-                body, 
-                file, 
-                creationDate,
-                updateDate 
+                answers.questionID,  
+                answers.userID,
+                answers.parentID,
+                answers.body, 
+                answers.file, 
+                answers.creationDate,
+                answers.updateDate,
+                users.username,
+                users.avatar
                 
-            FROM answers where parentID = ${data.parentID}
+            FROM answers
+            JOIN users
+            ON users.id = answers.userID
+            where answers.parentID = ${data.parentID}
             
         `
 

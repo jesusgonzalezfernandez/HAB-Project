@@ -22,12 +22,6 @@ export default function loginReducer(state = null, action) {
         
         case 'login':
             return action.data
-        // case 'expert':
-        //     return { data: action.data, isExpert: action.role === 'expert' }
-        // case 'admin':
-        //     return { data: action.data, isAdmin: action.role === 'admin' }
-        // case 'student':
-        //     return { data: action.data, isStudent: action.role === 'student' }
         case 'logout':
             return null
         default:

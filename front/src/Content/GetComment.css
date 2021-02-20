@@ -1,4 +1,25 @@
 .comment.box {
-    padding: 20px;
     border-bottom: 1px solid rgb(201, 191, 191);
+    padding: 10px 40px;
+}
+
+.comment.publish {
+    border-bottom: 1px rgb(223, 211, 211) solid;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment.body {
+    font-size: 0.9em;
+}
+
+.comment.avatar {
+    max-height: 22px;
+}
+
+.comment.author {
+    color: rgb(145, 135, 135);
+    flex: 1 1 auto;
+    font-size: 14px;
 }

@@ -4,19 +4,20 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
 
-function EditProfile( {reload, data} ) {
+function EditProfile({ reload, data }) {
     const login = useSelector(state => state.login)
     const { userID } = useParams()
 
-    const [displayName, setDisplayName] = useState(data.name || '')
-    const [displaySurname, setDisplaySurname] = useState(data.surname || '')
-    const [displayBirth, setDisplayBirth] = useState(data.birthData || '')
-    const [displayCountry, setDisplayCountry] = useState(data.country || '')
-    const [displayUsername, setDisplayUsername] = useState(data.username || '')
+    const [displayName, setDisplayName] = useState(login.name || '')
+    const [displaySurname, setDisplaySurname] = useState(login.surname || '')
+    const [displayBirth, setDisplayBirth] = useState(login.birthData || '')
+    const [displayCountry, setDisplayCountry] = useState(login.country || '')
+    const [displayUsername, setDisplayUsername] = useState(login.username || '')
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
         const avatar = e.target.avatar.files[0]
+
         const fd = new FormData()
         fd.append('avatar', avatar)
         fd.append('name', displayName)
@@ -24,28 +25,29 @@ function EditProfile( {reload, data} ) {
         fd.append('birthDate', displayBirth)
         fd.append('country', displayCountry)
         fd.append('username', displayUsername)
-        
-        const res = fetch(`http://localhost:3001/users/${userID}`,
-        {
-        
-            headers: { 'auth': login.token },
+
+        await fetch(`http://localhost:3001/users/${userID}`, {
             method: 'PUT',
+            headers: { 'auth': login.token },
             body: fd
         })
-            .then(res => res.json)
-         
-        console.log(res);
+            // .then(res => res.json())
+            // .then(data => {
+            //     JSON.stringify(data)
+            //     console.log('esto es data---   :::' + data)
+            //     return data
+            // }, (error) => {
+            //     console.log(error)
+            // })
 
         reload()
-
     }
 
-    console.log(data.avatar)
 
     return (
         <div className='expert-profile-edit'>
             <form onSubmit={handleSubmit}>
-                <img src={data.avatar} alt=""/>
+                {/* <img src={`http://localhost:3001/${data.avatar}`} alt="avatar-editar"/> */}
                 <input name='avatar' type='file' accept='image/*' />
                 <input type="text" placeholder='Username...' value={displayUsername} onChange={e => setDisplayUsername(e.target.value)} />
                 <input type="text" placeholder='Nombre...' value={displayName} onChange={e => setDisplayName(e.target.value)} />

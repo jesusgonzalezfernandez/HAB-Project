@@ -54,8 +54,6 @@ const updateUser = async (req, res) => {
         const outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
  
         await fsPromises.writeFile(outputFileName, req.files.avatar.data)
-        console.log(req.files)
-        console.log('---->>>>     ' + req.body.avatar)
 
         // Validar y Corregir
         reqData = await updateUserValidation.validateAsync(reqData)
@@ -73,7 +71,6 @@ const updateUser = async (req, res) => {
         */
         
         reqData = {...reqData, userID: userID, avatar: outputFileName}
-        console.log(reqData)
 
         // Comprobar si el username ya existe
             console.log(reqData.user)
