@@ -5,6 +5,7 @@ import './GetAnswers.css'
 import Acordeon from '../utils/Acordeon'
 import GetComments from './GetComments';
 import PostComment from './PostComment';
+import Moment from 'react-moment';
 
 
 
@@ -52,11 +53,19 @@ function GetAnswers({ key, reload }) {
                     {/* Y recorre el array de resultados */}
                     {data.map(answer =>
                         <div className="answer box">
-                            <div className="answer author">
+                            {/* En la caja de respuestas muestra avatar, autor, fecha y body */}
+                            <div className="answer publish">
+                                <div className="answer author">
                                 <img className="answer avatar" src={`http://localhost:3001/${answer.avatar}`} alt="avatar" />
                                 {answer.username} dice:
+                                </div>
+                                <div className= "answer date">
+                                    <Moment format='YYYY/MM/DD'>
+                                        {answer.creationDate}
+                                    </Moment>
+                                </div>
                             </div>
-                            <div> {answer.body} </div>
+                            <div className="answer body"> {answer.body} </div>
                             <div className='get comments'>
                                 {/* Obtener los comentarios a partir del id de respuesta */}
                                 <GetComments parentID={answer.id} />
