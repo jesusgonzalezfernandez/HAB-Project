@@ -14,14 +14,14 @@ function GetAnswers({ key, reload }) {
 
     // Definir el estado del acordeon activo
     const [active, setActive] = useState()
-    
+
     // Obtener información de login
     const login = useSelector(state => state.login)
     if (login) console.log(`*GetUserProfile* 
         - Usuario registrado con el ID: ${login.userID}, 
         - username: ${login.username}
         - rol: ${login.role} `);
-    
+
     // Obtener el ID de la pregunta
     const { questionID } = useParams()
 
@@ -38,6 +38,7 @@ function GetAnswers({ key, reload }) {
 
         const data = await res.json();
         setData(data)
+        console.log(data)
 
     }, [key])
 
@@ -51,27 +52,29 @@ function GetAnswers({ key, reload }) {
                     {/* Y recorre el array de resultados */}
                     {data.map(answer =>
                         <div className="answer box">
-                            <div> {answer.username} </div>
+                            <div className="answer author">
+                                <img className="answer avatar" src={`http://localhost:3001/${answer.avatar}`} alt="avatar" />
+                                {answer.username} dice:
+                            </div>
                             <div> {answer.body} </div>
-
                             <div className='get comments'>
                                 {/* Obtener los comentarios a partir del id de respuesta */}
                                 <GetComments parentID={answer.id} />
                             </div>
 
                             {/* Obtener el formulario para realizar un comentario */}
-                            <Acordeon 
+                            <Acordeon
 
                                 // Función para cambiar el estado de la respuesta activa
-                                onChange={value => setActive(value)} 
+                                onChange={value => setActive(value)}
                                 // ID de la respuesta actual
                                 parentID={answer.id}
                                 // ID de la respuesta activa
                                 active={active} >
 
-                                {/* Contenido del acordeon */}    
-                                <PostComment 
-                                    reload={reload} 
+                                {/* Contenido del acordeon */}
+                                <PostComment
+                                    reload={reload}
                                     parentID={answer.id} />
 
                             </Acordeon>
@@ -86,7 +89,7 @@ function GetAnswers({ key, reload }) {
                 <div>
                     <i>Todavía no hay respuestas</i>
                 </div>
-                
+
             }
         </div>
     )

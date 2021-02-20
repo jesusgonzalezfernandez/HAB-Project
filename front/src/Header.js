@@ -12,6 +12,8 @@ function Header() {
     return <Redirect to="/" />
   }
 
+  console.log(login)
+
   return (
     <header>
       <Link to="/"><img src={logo} className={'logo'} alt={'logo'} /></Link>

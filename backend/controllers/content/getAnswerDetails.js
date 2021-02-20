@@ -5,18 +5,22 @@ const getAnswerDataQuery = async data => {
     let query =
 
         `
-
             SELECT
-                id,   
-                questionID,  
-                userID,
-                parentID,
-                body, 
-                file, 
-                creationDate,
-                updateDate 
+                answers.id,   
+                answers.questionID,  
+                answers.userID,
+                answers.parentID,
+                answers.body, 
+                answers.file, 
+                answers.creationDate,
+                answers.updateDate,
+                users.username,
+                users.avatar
                 
-            FROM answers WHERE parentID is null
+            FROM answers
+            JOIN users
+            ON users.id = answers.userID
+            WHERE answers.parentID is null
             
         `
     const objects = [
@@ -88,4 +92,3 @@ const getAnswerDetails = async (req, res) => {
 }
 
 module.exports = getAnswerDetails
-

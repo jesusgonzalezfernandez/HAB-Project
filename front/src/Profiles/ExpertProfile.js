@@ -7,6 +7,7 @@ import EditProfile from './EditProfile';
 
 function ExpertProfile({ data }) {
   const [editMode, setEditMode] = useState(false)
+
   
   return (
     <div className='expert-profile-component'>

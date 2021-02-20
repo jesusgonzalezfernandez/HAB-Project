@@ -13,3 +13,11 @@
     min-height: 200px;
 
 }
+
+.answer.avatar {
+    max-height: 32px;
+}
+
+.answer.author {
+    border: 1px grey solid;
+}
