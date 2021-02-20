@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import './Header.css'
 import logo from './logo.png'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
   const login = useSelector(s => s.login)
@@ -27,7 +29,7 @@ function Header() {
           {login &&
             <div className={'user-nav'}>
               <NavLink to={`/users/profile/${login.userID}`}> Perfil {login.username} </NavLink>
-          <button onClick={handleLogout}>Logout</button>
+          <button className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" /></button>
             </div>
           }
       </nav>

@@ -1,9 +1,31 @@
 .question-title {
-    color: #0077cc;
+    color: #3307ad;
+    font-family: 'Jost', sans-serif;
+    font-size: 28px;
     border-bottom: 1px solid grey;
     padding: 10px;
 }
 
+.question-avatar {
+    max-height: 32px;
+    border-radius: 50px;
+}
+
+.question-box {
+    border-bottom: 1px solid rgb(201, 191, 191);
+    padding: 20px;
+}
+
+.question-publish {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.question-author {
+    flex: 1 1 auto;
+    color: rgb(145, 135, 135);
+}
 .question-body {
     text-align: left;
     padding: 10px;

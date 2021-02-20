@@ -39,3 +39,8 @@ header a {
 img.logo {
     max-width: 160px;
 }
+
+.logout {
+    background: transparent;
+    border: none;
+}
