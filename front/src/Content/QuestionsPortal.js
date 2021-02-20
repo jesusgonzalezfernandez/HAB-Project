@@ -3,11 +3,31 @@ import LatestQuestions from "./LatestQuestions";
 import './QuestionsPortal.css'
 import useFetch from "../useFetch";
 import getTagCount from "../Functions/getTagCount";
+import { useState } from "react";
+import FilteredQuestions from "./FilteredQuestions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
 // Portal de preguntas
 function QuestionsPortal() {
+
+    // Estado que define el resultado del filtrado
+    const [filterData, setFilterData] = useState([])
+
+    // Estado que define el tipo de display (últimas o filtradas)
+    const [filterMode, setFilterMode] = useState(false)
+
+    // Paginación
+    const [pagination, setPagination] = useState(5)
+    
+    // Página actual
+    const [page, setPage] = useState(1)
+
+    // Valor de páginas máximo (definido por los componentes LatestQuestions y FilteredQuestions)
+    const [max, setMax] = useState(1)
 
     // Obtener listado de preguntas
     let data = useFetch('http://localhost:3001/questions') || []
@@ -28,21 +48,116 @@ function QuestionsPortal() {
                     <a href="">Software</a>
                 </div>
 
-                <QuestionsFilter />
+                <QuestionsFilter 
+                    reload={data => {setFilterData(data); setFilterMode(true)}} 
+                />
             
             </aside>
 
             <main className='main-content'>
+
                 <header>
-                    <h1 className=''>Últimas Preguntas</h1>
-                    <div className=''>
-                        <a className='create-question-button' href='http://localhost:3000/create/question'>Haz Tu Consulta</a>
+
+                    <div className='main-content-header-info'>
+
+                        {!filterMode && <h1 className=''>Últimas Preguntas</h1>}
+                        {filterMode && filterData && <h1 className=''>Resultados</h1>}
+
+                        <div className=''>
+                            <a className='create-question-button' href='http://localhost:3000/create/question'>Haz Tu Consulta</a>
+                        </div>
+
                     </div>
+
+                    <div className='main-content-header-options'>
+
+                        <div className='return-button-container'>
+                            {filterMode && filterData && 
+                                <button className='return-button' onClick={() => setFilterMode(false)}>
+                                    <FontAwesomeIcon icon={faAngleDoubleLeft} color="#3307ad" size="2x" />
+                                </button>
+                            }
+                        </div>
+
+                        {/* Control de Paginación */}
+                        <div className='pagination-set'>
+                            <h6>Resultados por página:</h6>
+                            <select name="pagination" value={pagination} 
+                                onChange={e => 
+                                    {setPagination(e.target.value);
+
+                                    /* 
+                                    
+                                        Resetear el valor de la página para evitar desfases.
+                                        
+                                        Por ejemplo, con paginación 5, y estando en la página
+                                        15/20, al cambiar a paginación 10, nos quedaríamos
+                                        en 15/10.
+                                        
+                                        Al resetear el valor de la página actual, 
+                                        se tiene en cuenta el valor actual y el valor
+                                        al que va a cambiar para encontrar la relación
+                                        entre ambas para calcular cual sería
+                                        página correcta. 
+                                        
+                                        *Debido al redondeo puede haber desplazamientos
+                                    
+                                    */
+
+                                    setPage(Math.ceil( 
+                                        pagination < e.target.value ? 
+                                        page * (pagination / e.target.value) 
+                                        : page / (e.target.value / pagination)
+                                        ))}}>
+                                            
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                            </select>
+        
+                        </div>
+        
+                        {/* Control de Pagina */}
+                        <div className='pagination'>
+        
+                            <span onClick={() => setPage(page > 1 ? page - 1 : 1)}>◄</span>
+                            <span>{page} / {max}</span>
+                            <span onClick={() => setPage(page < max ? page + 1 : max)}>►</span>
+        
+                        </div>
+
+                    </div>
+
                 </header>
 
-                <LatestQuestions />
+
+                {!filterMode &&  
+
+                    <LatestQuestions 
+                        setMax={value => setMax(value)}
+                        pagination={pagination} 
+                        page={page}
+                        />
+
+                }
+
+                {filterMode && filterData &&
+
+                    <div>
+
+                       
+                        <FilteredQuestions 
+                            data={filterData} 
+                            setMax={value => setMax(value)} 
+                            pagination={pagination}
+                            page={page}
+                        />
+
+                    </div>
+                }
 
             </main>
+
             <aside className='right-aside'>
                 <section className='blog'>
                     <h6>Latest Blog Posts:</h6>

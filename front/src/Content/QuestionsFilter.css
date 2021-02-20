@@ -11,7 +11,7 @@
 }
 
 .question-filter-form label {
-    margin: 2px 0px;
+    margin: 0px;
 }
 
 .question-filter-form input, 
@@ -22,4 +22,16 @@
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
+}
+
+.next-button-container {
+    text-align: right;
+}
+
+.next-button {
+    border: none;
+    background-color: var(--blanco);
+    display: contents;
+    text-align: right;
+    cursor: pointer;
 }

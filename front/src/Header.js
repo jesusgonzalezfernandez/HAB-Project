@@ -17,7 +17,7 @@ function Header() {
   console.log(login)
 
   return (
-    <header>
+    <header className='nav-header'>
       <Link to="/"><img src={logo} className={'logo'} alt={'logo'} /></Link>
       <nav className={'menu-nav'}>
         <NavLink to="/about" activeClassName="selected">¿Qué es Howdoi?</NavLink>
