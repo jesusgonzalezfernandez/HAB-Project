@@ -105,9 +105,12 @@ function QuestionsPortal() {
                                     */
 
                                     setPage(Math.ceil( 
-                                        pagination < e.target.value ? 
-                                        page * (pagination / e.target.value) 
-                                        : page / (e.target.value / pagination)
+                                        page !== 1 ? (
+                                            pagination < e.target.value ? 
+                                            page * (pagination / e.target.value) 
+                                            : page / (e.target.value / pagination) )
+                                        : 1
+                                        
                                         ))}}>
                                             
                                             <option value="5">5</option>
