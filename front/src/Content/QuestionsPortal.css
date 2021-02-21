@@ -59,6 +59,7 @@
 
 .pagination {
     text-align: right;
+    cursor: pointer;
 }
 
 .pagination-set > h6 {
