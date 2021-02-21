@@ -11,6 +11,7 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
+  const [error, setError] = useState()
 
   // Obtener datos del store
   const login = useSelector(s => s.login)
@@ -21,7 +22,7 @@ function Login() {
     e.preventDefault()
 
     // Enviar una consulta a la API con el email y la password
-    const res = await fetch(
+    fetch(
       // Dirección:
       `http://localhost:3001/users/login`,
       // Contenido:
@@ -30,22 +31,32 @@ function Login() {
         body: JSON.stringify({ email, password }),
         method: 'POST'
       })
-
-    // Parsear los datos que devuelve la API (token, role, username, userID, avatar)
-    const data = await res.json()
-    console.log(`La API devuelve: ${JSON.stringify(data)}`);
-
-    // Enviar objeto action al redux, con el type y los datos obtenidos de la API
-    dispatch({ type: 'login', data })
-
+      .then(res => {
+        if (!res.ok) {
+          console.log('Se ha producido un error');
+          throw res;
+        }
+        console.log('El fetch se ha realizado correctamente');
+        return res.json()
+      })
+      .then(data => {
+        // Enviar objeto action al redux, con el type y los datos obtenidos de la API
+        dispatch({ type: 'login', data })
+      })
+      .catch(e => 
+        // Capturar error
+        e.text().then(e => setError(e))
+      )
+        
   }
+
+  if (error) return <div>HACER UN DIV BONITO PARA ESTOS ERRORES DE MIERDA Y REDIRIGIR A LOGIN OTRA VEZ</div>
 
   if (login) {
     console.log('Logueado con éxito, redirigiendo...')
     console.log(`Username: ${login.username}, Role: ${login.role}, userID: ${login.userID}`);
     return <Redirect to="/" />
   }
-
 
   return (
     <main className="login main">
