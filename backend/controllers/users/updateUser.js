@@ -49,14 +49,11 @@ const updateUser = async (req, res) => {
 
     try {
 
-        if(req.files.avatar) {
-console.log(req.files.avatar);
             const fileID = uuid.v4()
             const outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
      
             await fsPromises.writeFile(outputFileName, req.files.avatar.data)
 
-        }
 
         // Validar y Corregir
         reqData = await updateUserValidation.validateAsync(reqData)

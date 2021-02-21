@@ -8,11 +8,11 @@ import './Question.css'
 import Loading from '../Home/Loading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import Login from '../User/Login'
 
 function Question() {
 
     const login = useSelector(state => state.login)
-    if (login) console.log(`*GetUserProfile* - Usuario registrado con el ID: ${login.userID}, username: ${login.username} y rol: ${login.role} `);
 
     const [data, setData] = useState()
     const [tags, setTags] = useState([])
@@ -33,7 +33,7 @@ function Question() {
             `http://localhost:3001/questions/${questionID}`,
             // Contenido
             {
-                headers: { 'Content-Type': 'application/json', auth: login.token },
+                headers: { 'Content-Type': 'application/json' },
                 method: 'GET'
             })
 
@@ -46,7 +46,6 @@ function Question() {
 
     }, [])
 
-    if (!login) return <Redirect to='/login' />
     if (!data) return <Loading />
 
     return (
@@ -62,7 +61,7 @@ function Question() {
                 <h2 className="question title"> {data.title}</h2>
                 {/* Fecha */}
                 <div className="question publish">
-                    <div className={'open' ? "data status open" : "" } >{data.status}</div>
+                    <div className={'open' ? "data status open" : "data closed"} >{data.status}</div>
                     <div className="question author">
                         <img className="question avatar" src={`http://localhost:3001/${data.avatar}`} alt="avatar" />
                         {data.username}
@@ -93,9 +92,13 @@ function Question() {
                 de que hay un cambio, lo hacemos con key. En este caso lo que tiene
                 que recargarse es el camponente de las respuestas, por lo que recibe
                 ese prop además del propio componente de crear respuestas */}
-                <GetAnswers key={key} reload={() => setKey(key + 1)} />
-                <PostAnswer reload={() => setKey(key + 1)} />
-
+                {login &&
+                    <div>
+                        <GetAnswers key={key} reload={() => setKey(key + 1)} />
+                        <PostAnswer reload={() => setKey(key + 1)} />
+                    </div>
+                }
+                {!login && <Login/>}
             </div>
         </main>
 

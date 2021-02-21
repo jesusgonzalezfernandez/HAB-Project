@@ -36,7 +36,7 @@
     margin-right: 3px;
 }
 
-.data.status.closed {
+.data.closed {
     background-color: red;
     color: white;
     padding: 5px;

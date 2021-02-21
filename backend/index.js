@@ -118,7 +118,7 @@ const getCommentsDetails = require ('./controllers/content/getCommentDetails')
     app.get('/questions', getQuestionsList)
     
     // 2.9 Obtener una Pregunta
-    app.get('/questions/:questionID', isAuthenticated, getQuestionDetails)
+    app.get('/questions/:questionID', getQuestionDetails)
     
     // 2.10 Eliminar una Pregunta
     app.delete('/questions/:questionID', isAuthenticated, isAuthor, deleteQuestion)
