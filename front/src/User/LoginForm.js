@@ -5,7 +5,7 @@ import './Login.css'
 import logo from '../logo.png'
 
 
-function Login() {
+function LoginForm() {
 
   // Inicializar estados y dispatch
   const [email, setEmail] = useState('')
@@ -50,7 +50,7 @@ function Login() {
         
   }
 
-  if (error) return <div>Correo o contraseña no válidos</div>
+  if (error) return <div>HACER UN DIV BONITO PARA ESTOS ERRORES DE MIERDA Y REDIRIGIR A LOGIN OTRA VEZ</div>
 
   if (login) {
     console.log('Logueado con éxito, redirigiendo...')
@@ -61,8 +61,6 @@ function Login() {
   return (
     <main className="login main">
       <form className="login form" onSubmit={handleSubmit}>
-        <img src={logo} className={'logo'} alt={'logo'} />
-        <h2>Inicia sesión:</h2>
         <div>
           <input className="login input" placeholder="E-mail ..." value={email} onChange={e => setEmail(e.target.value)} />
         </div>
@@ -81,4 +79,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginForm;

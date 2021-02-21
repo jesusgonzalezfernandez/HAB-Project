@@ -1,6 +1,7 @@
 import useFetch from '../useFetch';
 import { useState } from 'react';
 import QuestionPreview from './QuestionPreview';
+import './LatestQuestions.css'
 
 
 
@@ -22,7 +23,7 @@ function LatestQuestions({ setMax, pagination, page }) {
 
         <div className='latest-questions'>
 
-            <div className='questions-list'>
+            <div className='questions list'>
 
                 {data &&
 

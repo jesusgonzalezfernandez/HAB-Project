@@ -16,6 +16,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    background-color: rgba(163, 140, 184, 0.26);
+    padding: 4px;
 }
 
 .answer.avatar {
@@ -26,10 +28,19 @@
 .answer.author {
     flex: 1 1 auto;
     color: rgb(145, 135, 135);
+    font-size: 15px;
 }
 
 .answer.body {
     padding: 20px 30px;
+}
+
+.answer.footer {
+    display: flex;
+}
+
+.answer.acordeon {
+    flex: 1 1 auto;
 }
 
 .ql-container.ql-snow{

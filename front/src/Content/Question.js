@@ -8,7 +8,7 @@ import './Question.css'
 import Loading from '../Home/Loading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
-import Login from '../User/Login'
+import LoginForm from '../User/LoginForm'
 
 function Question() {
 
@@ -54,20 +54,19 @@ function Question() {
                 <div className="question back">
                     <a href="http://localhost:3000/questions"><FontAwesomeIcon icon={faArrowCircleLeft} color="white" size="lg" /> Volver </a>
                 </div>
-                <div className="question language">Posteado en: <span className="question language tag"> {data.languages} </span></div>
+                {/* El link no funciona, esa ruta no existe */}
+                <div className="question language">Posteado en: <span className="question language tag"><a href={`http://localhost:3000/questions?languages=${data.languages}`}> {data.languages} </a> </span></div>
             </div>
             <div className="question box">
                 {/* Título */}
                 <h2 className="question title"> {data.title}</h2>
                 {/* Fecha */}
                 <div className="question publish">
-                    <div className={'open' ? "data status open" : "data closed"} >{data.status}</div>
+                    <div className={data.status === 'open' ? "data status open" : "data closed"} >{data.status}</div>
                     <div className="question author">
+                        Publicado por:
                         <img className="question avatar" src={`http://localhost:3001/${data.avatar}`} alt="avatar" />
-                        {data.username}
-                    </div>
-                    <div className="question date">
-                        <Moment format='YYYY/MM/DD'>
+                        {data.username} el <Moment format='DD/MM/YYYY'>
                             {data.creationDate}
                         </Moment>
                     </div>
@@ -98,7 +97,11 @@ function Question() {
                         <PostAnswer reload={() => setKey(key + 1)} />
                     </div>
                 }
-                {!login && <Login/>}
+                {!login &&
+                    <div>
+                        <p>Para ver el registro del contenido debes iniciar sesión</p>
+                        <LoginForm />
+                    </div>}
             </div>
         </main>
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './GetAnswers.css'
 import Acordeon from '../utils/Acordeon'
 import GetComments from './GetComments';
 import PostComment from './PostComment';
 import Moment from 'react-moment';
-
+import Vote from './Vote'
 
 
 function GetAnswers({ key, reload }) {
@@ -49,49 +49,52 @@ function GetAnswers({ key, reload }) {
 
             {/* Si hay resultados los muestra */}
             {data.length >= 1 &&
-                    <div className="get-answers">
+                <div className="get-answers">
                     <h4>{data.length} {data.length > 1 ? 'Respuestas' : 'Respuesta'} </h4>
-                        {/* Y recorre el array de resultados */}
-                        {data.map(answer =>
-                            <div className="answer box">
-                                {/* En la caja de respuestas muestra avatar, autor, fecha y body */}
-                                <div className="answer publish">
-                                    <div className="answer author">
-                                        <img className="answer avatar" src={`http://localhost:3001/${answer.avatar}`} alt="avatar" />
-                                        {answer.username} dice:
+                    {/* Y recorre el array de resultados */}
+                    {data.map(answer =>
+                        <div className="answer box">
+                            {/* En la caja de respuestas muestra avatar, autor, fecha y body */}
+                            <div className="answer publish">
+                                <div className="answer author">
+                                    <img className="answer avatar" src={`http://localhost:3001/${answer.avatar}`} alt="avatar" />
+                                    {answer.username} respondió el <Moment format='DD/MM/YYYY'>
+                                        {answer.creationDate}
+                                    </Moment>
                                 </div>
-                                    <div className="answer date">
-                                        <Moment format='YYYY/MM/DD'>
-                                            {answer.creationDate}
-                                        </Moment>
-                                    </div>
-                                </div>
-                                <div className="answer body"> {answer.body} </div>
-                                <div className='get-comments'>
-                                    {/* Obtener los comentarios a partir del id de respuesta */}
-                                    <GetComments parentID={answer.id} />
-                                </div>
-
-                                {/* Obtener el formulario para realizar un comentario */}
-                                <Acordeon
-
-                                    // Función para cambiar el estado de la respuesta activa
-                                    onChange={value => setActive(value)}
-                                    // ID de la respuesta actual
-                                    parentID={answer.id}
-                                    // ID de la respuesta activa
-                                    active={active} >
-
-                                    {/* Contenido del acordeon */}
-                                    <PostComment
-                                        reload={reload}
-                                        parentID={answer.id} />
-
-                                </Acordeon>
-
                             </div>
-                        )}
-                    </div>
+                            <div className="answer body"> {answer.body} </div>
+                            <div className='get-comments'>
+                                {/* Obtener los comentarios a partir del id de respuesta */}
+                                <GetComments parentID={answer.id} />
+                            </div>
+                            <div className="answer footer">
+                                <div className="answer acordeon">
+                                    {/* Obtener el formulario para realizar un comentario */}
+                                    <Acordeon
+
+                                        // Función para cambiar el estado de la respuesta activa
+                                        onChange={value => setActive(value)}
+                                        // ID de la respuesta actual
+                                        parentID={answer.id}
+                                        // ID de la respuesta activa
+                                        active={active} >
+
+                                        {/* Contenido del acordeon */}
+                                        <PostComment
+                                            reload={reload}
+                                            parentID={answer.id} />
+
+                                    </Acordeon>
+
+                                </div>
+                                <div>
+                                    <Vote/>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
             }
 
             {data.length < 1 &&

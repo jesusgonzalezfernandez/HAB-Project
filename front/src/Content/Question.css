@@ -17,7 +17,7 @@
     color: white;
 }
 
-.question.language.tag {
+.question.language.tag a {
     background-color: white;
     color: #3307ad;
     padding: 2px 4px;
@@ -90,7 +90,6 @@
 .question.tags a {
     background-color: var(--amarillo);
     padding: 5px 10px;
-    border-radius: 10%;
     text-decoration: none;
     margin: 2px;
     color: var(--morado);
