@@ -42,39 +42,48 @@ function QuestionsFilter({ reload }) {
 
         <div className='question-filter'>
 
-            <h1>Encuentra lo que estás buscando</h1>
-            
             {/* Formulario de búsqueda */}
             <form className='question-filter-form' onSubmit={handleSubmit}>
+                
+                <h1>Encuentra lo que estás buscando</h1>
 
                 <label className='question-filter-form-title'>
-                    <input placeholder='Título...' value={title} onChange={e => setTitle(e.target.value)} />
+                    Título
+                    <input placeholder='...' value={title} onChange={e => setTitle(e.target.value)} />
                 </label>
                 <label className='question-filter-form-languages'>
+                    Lenguaje
                     <select value={languages} onChange={e => setLanguages(e.target.value)}>
-                        <option value="" selected disabled hidden>Lenguaje de Programación...</option>
-                        <option value="css">CSS</option>
-                        <option value="html">HTML</option>
-                        <option value="javascript">Javascript</option>
-                        <option value="sql">MySql</option>
+                        <option value=''selected disabled hidden>Selecciona...</option>
+                        <option value=''>...</option>
+                        <option value='css'>CSS</option>
+                        <option value='html'>HTML</option>
+                        <option value='javascript'>Javascript</option>
+                        <option value='sql'>MySql</option>
                     </select>
                 </label>
                 <label className='question-filter-form-tags'>
-                    <input placeholder='Tags...' value={tags} onChange={e => setTags(e.target.value)}></input>
+                    Tags
+                    <input placeholder='...' value={tags} onChange={e => setTags(e.target.value)}></input>
                 </label>
                 <label className='question-filter-form-status'>
+                    Status
                     <select value={status} onChange={e => setStatus(e.target.value)}>
-                        <option value="" selected disabled hidden>Estado de la Pregunta...</option>
-                        <option>Pending</option>
-                        <option>Closed</option>
+                        <option value="" selected disabled hidden>Selecciona...</option>
+                        <option value=''>...</option>
+                        <option value='pending'>Pending</option>
+                        <option value='closed'>Closed</option>
                     </select>
                 </label>
                 <label className='question-filter-form-date'>
-                    <input placeholder='Fecha de Creación...' value={creationDate} onChange={e => setCreationDate(e.target.value)}></input>
+                    Fecha de Creación
+                    <input placeholder='dd/mm/aa' value={creationDate} onChange={e => setCreationDate(e.target.value)}></input>
                 </label>
                 <div className='next-button-container'>
                     <button className='next-button'>
-                        <FontAwesomeIcon icon={faAngleDoubleRight} color="#3307ad" size="2x" />
+                        <a href="">
+                            <FontAwesomeIcon icon={faAngleDoubleRight} color="#3307ad" size="2x" />
+                        </a>
                     </button>
                 </div>
             </form>

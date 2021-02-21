@@ -37,7 +37,7 @@ const updateUserQuery = async data => {
 
 
 const updateUser = async (req, res) => {
-    console.log(req.body)
+
     console.log('*Update User*');
 
     let query;
@@ -46,14 +46,17 @@ const updateUser = async (req, res) => {
     // Obtener variables 
     let { userID } = req.params
     let reqData = req.body
-    console.log(reqData)
 
     try {
 
-        const fileID = uuid.v4()
-        const outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
- 
-        await fsPromises.writeFile(outputFileName, req.files.avatar.data)
+        if(req.files.avatar) {
+console.log(req.files.avatar);
+            const fileID = uuid.v4()
+            const outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
+     
+            await fsPromises.writeFile(outputFileName, req.files.avatar.data)
+
+        }
 
         // Validar y Corregir
         reqData = await updateUserValidation.validateAsync(reqData)

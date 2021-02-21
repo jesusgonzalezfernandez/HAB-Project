@@ -26,7 +26,7 @@ function EditProfile({ reload, data }) {
         fd.append('country', displayCountry)
         fd.append('username', displayUsername)
 
-        await fetch(`http://localhost:3001/users/${userID}`, {
+        const res = await fetch(`http://localhost:3001/users/${userID}`, {
             method: 'PUT',
             headers: { 'auth': login.token },
             body: fd
@@ -39,6 +39,8 @@ function EditProfile({ reload, data }) {
             // }, (error) => {
             //     console.log(error)
             // })
+
+            console.log(res);
 
         reload()
     }

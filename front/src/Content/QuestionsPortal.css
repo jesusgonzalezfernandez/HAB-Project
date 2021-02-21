@@ -22,7 +22,7 @@
 
 .questions-portal .main-content {
     width: 45%;
-    margin: 0px 100px 0px 80px;
+    margin: 0px 100px 0px 60px;
 }
 
 .question-filter-form {
@@ -141,6 +141,19 @@
 
 .questions-portal .return-button {
     border: none;
+}
+
+.return-button {
+    border: none;
+    display: contents;
+    text-align: right;
+    cursor: pointer;
+    padding: 5px;
+    transition: .5s;
+}
+
+.return-button:hover {
+    font-size: medium;
 }
 
 @media only screen and (max-width: 1024px){

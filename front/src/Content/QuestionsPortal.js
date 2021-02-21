@@ -73,15 +73,17 @@ function QuestionsPortal() {
 
                         <div className='return-button-container'>
                             {filterMode && filterData && 
-                                <button className='return-button' onClick={() => setFilterMode(false)}>
-                                    <FontAwesomeIcon icon={faAngleDoubleLeft} color="#3307ad" size="2x" />
-                                </button>
+                                <a href="">
+                                    <button className='return-button' onClick={() => setFilterMode(false)}>
+                                        <FontAwesomeIcon icon={faAngleDoubleLeft} color="#3307ad" size="2x" />
+                                    </button>
+                                </a>
                             }
                         </div>
 
                         {/* Control de Paginación */}
                         <div className='pagination-set'>
-                            <h6>Resultados por página:</h6>
+                            <h6>Resultados / Página:</h6>
                             <select name="pagination" value={pagination} 
                                 onChange={e => 
                                     {setPagination(e.target.value);
