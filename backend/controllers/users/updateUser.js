@@ -42,6 +42,7 @@ const updateUser = async (req, res) => {
 
     let query;
     let user;
+    let outputFileName;
 
     // Obtener variables 
     let { userID } = req.params
@@ -52,7 +53,7 @@ const updateUser = async (req, res) => {
         if(req.files) {
 
             const fileID = uuid.v4()
-            const outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
+            outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
             
             await fsPromises.writeFile(outputFileName, req.files.avatar.data)
         
@@ -146,7 +147,7 @@ const updateUser = async (req, res) => {
 
     }
 
-    res.send('User Updated')
+    res.send(reqData)
 
 }
 

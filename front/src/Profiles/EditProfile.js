@@ -1,18 +1,21 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 
 
 function EditProfile({ reload, data }) {
     const login = useSelector(state => state.login)
     const { userID } = useParams()
-console.log(login);
+
+    const dispatch = useDispatch()
+
     const [displayName, setDisplayName] = useState(login.name || '')
     const [displaySurname, setDisplaySurname] = useState(login.surname || '')
     const [displayBirth, setDisplayBirth] = useState(login.birthData || '')
     const [displayCountry, setDisplayCountry] = useState(login.country || '')
     const [displayUsername, setDisplayUsername] = useState(login.username || '')
+    const [error, setError] = useState()
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -32,17 +35,22 @@ console.log(login);
             method: 'PUT',
             headers: { 'auth': login.token },
             body: fd
-        })
-            // .then(res => res.json())
-            // .then(data => {
-            //     JSON.stringify(data)
-            //     console.log('esto es data---   :::' + data)
-            //     return data
-            // }, (error) => {
-            //     console.log(error)
-            // })
-
-            console.log(res);
+        }).then(res => {
+            if (!res.ok) {
+              console.log('Se ha producido un error');
+              throw res;
+            }
+            console.log('El fetch se ha realizado correctamente');
+            return res.json()
+          })
+          .then(data => {
+            // Enviar objeto action al redux, con el type y los datos obtenidos de la API
+            dispatch({ type: 'login', data })
+          })
+          .catch(e => 
+            // Capturar error
+            e.text().then(e => setError(e))
+          )
 
         reload()
     }
