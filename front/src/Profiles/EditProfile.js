@@ -7,7 +7,7 @@ import { useState } from 'react';
 function EditProfile({ reload, data }) {
     const login = useSelector(state => state.login)
     const { userID } = useParams()
-
+console.log(login);
     const [displayName, setDisplayName] = useState(login.name || '')
     const [displaySurname, setDisplaySurname] = useState(login.surname || '')
     const [displayBirth, setDisplayBirth] = useState(login.birthData || '')
@@ -25,6 +25,8 @@ function EditProfile({ reload, data }) {
         fd.append('birthDate', displayBirth)
         fd.append('country', displayCountry)
         fd.append('username', displayUsername)
+
+        console.log(fd);
 
         const res = await fetch(`http://localhost:3001/users/${userID}`, {
             method: 'PUT',

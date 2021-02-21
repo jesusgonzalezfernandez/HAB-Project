@@ -49,11 +49,14 @@ const updateUser = async (req, res) => {
 
     try {
 
+        if(req.files) {
+
             const fileID = uuid.v4()
             const outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
-     
+            
             await fsPromises.writeFile(outputFileName, req.files.avatar.data)
-
+        
+        }
 
         // Validar y Corregir
         reqData = await updateUserValidation.validateAsync(reqData)
@@ -70,7 +73,8 @@ const updateUser = async (req, res) => {
         
         */
 
-        reqData = { ...reqData, userID: userID, avatar: outputFileName }
+        // Añadir ID del params (añadir avatar si lo hubiera)
+        reqData = { ...reqData, userID: userID, avatar: outputFileName || 'default' }
 
         // Comprobar si el username ya existe
         console.log(reqData.user)
