@@ -25,13 +25,22 @@
 
 .question.title {
     color: #3307ad;
-    background-color: white;
-    padding: 30px;
     font-family: 'Jost', sans-serif;
     font-size: 28px;
-    border-bottom: 1px solid rgb(223, 211, 211);
-    box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-    margin-bottom: 10px;
+}
+
+.data.status.open {
+    background-color: green;
+    color: white;
+    padding: 5px;
+    margin-right: 3px;
+}
+
+.data.status.closed {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    margin-right: 3px;
 }
 
 .question.avatar {
@@ -41,6 +50,11 @@
 
 .question.box {
     border-radius: 2px;
+    background-color: white;
+    padding: 30px;
+    border-bottom: 1px solid rgb(223, 211, 211);
+    box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+    margin-bottom: 10px;
 }
 
 .question.publish {

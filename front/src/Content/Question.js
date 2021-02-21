@@ -62,6 +62,7 @@ function Question() {
                 <h2 className="question title"> {data.title}</h2>
                 {/* Fecha */}
                 <div className="question publish">
+                    <div className={'open' ? "data status open" : "" } >{data.status}</div>
                     <div className="question author">
                         <img className="question avatar" src={`http://localhost:3001/${data.avatar}`} alt="avatar" />
                         {data.username}
