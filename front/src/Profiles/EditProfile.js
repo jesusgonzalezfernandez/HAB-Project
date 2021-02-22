@@ -45,7 +45,7 @@ function EditProfile({ reload, data }) {
           })
           .then(data => {
             // Enviar objeto action al redux, con el type y los datos obtenidos de la API
-            dispatch({ type: 'login', data })
+            dispatch({ type: 'update', data })
           })
           .catch(e => 
             // Capturar error
@@ -61,11 +61,11 @@ function EditProfile({ reload, data }) {
             <form onSubmit={handleSubmit}>
                 {/* <img src={`http://localhost:3001/${data.avatar}`} alt="avatar-editar"/> */}
                 <input name='avatar' type='file' accept='image/*' />
-                <input type="text" placeholder='Username...' value={displayUsername} onChange={e => setDisplayUsername(e.target.value)} />
+                <input type="text" placeholder='Username...' value={displayUsername} onChange={e => setDisplayUsername(e.target.value)} minLength='3'/>
                 <input type="text" placeholder='Nombre...' value={displayName} onChange={e => setDisplayName(e.target.value)} />
                 <input type="text" placeholder='Apellido...' value={displaySurname} onChange={e => setDisplaySurname(e.target.value)} />
                 <input type="text" placeholder='País...' value={displayCountry} onChange={e => setDisplayCountry(e.target.value)} />
-                <input type="date" placeholder='Fecha de nacimiento...' value={displayBirth} onChange={e => setDisplayBirth(e.target.value)} />
+                <input type="date" placeholder='Fecha de nacimiento...' value={displayBirth} onChange={e => setDisplayBirth(e.target.value)} required />
                 <button>Guardar</button>
             </form>
             <button onClick={() => reload()}>Cancelar</button>

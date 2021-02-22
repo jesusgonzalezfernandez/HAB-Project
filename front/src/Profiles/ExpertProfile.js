@@ -13,8 +13,8 @@ function ExpertProfile({ data }) {
   
   return (
     <div className='expert-profile-component'>
-      <h2>Admin</h2>
       <aside className='expert-profile'>
+      <h2>Experto</h2>
       <img src={`http://localhost:3001/${data.avatar}`} alt="avatar"/>
         <h3>{login.name} {login.surname}</h3>
         <h4>{login.username}</h4>
@@ -25,7 +25,7 @@ function ExpertProfile({ data }) {
         <h3>Tus últimas respuestas</h3>
         <ul>
           {data.answers.map((q, i) =>
-            <li key={i}>{q}</li>
+            <li className='profile-lista-respuestas' key={i}>{q}</li>
           )}
         </ul>
       </div>

@@ -29,6 +29,9 @@ function Header() {
           <button className="logout" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" /></button>
             </div>
           }
+          {!login &&
+            <NavLink to="/register" activeClassName="selected">Registro</NavLink>
+          }
       </nav>
 
     </header>

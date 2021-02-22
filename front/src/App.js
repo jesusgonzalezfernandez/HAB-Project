@@ -46,6 +46,9 @@ function App() {
         <Route path="/users/profile/:userID" exact>
           <Profile />
         </Route>
+        <Route path="/">
+          Error 404
+        </Route>
       </Switch>
     </div >
   );

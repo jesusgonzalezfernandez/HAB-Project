@@ -11,6 +11,10 @@ html {
   --blanco: #F5F5F7;
 }
 
+/* .App.dark {
+  --amarillo: 
+} */
+
 body {
   background-color: #F5F5F7;
   font-family: 'Open Sans', sans-serif;
