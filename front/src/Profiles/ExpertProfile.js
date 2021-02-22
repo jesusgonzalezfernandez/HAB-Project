@@ -8,6 +8,7 @@ import EditProfile from './EditProfile';
 function ExpertProfile({ data }) {
   const login = useSelector(state => state.login)
   const [editMode, setEditMode] = useState(false)
+  console.log(login.avatar)
 
   
   
@@ -15,7 +16,7 @@ function ExpertProfile({ data }) {
     <div className='expert-profile-component'>
       <aside className='expert-profile'>
       <h2>Experto</h2>
-      <img src={`http://localhost:3001/${data.avatar}`} alt="avatar"/>
+      <img src={`http://localhost:3001/${login.avatar}`} alt="avatar"/>
         <h3>{login.name} {login.surname}</h3>
         <h4>{login.username}</h4>
         <button onClick={() => setEditMode(true)}>Editar</button>
