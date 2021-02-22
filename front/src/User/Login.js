@@ -64,7 +64,6 @@ function Login() {
 
       <form className="login form" onSubmit={handleSubmit}>
         <img src={logo} className={'logo'} alt={'logo'} />
-        <h2>Inicia sesión:</h2>
         <div>
           <input className="login input" placeholder="E-mail ..." value={email} onChange={e => setEmail(e.target.value)} required />
         </div>
