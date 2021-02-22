@@ -7,18 +7,22 @@ import { useState } from "react";
 import FilteredQuestions from "./FilteredQuestions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons'
+import { useParams } from "react-router-dom";
 
 
 
 
 // Portal de preguntas
-function QuestionsPortal() {
+function QuestionsPortal({tag}) {
 
     // Estado que define el resultado del filtrado
     const [filterData, setFilterData] = useState([])
 
     // Estado que define el tipo de display (últimas o filtradas)
     const [filterMode, setFilterMode] = useState(false)
+    
+    const {value} = useParams()
+    console.log(`Params: ${tag}`);
 
     // Paginación
     const [pagination, setPagination] = useState(5)

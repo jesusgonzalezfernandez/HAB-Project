@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GetAnswers from './GetAnswers';
 import PostAnswer from './PostAnswer';
@@ -8,7 +8,7 @@ import './Question.css'
 import Loading from '../Home/Loading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
-import LoginForm from '../User/LoginForm'
+import Login from '../User/Login';
 
 function Question() {
 
@@ -100,7 +100,7 @@ function Question() {
                 {!login &&
                     <div>
                         <p>Para ver el registro del contenido debes iniciar sesión</p>
-                        <LoginForm />
+                        <Login />
                     </div>}
             </div>
         </main>

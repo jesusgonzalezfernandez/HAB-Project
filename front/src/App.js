@@ -22,7 +22,7 @@ function App() {
           <Loading />
           <Home />
         </Route>
-        <Route path="/questions">
+        <Route path="/questions" exact>
           <Questions/>
         </Route>
         <Route path="/question/:questionID">
