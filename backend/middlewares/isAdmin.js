@@ -1,8 +1,13 @@
 const isAdmin = (req, res, next) => {
 
-    if (!req.auth || !req.auth.isAdmin) {
+    console.log('* Checking User Admin Rights *');
 
-        res.status(403).send('You do not have admin permission')
+    const token = req.auth
+
+    if (!token || !token.isAdmin) {
+        
+        console.log('User Does Not Have Admin Rights');
+        res.status(403).send('Admin Rights Error')
         return
 
     }

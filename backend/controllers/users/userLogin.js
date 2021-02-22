@@ -128,16 +128,15 @@ const userLogin = async (req, res) => {
             res.json({
                 token,
                 userID: user.id,
-                isAdmin: user.role === 'admin',
                 email: user.email,
                 username: user.username,
                 name: user.name,
                 surname: user.surname,
                 birthDate: user.birthDate,
-                role: user.role,
+                avatar: user.avatar,
+                isAdmin: user.role === 'admin',
                 isExpert: user.role === 'expert',
                 isStudent: user.role === 'student',
-                avatar: user.avatar,
                 country: user.country,
                 password: user.password
             })

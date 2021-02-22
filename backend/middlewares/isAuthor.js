@@ -8,7 +8,7 @@ const performQuery = require('../db/performQuery')
 
 const isAuthor = async (req, res, next) => {
 
-    console.log('Checking Authorship');
+    console.log('* Checking Authorship *');
 
     let query;
 
@@ -127,6 +127,7 @@ const isAuthor = async (req, res, next) => {
         
     } catch (e) {
 
+        console.log('* User Is Not The Author *');
         res.status(401).send(e.message)
         return
 

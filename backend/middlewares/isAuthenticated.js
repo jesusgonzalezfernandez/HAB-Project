@@ -12,7 +12,10 @@ const isAuthenticated = async (req, res, next) => {
     console.log('* Checking Authentication *');
 
     // Obtener variables
-    const { auth } = req.headers;
+    let { auth } = req.headers;
+
+    // Eliminar el string Bearer 
+    auth = auth.substring(7)
 
     try {
         
@@ -21,25 +24,24 @@ const isAuthenticated = async (req, res, next) => {
         
         // Comprobar si el usuario existe / Obtener sus datos
         
-        // Crear objeto userID
-        let userID = token.userID
-        userID = { userID }
+            // Crear objeto userID
+            let userID = token.userID
+            userID = { userID }
+
+            // Obtener query (Enviar sólo ID)
+            const query = getUserQuery(userID)
+
+            // Procesar query
+            const user = ( await performQuery (query) ) [0] 
         
-        // Obtener query (Enviar sólo ID)
-        const query = getUserQuery(userID)
-        
-        // Procesar query
-        const user = ( await performQuery (query) ) [0] 
-        
-        // Error
-        if (!user){
-            
-            throw new Error('Authorization Error')
-            
-        }
+            // Error
+            if (!user){
+
+                throw new Error('User Does Not Exist')
+
+            }
         
         // Comprobar si el token coincide con el de la BD
-        
         if (user.token !== auth){
             
             throw new Error('Authorization Error')
