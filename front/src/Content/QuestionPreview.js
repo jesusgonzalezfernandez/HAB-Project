@@ -43,8 +43,8 @@ function QuestionPreview({ question }) {
                 </div>
                 <div className='question-preview-tags'>
                     {tags.length >= 1 && 
-                        tags.map(tag => 
-                            <a href={'http://localhost:3001/questions?tags=' + tag}>
+                        tags.map((tag, i) => 
+                            <a key={i} href={'http://localhost:3001/questions?tags=' + tag}>
                                 {tag}
                             </a>
                     )}

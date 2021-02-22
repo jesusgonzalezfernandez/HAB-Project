@@ -3,12 +3,12 @@
     padding: 10px 40px;
 }
 
-.comment.publish {
+/* .comment.publish {
     border-bottom: 1px rgb(223, 211, 211) solid;
     display: flex;
     flex-direction: row;
     align-items: center;
-}
+} */
 
 .comment.body {
     font-size: 0.9em;
@@ -22,4 +22,8 @@
     color: rgb(145, 135, 135);
     flex: 1 1 auto;
     font-size: 14px;
+    border-bottom: 1px rgb(223, 211, 211) solid;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

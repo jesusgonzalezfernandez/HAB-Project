@@ -33,20 +33,16 @@ function GetComments({ parentID }) {
         <div>
             {data.length >= 1 &&
                 <div className="get comments">
-                    {data.map(comment =>
+                    {data.map((comment, i) =>
                         <div className="comment box">
-                            <div className="comment publish">
-                                <div className="comment author">
-                                    <img className="comment avatar" src={`http://localhost:3001/${comment.avatar}`} alt="avatar" />
-                                    {comment.username}
-                                </div>
-                                <div className="comment date">
-                                    <Moment format='YYYY/MM/DD'>
-                                        {data.creationDate}
-                                    </Moment>
-                                </div>
+                            <div className="comment author">
+                                <img key={i} className="comment avatar" src={`http://localhost:3001/${comment.avatar}`} alt="avatar" />
+                                {comment.username}
+                                <Moment format='YYYY/MM/DD'>
+                                    {data.creationDate}
+                                </Moment>
                             </div>
-                            <div className="comment body"> {comment.body} </div>
+                            <div key={data.id} className="comment body"> {comment.body} </div>
                         </div>
                     )}
                 </div>
