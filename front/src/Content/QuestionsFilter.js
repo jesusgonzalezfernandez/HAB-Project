@@ -1,23 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import filterQuestionsQuery from '../Functions/filterQuestionQuery'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import './QuestionsFilter.css'
 
 
-function QuestionsFilter({ reload }) {
+function QuestionsFilter({ query, reload }) {
 
     // Variables
     const [title, setTitle] = useState('')
     const [languages, setLanguages] = useState('')
-    const [tags, setTags] = useState('')
+    // Tags recibe un valor por defecto si hay una query definida
+    const [tags, setTags] = useState(query)
     const [creationDate, setCreationDate] = useState('')
     const [status, setStatus] = useState('')
 
-    const handleSubmit = async e => {
+    /* 
+    
+        Use effect simula un submit, y se ejecuta
+        cuando al cargar el componente hay una query
+        en la URL, o cada vez que esa query cambie
+    
+    */
 
-        e.preventDefault()
-        
+    useEffect(() => {query && handleSubmit()}, [query])
+
+    const handleSubmit = async e  => {
+
+        // Como useEffect no tiene evento 'e', hay que evitar el error
+        e && e.preventDefault()
+                
         // Crear objeto data
         const queryData = {
             title, 
@@ -26,18 +38,20 @@ function QuestionsFilter({ reload }) {
             status, 
             creationDate
         }
-        
+
         // Obtener URL a partir del objeto data
         const URL = filterQuestionsQuery(queryData)
         
-        // Descarga, parseado y envio del resultado.
+        // Descargar contenido a partir de la URL
         await fetch(URL)
+        // Parsear el contenido
         .then(res => res.json())
-        // Avisar al padre para cambiar el display y enviarle el data de vuelta        
+        // Avisar al padre para cambiar el display y enviarle el contenido    
         .then(data => reload(data))
 
     }
-        
+    
+    
     return (
 
         <div className='question-filter'>

@@ -4,7 +4,7 @@ import Home from './Home/Home';
 import Login from './User/Login';
 import Recovery from './User/Recovery';
 import Reset from './User/Reset';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import CreateQuestion from './Content/CreateQuestion';
 import Profile from './Profiles/Profile';
 import Question from './Content/Question'
@@ -13,7 +13,16 @@ import Loading from './Home/Loading';
 import Register from './User/Register'
 
 
+
+// Obtener query de la URL
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 function App() {
+  
+  let query = useQuery();
+
   return (
     <div className="App">
       <Header />
@@ -23,7 +32,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/questions" exact>
-          <Questions/>
+          <Questions query={query.get('tags')}/>
         </Route>
         <Route path="/question/:questionID">
           <Question/>
@@ -52,6 +61,7 @@ function App() {
       </Switch>
     </div >
   );
+
 }
 
 

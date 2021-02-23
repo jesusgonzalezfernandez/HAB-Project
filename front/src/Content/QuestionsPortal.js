@@ -7,22 +7,25 @@ import { useState } from "react";
 import FilteredQuestions from "./FilteredQuestions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons'
-import { useParams } from "react-router-dom";
 
+/* 
 
+    Portal de preguntas. Recibe una query
+    con el valor de los tags si la URL es 
+    questions?tags=...
 
+    Esa Query se envía al filtro, y si 
+    existe sustituye al formulario.
+    
+*/
 
-// Portal de preguntas
-function QuestionsPortal({tag}) {
+function QuestionsPortal({ query }) {
 
     // Estado que define el resultado del filtrado
     const [filterData, setFilterData] = useState([])
 
     // Estado que define el tipo de display (últimas o filtradas)
     const [filterMode, setFilterMode] = useState(false)
-    
-    const {value} = useParams()
-    console.log(`Params: ${tag}`);
 
     // Paginación
     const [pagination, setPagination] = useState(5)
@@ -53,6 +56,7 @@ function QuestionsPortal({tag}) {
                 </div>
 
                 <QuestionsFilter 
+                    query={query}
                     reload={data => {setFilterData(data); setFilterMode(true)}} 
                 />
             
