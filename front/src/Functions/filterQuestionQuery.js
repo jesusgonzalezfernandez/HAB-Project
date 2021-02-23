@@ -29,9 +29,6 @@ function filterQuestionsQuery(data) {
 
         const [ key ] = Object.keys(array[i])
         const [ value ] = Object.values(array[i])
-
-        console.log(`Key ${i} del array: ${key}`);
-        console.log(`Value ${i} del array: ${value}`);
         
         if (i === 0) {
             URL = URL.concat(`?${key}=${value}`)

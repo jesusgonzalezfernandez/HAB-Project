@@ -16,7 +16,7 @@ import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons'
 
     Esa Query se envía al filtro, y si 
     existe sustituye al formulario.
-    
+
 */
 
 function QuestionsPortal({ query }) {

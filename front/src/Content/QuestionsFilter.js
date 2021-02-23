@@ -4,40 +4,67 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import './QuestionsFilter.css'
 
-
 function QuestionsFilter({ query, reload }) {
 
     // Variables
     const [title, setTitle] = useState('')
     const [languages, setLanguages] = useState('')
-    // Tags recibe un valor por defecto si hay una query definida
-    const [tags, setTags] = useState(query)
+    const [tags, setTags] = useState('')    
     const [creationDate, setCreationDate] = useState('')
     const [status, setStatus] = useState('')
 
     /* 
     
-        Use effect simula un submit, y se ejecuta
-        cuando al cargar el componente hay una query
-        en la URL, o cada vez que esa query cambie
-    
+        Use effect se ejecuta al cargar el componente,
+        o cada vez que hay un cambio en la query.
+        
+        Simula un submit y envía el valor de la
+        nueva query.
+
     */
 
-    useEffect(() => {query && handleSubmit()}, [query])
-
-    const handleSubmit = async e  => {
-
-        // Como useEffect no tiene evento 'e', hay que evitar el error
-        e && e.preventDefault()
-                
-        // Crear objeto data
-        const queryData = {
-            title, 
-            languages, 
-            tags, 
-            status, 
-            creationDate
+    useEffect(() => {
+        if (query) {
+            handleSubmit('', query)
         }
+    }, [query])
+
+    const handleSubmit = async (e, query)  => {
+
+        // Como el handleSubmit del useEffect no tiene evento 'e', hay que evitar el error
+        e && e.preventDefault()
+
+        /* 
+        
+            Crear objeto data.
+
+            La variable query solo tomará valor cuando
+            handleSubmit sea llamado desde el useEffect.
+
+            Si hay query, el objeto que se envía
+            al filtro solo tiene esa query. De forma
+            que se evita que los parámetros se concatenen
+            si se ha realizado alguna búsqueda previa
+            desde el formulario.
+
+            En el resto de los casos, se utilizarán las variables
+            que hayan sido definidas en el formulario.
+
+        */
+
+        let queryData;
+       
+        if(!query) {
+
+            queryData = {
+                title, 
+                languages,  
+                tags: tags,
+                status, 
+                creationDate
+            }
+
+        } else { queryData = { tags: query } }
 
         // Obtener URL a partir del objeto data
         const URL = filterQuestionsQuery(queryData)

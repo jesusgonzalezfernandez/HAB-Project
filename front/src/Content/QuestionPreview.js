@@ -1,6 +1,6 @@
 import React from 'react'
 import './QuestionPreview.css'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 
@@ -44,9 +44,10 @@ function QuestionPreview({ question }) {
                 <div className='question-preview-tags'>
                     {tags.length >= 1 && 
                         tags.map((tag, i) => 
-                            <a key={i} href={'http://localhost:3000/questions?tags=' + tag}>
+                            <Link to={'/questions?tags=' + tag} key={i}>
                                 {tag}
-                            </a>
+                            </Link>
+
                     )}
                 </div>
             </main>
@@ -56,3 +57,8 @@ function QuestionPreview({ question }) {
 }
 
 export default QuestionPreview
+                            
+                            
+                            // <a key={i} href={'http://localhost:3000/questions?tags=' + tag}>
+                            //     {tag}
+                            // </a>

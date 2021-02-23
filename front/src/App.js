@@ -8,7 +8,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import CreateQuestion from './Content/CreateQuestion';
 import Profile from './Profiles/Profile';
 import Question from './Content/Question'
-import Questions from './Content/QuestionsPortal';
+import QuestionsPortal from './Content/QuestionsPortal';
 import Loading from './Home/Loading';
 import Register from './User/Register'
 
@@ -31,8 +31,8 @@ function App() {
           <Loading />
           <Home />
         </Route>
-        <Route path="/questions" exact>
-          <Questions query={query.get('tags')}/>
+        <Route path="/questions">
+          <QuestionsPortal query={query.get('tags')}/>
         </Route>
         <Route path="/question/:questionID">
           <Question/>
