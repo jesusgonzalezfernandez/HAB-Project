@@ -39,12 +39,6 @@ function PostComment({ reload, parentID }) {
 
         e.preventDefault()
 
-        if (!login) {
-
-            return alert('Please log in first!')
-
-        }
-
         const commentData = {
             body: content,
         }

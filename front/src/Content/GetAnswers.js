@@ -89,7 +89,8 @@ function GetAnswers({ key, reload }) {
 
                                 </div>
                                 <div>
-                                    <Vote/>
+                                    <Vote
+                                        parentID={answer.id} />
                                 </div>
                             </div>
                         </div>
