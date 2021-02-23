@@ -3,6 +3,7 @@ import filterQuestionsQuery from '../Functions/filterQuestionQuery'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import './QuestionsFilter.css'
+import { useHistory } from 'react-router-dom';
 
 function QuestionsFilter({ query, reload }) {
 
@@ -12,6 +13,8 @@ function QuestionsFilter({ query, reload }) {
     const [tags, setTags] = useState('')    
     const [creationDate, setCreationDate] = useState('')
     const [status, setStatus] = useState('')
+
+    const history = useHistory()
 
     /* 
     
@@ -75,9 +78,11 @@ function QuestionsFilter({ query, reload }) {
         .then(res => res.json())
         // Avisar al padre para cambiar el display y enviarle el contenido    
         .then(data => reload(data))
+        
+        // Si se ha hecho un filtrado desde el formulario, se elimina la query de la URL
+        !query && history.push('/questions')
 
     }
-    
     
     return (
 
@@ -122,9 +127,24 @@ function QuestionsFilter({ query, reload }) {
                 </label>
                 <div className='next-button-container'>
                     <button className='next-button'>
-                        <a href="">
+
+                        {/* 
+                        
+                            Se utiliza 'a' en lugar de 'Link'
+                            porque Link relanza el componente 
+                            sin hacer el handleSubmit, y por
+                            lo tanto no renueva los parámetros
+                            de búsqueda si había una query previa.
+
+                            Para eliminar la query de la URL,
+                            se introduce el history.push al final.
+                            
+                        */}
+                        
+                        <a>
                             <FontAwesomeIcon icon={faAngleDoubleRight} color="#3307ad" size="2x" />
                         </a>
+
                     </button>
                 </div>
             </form>

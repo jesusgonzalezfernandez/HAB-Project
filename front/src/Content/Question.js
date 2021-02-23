@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GetAnswers from './GetAnswers';
 import PostAnswer from './PostAnswer';
@@ -77,10 +77,10 @@ function Question() {
                 </div>
                 {/* Tags */}
                 <div className='question tags'>
-                    {tags && tags.map(tag =>
-                        <a href={'http://localhost:3000/questions?tags=' + tag}>
+                    {tags && tags.map( (tag, i) =>
+                        <Link to={'/questions?tags=' + tag} key={i}>
                             {tag}
-                        </a>
+                        </Link>
                     )}
                 </div>
             </div>
