@@ -43,8 +43,12 @@ const castVote = async (req, res) => {
 
     // Obtener variables
     let { answerID } = req.params;
-    let { value } = req.query
+    let { value } = req.body
     let { userID } = req.auth
+    // const token = req.auth
+
+    console.log (req.auth)
+
 
     /*
     
@@ -56,7 +60,7 @@ const castVote = async (req, res) => {
 
     */
     
-    const reqData = { answerID, value, userID }
+    const reqData = { answerID, value, userID}
 
     try {
         

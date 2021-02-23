@@ -26,7 +26,7 @@ function GetComments({ parentID }) {
 
         const data = await res.json();
         setData(data)
-        console.log(`Resultado de la respuesta: ${JSON.stringify(data)}`)
+        // console.log(`Resultado de la respuesta: ${JSON.stringify(data)}`)
     }, [])
 
     return (

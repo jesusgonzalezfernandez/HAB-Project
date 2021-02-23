@@ -54,7 +54,7 @@ function PostAnswer({ reload }) {
             `http://localhost:3001/questions/${questionID}`,
             // Contenido
             {
-                headers: { 'Content-Type': 'application/json', auth: login.token },
+                headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
                 body: JSON.stringify(answerData),
                 method: 'POST'
             })

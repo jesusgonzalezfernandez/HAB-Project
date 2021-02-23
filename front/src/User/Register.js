@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
 import './Register.css'
 import logo from '../logo.png'
 

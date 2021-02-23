@@ -100,7 +100,7 @@ const getCommentsDetails = require ('./controllers/content/getCommentDetails')
     app.post('/questions/:questionID', isAuthenticated, isExpert, createAnswer)
 
     // 2.3 Emitir Voto
-    app.post('/questions/:answerID/vote', castVote)
+    app.post('/questions/:answerID/vote', isAuthenticated, castVote)
     
     // 2.4 Postear una imagen
     app.post('/images/', uploadFiles)

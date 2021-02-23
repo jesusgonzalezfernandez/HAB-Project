@@ -39,7 +39,7 @@ function GetAnswers({ key, reload }) {
 
         const data = await res.json();
         setData(data)
-        console.log(data)
+        console.log(`Resultado de la respuesta: ${data}`)
 
     }, [key])
 
