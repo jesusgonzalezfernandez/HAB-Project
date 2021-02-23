@@ -7,6 +7,7 @@ import { useState } from "react";
 import FilteredQuestions from "./FilteredQuestions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
 
 /* 
 
@@ -69,7 +70,7 @@ function QuestionsPortal({ query }) {
                     <div className='main-content-header-info'>
 
                         {!filterMode && <h1 className=''>Últimas Preguntas</h1>}
-                        {filterMode && filterData && <h1 className=''>Resultados</h1>}
+                        {filterMode && filterData && <h1 className=''>Resultados: {query ? `tag = ${query}` : 'filtro'} </h1>}
 
                         <div className=''>
                             <a className='create-question-button' href='http://localhost:3000/create/question'>Haz Tu Consulta</a>
@@ -81,11 +82,11 @@ function QuestionsPortal({ query }) {
 
                         <div className='return-button-container'>
                             {filterMode && filterData && 
-                                <a href="">
+                                <Link to="/questions">
                                     <button className='return-button' onClick={() => setFilterMode(false)}>
                                         <FontAwesomeIcon icon={faAngleDoubleLeft} color="#3307ad" size="2x" />
                                     </button>
-                                </a>
+                                </Link>
                             }
                         </div>
 
@@ -190,15 +191,15 @@ function QuestionsPortal({ query }) {
                     </ul>
                 </section>
                 <section className="tags">
-                    {tagCounter && tagCounter.map( (count, i) =>             
+                    {tagCounter && tagCounter.map( (tagCount, i) =>             
                         <div key={i} className='tag-counter'>
-                            <a 
+                            <Link to={'/questions?tags=' + tagCount.tag} 
                                 // El tag toma diferentes tamaños según el orden en el array
                                 className={i < tagCounter.length / 2 ? ( i < tagCounter.length / 6 ? 'big' : '' ) : 'small'} 
-                                href={'http://localhost:3001/questions?tags=' + count.tag}>
-                                    {count.tag} 
-                            </a>
-                            <span>x {count.count}</span>
+                                href={'http://localhost:3001/questions?tags=' + tagCount.tag}>
+                                    {tagCount.tag} 
+                            </Link>
+                            <span>x {tagCount.count}</span>
                         </div>
                     )}
                 </section>

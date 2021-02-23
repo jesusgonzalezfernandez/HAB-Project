@@ -8,9 +8,6 @@ import EditProfile from './EditProfile';
 function ExpertProfile({ data }) {
   const login = useSelector(state => state.login)
   const [editMode, setEditMode] = useState(false)
-  console.log(login.avatar)
-
-  
   
   return (
     <div className='expert-profile-component'>
@@ -26,9 +23,14 @@ function ExpertProfile({ data }) {
         <h3>Tus últimas respuestas</h3>
         <ul>
           {data.answers.map((q, i) =>
-            <li className='profile-lista-respuestas' key={i}>{q}</li>
+            <li className='profile-lista-respuestas' key={i}>
+              {q}
+            </li>
           )}
         </ul>
+      </div>
+      <div>
+        <button onClick={() => data.name = 'Borrar cuenta'} >Eliminar cuenta</button>
       </div>
     </div>
 

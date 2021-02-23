@@ -40,7 +40,7 @@ function Login() {
     } else {
 
       console.log('El fetch se ha realizado correctamente');
-      const data = res.json()
+      const data = await res.json()
       // Enviar objeto action al redux, con el type y los datos obtenidos de la API
       dispatch({ type: 'login', data })
 

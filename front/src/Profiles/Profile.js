@@ -10,7 +10,7 @@ import UserProfile from './UserProfile';
 
 function Profile() {
   const [data, setData] = useState()
-  
+
   const login = useSelector(state => state.login)
 
   // Obtener id del usuario buscado
@@ -18,51 +18,60 @@ function Profile() {
   console.log(`Buscando el usuario con ID: ${userID}`);
 
   // Ejecutar fetch al cargar la página
-  useEffect ( () => {
+  useEffect(() => {
     async function fetchData() {
       const res = await fetch(
 
         `http://localhost:3001/users/profile/${userID}`,
         {
-          headers: { 'Content-Type': 'application/json', auth: login.token },
+          headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
           method: 'GET'
         })
-    
-        const data = await res.json();
-        setData(data)
-    
-        console.log(`Resultado del perfil del usuario: ${JSON.stringify(login)}`)
+
+      const data = await res.json();
+      setData(data)
+
+      console.log(`Resultado del perfil del usuario: ${JSON.stringify(data)}`)
     }
     fetchData()
   }, [])
 
-  if(!login) return  <Redirect to='/'/>
+  if (!login) return <Redirect to='/' />
 
-  if(!data) return <Loading />
-    
+  if (!data) return <Loading />
+
   return (
-    
+
     <div>
-      
-      
-      {login.role === 'admin' && <div> 
+      {login.isAdmin &&
+        <div>
 
-        <ExpertProfile data={data}/>
+          <ExpertProfile data={data} />
 
-      </div>}
+        </div>
+      }
 
-      {login.role === 'student' && <div>
-        
-        <UserProfile data={data}/>
+      {login.isExpert &&
+        <div>
+
+          <ExpertProfile data={data} />
+
+        </div>
+      }
+
+
+      {login.isStudent && <div>
+
+        <UserProfile data={data} />
 
       </div>
-      
+
       }
-    
+
     </div>
 
   );
-}  
+}
 
 export default Profile;
 
