@@ -8,9 +8,6 @@ import EditProfile from './EditProfile';
 function ExpertProfile({ data }) {
   const login = useSelector(state => state.login)
   const [editMode, setEditMode] = useState(false)
-  console.log(login.avatar)
-
-  
   
   return (
     <div className='expert-profile-component'>
@@ -33,7 +30,7 @@ function ExpertProfile({ data }) {
         </ul>
       </div>
       <div>
-        <button></button>
+        <button onClick={() => data.name = 'Borrar cuenta'} >Eliminar cuenta</button>
       </div>
     </div>
 
