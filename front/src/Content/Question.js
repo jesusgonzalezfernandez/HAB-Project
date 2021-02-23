@@ -78,7 +78,7 @@ function Question() {
                 {/* Tags */}
                 <div className='question tags'>
                     {tags && tags.map(tag =>
-                        <a href={'http://localhost:3001/questions?tags=' + tag}>
+                        <a href={'http://localhost:3000/questions?tags=' + tag}>
                             {tag}
                         </a>
                     )}
