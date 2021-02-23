@@ -9,14 +9,12 @@ import { useState } from 'react'
 
 function Vote({parentID}) {
     const login = useSelector(state => state.login)
-    // const [value, setValue] = useState(0)
+    const [value, setValue] = useState(0)
 
     const answerID = parentID
 
     const handleSubmit = async e => {
         e.preventDefault()
-
-        let value = true
 
         const res = await fetch(
             // Dirección
@@ -34,7 +32,7 @@ function Vote({parentID}) {
 
     return (
         <div>
-            ¿Te ha resultado útil? <button onClick={handleSubmit}><FontAwesomeIcon className="vote icon" icon={faGratipay} /></button>
+            ¿Te ha resultado útil? <button onClick={handleSubmit} onChange={e => setValue(e.target.value)} ><FontAwesomeIcon className="vote icon" icon={faGratipay} /></button>
             <span>Votos:</span>
         </div>
     )
