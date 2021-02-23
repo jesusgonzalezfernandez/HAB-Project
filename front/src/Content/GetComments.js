@@ -20,7 +20,7 @@ function GetComments({ parentID }) {
         const res = await fetch(`http://localhost:3001/questions/${questionID}/${parentID}`,
             // Contenido
             {
-                headers: { 'Content-Type': 'application/json', auth: login.token },
+                headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
                 method: 'GET'
             })
 

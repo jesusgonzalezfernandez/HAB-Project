@@ -49,6 +49,7 @@ const deleteQuestion = require ('./controllers/content/deleteQuestion')
 const deleteAnswer = require ('./controllers/content/deleteAnswer')
 const getAnswerDetails = require ('./controllers/content/getAnswerDetails')
 const getCommentsDetails = require ('./controllers/content/getCommentDetails')
+const getVotes = require ('./controllers/content/getVotes')
 
 
 
@@ -127,13 +128,16 @@ const getCommentsDetails = require ('./controllers/content/getCommentDetails')
     app.delete('/questions/:questionID/:answerID', isAuthenticated, isAuthor, deleteAnswer)
 
     // 2.12 Obtener una Respuesta
-    app.get ('/answers/:questionID', getAnswerDetails)
+    app.get ('/answers/:questionID', isAuthenticated, getAnswerDetails)
         
     // 2.13 Publicar una Respuesta a otra Respuesta
     app.post('/questions/:questionID/:parentID', isAuthenticated, isExpert, createAnswer)
 
     //2.15 Obtener Respuestas a Respuestas (comentarios)
-    app.get('/questions/:questionID/:parentID', getCommentsDetails)
+    app.get('/questions/:questionID/:parentID', isAuthenticated, getCommentsDetails)
+
+    // 2.16 Obtener Votos
+    app.get('/question/:answerID/vote', getVotes)
 
 // Servidor
 

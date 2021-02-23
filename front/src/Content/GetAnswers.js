@@ -7,6 +7,7 @@ import GetComments from './GetComments';
 import PostComment from './PostComment';
 import Moment from 'react-moment';
 import Vote from './Vote'
+import GetVote from './GetVote'
 
 
 function GetAnswers({ key, reload }) {
@@ -33,7 +34,7 @@ function GetAnswers({ key, reload }) {
         const res = await fetch(`http://localhost:3001/answers/${questionID}`,
             // Contenido
             {
-                headers: { 'Content-Type': 'application/json', auth: login.token },
+                headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
                 method: 'GET'
             })
 
@@ -92,6 +93,11 @@ function GetAnswers({ key, reload }) {
                                     <Vote
                                         parentID={answer.id} />
                                 </div>
+                                <div>
+                                    Votos:
+                                <GetVote
+                                        parentID={answer.id} />
+                                    </div>
                             </div>
                         </div>
                     )}

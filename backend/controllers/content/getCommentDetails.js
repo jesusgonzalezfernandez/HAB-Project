@@ -1,7 +1,6 @@
 const performQuery = require('../../db/performQuery')
 
 const getCommentDataQuery = async data => {
-    let array = []
     let query =
 
         `
@@ -48,7 +47,7 @@ const getCommentDetails = async (req, res) => {
         // Si la pregunta no existe, se envía un error
         if (!CommentData) {
 
-            throw new Error('User not found')
+            throw new Error('Parent not found')
 
         }
 

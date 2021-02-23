@@ -1,22 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Vote.css'
 import { faGratipay } from '@fortawesome/free-brands-svg-icons';
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useState } from 'react'
+import GetVote from './GetVote'
 
 
 
 function Vote({parentID}) {
     const login = useSelector(state => state.login)
-    // const [value, setValue] = useState(0)
 
     const answerID = parentID
 
     const handleSubmit = async e => {
         e.preventDefault()
 
-        let value = true
+        let value = '1'
 
         const res = await fetch(
             // Dirección
@@ -35,7 +33,6 @@ function Vote({parentID}) {
     return (
         <div>
             ¿Te ha resultado útil? <button onClick={handleSubmit}><FontAwesomeIcon className="vote icon" icon={faGratipay} /></button>
-            <span>Votos:</span>
         </div>
     )
 }
