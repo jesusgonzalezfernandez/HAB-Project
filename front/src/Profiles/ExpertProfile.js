@@ -26,9 +26,14 @@ function ExpertProfile({ data }) {
         <h3>Tus últimas respuestas</h3>
         <ul>
           {data.answers.map((q, i) =>
-            <li className='profile-lista-respuestas' key={i}>{q}</li>
+            <li className='profile-lista-respuestas' key={i}>
+              {q}
+            </li>
           )}
         </ul>
+      </div>
+      <div>
+        <button></button>
       </div>
     </div>
 
