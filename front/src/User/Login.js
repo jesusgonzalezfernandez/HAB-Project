@@ -56,7 +56,7 @@ function Login() {
   }
 
   const handleLogin = async googleData => {
-    const res = await fetch("/api/v1/auth/google", {
+    const res = await fetch("http://localhost:3001/api/v1/auth/google", {
         method: "POST",
         body: JSON.stringify({
         token: googleData.tokenId
@@ -67,6 +67,7 @@ function Login() {
     })
     const data = await res.json()
     // store returned user somehow
+    console.log(googleData)
   }
 
   return (
