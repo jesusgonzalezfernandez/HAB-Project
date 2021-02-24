@@ -25,13 +25,13 @@ function Vote({ parentID, reload }) {
             })
 
         console.log(`Res de value ${JSON.stringify(res)}`);
-        // reload()
+        reload()
 
     }
 
     return (
         <div>
-            ¿Te ha resultado útil? <button onClick={handleSubmit}><FontAwesomeIcon className="vote icon" icon={faGratipay} /></button>
+            <button onClick={handleSubmit}><FontAwesomeIcon className="vote icon" icon={faGratipay} size="2x" /></button>
         </div>
     )
 }

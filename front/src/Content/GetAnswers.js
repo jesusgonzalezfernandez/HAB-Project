@@ -8,8 +8,6 @@ import PostComment from './PostComment';
 import Moment from 'react-moment';
 import Vote from './Vote';
 import GetVote from './GetVote';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGratipay } from '@fortawesome/free-brands-svg-icons';
 
 
 function GetAnswers({ key, reload }) {
@@ -63,9 +61,15 @@ function GetAnswers({ key, reload }) {
                                 </div>
                             </div>
                             <main className="answer main">
+                                {/* Votos */}
                                 <aside className="answer vote">
-                                    Votos:
-                                    <FontAwesomeIcon className="vote icon" icon={faGratipay} />
+                                    <div>
+                                        {/* Emite voto */}
+                                        <Vote
+                                            reload={reload}
+                                            parentID={answer.id} />
+                                    </div>
+                                    {/* Recibe voto */}
                                     <GetVote
                                         parentID={answer.id} />
                                 </aside>
@@ -94,10 +98,6 @@ function GetAnswers({ key, reload }) {
 
                                     </Acordeon>
 
-                                </div>
-                                <div>
-                                    <Vote
-                                        parentID={answer.id} />
                                 </div>
                             </div>
                         </div>
