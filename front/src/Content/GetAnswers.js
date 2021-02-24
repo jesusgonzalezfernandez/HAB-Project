@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import './GetAnswers.css'
+import { useSelector } from 'react-redux';
+import './GetAnswers.css';
 import Acordeon from '../utils/Acordeon'
 import GetComments from './GetComments';
 import PostComment from './PostComment';
 import Moment from 'react-moment';
-import Vote from './Vote'
-import GetVote from './GetVote'
+import Vote from './Vote';
+import GetVote from './GetVote';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGratipay } from '@fortawesome/free-brands-svg-icons';
 
 
 function GetAnswers({ key, reload }) {
@@ -19,10 +21,6 @@ function GetAnswers({ key, reload }) {
 
     // Obtener información de login
     const login = useSelector(state => state.login)
-    if (login) console.log(`*GetUserProfile* 
-        - Usuario registrado con el ID: ${login.userID}, 
-        - username: ${login.username}
-        - rol: ${login.role} `);
 
     // Obtener el ID de la pregunta
     const { questionID } = useParams()
@@ -55,7 +53,7 @@ function GetAnswers({ key, reload }) {
                     {/* Y recorre el array de resultados */}
                     {data.map(answer =>
                         <div className="answer box">
-                            {/* En la caja de respuestas muestra avatar, autor, fecha y body */}
+                            {/* En la caja de respuestas muestra avatar, autor, fecha, votos y body */}
                             <div className="answer publish">
                                 <div className="answer author">
                                     <img className="answer avatar" src={`http://localhost:3001/${answer.avatar}`} alt="avatar" />
@@ -64,7 +62,15 @@ function GetAnswers({ key, reload }) {
                                     </Moment>
                                 </div>
                             </div>
-                            <div className="answer body"> {answer.body} </div>
+                            <main className="answer main">
+                                <aside className="answer vote">
+                                    Votos:
+                                    <FontAwesomeIcon className="vote icon" icon={faGratipay} />
+                                    <GetVote
+                                        parentID={answer.id} />
+                                </aside>
+                                <div className="answer body">{answer.body}</div>
+                            </main>
                             <div className='get-comments'>
                                 {/* Obtener los comentarios a partir del id de respuesta */}
                                 <GetComments parentID={answer.id} />
@@ -93,11 +99,6 @@ function GetAnswers({ key, reload }) {
                                     <Vote
                                         parentID={answer.id} />
                                 </div>
-                                <div>
-                                    Votos:
-                                <GetVote
-                                        parentID={answer.id} />
-                                    </div>
                             </div>
                         </div>
                     )}

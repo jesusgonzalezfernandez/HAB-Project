@@ -31,6 +31,18 @@
     font-size: 15px;
 }
 
+.answer.main {
+    display: flex;
+}
+
+.answer.vote {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 2px;
+    color: #6a737c;
+    font-size: 16px;
+}
+
 .answer.body {
     padding: 20px 30px;
 }

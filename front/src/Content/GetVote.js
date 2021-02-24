@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 function GetVote({parentID}) {
     const [data, setData] = useState([])
