@@ -7,20 +7,19 @@ import { useState } from 'react';
 function DeleteAcount({ reload }) {
   const login = useSelector(state => state.login)
   const { userID } = useParams()
-
   const dispatch = useDispatch()
-
   const [reason, setReason] = useState('')
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const res = await fetch(`http://localhost:3001/users/profile/${userID}`,
+    const res = await fetch(`http://localhost:3001/users/${userID}`,
       {
         headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
         method: 'DELETE',
-        body: reason
+        body: JSON.stringify({reason})
       })
 
+    dispatch({ type: 'logout' })
     return <Redirect to='/' />
 
     reload()
