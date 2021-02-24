@@ -7,7 +7,7 @@ import Loading from '../Home/Loading';
 import DeleteAcount from './DeleteAcount';
 import EditPassword from './EditPassword';
 import EditProfile from './EditProfile';
-// import './Profile.css';
+import './Profile.css'
 
 
 function Profile() {
@@ -53,49 +53,46 @@ function Profile() {
 
   return (
 
-    <div>
-      {login &&
-        <div className='expert-profile-component'>
-          <aside className='expert-profile'>
-            <div>
-            <h2>{login.name}</h2>
-            <img src={`http://localhost:3001/${login.avatar}`} alt="avatar" />
+    <div className='profile-component'>
+      <div className='profile-card'>
+        <div className='user-info'>
+          <img src={`http://localhost:3001/${login.avatar}`} alt="avatar" className='profile-avatar' />
+          <div>
             <h3>{login.name} {login.surname}</h3>
             <h4>{login.username}</h4>
-            </div>
-
-            <div onClick={() => setActive('profile')}>Editar perfil</div>
-            {active === 'profile' && <EditProfile reload={() => setActive(!active)}/>}
-            <div onClick={() => setActive('password')}>Editar password</div>
-            {active === 'password' && <EditPassword reload={() => setActive(!active)}/>}
-            <div onClick={() => setActive('delete')}>Eliminar cuenta</div>
-            {active === 'delete' && <DeleteAcount reload={() => setActive(!active)}/>}
-          </aside>
-          <div className='panel'>
-          <div className='panel-respuestas'>
-            <h3>Tus últimas respuestas</h3>
-            <ul>
-              {dataAnswers && dataAnswers.map((answer, i) =>
-                <li className='profile-lista-respuestas' key={i}>
-                  <Link to={`/question/${answer.questionID}`}> {answer.body} </Link>
-                </li>
-              )}
-            </ul>
-          </div>
-          <div className='panel-preguntas'>
-            <h3>Tus últimas respuestas</h3>
-            <ul>
-              {dataQuestions && dataQuestions.map((question, i) =>
-                <li className='profile-lista-preguntas' key={i}>
-                  <QuestionPreview question={question} />
-                </li>
-              )}
-            </ul>
           </div>
         </div>
-          </div>
-
-      }
+        <div className='profile-card-menu'>
+          <div onClick={() => setActive('profile')}>Editar perfil</div>
+          {active === 'profile' && <EditProfile reload={() => setActive(!active)} />}
+          <div onClick={() => setActive('password')}>Editar password</div>
+          {active === 'password' && <EditPassword reload={() => setActive(!active)} />}
+          <div onClick={() => setActive('delete')}>Eliminar cuenta</div>
+          {active === 'delete' && <DeleteAcount reload={() => setActive(!active)} />}
+        </div>
+      </div>
+      <div className='profile-data'>
+        <div className='panel-respuestas'>
+          <h3>Tus últimas respuestas</h3>
+          <ul>
+            {dataAnswers && dataAnswers.map((answer, i) =>
+              <li className='profile-lista-respuestas' key={i}>
+                <Link to={`/question/${answer.questionID}`}> {answer.body} </Link>
+              </li>
+            )}
+          </ul>
+        </div>
+        <div className='panel-preguntas'>
+          <h3>Tus últimas preguntas</h3>
+          <ul>
+            {dataQuestions && dataQuestions.map((question, i) =>
+              <li className='profile-lista-preguntas' key={i}>
+                <QuestionPreview question={question} />
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
 
     </div>
 

@@ -13,8 +13,6 @@ import Loading from './Home/Loading';
 import Register from './User/Register'
 import Navbar from './NavBar/Navbar';
 
-
-
 // Obtener query de la URL
 function useQuery() {
   return new URLSearchParams(useLocation().search);
