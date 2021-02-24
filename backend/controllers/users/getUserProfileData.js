@@ -8,28 +8,36 @@ const getUserProfileDataQuery = async userID => {
     const query = 
         
         `
+            SELECT * FROM users WHERE id = ${userID}
+            
+        `
 
-            SELECT 
-                
-                users.email, 
-                users.name, 
-                users.username,  
-                users.surname, 
-                users.role, 
-                users.birthDate,
-                users.country,
-                users.languages,
-                users.avatar,
-                users.registrationDate,
-                users.lastConnection,
-                questions.title AS questions,
-                answers.body AS answers
+    const result = ( await performQuery(query) )
+    return result
 
-                FROM users
-                INNER JOIN questions ON questions.userID = users.id
-                INNER JOIN answers ON answers.userID = users.id
-                
-                WHERE users.id = ${userID}
+}
+
+const getUserQuestionsQuery = async userID => {
+
+    const query = 
+        
+        `
+            SELECT * FROM questions WHERE userID = ${userID}
+            
+        `
+
+    const result = ( await performQuery(query) )
+    return result
+
+}
+
+
+const getUserAnswersQuery = async userID => {
+
+    const query = 
+        
+        `
+            SELECT * FROM answers WHERE userID = ${userID}
             
         `
 
@@ -42,6 +50,8 @@ const getUserProfileDataQuery = async userID => {
 const getUserProfileData = async (req, res) => {
 
     let userData;
+    let userQuestions;
+    let userAnswers;
     
     // Obtener variables
     let reqData = req.params
@@ -57,7 +67,10 @@ const getUserProfileData = async (req, res) => {
 
             throw new Error ('User not found')
         
-        } 
+        }
+
+        userQuestions = await getUserQuestionsQuery (reqData.userID)
+        userAnswers = await getUserAnswersQuery (reqData.userID)
 
         // Si el usuario target es admin y el usuario del request NO es admin, se envía otro error
         if (userData.role === 'admin' && !reqData.token.isAdmin) {
@@ -67,32 +80,20 @@ const getUserProfileData = async (req, res) => {
         } 
 
 
+
     } catch (e) {
 
         res.status(500).send(e.message)
         return
     
     }
-    const userInfo = {
-        email: userData[0].email,
-        username: userData[0].username,
-        name: userData[0].name,
-        surname: userData[0].surname,
-        role: userData[0].role,
-        birthDate: userData[0].birthDate,
-        country: userData[0].country,
-        languages: userData[0].languages,
-        avatar: userData[0].avatar,
-        registrationDate: userData[0].registrationDate,
-        lastConnection: userData[0].lastConnection,
-        answers: [],
-        questions: []
-    }
     
-    for (let i = 0; i < userData.length; i++) {
-        userInfo.answers.push(userData[i].answers)
-        userInfo.questions.push(userData[i].questions)
+    const userInfo = {
+        user: userData,
+        questions: userQuestions,
+        answers: userAnswers
     }
+
     console.log(userInfo)
 
     res.send(userInfo)

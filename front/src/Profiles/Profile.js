@@ -1,21 +1,27 @@
 // import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect, useParams } from 'react-router-dom';
+import { Link, Redirect, useParams } from 'react-router-dom';
+import QuestionPreview from '../Content/QuestionPreview';
 import Loading from '../Home/Loading';
-import ExpertProfile from './ExpertProfile';
-import UserProfile from './UserProfile';
-
+import DeleteAcount from './DeleteAcount';
+import EditPassword from './EditPassword';
+import EditProfile from './EditProfile';
+// import './Profile.css';
 
 
 function Profile() {
-  const [data, setData] = useState()
+  const [dataUser, setDataUser] = useState()
+  const [dataQuestions, setDataQuestions] = useState()
+  const [dataAnswers, setDataAnswers] = useState()
 
   const login = useSelector(state => state.login)
+  const [editMode, setEditMode] = useState(false)
+  const [active, setActive] = useState()
+
 
   // Obtener id del usuario buscado
   const { userID } = useParams()
-  console.log(`Buscando el usuario con ID: ${userID}`);
 
   // Ejecutar fetch al cargar la página
   useEffect(() => {
@@ -29,48 +35,71 @@ function Profile() {
         })
 
       const data = await res.json();
-      setData(data)
-
-      console.log(`Resultado del perfil del usuario: ${JSON.stringify(data)}`)
+      setDataUser(data.user)
+      setDataQuestions(data.questions)
+      setDataAnswers(data.answers)
+      // console.log(`Resultado del perfil del usuario: ${JSON.stringify(data)}`)
     }
     fetchData()
   }, [])
 
   if (!login) return <Redirect to='/' />
 
-  if (!data) return <Loading />
+  if (!dataUser) return <Loading />
+
+  const imagen = dataUser.map(user => user.avatar)
+  console.log('esto es avatar:' + login.avatar)
+
 
   return (
 
     <div>
-      {login.isAdmin &&
-        <div>
+      {login &&
+        <div className='expert-profile-component'>
+          <aside className='expert-profile'>
+            <div>
+            <h2>{login.name}</h2>
+            <img src={`http://localhost:3001/${login.avatar}`} alt="avatar" />
+            <h3>{login.name} {login.surname}</h3>
+            <h4>{login.username}</h4>
+            </div>
 
-          <ExpertProfile data={data} />
-
+            <div onClick={() => setActive('profile')}>Editar perfil</div>
+            {active === 'profile' && <EditProfile reload={() => setActive(!active)}/>}
+            <div onClick={() => setActive('password')}>Editar password</div>
+            {active === 'password' && <EditPassword reload={() => setActive(!active)}/>}
+            <div onClick={() => setActive('delete')}>Eliminar cuenta</div>
+            {active === 'delete' && <DeleteAcount reload={() => setActive(!active)}/>}
+          </aside>
+          <div className='panel'>
+          <div className='panel-respuestas'>
+            <h3>Tus últimas respuestas</h3>
+            <ul>
+              {dataAnswers && dataAnswers.map((answer, i) =>
+                <li className='profile-lista-respuestas' key={i}>
+                  <Link to={`/question/${answer.questionID}`}> {answer.body} </Link>
+                </li>
+              )}
+            </ul>
+          </div>
+          <div className='panel-preguntas'>
+            <h3>Tus últimas respuestas</h3>
+            <ul>
+              {dataQuestions && dataQuestions.map((question, i) =>
+                <li className='profile-lista-preguntas' key={i}>
+                  <QuestionPreview question={question} />
+                </li>
+              )}
+            </ul>
+          </div>
         </div>
-      }
-
-      {login.isExpert &&
-        <div>
-
-          <ExpertProfile data={data} />
-
-        </div>
-      }
-
-
-      {login.isStudent && <div>
-
-        <UserProfile data={data} />
-
-      </div>
+          </div>
 
       }
 
     </div>
 
-  );
+  )
 }
 
 export default Profile;

@@ -5,9 +5,11 @@ import { Link, NavLink } from 'react-router-dom';
 
 
 function QuestionPreview({ question }) {
-
+    let tags = []
     // Generar array de tags para recorrerlo
-    const tags = question.tags.split(',')
+    if(question.tags) {
+        tags = question.tags.split(',')
+    }
 
     return (
     

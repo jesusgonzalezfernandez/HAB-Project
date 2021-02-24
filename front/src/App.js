@@ -11,6 +11,7 @@ import Question from './Content/Question'
 import QuestionsPortal from './Content/QuestionsPortal';
 import Loading from './Home/Loading';
 import Register from './User/Register'
+import Navbar from './NavBar/Navbar';
 
 
 
@@ -25,7 +26,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Navbar />
+      {/* <Header /> */}
       <Switch>
         <Route path="/" exact>
           <Loading />

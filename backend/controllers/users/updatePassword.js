@@ -35,6 +35,7 @@ const updatePassword = async (req, res) => {
     // Obtener variables
     let { userID } = req.params;
     let reqData = req.body
+    console.log(reqData)
 
     try {
 
