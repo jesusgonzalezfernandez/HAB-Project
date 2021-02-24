@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-function GetVote({parentID}) {
+function GetVote({voteKey, parentID}) {
     const [data, setData] = useState([])
     const login = useSelector(state => state.login)
 
@@ -20,7 +20,7 @@ function GetVote({parentID}) {
         setData(data)
         console.log(data)
 
-    }, [])
+    }, [voteKey])
     return (
         <div>{data.value}</div>
     )}
