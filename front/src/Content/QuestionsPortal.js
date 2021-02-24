@@ -8,6 +8,7 @@ import FilteredQuestions from "./FilteredQuestions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
+import Loading from "../Home/Loading";
 
 /* 
 
@@ -70,8 +71,11 @@ function QuestionsPortal({ query }) {
                     <div className='main-content-header-info'>
 
                         {!filterMode && <h1 className=''>Últimas Preguntas</h1>}
-                        {filterMode && filterData && <h1 className=''>Resultados: {query ? `tag = ${query}` : 'filtro'} </h1>}
-
+                        {filterMode && filterData &&
+                            <div>
+                                <h1 className=''>Resultados: {query ? <Loading query={query}/> : 'filtro'} </h1>
+                            </div> 
+                        }
                         <div className=''>
                             <a className='create-question-button' href='http://localhost:3000/create/question'>Haz Tu Consulta</a>
                         </div>

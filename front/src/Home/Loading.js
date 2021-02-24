@@ -4,26 +4,44 @@ import './Loading.css'
 
 import { useDencrypt } from "use-dencrypt-effect";
 
-const values = ["Howdoi", "Html scripts", "React Hook", "Javascrit"];
 
-const Loading = () => {
+const Loading = ({ query }) => {
+
+    const defaultValues = ["Howdoi", "Html scripts", "React Hook", "Javascrit"];
+
+    let values;
+    let interval = 2000;
+    
+    if (query) {
+      values = [`tags.contains('${query}')`, `tags.find('${query}')`, `tags.filter('${query}')`]
+      interval = 10000
+    }
+
+    values = values || defaultValues;
+    
     const { result, dencrypt } = useDencrypt();
 
     useEffect(() => {
       let i = 0;
+
+      dencrypt(values[i]);
   
       const action = setInterval(() => {
+        
         dencrypt(values[i]);
-  
         i = i === values.length - 1 ? 0 : i + 1;
-      }, 2000);
+        
+      }, interval);
   
       return () => clearInterval(action);
-    }, []);
+
+    }, [query]);
 
   return (
-  <div className='loading'>{result}</div>
-  );
+
+    <span className='loading'>{result}</span>
+  
+    );
 };
 
 export default Loading;
