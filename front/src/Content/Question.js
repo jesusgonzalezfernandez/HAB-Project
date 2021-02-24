@@ -9,6 +9,7 @@ import Loading from '../Home/Loading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import Login from '../User/Login';
+import Modal from '../Modal/index'
 
 function Question() {
 
@@ -17,6 +18,15 @@ function Question() {
     const [data, setData] = useState()
     const [tags, setTags] = useState([])
     const [key, setKey] = useState(0)
+    const [showModal, setShowModal] = useState(false)
+
+    const handleClick = () => {
+        if(!login) return  setShowModal(true)
+    }
+
+    const handleClose = () => {
+         setShowModal(false)
+    }
 
     // Obtener id de la pregunta
     const { questionID } = useParams()
@@ -99,9 +109,10 @@ function Question() {
                 }
                 {!login &&
                     <div>
-                        <p>Para ver el registro del contenido debes iniciar sesión</p>
-                        <Login />
-                    </div>}
+                        <button onClick={handleClick}>Ver respuestas</button>
+                    </div>
+                }
+                {showModal && <Modal onClose={handleClose}><Login /></Modal>}
             </div>
         </main>
 
