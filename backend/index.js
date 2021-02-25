@@ -55,7 +55,6 @@ const getCommentsDetails = require('./controllers/content/getCommentDetails')
 const getVotes = require('./controllers/content/getVotes')
 
 
-
 // 1. User Endpoints
 
 // 1.1 Registrar Usuario
@@ -144,6 +143,7 @@ app.get('/question/:answerID/vote', getVotes)
 
 // Servidor Google
 app.post('/api/v1/auth/google', googleAuth)
+
 
 // Servidor de .env
 const envPort = process.env.PORT
