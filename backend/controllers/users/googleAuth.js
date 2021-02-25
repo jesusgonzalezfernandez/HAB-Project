@@ -1,20 +1,6 @@
-// app.post("/api/v1/auth/google", async (req, res) => {
-//     const { token } = req.body
-//     const ticket = await client.verifyIdToken({
-//         idToken: token,
-//         audience: process.env.CLIENT_ID
-//     });
-//     const { name, email, picture } = ticket.getPayload();
-//     const user = await db.user.upsert({
-//         where: { email: email },
-//         update: { name, picture },
-//         create: { name, email, picture }
-//     })
-//     res.status(201)
-//     res.json(user)
-// })
 
 // Dependencias
+<<<<<<< HEAD
 // const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 require('dotenv').config()
@@ -50,11 +36,19 @@ const googleUser = async (name, email, picture) => {
     return result
 
 }
+=======
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { OAuth2Client } = require('google-auth-library')
+const client = new OAuth2Client(process.env.CLIENT_ID)
+
+>>>>>>> b1c95f6f7587fa7067fb014d6670b4319e6dfa3d
 
 const googleAuth = async (req, res) => {
     console.log('*  Google Auth  *')
     try {
 
+<<<<<<< HEAD
         const { token } = req.body
 
         const client = new JWT({
@@ -76,14 +70,40 @@ const googleAuth = async (req, res) => {
 
         // Enviar al front
         res.status(201).json(user)
+=======
+        const token = req.body.token;
+        async function verify() {
+            const ticket = await client.verifyIdToken({
+                idToken: token,
+                audience: process.env.GOOGLE_APP_CLIENT_ID,  
+            });
+            const payload = ticket.getPayload();
+            const userID = payload['sub'];
+            console.log('payload: ', payload)
 
+        }
+>>>>>>> b1c95f6f7587fa7067fb014d6670b4319e6dfa3d
+
+        verify().catch(console.error);
     } catch (e) {
 
         res.status(401).send(e.message)
         return
 
     }
+    }
 
-}
+        // Enviar al front
+        // res.status(201).json(user)
+        // console.log(req.body)
+
+    // } catch (e) {
+
+    //     res.status(401).send(e.message)
+    //     return
+
+    // }
+
+
 
 module.exports = googleAuth

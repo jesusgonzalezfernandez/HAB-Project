@@ -67,6 +67,7 @@ function Login() {
     })
     const data = await res.json()
     // store returned user somehow
+    console.log(googleData.tokenId)
   }
 
   return (
