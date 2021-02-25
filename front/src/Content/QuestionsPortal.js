@@ -73,7 +73,7 @@ function QuestionsPortal({ query }) {
                         {!filterMode && <h1 className=''>Últimas Preguntas</h1>}
                         {filterMode && filterData &&
                             <div>
-                                <h1 className=''>Resultados: {query ? <Loading query={query}/> : 'filtro'} </h1>
+                                <h2 className=''>Resultados: {query ? <Loading query={query}/> : 'filtro'} </h2>
                             </div> 
                         }
                         <div className=''>

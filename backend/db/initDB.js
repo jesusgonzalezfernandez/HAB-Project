@@ -16,7 +16,6 @@ async function main() {
         connection = await getConnection();
 
         console.log('Deleting tables')
-
         await connection.query("SET FOREIGN_KEY_CHECKS = 0");
         await connection.query("DROP TABLE IF EXISTS users CASCADE");
         await connection.query("DROP TABLE IF EXISTS offUsers CASCADE");
@@ -24,10 +23,13 @@ async function main() {
         await connection.query("DROP TABLE IF EXISTS answers CASCADE");
         await connection.query("DROP TABLE IF EXISTS languages CASCADE");
         await connection.query("DROP TABLE IF EXISTS votes CASCADE");
+        await connection.query("DROP TABLE IF EXISTS users_languages CASCADE");
+        await connection.query("DROP TABLE IF EXISTS questions_languages CASCADE");
         await connection.query("SET FOREIGN_KEY_CHECKS = 1");
-        // Pablo. Necesitamos una tabla de aplicaciones
-        // Pablo. Hay que completar y enlazar la tabla lenguajes a users y questions
-    
+
+        console.log('Setting Max Connections');
+        await connection.query('SET GLOBAL max_connections = 1000');
+
         console.log('Creating new tables')
 
         // Users
@@ -56,8 +58,6 @@ async function main() {
                         varchar(50) not null,
                     avatar 
                         varchar(500) default '/images/profile/avatar-default.jpeg',
-                    languages 
-                        set ('html', 'css', 'javascript', 'mysql', 'python', 'react', 'vue' ),
                     lastConnection 
                         timestamp,
                     status 
@@ -94,8 +94,6 @@ async function main() {
                         varchar (3000) not null,
                     file 
                         varchar(500),
-                    languages
-                        set ('html', 'css', 'javascript', 'mysql', 'python', 'react', 'vue' ) not null,
                     tags 
                         varchar (200),
                     status
@@ -118,6 +116,69 @@ async function main() {
 
             // Pablo. On delete cascade o set null?
         );
+
+        // Languages
+        await connection.query(
+
+            `
+                CREATE TABLE if not exists languages (
+
+                    id
+                        int unsigned auto_increment primary key,
+                    name
+                        varchar(100) not null unique,
+                    creationDate 
+                        timestamp default current_timestamp,
+                    updateDate 
+                        timestamp default current_timestamp on update current_timestamp
+
+                )
+            `            
+        )
+
+        // Join Tables
+
+            // Users/Languages
+            await connection.query(
+
+                `
+                    CREATE TABLE if not exists users_languages (
+
+                        userID
+                            int unsigned,
+                        languageID
+                            int unsigned,
+
+                        PRIMARY KEY(userID, languageID),
+
+                        constraint users_languages_user_fk1
+                            foreign key(userID) references users (id) on delete cascade,
+                        constraint users_languages_language_fk2
+                            foreign key(languageID) references languages (id) on delete cascade
+                    )
+                `
+            )
+
+            // Questions/Languages
+            await connection.query(
+
+                `
+                    CREATE TABLE if not exists questions_languages (
+
+                        questionID
+                            int unsigned,
+                        languageID
+                            int unsigned,
+                            
+                        PRIMARY KEY(questionID, languageID),
+
+                        constraint questions_languages_question_fk1
+                            foreign key(questionID) references questions (id) on delete cascade,
+                        constraint questions_languages_language_fk2
+                            foreign key(languageID) references languages (id) on delete cascade
+                    )
+                `
+            )
 
         // Answers
         await connection.query(
@@ -165,7 +226,7 @@ async function main() {
                     userID 
                         int unsigned,
                     value 
-                        tinyint default 0,
+                        boolean default 0,
                     creationDate 
                         timestamp default current_timestamp,
                     updateDate 
@@ -179,23 +240,8 @@ async function main() {
                 )           
             `
             // Pablo. En lugar de un ID propio, clave compuesta answerID, userID
-            // Pablo. Value tinyint o boolean, como prefiráis
         );
             
-        // Languages
-        await connection.query(
-
-            `
-                CREATE TABLE if not exists languages (
-                    
-                    id 
-                        int unsigned auto_increment primary key,
-                    name
-                        varchar(200) not null unique
-                )
-            `
-        )
-
         // Off Users
         await connection.query(
             
@@ -208,6 +254,10 @@ async function main() {
                         int unsigned,
                     reason 
                         varchar(500),
+                    creationDate 
+                        timestamp default current_timestamp,
+                    updateDate 
+                        timestamp default current_timestamp on update current_timestamp,
                         
                     constraint offUser_userID_fk1
                         foreign key (userID) references users (id) on delete cascade,
@@ -217,14 +267,13 @@ async function main() {
                 )
             `
         )
-    
+
         // Crear Admin
         console.log('Creating admin')
 
         const encryptedPass = await bcrypt.hash(process.env.DEFAULT_ADMIN_PASSWORD, 10);
 
         // Admin
-        
         await connection.query(
 
             `
@@ -252,137 +301,6 @@ async function main() {
                     '${encryptedPass}', 
                     'admin',
                     1 
-                )
-            `
-        )
-
-        // Dummies
-        console.log('Creating dummy users');
-
-        await connection.query(
-            
-            `
-                INSERT INTO users (
-
-                    creationDate, 
-                    updateDate, 
-                    email, 
-                    username, 
-                    birthDate, 
-                    country, 
-                    password, 
-                    role, 
-                    active
-                )
-
-                VALUES ( 
-
-                    UTC_TIMESTAMP, 
-                    UTC_TIMESTAMP, 
-                    'pepito@preguntify.com', 
-                    'pepito2021', 
-                    '1000-01-01',
-                    'Spain', 
-                    '${encryptedPass}', 
-                    'student',
-                    1 
-
-                )
-            `
-        )
-
-        await connection.query(
-            
-            `
-                INSERT INTO users (
-
-                    creationDate, 
-                    updateDate, 
-                    email, 
-                    username, 
-                    birthDate, 
-                    country, 
-                    password, 
-                    role, 
-                    active
-                )
-
-                VALUES ( 
-
-                    UTC_TIMESTAMP, 
-                    UTC_TIMESTAMP, 
-                    'manolito@preguntify.com', 
-                    'manolito89', 
-                    '1000-01-01',
-                    'Spain', 
-                    '${encryptedPass}', 
-                    'student',
-                    1 
-
-                )
-            `
-        )
-
-        await connection.query(
-            
-            `
-                INSERT INTO users (
-
-                    creationDate, 
-                    updateDate, 
-                    email, 
-                    username, 
-                    birthDate, 
-                    country, 
-                    password, 
-                    role, 
-                    active
-                )
-
-                VALUES ( 
-
-                    UTC_TIMESTAMP, 
-                    UTC_TIMESTAMP, 
-                    'joselito@preguntify.com', 
-                    'joselito2021', 
-                    '1000-01-01',
-                    'Spain', 
-                    '${encryptedPass}', 
-                    'student',
-                    1 
-
-                )
-            `
-        )
-
-        await connection.query(
-            
-            `
-                INSERT INTO users (
-
-                    creationDate, 
-                    updateDate, 
-                    email, 
-                    username, 
-                    birthDate, 
-                    country, 
-                    password, 
-                    role, 
-                    active
-                )
-
-                VALUES ( 
-
-                    UTC_TIMESTAMP, 
-                    UTC_TIMESTAMP, 
-                    'mar@preguntify.com', 
-                    'marpreguntify', 
-                    '1000-01-01',
-                    'Spain',
-                    '${encryptedPass}', 
-                    'expert',
-                    1 
-
                 )
             `
         )
