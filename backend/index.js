@@ -143,7 +143,10 @@ app.get('/question/:answerID/vote', getVotes)
 
 // Servidor Google
 app.post('/api/v1/auth/google', googleAuth)
+<<<<<<< HEAD
+=======
 
+>>>>>>> b1c95f6f7587fa7067fb014d6670b4319e6dfa3d
 
 // Servidor de .env
 const envPort = process.env.PORT
