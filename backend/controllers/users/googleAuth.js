@@ -15,8 +15,15 @@
 // })
 
 // Dependencias
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+require('dotenv').config()
+
+const {JWT} = require('google-auth-library');
+const keys = require('./jwt.keys.json');
+
+
+
 
 // Queries
 // const getUserQuery = require('../../queries/getUserQuery')
@@ -26,15 +33,15 @@ const performQuery = require('../../db/performQuery');
 
 
 
-const updateTokenQuery = async (token, email) => {
+const googleUser = async (name, email, picture) => {
 
     const query =
 
         `
             UPDATE users SET 
 
-                updateDate = UTC_TIMESTAMP,
-                token = '${token}' 
+                avatar = '${picture}' ,
+                name = '${name}' 
                 
             WHERE email = '${email}' AND active = true 
         `
@@ -45,24 +52,27 @@ const updateTokenQuery = async (token, email) => {
 }
 
 const googleAuth = async (req, res) => {
-
+    console.log('*  Google Auth  *')
     try {
 
-        const { token } = req.auth
-        const reqData = req.body
+        const { token } = req.body
+
+        const client = new JWT({
+            email: keys.client_email,
+            key: keys.private_key,
+            scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+          });
 
         const ticket = await client.verifyIdToken({
             idToken: token,
             audience: process.env.CLIENT_ID
         });
 
-        const { name, email, avatar } = ticket.getPayload();
+        console.log('tiket    ' + ticket)
 
-        const user = await db.user.upsert({
-            where: { email: email },
-            update: { name, picture },
-            create: { name, email, picture }
-        })
+        const { name, email, picture } = ticket.getPayload();
+
+        const user = await googleUser(name, email, picture)
 
         // Enviar al front
         res.status(201).json(user)
