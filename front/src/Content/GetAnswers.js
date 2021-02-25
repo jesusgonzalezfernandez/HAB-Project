@@ -17,6 +17,8 @@ function GetAnswers({ key, reload }) {
     // Definir el estado del acordeon activo
     const [active, setActive] = useState()
 
+    const [voteKey, setVoteKey] = useState()
+
     // Obtener información de login
     const login = useSelector(state => state.login)
 
@@ -66,11 +68,12 @@ function GetAnswers({ key, reload }) {
                                     <div>
                                         {/* Emite voto */}
                                         <Vote
-                                            reload={reload}
+                                            reload={() => setVoteKey(voteKey + 1)}
                                             parentID={answer.id} />
                                     </div>
                                     {/* Recibe voto */}
                                     <GetVote
+                                        voteKey={voteKey}
                                         parentID={answer.id} />
                                 </aside>
                                 <div className="answer body">{answer.body}</div>

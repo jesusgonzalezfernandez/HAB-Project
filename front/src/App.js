@@ -1,5 +1,4 @@
 import './App.css';
-import Header from './Header';
 import Home from './Home/Home';
 import Login from './User/Login';
 import Recovery from './User/Recovery';
@@ -25,10 +24,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      {/* <Header /> */}
       <Switch>
         <Route path="/" exact>
-          <Loading />
           <Home />
         </Route>
         <Route path="/questions">

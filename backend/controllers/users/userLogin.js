@@ -65,7 +65,7 @@ const userLogin = async (req, res) => {
                 if(!user) {
 
                     console.log('Incorrect User');
-                    throw new Error('Incorrect user or password')
+                    throw new Error('Usuario o contraseña incorrectos')
                 
                 }
             
@@ -80,7 +80,7 @@ const userLogin = async (req, res) => {
             if (!validPassword) {
 
                 console.log('Incorrect Password');
-                throw new Error('Incorrect user or password')
+                throw new Error('Usuario o contraseña incorrectos')
             
             }
 

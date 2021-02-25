@@ -1,11 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Vote.css'
 import { faGratipay } from '@fortawesome/free-brands-svg-icons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function Vote({ parentID, reload }) {
     const login = useSelector(state => state.login)
+    const dispatch = useDispatch()
+
 
     const answerID = parentID
 
@@ -25,7 +27,8 @@ function Vote({ parentID, reload }) {
             })
 
         console.log(`Res de value ${JSON.stringify(res)}`);
-        reload()
+        dispatch({ type: 'update', value })
+        // reload()
 
     }
 

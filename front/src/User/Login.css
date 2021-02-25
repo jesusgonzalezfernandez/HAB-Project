@@ -4,6 +4,10 @@
     justify-content: center;
 }
 
+.login.error {
+    flex-direction: column;
+}
+
 .login.form{
     display: flex;
     flex-direction: column;

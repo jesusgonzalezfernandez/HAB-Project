@@ -57,7 +57,9 @@ async function main() {
                     country 
                         varchar(50) not null,
                     avatar 
-                        varchar(500) default '/images/profile/avatar-default.jpeg',
+                        varchar(500) default 'images/profile/avatar-default.jpg',
+                    languages 
+                        set ('html', 'css', 'javascript', 'mysql', 'python', 'react', 'vue' ),
                     lastConnection 
                         timestamp,
                     status 

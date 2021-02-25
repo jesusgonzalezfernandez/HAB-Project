@@ -9,7 +9,7 @@ import Loading from '../Home/Loading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import Login from '../User/Login';
-import Modal from '../Modal/index'
+import Modal from '../Modal/Modal'
 
 function Question() {
 
