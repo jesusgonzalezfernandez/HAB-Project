@@ -57,8 +57,8 @@ function Login() {
 
   const handleLogin = async googleData => {
     const res = await fetch("http://localhost:3001/api/v1/auth/google", {
-        method: "POST",
-        body: JSON.stringify({
+      method: "POST",
+      body: JSON.stringify({
         token: googleData.tokenId
       }),
       headers: {
@@ -73,11 +73,6 @@ function Login() {
   return (
     <main className="login main">
 
-      {error &&
-        <div>
-          {error}
-        </div>}
-
       <form className="login form" onSubmit={handleSubmit}>
         <img src={logo} className={'logo'} alt={'logo'} />
         <div>
@@ -86,6 +81,10 @@ function Login() {
         <div>
           <input className="login input" placeholder="Password ..." type="password" value={password} onChange={e => setPassword(e.target.value)} required />
         </div>
+        {error &&
+          <div className="login error">
+            {error}
+          </div>}
         <button className="submit">Iniciar sesión</button>
         <p>
           <Link to="/recovery">Recordar contraseña</Link>
