@@ -554,13 +554,13 @@ const fakeData = async (u, q, a, v) => {
 
     try {
 
-        // await createLanguages()
-        // await createFakeUsers(u)
+        await createLanguages()
+        await createFakeUsers(u)
         await createFakeUsers_Languages(u)
-        // await createFakeQuestions(u, q)
-        // await createFakeQuestions_Languages(u, q)
-        // await createFakeAnswers(u, q, a)
-        // await createFakeVotes(u, q, a, v)
+        await createFakeQuestions(u, q)
+        await createFakeQuestions_Languages(u, q)
+        await createFakeAnswers(u, q, a)
+        await createFakeVotes(u, q, a, v)
         
     } catch (e) {
         

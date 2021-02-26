@@ -28,7 +28,7 @@ async function main() {
         await connection.query("SET FOREIGN_KEY_CHECKS = 1");
 
         console.log('Setting Max Connections');
-        await connection.query('SET GLOBAL max_connections = 1000');
+        await connection.query('SET GLOBAL max_connections = 10000');
 
         console.log('Creating new tables')
 
@@ -322,6 +322,7 @@ async function main() {
         if (connection) {
           connection.release();
         }   
+        
         process.exit();
     }
 }
