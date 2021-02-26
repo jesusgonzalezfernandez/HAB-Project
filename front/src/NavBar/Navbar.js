@@ -37,6 +37,9 @@ function Navbar() {
     }
   };
 
+  const imagen = login.email.includes('@gmail.') ? login.avatar : `http://localhost:3001/${login.avatar}`
+
+
   return (
     <>
       <nav className='navbar'>
@@ -105,7 +108,7 @@ function Navbar() {
               >
                 <div className='nav-profile'>
                   Perfil
-                <img src={`http://localhost:3001/${login.avatar}`} alt='avatar' className='navbar-avatar' />
+                <img src={imagen} alt='avatar' className='navbar-avatar' />
                 </div>
               </NavLink>
             </li>

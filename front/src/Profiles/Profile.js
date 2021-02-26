@@ -48,16 +48,14 @@ function Profile() {
 
   if (!dataUser) return <Loading />
 
-  const imagen = dataUser.map(user => user.avatar)
-  console.log('esto es avatar:' + login.avatar)
-
+  const imagen = login.email.includes('@gmail.') ? login.avatar : `http://localhost:3001/${login.avatar}`
 
   return (
 
     <div className='profile-component'>
       <div className='profile-card'>
         <div className='user-info'>
-          <img src={`http://localhost:3001/${login.avatar}`} alt="avatar" className='profile-avatar' />
+          <img src={imagen} alt="avatar" className='profile-avatar' />
           <div>
             <h3>{login.name} {login.surname}</h3>
             <h4>{login.username}</h4>
