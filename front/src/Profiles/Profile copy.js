@@ -8,7 +8,6 @@ import DeleteAcount from './DeleteAcount';
 import EditPassword from './EditPassword';
 import EditProfile from './EditProfile';
 import './Profile.css'
-import UserActivity from './UserActivity';
 
 
 function Profile() {
@@ -18,7 +17,7 @@ function Profile() {
 
   const login = useSelector(state => state.login)
   const [editMode, setEditMode] = useState(false)
-  const [active, setActive] = useState('activity')
+  const [active, setActive] = useState()
 
 
   // Obtener id del usuario buscado
@@ -63,30 +62,38 @@ function Profile() {
             <h4>{login.username}</h4>
           </div>
         </div>
-        <div className='profile-menu'>
+        <div className='profile-card-menu'>
+          <div onClick={() => setActive('profile')}>Editar perfil</div>
+          {active === 'profile' && <EditProfile reload={() => setActive(!active)} />}
+          <div onClick={() => setActive('password')}>Editar password</div>
+          {active === 'password' && <EditPassword reload={() => setActive(!active)} />}
+          <div onClick={() => setActive('delete')}>Eliminar cuenta</div>
+          {active === 'delete' && <DeleteAcount reload={() => setActive(!active)} />}
+        </div>
+      </div>
+      <div className='profile-data'>
+        <div className='panel-respuestas'>
+          <h3>Tus últimas respuestas</h3>
           <ul>
-            <li onClick={() => setActive('activity')}>
-              Actividad
-            </li>
-            <li onClick={() => setActive('profile')}>
-              Editar perfil
-            </li>
-            <li onClick={() => setActive('password')}>
-              Cambiar contraseña
-            </li>
-            <li onClick={() => setActive('delete')}>
-              Eliminar cuenta
-            </li>
-
+            {dataAnswers && dataAnswers.map((answer, i) =>
+              <li className='profile-lista-respuestas' key={i}>
+                <Link to={`/question/${answer.questionID}`}> {answer.body} </Link>
+              </li>
+            )}
+          </ul>
+        </div>
+        <div className='panel-preguntas'>
+          <h3>Tus últimas preguntas</h3>
+          <ul>
+            {dataQuestions && dataQuestions.map((question, i) =>
+              <li className='profile-lista-preguntas' key={i}>
+                <QuestionPreview question={question} />
+              </li>
+            )}
           </ul>
         </div>
       </div>
-      <div className='profile-info'>
-        {active === 'activity' && <UserActivity />}
-        {active === 'profile' && <EditProfile reload={() => setActive(!active)} />}
-        {active === 'password' && <EditPassword reload={() => setActive(!active)} />}
-        {active === 'delete' && <DeleteAcount reload={() => setActive(!active)} />}
-      </div>
+
     </div>
 
   )

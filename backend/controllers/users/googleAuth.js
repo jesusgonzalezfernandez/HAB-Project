@@ -20,7 +20,7 @@ const findUser = async (email) => {
 
 }
 
-/* const addUser = async (email, name, surname, avatar, username) => {
+ const addUser = async (email, name, surname, avatar, username) => {
 
     const query =
 
@@ -34,7 +34,8 @@ const findUser = async (email) => {
         name,
         surname,
         active,
-        avatar
+        avatar,
+        password
 
     )
 
@@ -46,8 +47,10 @@ const findUser = async (email) => {
         'googleUSer${username}', 
         '${name}', 
         '${surname}',
-        '${true}',
-        '${avatar}' 
+        'true',
+        '${avatar}',
+        'passwordGoogleUser'
+
 
     )
 `
@@ -56,7 +59,7 @@ const findUser = async (email) => {
     return result
 
 }
-*/
+
 
 const updateTokenQuery = async (token, email) => {
 
@@ -93,29 +96,13 @@ const googleAuth = async (req, res) => {
         email = { email }
         query = getUserQuery (email)
 
-        const user = ( await performQuery (query) )[0]
+        let user = ( await performQuery (query) )[0]
 
         if(!user) {
-
-            console.log('Incorrect User');
-            throw new Error('Incorrect user or password')
-        
+            user = await addUser(payload.email, payload.given_name, payload.family_name, payload.picture, payload.sub)
+            user = await findUser(payload.email)
+            return user
         }
-
-
-        // Busca un usuario en nuestra db con el email de google
-
-        // const userExists = await findUser(payload.email)
-
-        // Si no encuentra en nuestra db un usuario de google, lo crea
-        // if (userExists.length <= 0) {
-        //     const newUSer = await addUser(payload.email, payload.given_name, payload.family_name, payload.picture, payload.sub)
-        //     console.log('*  Creating new user with Google  *')
-        // }
-
-        // const user = await findUser(payload.email)
-
-        // console.log('user    ' + user)
 
         const tokenPayload = {
 
