@@ -72,12 +72,12 @@ function CreateQuestion() {
         
     return (
         
-        <div>
+        <main className="create question main">
 
             <h1>Formula tu Pregunta:</h1>
 
             <input
-                className='question-title'
+                className='create question title'
                 value= {title} 
                 placeholder='Título de la pregunta...'
                 onChange= {e => setTitle(e.target.value)}
@@ -91,7 +91,7 @@ function CreateQuestion() {
                 onChange= {setContent}
             />  
 
-            <select value={languages} onChange={e => setLanguages(e.target.value)}>
+            <select className="create question tag" value={languages} onChange={e => setLanguages(e.target.value)}>
                 <option value='' hidden>Seleciona una opción...</option>
                 <option value='javascript'>Javascript</option>
                 <option value='python'>Python</option>
@@ -106,7 +106,7 @@ function CreateQuestion() {
 
             </form>
 
-        </div>
+        </main>
     )
 }
 

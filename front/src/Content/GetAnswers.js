@@ -63,19 +63,6 @@ function GetAnswers({ key, reload }) {
                                 </div>
                             </div>
                             <main className="answer main">
-                                {/* Votos */}
-                                <aside className="answer vote">
-                                    <div>
-                                        {/* Emite voto */}
-                                        <Vote
-                                            reload={() => setVoteKey(voteKey + 1)}
-                                            parentID={answer.id} />
-                                    </div>
-                                    {/* Recibe voto */}
-                                    <GetVote
-                                        voteKey={voteKey}
-                                        parentID={answer.id} />
-                                </aside>
                                 <div className="answer body">{answer.body}</div>
                             </main>
                             <div className='get-comments'>
@@ -100,7 +87,19 @@ function GetAnswers({ key, reload }) {
                                             parentID={answer.id} />
 
                                     </Acordeon>
-
+                                </div>
+                                {/* Votos */}
+                                <div className="answer vote">
+                                    <div className="answer get vote">
+                                        {/* Recibe voto */}
+                                        <GetVote
+                                            voteKey={voteKey}
+                                            parentID={answer.id} />
+                                        {/* Emite voto */}
+                                        <Vote
+                                            reload={() => setVoteKey(voteKey + 1)}
+                                            parentID={answer.id} />
+                                    </div>
                                 </div>
                             </div>
                         </div>

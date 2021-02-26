@@ -37,10 +37,13 @@
 
 .answer.vote {
     display: flex;
-    flex-direction: column;
-    padding: 25px 2px;
+    flex-direction: row;
     color: #6a737c;
     font-size: 26px;
+}
+
+.answer.get.vote {
+    font-size: 18px;
 }
 
 .answer.body {
@@ -49,6 +52,7 @@
 
 .answer.footer {
     display: flex;
+    flex-direction: row;
 }
 
 .answer.acordeon {

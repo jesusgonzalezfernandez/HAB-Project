@@ -22,7 +22,7 @@ function GetVote({voteKey, parentID}) {
 
     }, [voteKey])
     return (
-        <div>{data.value}</div>
+        <div className="vote number">Votos: {data.value}</div>
     )}
 
 

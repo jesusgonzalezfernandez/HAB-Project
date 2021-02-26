@@ -13,6 +13,11 @@ function Register() {
     const [country, setCountry] = useState('')
     const [sent, setSent] = useState('')
 
+    // if (password !== repeatPassword) return (
+    //     'Las contraseñas no coinciden'
+    // )
+    // setSent(true)
+
     const handleSubmit = async e => {
         e.preventDefault()
         await fetch('http://localhost:3001/users/', {
@@ -20,7 +25,6 @@ function Register() {
             body: JSON.stringify({ email, username, password, repeatPassword, birthDate, name, surname, country }),
             method: 'POST'
         })
-        setSent(true)
     }
 
     if (sent) return (

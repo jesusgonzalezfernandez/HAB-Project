@@ -12,3 +12,18 @@
     min-height: 500px;
 
 }
+
+/* .create.question {
+} */
+
+.create.question.title {
+    padding: 10px;
+    margin: 10px 0px;
+    display: block;
+    width: 100%;
+}
+
+.create.question.tag {
+    padding:10px;
+    margin: 15px 0px;
+}

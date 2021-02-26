@@ -34,7 +34,7 @@ function Vote({ parentID, reload }) {
 
     return (
         <div>
-            <button onClick={handleSubmit}><FontAwesomeIcon className="vote icon" icon={faGratipay} size="2x" /></button>
+            <button className="vote button" onClick={handleSubmit}><FontAwesomeIcon className="vote icon" icon={faGratipay} /></button>
         </div>
     )
 }

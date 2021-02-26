@@ -74,9 +74,8 @@ function Question() {
                 <div className="question publish">
                     <div className={data.status === 'open' ? "data status open" : "data closed"} >{data.status}</div>
                     <div className="question author">
-                        Publicado por:
                         <img className="question avatar" src={`http://localhost:3001/${data.avatar}`} alt="avatar" />
-                        {data.username} el <Moment format='DD/MM/YYYY'>
+                        {data.username} preguntó el <Moment format='DD/MM/YYYY'>
                             {data.creationDate}
                         </Moment>
                     </div>
