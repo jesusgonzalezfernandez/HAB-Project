@@ -84,10 +84,10 @@ const googleAuth = async (req, res) => {
     let query;
 
     try {
-        const token = req.body.token;
+        const tokenGoogle = req.body.token;
 
         const ticket = await client.verifyIdToken({
-            idToken: token,
+            idToken: tokenGoogle,
             audience: process.env.CLIENT_ID
         });
 
@@ -116,11 +116,10 @@ const googleAuth = async (req, res) => {
             password: user.password
         }
 
-        const tokenDB = jwt.sign(tokenPayload, process.env.SECRET, { expiresIn: '1d' });
-
+        const token = jwt.sign(tokenPayload, process.env.SECRET, { expiresIn: '1d' });
 
         // Enviar a BD
-        const result = await updateTokenQuery(tokenDB, email)
+        const result = await updateTokenQuery(token, payload.email)
 
         // Error
         if (!result) {

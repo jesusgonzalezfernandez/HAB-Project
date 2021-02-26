@@ -47,7 +47,6 @@ const isAuthenticated = async (req, res, next) => {
             throw new Error('Authorization Error')
             
         }
-
         // Procesar los datos
 
             // Añadir token al req.auth
