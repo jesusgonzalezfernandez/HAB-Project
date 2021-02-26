@@ -77,11 +77,6 @@ function Login({ onLogin }) {
   return (
     <main className="login main">
 
-      {error &&
-        <div>
-          {error}
-        </div>}
-
       <form className="login form" onSubmit={handleSubmit}>
         <img src={logo} className={'logo'} alt={'logo'} />
         <div>
@@ -90,6 +85,10 @@ function Login({ onLogin }) {
         <div>
           <input className="login input" placeholder="Password ..." type="password" value={password} onChange={e => setPassword(e.target.value)} required />
         </div>
+        {error &&
+          <div className="login error">
+            {error}
+          </div>}
         <button className="submit">Iniciar sesión</button>
         <p>
           <Link to="/recovery">Recordar contraseña</Link>
