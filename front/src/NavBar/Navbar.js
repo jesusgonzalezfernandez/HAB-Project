@@ -71,16 +71,6 @@ function Navbar() {
               Preguntas
             </NavLink>
           </li>
-          <li className='nav-item'>
-            <NavLink
-              to='/contact'
-              className='nav-links'
-              activeClassName='selected'
-              onClick={closeMobileMenu}
-            >
-              Contacto
-            </NavLink>
-          </li>
           {!login &&
             <li className='nav-item'>
               <NavLink
@@ -120,7 +110,7 @@ function Navbar() {
               </NavLink>
             </li>
           }
-          {login &&
+          {/* {login &&
             <li className='nav-item'>
               <NavLink
                 to='/'
@@ -128,13 +118,18 @@ function Navbar() {
                 activeClassName='selected'
                 onClick={handleLogout}
               >
-                <GoogleLogout
-                  clientId={'355596453353-8eq0ri18jbug2bvp80jmg4p5jpem1usi.apps.googleusercontent.com'}
-                  buttonText="Logout"
-                  onLogoutSuccess={handleLogout}
-                />
                 <FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" />
               </NavLink>
+            </li>
+          } */}
+          {login &&
+            <li className='nav-item'>
+              <GoogleLogout
+                clientId={'355596453353-8eq0ri18jbug2bvp80jmg4p5jpem1usi.apps.googleusercontent.com'}
+                // buttonText="Logout"
+                onLogoutSuccess={handleLogout}
+                icon={false}
+              ><FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" /></GoogleLogout>
             </li>
           }
 
