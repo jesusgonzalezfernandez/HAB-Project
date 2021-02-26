@@ -25,7 +25,7 @@ const performQuery = async query => {
     }
     
     finally {
-        
+
         if (connection) {
             connection.release()
         }

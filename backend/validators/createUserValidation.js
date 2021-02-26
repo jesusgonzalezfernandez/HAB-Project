@@ -19,14 +19,6 @@ const createUserValidation = joi.object({
         .required()
         .messages(),
 
-    repeatPassword: joi
-        .string()
-        .equal(joi.ref('password'))
-        .required()
-        .messages(
-            new Error('password does not match')
-        ),
-
     username: joi
         .string()
         .trim()

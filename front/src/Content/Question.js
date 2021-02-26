@@ -111,7 +111,7 @@ function Question() {
                         <button onClick={handleClick}>Ver respuestas</button>
                     </div>
                 }
-                {showModal && <Modal onClose={handleClose}><Login /></Modal>}
+                {showModal && <Modal onClose={handleClose}><Login onLogin={handleClose}/></Modal>}
             </div>
         </main>
 

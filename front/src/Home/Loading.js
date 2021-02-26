@@ -7,7 +7,7 @@ import { useDencrypt } from "use-dencrypt-effect";
 
 const Loading = ({ query }) => {
 
-    const defaultValues = ["Howdoi", "Html scripts", "React Hook", "Javascrit"];
+    const defaultValues = ["Howdoi", "Html scripts", "React Hook", "Javascript"];
 
     let values;
     let interval = 2000;

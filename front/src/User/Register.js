@@ -22,7 +22,7 @@ function Register() {
         e.preventDefault()
         await fetch('http://localhost:3001/users/', {
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, username, password, repeatPassword, birthDate, name, surname, country }),
+            body: JSON.stringify({ email, username, password, birthDate, name, surname, country }),
             method: 'POST'
         })
     }

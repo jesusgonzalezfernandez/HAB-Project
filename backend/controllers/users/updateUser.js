@@ -11,24 +11,21 @@ const updateUserValidation = require('../../validators/updateUserValidation')
 const getUserQuery = require('../../queries/getUserQuery')
 const performQuery = require('../../db/performQuery')
 
-
-
 const updateUserQuery = async data => {
-
 
     const query =
 
         `
-        UPDATE users SET 
-            updateDate = UTC_TIMESTAMP,
-            userName = '${data.username}',
-            name = '${data.name}',
-            surname = '${data.surname}',
-            birthDate = '${data.birthDate}',            
-            country = '${data.country}',
-            avatar = '${data.avatar}'
-        WHERE id = '${data.userID}'
-    `
+            UPDATE users SET 
+                updateDate = UTC_TIMESTAMP,
+                userName = '${data.username}',
+                name = '${data.name}',
+                surname = '${data.surname}',
+                birthDate = '${data.birthDate}',            
+                country = '${data.country}',
+                avatar = '${data.avatar}'
+            WHERE id = '${data.userID}'
+        `
 
     const result = await performQuery(query)
     return result
@@ -89,8 +86,8 @@ const updateUser = async (req, res) => {
         // Procesar query
         user = (await performQuery(query))[0]
 
-        // Enviar error si ya existe
-        if (user) {
+        // Enviar error si ya existe (Siempre y cuando sea diferente al nombre anterior)
+        if (user && user.username !== reqData.username) {
 
             throw new Error('Username Already in Use')
 

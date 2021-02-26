@@ -6,7 +6,7 @@ import logo from '../logo.png';
 import { GoogleLogin } from 'react-google-login';
 
 
-function Login() {
+function Login({ onLogin }) {
 
   // Inicializar estados y dispatch
   const [email, setEmail] = useState('')
@@ -18,15 +18,11 @@ function Login() {
   const login = useSelector(s => s.login)
   console.log(`Objeto login del store: ${JSON.stringify(login)}`);
 
-
   const handleSubmit = async e => {
     e.preventDefault()
 
-    // Enviar una consulta a la API con el email y la password
     const res = await fetch(
-      // Dirección:
       `http://localhost:3001/users/login`,
-      // Contenido:
       {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -44,30 +40,38 @@ function Login() {
       const data = await res.json()
       // Enviar objeto action al redux, con el type y los datos obtenidos de la API
       dispatch({ type: 'login', data })
+      onLogin && onLogin()
 
     }
 
   }
 
-  if (login) {
-    console.log('Logueado con éxito, redirigiendo...')
-    console.log(`Username: ${login.username}, Role: ${login.role}, userID: ${login.userID}`);
-    return <Redirect to="/" />
+  const handleLogin = async googleData => {
+    const res = await fetch("http://localhost:3001/api/v1/auth/google", 
+    {
+      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      body: JSON.stringify({token: googleData.tokenId})
+    })
+
+    if (!res.ok) {
+      console.log('Se ha producido un error');
+      res.text().then(e => setError(e))
+
+    } else {
+      const data = await res.json()
+      console.log('>>>', data)
+      dispatch({ type: 'login', data })
+      onLogin && onLogin()
+    }
   }
 
-  const handleLogin = async googleData => {
-    const res = await fetch("http://localhost:3001/api/v1/auth/google", {
-      method: "POST",
-      body: JSON.stringify({
-        token: googleData.tokenId
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    const data = await res.json()
-    // store returned user somehow
-    console.log(googleData.tokenId)
+  const onFailure = res => {
+    console.log('Error' + res)
+  }
+
+  if (login && !onLogin) {
+    return <Redirect to="/" />
   }
 
   return (
@@ -93,8 +97,9 @@ function Login() {
           clientId={'355596453353-8eq0ri18jbug2bvp80jmg4p5jpem1usi.apps.googleusercontent.com'}
           buttonText="Log in with Google"
           onSuccess={handleLogin}
-          onFailure={handleLogin}
+          onFailure={onFailure}
           cookiePolicy={'single_host_origin'}
+          isSignedIn={true}
         />
         <p>
           ¿Todavía no tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
