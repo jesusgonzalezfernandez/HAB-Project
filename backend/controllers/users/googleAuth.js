@@ -47,7 +47,7 @@ const findUser = async (email) => {
         'googleUSer${username}', 
         '${name}', 
         '${surname}',
-        'true',
+        1,
         '${avatar}',
         'passwordGoogleUser'
 
@@ -100,7 +100,7 @@ const googleAuth = async (req, res) => {
 
         if(!user) {
             user = await addUser(payload.email, payload.given_name, payload.family_name, payload.picture, payload.sub)
-            user = await findUser(payload.email)
+            user = ( await performQuery (query) )[0]
             return user
         }
 
