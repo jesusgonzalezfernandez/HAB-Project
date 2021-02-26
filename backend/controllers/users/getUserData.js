@@ -78,7 +78,7 @@ const getUserData = async (req, res) => {
         avatar: userData.avatar,
         lastConnection: userData.lastConnection,
         registrationDate: userData.registrationDate,
-        languages: userData.languages
+        languages: userData.languages.map(l => l.name)
     }
 
     res.send(response)

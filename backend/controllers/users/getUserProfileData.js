@@ -109,7 +109,7 @@ const getUserProfileData = async (req, res) => {
     
     const response = {
         user: userData,
-        languages: userLanguages,
+        languages: userLanguages.map(l => l.name),
         questions: userQuestions,
         answers: userAnswers
     }
