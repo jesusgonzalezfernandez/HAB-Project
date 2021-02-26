@@ -2,19 +2,71 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library')
 const client = new OAuth2Client(process.env.CLIENT_ID)
+
+// Queries
+const getUserQuery = require ('../../queries/getUserQuery')
 const performQuery = require('../../db/performQuery')
-const session = require('express-session')
 
+const findUser = async (email) => {
 
-const googleUser = async (given_name, email, picture) => {
+    const query =
+
+        `
+           SELECT * FROM users WHERE email = '${email}' AND active = true 
+        `
+
+    const result = await performQuery(query)
+    return result
+
+}
+
+/* const addUser = async (email, name, surname, avatar, username) => {
+
+    const query =
+
+        `
+    INSERT INTO users ( 
+
+        creationDate, 
+        updateDate, 
+        email, 
+        username,
+        name,
+        surname,
+        active,
+        avatar
+
+    )
+
+    VALUES ( 
+
+        UTC_TIMESTAMP, 
+        UTC_TIMESTAMP, 
+        '${email}', 
+        'googleUSer${username}', 
+        '${name}', 
+        '${surname}',
+        '${true}',
+        '${avatar}' 
+
+    )
+`
+
+    const result = await performQuery(query)
+    return result
+
+}
+*/
+
+const updateTokenQuery = async (token, email) => {
 
     const query =
 
         `
             UPDATE users SET 
 
-                avatar = '${picture}' ,
-                name = '${given_name}' 
+                updateDate = UTC_TIMESTAMP,
+                token = '${token}' 
                 
             WHERE email = '${email}' AND active = true 
         `
@@ -26,34 +78,97 @@ const googleUser = async (given_name, email, picture) => {
 
 const googleAuth = async (req, res) => {
     console.log('*  Google Auth  *')
+    let query;
+
     try {
-
         const token = req.body.token;
-        async function verify() {
-            const ticket = await client.verifyIdToken({
-                idToken: token,
-                audience: process.env.GOOGLE_APP_CLIENT_ID,
-            });
-            const payload = ticket.getPayload();
-            const userId = payload.sub
-            console.log('payload: ', payload)
-            
-            const user = await googleUser(payload.given_name, payload.email, payload.picture)
 
-            req.session.userId = user.id
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: process.env.CLIENT_ID
+        });
 
-            console.log(req.session)
+        const payload = ticket.getPayload();
+        let email = payload.email
+        email = { email }
+        query = getUserQuery (email)
 
-            console.log(user)
+        const user = ( await performQuery (query) )[0]
+
+        if(!user) {
+
+            console.log('Incorrect User');
+            throw new Error('Incorrect user or password')
+        
         }
 
-        verify().catch(console.error);
+
+        // Busca un usuario en nuestra db con el email de google
+
+        // const userExists = await findUser(payload.email)
+
+        // Si no encuentra en nuestra db un usuario de google, lo crea
+        // if (userExists.length <= 0) {
+        //     const newUSer = await addUser(payload.email, payload.given_name, payload.family_name, payload.picture, payload.sub)
+        //     console.log('*  Creating new user with Google  *')
+        // }
+
+        // const user = await findUser(payload.email)
+
+        // console.log('user    ' + user)
+
+        const tokenPayload = {
+
+            userID: user.id,
+            isAdmin: user.role === 'admin',
+            isExpert: user.role === 'expert',
+            email: user.email,
+            username: user.username,
+            name: user.name,
+            role: user.role,
+            password: user.password
+        }
+
+        const tokenDB = jwt.sign(tokenPayload, process.env.SECRET, { expiresIn: '1d' });
+
+
+        // Enviar a BD
+        const result = await updateTokenQuery(tokenDB, email)
+
+        // Error
+        if (!result) {
+
+            throw new Error('Database Error')
+
+        }
+
+        console.log(`Successfully Authenticated. Affected Rows: ${result.affectedRows} `);
+
+        // Enviar al front
+        res.json({
+            token,
+            userID: user.id,
+            email: user.email,
+            username: user.username,
+            name: user.name,
+            surname: user.surname,
+            birthDate: user.birthDate,
+            avatar: user.avatar,
+            isAdmin: user.role === 'admin',
+            isExpert: user.role === 'expert',
+            isStudent: user.role === 'student',
+            country: user.country
+        })
+
     } catch (e) {
 
         res.status(401).send(e.message)
         return
 
     }
+
+    console.log('Logged-in user')
+
 }
 
 

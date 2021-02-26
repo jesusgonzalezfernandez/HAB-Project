@@ -5,6 +5,7 @@ import './Navbar.css';
 import logo from '../logo.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { GoogleLogout } from 'react-google-login';
 
 function Navbar() {
   const login = useSelector(s => s.login)
@@ -81,56 +82,60 @@ function Navbar() {
             </NavLink>
           </li>
           {!login &&
-          <li className='nav-item'>
-            <NavLink
-              to='/register'
-              className='nav-links'
-              activeClassName='selected'
-              onClick={closeMobileMenu}
-            >
-              Registro
+            <li className='nav-item'>
+              <NavLink
+                to='/register'
+                className='nav-links'
+                activeClassName='selected'
+                onClick={closeMobileMenu}
+              >
+                Registro
             </NavLink>
-          </li>
+            </li>
           }
           {!login &&
-          <li className='nav-item'>
-          <NavLink
-            to='/login'
-            className='nav-links'
-            activeClassName='selected'
-            onClick={closeMobileMenu}
-          >
-            Iniciar sesión
+            <li className='nav-item'>
+              <NavLink
+                to='/login'
+                className='nav-links'
+                activeClassName='selected'
+                onClick={closeMobileMenu}
+              >
+                Iniciar sesión
           </NavLink>
-        </li>      
+            </li>
           }
           {login &&
-          <li className='nav-item'>
-          <NavLink
-            to={`/users/profile/${login.userID}`}
-            className='nav-links'
-            activeClassName='selected'
-            onClick={closeMobileMenu}
-          >
-            <div className='nav-profile'>
-                Perfil
+            <li className='nav-item'>
+              <NavLink
+                to={`/users/profile/${login.userID}`}
+                className='nav-links'
+                activeClassName='selected'
+                onClick={closeMobileMenu}
+              >
+                <div className='nav-profile'>
+                  Perfil
                 <img src={`http://localhost:3001/${login.avatar}`} alt='avatar' className='navbar-avatar' />
-            </div>
-          </NavLink>
-        </li>      
+                </div>
+              </NavLink>
+            </li>
           }
           {login &&
-          <li className='nav-item'>
-          <NavLink
-            to='/'
-            className='nav-links'
-            activeClassName='selected'
-            onClick={handleLogout}
-          >
-            {/* Cerrar sesión  */}
-            <FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" />
-          </NavLink>
-        </li>      
+            <li className='nav-item'>
+              <NavLink
+                to='/'
+                className='nav-links'
+                activeClassName='selected'
+                onClick={handleLogout}
+              >
+                <GoogleLogout
+                  clientId={'355596453353-8eq0ri18jbug2bvp80jmg4p5jpem1usi.apps.googleusercontent.com'}
+                  buttonText="Logout"
+                  onLogoutSuccess={handleLogout}
+                />
+                <FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" />
+              </NavLink>
+            </li>
           }
 
         </ul>

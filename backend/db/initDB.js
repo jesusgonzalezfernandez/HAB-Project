@@ -43,7 +43,7 @@ async function main() {
                     username 
                         varchar(500) not null unique,
                     password 
-                        varchar(500) not null,
+                        varchar(500),
                     name 
                         varchar(50) default 'undefined',
                     surname 
@@ -51,9 +51,9 @@ async function main() {
                     role 
                         enum ('student', 'expert', 'admin') default 'student',
                     birthDate 
-                        date not null,
+                        date,
                     country 
-                        varchar(50) not null,
+                        varchar(50),
                     avatar 
                         varchar(500) default 'images/profile/avatar-default.jpg',
                     languages 
