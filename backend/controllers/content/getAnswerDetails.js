@@ -1,12 +1,11 @@
 const performQuery = require('../../db/performQuery')
 
 const getAnswerDataQuery = async data => {
-    let array = []
     let query =
 
         `
             SELECT
-                answers.id,   
+                answers.id AS answerID,   
                 answers.questionID,  
                 answers.userID,
                 answers.parentID,
@@ -20,48 +19,31 @@ const getAnswerDataQuery = async data => {
             FROM answers
             JOIN users
             ON users.id = answers.userID
+            JOIN questions
+            ON  questions.id = answers.questionID
             WHERE answers.parentID is null
+            AND questions.id = ${data.questionID}
             
         `
-    const objects = [
-        { questionID: data.questionID },
-        { userID: data.userID },
-        { body: data.body },
-        { file: data.file },
-        { creationDate: data.creationDate }
-    ]
-
-    // Poblar el array con los objetos con valor definido
-    objects.forEach(object => {
-
-        // Object.values devuelve un nuevo array (Solo nos interesa el valor de la posición 0 en ese nuevo array)
-        if (Object.values(object)[0]) {
-
-            array.push(object)
-
-        }
-
-    })
-
-    // Recorrer el array de elementos definidos
-    for (let i = 0; i < array.length; i++) {
-
-        // Obtener key y valor de cada objeto
-        const [ key ] = Object.keys(array[i])
-        let [ value ] = Object.values(array[i])
-        
-        query = query.concat(` AND ${key} LIKE '${value}'`)
-
-    }
-
+ 
     const result = await performQuery (query)
-    console.log(result)
     return result
 
 }
 
+const getAnswerVotesQuery = async data => {
+
+    let query = 
+
+    `SELECT COUNT(*) AS count FROM votes WHERE value = 1 and answerID = ${data.answerID}`
+
+    const result = (await performQuery (query)) [0]
+    return result
+}
+
 const getAnswerDetails = async (req, res) => {
 
+    console.log(`>>> getAnswerDetails`)
     let answerData;
 
     // Obtener variables
@@ -71,14 +53,24 @@ const getAnswerDetails = async (req, res) => {
     try {
 
         // Obtener información de la pregunta
-        answerData = await getAnswerDataQuery(reqData)
+        questionAnswers = await getAnswerDataQuery(reqData)
 
         // Si la pregunta no existe, se envía un error
-        if (!answerData) {
+        if (!questionAnswers) {
 
-            throw new Error('User not found')
+            throw new Error('Answer not found')
 
         }
+
+    // Query de votos
+    
+    let answerVotes = []
+
+    for (answer of questionAnswers) {
+
+        votesCount = await getAnswerVotesQuery(answer)
+        answerData = {...answer, votes: votesCount.count}
+    }
 
     } catch (e) {
 

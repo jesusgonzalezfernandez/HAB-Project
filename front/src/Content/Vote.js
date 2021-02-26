@@ -14,7 +14,7 @@ function Vote({ parentID, reload }) {
     const handleSubmit = async e => {
         e.preventDefault()
 
-        let value = '1'
+        let value = 1
 
         const res = await fetch(
             // Dirección
