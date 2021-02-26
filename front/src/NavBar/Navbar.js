@@ -37,7 +37,10 @@ function Navbar() {
     }
   };
 
-  const imagen = login.email.includes('@gmail.') ? login.avatar : `http://localhost:3001/${login.avatar}`
+  let imagen = undefined
+  if (login) {
+    imagen = login.email.includes('gmail') ? login.avatar : `http://localhost:3001/${login.avatar}`
+  }
 
 
   return (
@@ -113,18 +116,6 @@ function Navbar() {
               </NavLink>
             </li>
           }
-          {/* {login &&
-            <li className='nav-item'>
-              <NavLink
-                to='/'
-                className='nav-links'
-                activeClassName='selected'
-                onClick={handleLogout}
-              >
-                <FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" />
-              </NavLink>
-            </li>
-          } */}
           {login &&
             <li className='nav-item'>
               <GoogleLogout
@@ -132,7 +123,8 @@ function Navbar() {
                 // buttonText="Logout"
                 onLogoutSuccess={handleLogout}
                 icon={false}
-              ><FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" /></GoogleLogout>
+              ><FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" />
+              </GoogleLogout>
             </li>
           }
 
