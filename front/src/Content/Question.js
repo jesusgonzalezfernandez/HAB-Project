@@ -81,8 +81,7 @@ function Question() {
                     </div>
                 </div>
                 {/* Cuerpo */}
-                <div className="question body">
-                    {data.body}
+                <div dangerouslySetInnerHTML={{__html: data.body}} className="question body">
                 </div>
                 {/* Tags */}
                 <div className='question tags'>

@@ -94,3 +94,18 @@
     margin: 2px;
     color: var(--morado);
 }
+
+.ql-syntax.ql-align-justify {
+    background-color: #011627;
+    padding: 20px;
+    display: inline-block;
+    font-family: monospace;
+    line-height: 20px;
+    color: #D2D4D6;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}

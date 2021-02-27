@@ -23,16 +23,13 @@ const questionValidation = joi.object({
     file: joi.any(),
 
     languages: joi
-        .string()
-        .min(2)
-        .max(50)
+        .array()
         .required()
         .messages(),
 
     tags: joi
-        .string()
-        .min(2)
-        .max(200)
+        .array()
+        .required()
         .messages(),
         
     })

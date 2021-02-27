@@ -23,12 +23,10 @@ function CreateQuestion() {
     const [tagError, setTagError] = useState(false)
     const [tagsLimit, setTagsLimit] = useState(false)
     const [apiError, setApiError] = useState()
+    const [ok, setOk] = useState(false)
 
     if (tagsLimit && tags.length < 15) setTagsLimit(false)
     if (!tagsLimit && tags.length >= 15) setTagsLimit(true)
-
-console.log(tags);
-
 
     // Obtener Lenguajes
     useEffect(async () => {
@@ -101,7 +99,7 @@ console.log(tags);
             'http://localhost:3001/questions', 
             // Contenido
             {
-                headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(questionData),
                 method: 'POST'
             })
@@ -114,10 +112,18 @@ console.log(tags);
         } else {
           
             console.log('El fetch se ha realizado correctamente');
-            const data = await res.json()
+            
+            // Resetear el posible error que se hubiera podido producir
+            setApiError('')
             
             // Reiniciar el contenido
-            // setContent('')   
+            setContent('')
+            setTitle('')
+            setLanguages([])
+            setTags([])
+            
+            // Crear un mensaje de éxito
+            setOk(true)
         }
 
         
@@ -262,7 +268,9 @@ console.log(tags);
                 </button>
 
             </form>
-
+            {ok && 
+                <div>Success !</div>
+            }
             {apiError && 
             
                 <div>{apiError}</div>

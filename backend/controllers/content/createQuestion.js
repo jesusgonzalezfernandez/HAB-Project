@@ -132,11 +132,8 @@ const createQuestion = async (req, res) => {
 
         // Enviar a la tabla relacional
 
-            // Obtener array de lenguajes
-            const languages = reqData.languages.split()
-
             // Hacer insert para cada uno
-            for (language of languages) {
+            for (let language of reqData.languages) {
 
                 result = await addQuestionLanguageQuery (reqData, language)
 

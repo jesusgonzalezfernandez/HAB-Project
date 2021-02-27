@@ -13,6 +13,7 @@ function QuestionsFilter({ query, reload }) {
     const [tags, setTags] = useState('')    
     const [creationDate, setCreationDate] = useState('')
     const [status, setStatus] = useState('')
+    const [languageOptions, setLanguageOptions] = useState([])
 
     const history = useHistory()
 
@@ -31,6 +32,23 @@ function QuestionsFilter({ query, reload }) {
             handleSubmit('', query)
         }
     }, [query])
+
+    // Obtener Lenguajes
+    useEffect(async () => {
+
+        // Enviar consulta a la API
+        const res = await fetch(`http://localhost:3001/languages`,
+            // Contenido
+            {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'GET'
+            })
+    
+        const data = await res.json();
+    
+        setLanguageOptions(data)
+    
+    }, [])
 
     const handleSubmit = async (e, query)  => {
 
@@ -99,14 +117,22 @@ function QuestionsFilter({ query, reload }) {
                 </label>
                 <label className='question-filter-form-languages'>
                     Lenguaje
-                    <select value={languages} onChange={e => setLanguages(e.target.value)}>
-                        <option value=''selected disabled hidden>Selecciona...</option>
-                        <option value=''>...</option>
-                        <option value='css'>CSS</option>
-                        <option value='html'>HTML</option>
-                        <option value='javascript'>Javascript</option>
-                        <option value='sql'>MySql</option>
-                    </select>
+
+                {/* Mostar Opciones de Lenguaje */}
+                <select value={languages} onChange={e => setLanguages(e.target.value)}>
+                    <option hidden>Lenguaje de Programación...</option>
+                    {languageOptions && languageOptions
+                        // Mostrar opciones
+                            .map(option => 
+                                <option 
+                                    key={option.id} 
+                                    value={option.name}>
+                                        {option.name}
+                                </option>
+                            )
+                    }
+                </select>
+
                 </label>
                 <label className='question-filter-form-tags'>
                     Tags
