@@ -27,3 +27,34 @@
     padding:10px;
     margin: 15px 0px;
 }
+
+.tags-text-area {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    background-color: var(--blanco);
+    border: 1px solid black;
+    min-height: 30px;
+}
+
+.question-tag-selected {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.question-tag-selected button {
+    border: none;
+    margin-left: 5px;
+    padding: 2px 5px;
+    background-color: white;
+}
+
+.tags-text-area input {
+    flex-grow: 1;
+    min-height: 30px;
+    border: none;
+    background-color: var(--blanco);
+}

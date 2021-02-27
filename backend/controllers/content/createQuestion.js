@@ -19,7 +19,6 @@ const createQuestionQuery = async data => {
                 title,
                 body,
                 file,
-                languages,
                 tags,
                 creationDate,
                 updateDate
@@ -32,7 +31,6 @@ const createQuestionQuery = async data => {
                 '${data.title}',
                 '${data.body}',
                 '${data.file}',
-                '${data.languages}',
                 '${data.tags}',
                 UTC_TIMESTAMP,
                 UTC_TIMESTAMP
@@ -46,12 +44,39 @@ const createQuestionQuery = async data => {
 
 }
 
+const addQuestionLanguageQuery = async (data, language) => {
+
+    const query = 
+    
+        `
+        
+            INSERT INTO questions_languages (
+
+                questionID,
+                languageID
+
+            )
+
+            SELECT 
+                '${data.questionID}',
+                id
+            FROM languages 
+            WHERE name = '${language}'
+
+        `
+
+    const result = await performQuery(query) 
+    return result
+
+}
+
 const createQuestion = async (req, res) => {
 
     console.log('*Create Question*');
 
     let query;
     let question;
+    let result;
 
     try {
 
@@ -93,14 +118,36 @@ const createQuestion = async (req, res) => {
             reqData.userID = req.auth.userID
         
         // Enviar a BD
-        const result = await createQuestionQuery (reqData)
+        result = await createQuestionQuery (reqData)
 
         // Error
         if (!result) {
-
+            
             throw new Error ('Database Error')
-
+            
         }
+
+        // Obtener ID de la pregunta recién insertada
+        reqData.questionID = result.insertId
+
+        // Enviar a la tabla relacional
+
+            // Obtener array de lenguajes
+            const languages = reqData.languages.split()
+
+            // Hacer insert para cada uno
+            for (language of languages) {
+
+                result = await addQuestionLanguageQuery (reqData, language)
+
+                // Error
+                if (!result) {
+
+                    throw new Error ('Database Error')
+
+                }
+
+            }
 
         console.log(`Successfully Inserted. Affected Rows: ${result.affectedRows}`);
 

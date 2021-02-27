@@ -53,6 +53,7 @@ const deleteAnswer = require('./controllers/content/deleteAnswer')
 const getAnswerDetails = require('./controllers/content/getAnswerDetails')
 const getCommentsDetails = require('./controllers/content/getCommentDetails')
 const getVotes = require('./controllers/content/getVotes')
+const getLanguages = require('./controllers/content/getLanguages')
 
 
 // 1. User Endpoints
@@ -143,6 +144,9 @@ app.get('/question/:answerID/vote', getVotes)
 
 // Servidor Google
 app.post('/api/v1/auth/google', googleAuth)
+
+// Obtener listado de lenguajes
+app.get('/languages', getLanguages)
 
 // Servidor de .env
 const envPort = process.env.PORT
