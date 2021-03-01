@@ -11,6 +11,7 @@ import QuestionsPortal from './Content/QuestionsPortal';
 import Loading from './Home/Loading';
 import Register from './User/Register'
 import Navbar from './NavBar/Navbar';
+import Footer from './Home/Footer';
 
 // Obtener query de la URL
 function useQuery() {
@@ -56,6 +57,7 @@ function App() {
           Error 404
         </Route>
       </Switch>
+      <Footer />
     </div >
   );
 

@@ -48,7 +48,9 @@ function Profile() {
 
   if (!dataUser) return <Loading />
 
-  const imagen = login.email.includes('@gmail.') ? login.avatar : `http://localhost:3001/${login.avatar}`
+  const imagenAvatar = `http://localhost:3001/${login.avatar}`
+
+  const imagen = login.email.includes('@gmail.') ? login.avatar : imagenAvatar
 
   return (
 

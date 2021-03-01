@@ -1,0 +1,66 @@
+.footer {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
+    background-color: #3307ad;
+    margin-top: 10vh;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    color: #F5F5F7;
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+}
+
+.nav-links-footer {
+    color: white;
+    display: block;
+}
+
+.footer-logo {
+    margin-right: 20px;
+}
+
+.footer-logo-img {
+    width: 110%;
+}
+
+.footer-title {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.footer-title-1 {
+    text-transform: uppercase;
+}
+
+.footer-subtitle {
+    color: white;
+    margin-bottom: 10px;
+}
+.footer-subtitle > a {
+    color: white;
+}
+
+.footer-subtitle > a:hover {
+    color: #F9EA3B;
+}
+
+.menu, .authors {
+    margin-right: 10vw;
+}
+
+
+.author-link {
+    color: white;
+}
+
+.author-link:hover {
+    color: #F9EA3B;
+}
+
+.acceso {
+    align-self: flex-start;
+}
