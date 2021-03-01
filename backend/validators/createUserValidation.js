@@ -49,14 +49,12 @@ const createUserValidation = joi.object({
     // Exige formato MM-DD-YYYY
     birthDate: joi
         .date()
-        .required()
         .messages(),
 
     country: joi
         .string()
         .trim()
         .uppercase()
-        .required()
         .regex(RegExp(exp))
         .messages(),
 

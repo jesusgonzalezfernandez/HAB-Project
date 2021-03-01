@@ -102,7 +102,7 @@ const createUser = async (req, res) => {
             // Error
             if(user) {
 
-                throw new Error ('Email Already Registered')
+                throw new Error ('Email ya registrado')
             
             }
 
@@ -121,7 +121,7 @@ const createUser = async (req, res) => {
             // Enviar error si ya existe
             if(user) {
 
-                throw new Error ('Username Already in Use')
+                throw new Error ('El usuario ya existe')
             
             }
 
@@ -158,16 +158,16 @@ const createUser = async (req, res) => {
 
         // Enviar mail de confirmación
         await sendConfirmationMail(reqData.email, `http://${process.env.PUBLIC_DOMAIN}/users/validate/${reqData.validationCode}`)
-        console.log('Sending confimation mail to new user')
+        console.log('Enviando email de confirmación')
 
     } catch (e) {
 
-        console.log(`Error creating user: ${e.message}`)
+        console.log(`Error al crear el usuario: ${e.message}`)
         res.status(400).send(e.message)
         return
     }
 
-    res.send('Please, check your inbox for email validation')
+    res.send('Por favor, comprueba tu bandeja de entrada')
 
 }
 
