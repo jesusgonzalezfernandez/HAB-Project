@@ -96,8 +96,16 @@ function QuestionsPortal({ query }) {
 
                     <div className='main-content-header-toolbar'>
 
-                        <button onClick={e => setSortBy( sortBy === 'views' ? '!views' : 'views')}>Views</button>
-                        <button onClick={e => setSortBy( sortBy === 'answers' ? '!answers' : 'answers')}>Hot</button>
+                        <button onClick={e => setSortBy( sortBy === 'views' ? '!views' : 'views')}>
+                            Views {sortBy === 'views' || sortBy === '!views' ? (sortBy === 'views' ? '˅' : '^') : '' }
+                        </button>
+                        <button onClick={e => setSortBy( sortBy === 'answers' ? '!answers' : 'answers')}>
+                            Hot {sortBy === 'answers' || sortBy === '!answers' ? (sortBy === 'answers' ? '˅' : '^') : '' }
+                        </button>
+                        <button onClick={e => setSortBy( sortBy === 'date' ? '!date' : 'date')}>
+                            Date {sortBy === 'date' || sortBy === '!date' ? (sortBy === 'date' ? '˅' : '^') : '' }
+                        </button>
+                        <button onClick={e => setTimeFilter('day')}>Today</button>
                         <button onClick={e => setTimeFilter('week')}>Last Week</button>
                         <button onClick={e => setTimeFilter('month')}>Last Month</button>
                         <input 
@@ -110,6 +118,15 @@ function QuestionsPortal({ query }) {
                             placeholder='Filtrar por Contenido...' 
                             onChange={e => setBodyFilter(e.target.value)}
                         />
+                        <button onClick={() => {
+                            setTimeFilter(); 
+                            setTitleFilter(); 
+                            setBodyFilter();
+                            setSortBy()
+                        }
+                        }>
+                            Reset
+                        </button>
 
                     </div>
 

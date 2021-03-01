@@ -348,6 +348,7 @@ const createFakeQuestions = async (u, q) => {
                     body,
                     file,
                     tags,
+                    views,
                     creationDate,
                     updateDate
     
@@ -360,7 +361,8 @@ const createFakeQuestions = async (u, q) => {
                     '${data.body}',
                     '${data.file}',
                     '${data.tags}',
-                    UTC_TIMESTAMP,
+                    '${data.views}',
+                    '${data.creationDate}',
                     UTC_TIMESTAMP
     
                 )
@@ -378,12 +380,20 @@ const createFakeQuestions = async (u, q) => {
 
         languagesRandomNumber = Math.floor(Math.random()*languages.length);
 
+        const date = faker.date.between('2018-01-01', '2021-03-02')
+
+        const timestamp = date.getTime() / 1000
+
+        const creationDate = moment.unix(timestamp).format('YYYY-MM-DD')
+
         const reqData = {
 
             userID: faker.random.number({min: 1, max: u}),
             title: faker.lorem.sentence(10, 10),
             body: faker.lorem.paragraphs(3),
             languages: languages[languagesRandomNumber],
+            views: faker.random.number({min: 0, max: 250}),
+            creationDate: creationDate,
             tags: tags
                 .sort( () => Math.random() - Math.random() )
                 .slice(0, Math.floor(Math.random() * 5 + 2))
