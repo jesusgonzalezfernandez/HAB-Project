@@ -19,15 +19,15 @@ function QuestionPreview({ question }) {
             <aside className='question-preview-stats'>
                 <div className='question-preview-votes'>
                     <span className='counter'>
-                        0
+                        {question.views || 0}
                     </span>
                     <span>
-                        votes
+                        views
                     </span>
                 </div>
                 <div className='question-preview-answers-count'>
                     <span className='counter'>
-                        0
+                        {question.answers.length}
                     </span>
                     <span>
                         answers
@@ -38,7 +38,7 @@ function QuestionPreview({ question }) {
             {/* Extracto de la pregunta */}
             <main className='question-preview'>
                 <h3>
-                <NavLink to={`/question/${question.id}`} className="question-preview-title"> {question.title} </NavLink>
+                    <NavLink to={`/question/${question.id}`} className="question-preview-title"> {question.title} </NavLink>
                 </h3>
                 <div className='question-preview-excerpt'>
                     {question.body.substring(0, 250) + ' ...'}
@@ -59,8 +59,3 @@ function QuestionPreview({ question }) {
 }
 
 export default QuestionPreview
-                            
-                            
-                            // <a key={i} href={'http://localhost:3000/questions?tags=' + tag}>
-                            //     {tag}
-                            // </a>

@@ -50,6 +50,19 @@ const getQuestionLanguagesQuery = async questionID => {
 
 }
 
+const getQuestionAnswersQuery = async questionID => {
+
+    let query = 
+
+        `
+            SELECT * FROM answers WHERE questionID = ${questionID}
+        `
+    
+    const result = await performQuery(query)
+    return result
+    
+}
+
 const addQuestionViewQuery = async data => {
 
     let query =
@@ -92,6 +105,9 @@ const getQuestionDetails = async (req, res) => {
         // Obtener lenguajes de la pregunta
         questionLanguages = await getQuestionLanguagesQuery(reqData.questionID)
 
+        // Obtener respuestas de la pregunta (para el contador)
+        questionAnswers = await getQuestionAnswersQuery(reqData.questionID)
+
         // Aumentar el contador de views
         questionData = {...questionData, views: questionData.views + 1}
 
@@ -107,7 +123,8 @@ const getQuestionDetails = async (req, res) => {
 
     const response = {
         ...questionData, 
-        languages: questionLanguages.map(l => l.name)
+        languages: questionLanguages.map(l => l.name),
+        answers: questionAnswers
     }
 
     res.send(response)

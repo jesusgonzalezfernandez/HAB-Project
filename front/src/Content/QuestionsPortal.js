@@ -44,6 +44,9 @@ function QuestionsPortal({ query }) {
     // Estado que define el filtro del contenido en el cliente
     const [bodyFilter, setBodyFilter] = useState()
 
+    // Estdo que define el filtro de fecha
+    const [timeFilter, setTimeFilter] = useState()
+
     // Estado que define el tipo de ordenación
     const [sortBy, setSortBy] = useState('')
 
@@ -93,10 +96,10 @@ function QuestionsPortal({ query }) {
 
                     <div className='main-content-header-toolbar'>
 
-                        <button onClick={e => setSortBy('day')}>Hot</button>
-                        <button onClick={e => setSortBy('week')}>Week</button>
-                        <button onClick={e => setSortBy('month')}>Month</button>
-                        <div>Respuestas</div>
+                        <button onClick={e => setSortBy( sortBy === 'views' ? '!views' : 'views')}>Views</button>
+                        <button onClick={e => setSortBy( sortBy === 'answers' ? '!answers' : 'answers')}>Hot</button>
+                        <button onClick={e => setTimeFilter('week')}>Last Week</button>
+                        <button onClick={e => setTimeFilter('month')}>Last Month</button>
                         <input 
                             type="text" 
                             placeholder='Filtrar por Título...' 
@@ -185,6 +188,7 @@ function QuestionsPortal({ query }) {
                         page={page}
                         titleFilter={titleFilter}
                         bodyFilter={bodyFilter}
+                        timeFilter={timeFilter}
                         sortBy = {sortBy}
                     />
 

@@ -73,6 +73,19 @@ const getQuestionsListQuery = async data => {
 
 }
 
+const getQuestionAnswersQuery = async questionID => {
+
+    let query = 
+
+        `
+            SELECT * FROM answers WHERE questionID = ${questionID}
+        `
+    
+    const result = await performQuery(query)
+    return result
+    
+}
+
 const getQuestionLanguagesQuery = async questionID => {
 
     let query =
@@ -105,11 +118,11 @@ const getQuestionsList = async (req, res) => {
         const result = await getQuestionsListQuery (reqData)
         console.log(`Has obtenido: ${result.length} resultados`);
 
-        // Añadir lenguajes a cada pregunta del resultado
+        // Añadir lenguajes y respuestas a cada pregunta del resultado
         for (let question of result) {
 
-            // Crear un campo languages e inicializar a array
-            question = {...question, languages: []}
+            // Crear dos campos languages y answers e inicializar a array vacío
+            question = {...question, languages: [], answers: []}
 
             // Obtener lenguajes de la pregunta
             const languages = await getQuestionLanguagesQuery(question.id)
@@ -117,6 +130,14 @@ const getQuestionsList = async (req, res) => {
             // Añadir cada lenguaje al array dentro del objeto question
             for (language of languages) {
                 question.languages.push(language.name)
+            }
+
+            // Obtener respuestas de la pregunta
+            const answers = await getQuestionAnswersQuery(question.id)
+
+            // Añadir cada respuesta al array
+            for (answer of answers) {
+                question.answers.push(answer)
             }
 
             // Añadir la pregunta al listado
