@@ -38,6 +38,15 @@ function QuestionsPortal({ query }) {
     // Valor de páginas máximo (definido por los componentes LatestQuestions y FilteredQuestions)
     const [max, setMax] = useState(1)
 
+    // Estado que define el filtro del título en el cliente
+    const [titleFilter, setTitleFilter] = useState()
+
+    // Estado que define el filtro del contenido en el cliente
+    const [bodyFilter, setBodyFilter] = useState()
+
+    // Estado que define el tipo de ordenación
+    const [sortBy, setSortBy] = useState('')
+
     // Obtener listado de preguntas
     let data = useFetch('http://localhost:3001/questions') || []
     
@@ -79,6 +88,25 @@ function QuestionsPortal({ query }) {
                         <div className=''>
                             <a className='create-question-button' href='http://localhost:3000/create/question'>Haz Tu Consulta</a>
                         </div>
+
+                    </div>
+
+                    <div className='main-content-header-toolbar'>
+
+                        <button onClick={e => setSortBy('day')}>Hot</button>
+                        <button onClick={e => setSortBy('week')}>Week</button>
+                        <button onClick={e => setSortBy('month')}>Month</button>
+                        <div>Respuestas</div>
+                        <input 
+                            type="text" 
+                            placeholder='Filtrar por Título...' 
+                            onChange={e => setTitleFilter(e.target.value)}
+                        />
+                        <input 
+                            type="text" 
+                            placeholder='Filtrar por Contenido...' 
+                            onChange={e => setBodyFilter(e.target.value)}
+                        />
 
                     </div>
 
@@ -155,7 +183,10 @@ function QuestionsPortal({ query }) {
                         setMax={value => setMax(value)}
                         pagination={pagination} 
                         page={page}
-                        />
+                        titleFilter={titleFilter}
+                        bodyFilter={bodyFilter}
+                        sortBy = {sortBy}
+                    />
 
                 }
 
