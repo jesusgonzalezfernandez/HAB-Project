@@ -9,6 +9,7 @@ const getQuestionDataQuery = async data => {
 
             SELECT 
                 
+                questions.id,
                 questions.title, 
                 questions.body,  
                 questions.file, 
@@ -49,7 +50,26 @@ const getQuestionLanguagesQuery = async questionID => {
 
 }
 
+const addQuestionViewQuery = async data => {
+
+    let query =
+
+        `
+            UPDATE questions SET
+            
+                views = '${data.views}'
+        
+            WHERE id = ${data.id}
+        `
+
+    const result = await performQuery(query)
+    return result
+
+}
+
 const getQuestionDetails = async (req, res) => {
+
+    console.log('* Get Question Details *');
 
     let questionData;
 
@@ -71,6 +91,12 @@ const getQuestionDetails = async (req, res) => {
         
         // Obtener lenguajes de la pregunta
         questionLanguages = await getQuestionLanguagesQuery(reqData.questionID)
+
+        // Aumentar el contador de views
+        questionData = {...questionData, views: questionData.views + 1}
+
+        // Actualizar el contador en BD
+        await addQuestionViewQuery(questionData)
         
     } catch (e) {
 
@@ -84,7 +110,6 @@ const getQuestionDetails = async (req, res) => {
         languages: questionLanguages.map(l => l.name)
     }
 
-    console.log(response);
     res.send(response)
 
 }

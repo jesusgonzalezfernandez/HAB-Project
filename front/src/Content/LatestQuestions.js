@@ -5,11 +5,14 @@ import './LatestQuestions.css'
 
 
 
-function LatestQuestions({ setMax, pagination, page }) {
-
+function LatestQuestions({ setMax, pagination, page, titleFilter, bodyFilter, sortBy }) {
+console.log(`Body Filter: ${bodyFilter}`);
     // Obtiene listado de preguntas
     let data = useFetch('http://localhost:3001/questions') || []
-    
+
+    if(titleFilter) {data = data.filter(question => question.title.toLowerCase().includes(titleFilter.toLowerCase()))}
+    if(bodyFilter) {data = data.filter(question => question.body.toLowerCase().includes(bodyFilter.toLowerCase()))}
+
     // Procesar el data en función de la página actual
     const slice = data.slice( pagination * (page - 1), pagination * page )
 
