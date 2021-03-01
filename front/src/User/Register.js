@@ -11,22 +11,28 @@ function Register() {
     const [birthDate, setBirthDate] = useState('')
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
-    const [country, setCountry] = useState('')
     const [sent, setSent] = useState('')
+    const [error, setError] = useState()
 
     const handleSubmit = async e => {
         e.preventDefault()
-        await fetch('http://localhost:3001/users/', {
+        const res = await fetch('http://localhost:3001/users/', {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, username, password, birthDate, name, surname }),
             method: 'POST'
         })
-        setSent(true)
+        if (!res.ok) {
+            // Si ha habido algún error, se guarda para mostrarlo
+            res.text().then(e => setError(e))
+            console.log('Se ha producido un error');
+        } else {
+            setSent(true)
+        }
     }
 
     if (sent) return (
         <div className="register sent">
-            <p>Gracias por registrarte en Howdoi.<br/>
+            <p>Gracias por registrarte en Howdoi.<br />
             Por favor, revisa tu bandeja de entrada para validar el registro.</p>
         </div>
     )
@@ -44,7 +50,7 @@ function Register() {
                 </div>
                 <div>
                     <input className="register input" placeholder="Nombre de usuario ..." required
-                        value={username} onChange={e => setUsername(e.target.value)} />
+                        value={username} onChange={e => setUsername(e.target.value)} minLength='6' />
                 </div>
                 <div>
                     <input className="register input" placeholder="Contraseña ..." type="password" required
@@ -66,6 +72,10 @@ function Register() {
                     <input className="register input" placeholder="Fecha de nacimiento ..." type="date" required
                         value={birthDate} onChange={e => setBirthDate(e.target.value)} />
                 </div>
+                {error &&
+                    <div className="login error">
+                        {error}
+                    </div>}
                 <button className="submit">Enviar</button>
             </form>
         </main>
