@@ -1,8 +1,7 @@
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 import './Register.css'
 import logo from '../logo.png'
-import { Link, Redirect } from "react-router-dom";
-
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -12,37 +11,26 @@ function Register() {
     const [birthDate, setBirthDate] = useState('')
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
-    // const [sent, setSent] = useState('')
-    const [error, setError] = useState()
-
-    // if (password !== repeatPassword) return (
-    //     'Las contraseñas no coinciden'
-    // )
-    // setSent(true)
+    const [country, setCountry] = useState('')
+    const [sent, setSent] = useState('')
 
     const handleSubmit = async e => {
         e.preventDefault()
-        const res = await fetch('http://localhost:3001/users/', {
+        await fetch('http://localhost:3001/users/', {
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, username, password, name, surname, birthDate }),
+            body: JSON.stringify({ email, username, password, birthDate, name, surname }),
             method: 'POST'
         })
-        console.log(res)
-
-        // if (res.ok) {
-        //     return <Redirect to="/" />
-        // }
-        // else {
-        //     console.log('Se ha producido un error');
-        //     res.text().then(e => setError(e))
-        // }
-        if (!res.ok) {
-            res.text().then(e => setError(e))
-        } else {
-            const data = await res.json()
-            return <Redirect to="/" />
-        }
+        setSent(true)
     }
+
+    if (sent) return (
+        <div className="register sent">
+            <p>Gracias por registrarte en Howdoi.<br/>
+            Por favor, revisa tu bandeja de entrada para validar el registro.</p>
+        </div>
+    )
+
 
     return (
         <main className="register main">
@@ -78,10 +66,6 @@ function Register() {
                     <input className="register input" placeholder="Fecha de nacimiento ..." type="date" required
                         value={birthDate} onChange={e => setBirthDate(e.target.value)} />
                 </div>
-                {error &&
-                    <div className="login error">
-                        {error}
-                    </div>}
                 <button className="submit">Enviar</button>
             </form>
         </main>
