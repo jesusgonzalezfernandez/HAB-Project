@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../logo.png';
+import Dropdown from './Dropdown';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { GoogleLogout } from 'react-google-login';
@@ -102,7 +104,10 @@ function Navbar() {
             </li>
           }
           {login &&
-            <li className='nav-item'>
+            <li className='nav-item'
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            >
               <NavLink
                 to={`/users/profile/${login.userID}`}
                 className='nav-links'
@@ -110,23 +115,23 @@ function Navbar() {
                 onClick={closeMobileMenu}
               >
                 <div className='nav-profile'>
-                  Perfil
                 <img src={imagen} alt='avatar' className='navbar-avatar' />
+                {/* <i className='fas fa-caret-down' /> */}
                 </div>
               </NavLink>
+              {dropdown && <Dropdown />}
             </li>
           }
-          {login &&
+          {/* {login &&
             <li className='nav-item'>
               <GoogleLogout
                 clientId={'355596453353-8eq0ri18jbug2bvp80jmg4p5jpem1usi.apps.googleusercontent.com'}
-                // buttonText="Logout"
                 onLogoutSuccess={handleLogout}
                 icon={false}
               ><FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" />
               </GoogleLogout>
             </li>
-          }
+          } */}
 
         </ul>
 
