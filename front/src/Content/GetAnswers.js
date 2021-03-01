@@ -38,7 +38,8 @@ function GetAnswers({ key, reload }) {
 
         const data = await res.json();
         setData(data)
-        console.log(`Resultado de la respuesta: ${data}`)
+        console.log(`Resultado de la respuesta: ${JSON.stringify(data)}`)
+
 
     }, [key])
 
@@ -67,7 +68,7 @@ function GetAnswers({ key, reload }) {
                             </main>
                             <div className='get-comments'>
                                 {/* Obtener los comentarios a partir del id de respuesta */}
-                                <GetComments parentID={answer.id} />
+                                <GetComments parentID={answer.answerID} />
                             </div>
                             <div className="answer footer">
                                 <div className="answer acordeon">
@@ -77,14 +78,14 @@ function GetAnswers({ key, reload }) {
                                         // Función para cambiar el estado de la respuesta activa
                                         onChange={value => setActive(value)}
                                         // ID de la respuesta actual
-                                        parentID={answer.id}
+                                        parentID={answer.answerID}
                                         // ID de la respuesta activa
                                         active={active} >
 
                                         {/* Contenido del acordeon */}
                                         <PostComment
                                             reload={reload}
-                                            parentID={answer.id} />
+                                            parentID={answer.answerID} />
 
                                     </Acordeon>
                                 </div>
@@ -94,11 +95,11 @@ function GetAnswers({ key, reload }) {
                                         {/* Recibe voto */}
                                         <GetVote
                                             voteKey={voteKey}
-                                            parentID={answer.id} />
+                                            parentID={answer.answerID} />
                                         {/* Emite voto */}
                                         <Vote
                                             reload={() => setVoteKey(voteKey + 1)}
-                                            parentID={answer.id} />
+                                            parentID={answer.answerID} />
                                     </div>
                                 </div>
                             </div>

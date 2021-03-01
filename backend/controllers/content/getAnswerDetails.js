@@ -45,6 +45,7 @@ const getAnswerDetails = async (req, res) => {
 
     console.log(`>>> getAnswerDetails`)
     let answerData;
+    let questionAnswersResponse = []
 
     // Obtener variables
     let reqData = req.params
@@ -64,12 +65,13 @@ const getAnswerDetails = async (req, res) => {
 
     // Query de votos
     
-    let answerVotes = []
 
     for (answer of questionAnswers) {
 
         votesCount = await getAnswerVotesQuery(answer)
         answerData = {...answer, votes: votesCount.count}
+        questionAnswersResponse.push(answerData)
+        
     }
 
     } catch (e) {
@@ -79,7 +81,8 @@ const getAnswerDetails = async (req, res) => {
 
     }
 
-    res.send(answerData)
+    console.log(questionAnswersResponse)
+    res.send(questionAnswersResponse)
 
 }
 
