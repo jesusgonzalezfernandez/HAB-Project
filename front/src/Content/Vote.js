@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Vote.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGratipay } from '@fortawesome/free-brands-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 

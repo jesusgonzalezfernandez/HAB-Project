@@ -13,7 +13,6 @@
     line-height: 49px;
     border-radius: 20px;
     font-size: 16px;
-
 }
 
 .register.input {
@@ -33,9 +32,25 @@
 
 .register.sent p {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    line-height: 80px;
     text-align: center;
     font-size: 28px;
     padding: 80px;
 }
+
+
+.register.check {
+    color: #424BAC;
+    font-size: 6em;
+}
+
+input[type="date"]::before {
+    content: attr(placeholder);
+    width: 100%;
+    color: grey;
+  }
+  input[type="date"]:focus::before,
+  input[type="date"]:valid::before { display: none }

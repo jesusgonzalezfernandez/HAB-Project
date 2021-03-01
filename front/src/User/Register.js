@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
 import './Register.css'
 import logo from '../logo.png'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -32,7 +33,8 @@ function Register() {
 
     if (sent) return (
         <div className="register sent">
-            <p>Gracias por registrarte en Howdoi.<br />
+            <p><FontAwesomeIcon className="register check" icon={faCheckCircle} />
+            Gracias por registrarte en Howdoi.<br />
             Por favor, revisa tu bandeja de entrada para validar el registro.</p>
         </div>
     )
@@ -41,35 +43,34 @@ function Register() {
     return (
         <main className="register main">
             <form className="register form" onSubmit={handleSubmit}>
-                <h1>Registro</h1>
                 <img src={logo} className={'logo'} alt={'logo'} />
                 <h2>¡Bienvenido a Howdoi!</h2>
                 <div>
-                    <input className="register input" placeholder="Email ..." type="email" required
+                    <input className="register input" placeholder="Email" type="email" required
                         value={email} onChange={e => setEmail(e.target.value)} />
                 </div>
                 <div>
-                    <input className="register input" placeholder="Nombre de usuario ..." required
+                    <input className="register input" placeholder="Nombre de usuario" required
                         value={username} onChange={e => setUsername(e.target.value)} minLength='6' />
                 </div>
                 <div>
-                    <input className="register input" placeholder="Contraseña ..." type="password" required
+                    <input className="register input" placeholder="Contraseña" type="password" required
                         value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
                 <div>
-                    <input className="register input" placeholder="Repite tu contraseña ..." type="password" required
+                    <input className="register input" placeholder="Repite tu contraseña" type="password" required
                         value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
                 </div>
                 <div>
-                    <input className="register input" placeholder="Nombre ..." required
+                    <input className="register input" placeholder="Nombre" required
                         value={name} onChange={e => setName(e.target.value)} />
                 </div>
                 <div>
-                    <input className="register input" placeholder="Apellidos ..." required
+                    <input className="register input" placeholder="Apellidos" required
                         value={surname} onChange={e => setSurname(e.target.value)} />
                 </div>
                 <div>
-                    <input className="register input" placeholder="Fecha de nacimiento ..." type="date" required
+                    <input className="register input" placeholder="Fecha de nacimiento" type="date" required
                         value={birthDate} onChange={e => setBirthDate(e.target.value)} />
                 </div>
                 {error &&
