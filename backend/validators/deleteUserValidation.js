@@ -6,6 +6,7 @@ const deleteUserValidation = joi.object({
 
     reason: joi
         .string()
+        .allow('')
         .trim()
         .max(500)
         .messages(),

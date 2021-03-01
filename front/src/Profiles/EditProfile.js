@@ -33,24 +33,20 @@ function EditProfile({ reload }) {
       method: 'PUT',
       headers: { 'auth': 'Bearer ' + login.token },
       body: fd
-    }).then(res => {
-      if (!res.ok) {
-        console.log('Se ha producido un error');
-        throw res;
-      }
-      console.log('El fetch se ha realizado correctamente');
-      return res.json()
     })
-      .then(data => {
-        // Enviar objeto action al redux, con el type y los datos obtenidos de la API
-        dispatch({ type: 'update', data })
-      })
-      .catch(e =>
-        // Capturar error
-        e.text().then(e => setError(e))
-      )
+    
+    if(!res.ok) {
+      // Si ha habido algún error, se guarda para mostrarlo
+      res.text().then(e => setError(e))
+      console.log('Se ha producido un error');
+    } else {
+      const data = await res.json()
+      // Enviar objeto action al redux, con el type y los datos obtenidos de la API
+      dispatch({ type: 'update', data })
+    }
 
     reload()
+  
   }
 
 
