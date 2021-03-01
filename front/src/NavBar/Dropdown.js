@@ -30,7 +30,6 @@ function Dropdown() {
                         <NavLink
                             to={`/users/profile/${login.userID}`}
                             className='nav-links'
-                            activeClassName='selected'
                             onClick={() => setClick(false)}
                         >Perfil</NavLink>
                     </li>
@@ -42,8 +41,14 @@ function Dropdown() {
                             onLogoutSuccess={handleLogout}
                             icon={false}
                             onClick={() => setClick(false)}
-                        ><FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" />
-                        </GoogleLogout>
+                            tag={'div'}
+                            render={renderProps => (
+                                <div className='dropdown-link' onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                                    <FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" />
+                                     Logout
+                                </div>
+                              )}
+                        />
                     </li>
                 }
             </ul>

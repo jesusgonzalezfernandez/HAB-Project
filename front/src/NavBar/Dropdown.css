@@ -1,6 +1,6 @@
 .dropdown-menu {
-    background: red;
-    width: 200px;
+    background: #3307ad;
+    width: 100px;
     position: absolute;
     top: 80px;
     list-style: none;
@@ -8,12 +8,12 @@
   }
   
   .dropdown-menu li {
-    background: #1888ff;
+    background: #F5F5F7;
     cursor: pointer;
   }
   
   .dropdown-menu li:hover {
-    background: #5cabff;
+    background: #F9EA3B;
   }
   
   .dropdown-menu.clicked {
@@ -25,9 +25,10 @@
     height: 100%;
     width: 100%;
     text-decoration: none;
-    color: #fff;
+    color: rgb(48, 48, 48);
     padding: 16px;
   }
+
   
   @media screen and (max-width: 960px) {
     /* .fa-caret-down {
