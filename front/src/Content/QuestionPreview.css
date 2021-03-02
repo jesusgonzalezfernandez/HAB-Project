@@ -59,3 +59,10 @@
     margin: 2px;
     color: var(--morado);
 }
+
+
+.question-preview-languages {
+    font-size: 0.9em;
+    color: #404152;
+    font-weight: bold;
+}

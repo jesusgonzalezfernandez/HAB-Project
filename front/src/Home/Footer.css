@@ -6,9 +6,9 @@
     box-sizing: border-box;
     background-color: #3307ad;
     margin-top: 10vh;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
+    bottom:0;
+    left: 0;
+    right: 0;
     color: #F5F5F7;
     font-family: 'Jost', sans-serif;
     font-weight: 600;
@@ -64,3 +64,21 @@
 .acceso {
     align-self: flex-start;
 }
+
+/* @media screen and (max-width: 960px) {
+    .footer.main {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        padding: 50px;
+        box-sizing: border-box;
+        background-color: #3307ad;
+        margin-top: 10vh;
+        bottom:0;
+        left: 0;
+        right: 0;
+        color: #F5F5F7;
+        font-family: 'Jost', sans-serif;
+        font-weight: 600;
+    }
+  } */
