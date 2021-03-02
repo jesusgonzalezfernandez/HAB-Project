@@ -36,7 +36,7 @@ function Contact() {
                             value={phone} onChange={e => setPhone(e.target.value)} />
                     </div>
                     <div>
-                        <input className="contact input" placeholder="Mensaje" type="text-area" required
+                        <textarea className="contact input textarea" placeholder="Mensaje" required
                             value={message} onChange={e => setMessage(e.target.value)} />
                     </div>
                     <button className="submit">Enviar</button>

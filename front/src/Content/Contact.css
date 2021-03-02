@@ -37,6 +37,10 @@
     font-weight:  400;
 }
 
+.contact.input.textarea {
+    height: 96px;
+}
+
 .contact.text {
     display: flex;
     flex-direction: column;
