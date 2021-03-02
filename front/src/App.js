@@ -60,6 +60,9 @@ function App() {
         <Route path="/users/profile/:userID" exact>
           <Profile />
         </Route>
+        <Route path="/contact" exact>
+          <Contact />
+        </Route>
         <Route path="/">
           Error 404
         </Route>

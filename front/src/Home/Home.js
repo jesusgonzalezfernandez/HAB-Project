@@ -8,7 +8,7 @@ import LatestQuestions from '../Content/LatestQuestions';
 import { useState } from "react";
 import useFetch from "../useFetch";
 import { ReviewsSection } from './reviewSection';
-
+import { SectionTitle } from './sectionTitle';
 
 
 function Home() {
@@ -83,8 +83,8 @@ function Home() {
         </article>
       </div>
       <ReviewsSection />
-      {/* <div className='last-cuestions-home'>
-        <h2>Últimas preguntas</h2>
+      <div className='last-cuestions-home'>
+        <SectionTitle>Últimas preguntas</SectionTitle>
         <div className='home-questions'>
         <LatestQuestions
             setMax={(value) => setMax(value)}
@@ -96,8 +96,7 @@ function Home() {
             sortBy={sortBy}
           />
         </div>
-      </div> */}
-
+      </div>
     </div>
   );
 }

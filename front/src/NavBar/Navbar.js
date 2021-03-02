@@ -5,20 +5,12 @@ import './Navbar.css';
 import logo from '../logo.png';
 import Dropdown from './Dropdown';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { GoogleLogout } from 'react-google-login';
 
 function Navbar() {
   const login = useSelector(s => s.login)
   const dispatch = useDispatch()
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
-
-  const handleLogout = () => {
-    dispatch({ type: 'logout' })
-    return <Redirect to="/" />
-  }
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -76,6 +68,16 @@ function Navbar() {
               Preguntas
             </NavLink>
           </li>
+          <li className='nav-item'>
+            <NavLink
+              to='/contact'
+              className='nav-links'
+              activeClassName='selected'
+              onClick={closeMobileMenu}
+            >
+              Contacto
+            </NavLink>
+          </li>
           {!login &&
             <li className='nav-item'>
               <NavLink
@@ -119,16 +121,6 @@ function Navbar() {
               {dropdown && <Dropdown />}
             </li>
           }
-          {/* {login &&
-            <li className='nav-item'>
-              <GoogleLogout
-                clientId={'355596453353-8eq0ri18jbug2bvp80jmg4p5jpem1usi.apps.googleusercontent.com'}
-                onLogoutSuccess={handleLogout}
-                icon={false}
-              ><FontAwesomeIcon icon={faSignOutAlt} color="#3307ad" size="lg" />
-              </GoogleLogout>
-            </li>
-          } */}
 
         </ul>
 
