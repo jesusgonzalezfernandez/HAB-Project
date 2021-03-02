@@ -111,7 +111,6 @@ function CreateQuestion() {
             res.text().then(e => setApiError(e))
           
         } else {
-          <Redirect to= "/questions"/>
             console.log('El fetch se ha realizado correctamente');
             
             // Resetear el posible error que se hubiera podido producir
@@ -125,10 +124,8 @@ function CreateQuestion() {
             
             // Crear un mensaje de éxito
             setOk(true)
-        }
 
-        
-        console.log(res);
+        }
         
     }
         
@@ -270,7 +267,7 @@ function CreateQuestion() {
 
             </form>
             {ok && 
-                <div>Success !</div>
+                <Redirect to= "/questions"/>
             }
             {apiError && 
             
