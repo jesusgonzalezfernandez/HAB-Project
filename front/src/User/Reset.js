@@ -8,7 +8,7 @@ function Reset() {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    await fetch('http://localhost:9999/users/reset-account', {
+    await fetch('http://localhost:3001/users/reset-account', {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password, code }),
       method: 'POST'
