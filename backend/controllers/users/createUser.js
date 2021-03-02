@@ -157,7 +157,7 @@ const createUser = async (req, res) => {
         console.log(`Successfully Inserted. Affected Rows: ${result.affectedRows}`);
 
         // Enviar mail de confirmación
-        await sendConfirmationMail(reqData.email, `http://${process.env.PUBLIC_DOMAIN}/users/validate/${reqData.validationCode}`)
+        await sendConfirmationMail(reqData.email, `http://localhost:3000/users/validate/${reqData.validationCode}`)
         console.log('Enviando email de confirmación')
 
     } catch (e) {
