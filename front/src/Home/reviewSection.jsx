@@ -22,7 +22,7 @@ const ReviewsContainer = styled(Element)`
 `;
 
 const StyledCarouselProvider = styled(CarouselProvider)`
-  width: 70%;
+  width: 60%;
   @media screen and (max-width: 480px) {
     width: 100%;
   }
@@ -72,7 +72,7 @@ export function ReviewsSection(props) {
         <Slider>
           <StyledSlide index={0}>
             <ReviewCard
-              reviewText=" Howdoi es una buena plataforma para continuar creciendo como programador"
+              reviewText="Howdoi es una buena plataforma para continuar creciendo como programador"
               username="Pablo"
               userImgUrl={User1Img}
             />
@@ -86,7 +86,7 @@ export function ReviewsSection(props) {
           </StyledSlide>
           <StyledSlide index={2}>
             <ReviewCard
-              reviewText="el stackoverflow del futuro. Cuenta con grandes expertos que te ayudarán a formarte como programador de forma gratuita."
+              reviewText="El stackoverflow del futuro. Cuenta con grandes expertos que te ayudarán a formarte como programador de forma gratuita."
               username="Lorena"
               userImgUrl={User3Img}
             />
