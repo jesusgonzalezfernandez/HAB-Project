@@ -12,6 +12,7 @@ import Contact from './Content/Contact';
 import Register from './User/Register'
 import Navbar from './NavBar/Navbar';
 import Footer from './Home/Footer';
+import ValidateUser from './User/ValidateUser';
 
 // Obtener query de la URL
 function useQuery() {
@@ -19,7 +20,7 @@ function useQuery() {
 }
 
 function App() {
-  
+
   let query = useQuery();
 
   return (
@@ -30,25 +31,28 @@ function App() {
           <Home />
         </Route>
         <Route path="/questions">
-          <QuestionsPortal query={query.get('tags')}/>
+          <QuestionsPortal query={query.get('tags')} />
         </Route>
         <Route path="/question/:questionID">
-          <Question/>
+          <Question />
         </Route>
         <Route path="/login">
           <Login />
         </Route>
         <Route path="/register">
-          <Register/>
+          <Register />
         </Route>
         <Route path="/contact">
-          <Contact/>
+          <Contact />
         </Route>
         <Route path="/recovery" exact>
           <Recovery />
         </Route>
         <Route path="/recovery/:code" exact>
           <Reset />
+        </Route>
+        <Route path="/users/validate/:code">
+          <ValidateUser />
         </Route>
         <Route path="/create/question" exact>
           <CreateQuestion />

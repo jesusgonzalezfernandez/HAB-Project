@@ -56,10 +56,7 @@ function Navbar() {
         </div>
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
           <li
-            className='nav-item'
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
+            className='nav-item'>
             <NavLink
               to='/about'
               className='nav-links'
@@ -77,14 +74,6 @@ function Navbar() {
               onClick={closeMobileMenu}
             >
               Preguntas
-            </NavLink>
-            <NavLink
-              to='/contact'
-              className='nav-links'
-              activeClassName='selected'
-              onClick={closeMobileMenu}
-            >
-              Contacto
             </NavLink>
           </li>
           {!login &&
@@ -124,7 +113,7 @@ function Navbar() {
               >
                 <div className='nav-profile'>
                 <img src={imagen} alt='avatar' className='navbar-avatar' />
-                {/* <i className='fas fa-caret-down' /> */}
+                {login.name}
                 </div>
               </NavLink>
               {dropdown && <Dropdown />}

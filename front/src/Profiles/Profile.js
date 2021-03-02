@@ -14,6 +14,7 @@ function Profile() {
   const [dataUser, setDataUser] = useState()
   const login = useSelector(state => state.login)
   const [active, setActive] = useState('activity')
+  const [click, setClick] = useState(false);
 
   // Obtener id del usuario buscado
   const { userID } = useParams()
@@ -32,7 +33,6 @@ function Profile() {
       const data = await res.json();
 
       setDataUser(data.user)
-
     }
     fetchData()
   }, [])
@@ -58,16 +58,16 @@ function Profile() {
         </div>
         <div className='profile-menu'>
           <ul>
-            <li onClick={() => setActive('activity')}>
+            <li onClick={() => setActive('activity')} className='profile-menu-ul'>
               Actividad
             </li>
-            <li onClick={() => setActive('profile')}>
+            <li onClick={() => setActive('profile')} className='profile-menu-ul'>
               Editar perfil
             </li>
-            <li onClick={() => setActive('password')}>
+            <li onClick={() => setActive('password')} className='profile-menu-ul'>
               Cambiar contraseña
             </li>
-            <li onClick={() => setActive('delete')}>
+            <li onClick={() => setActive('delete')} className='profile-menu-ul'>
               Eliminar cuenta
             </li>
 
