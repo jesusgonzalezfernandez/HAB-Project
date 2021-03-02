@@ -54,3 +54,17 @@ div.home > header {
 .experto-imagen-perfil {
     width: 500px;
 }
+
+.last-cuestions-home {
+    margin-top: 40px;
+    padding: 20px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.home-questions {
+    width: 60vw;
+}

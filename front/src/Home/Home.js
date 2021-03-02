@@ -4,8 +4,45 @@ import code from '../imagenes/manos-coding.png';
 import developer from '../imagenes/desarrollador.png';
 import howdoi from '../imagenes/expert-student.png';
 import './Home.css'
+import LatestQuestions from '../Content/LatestQuestions';
+import { useState } from "react";
+import useFetch from "../useFetch";
+import { ReviewsSection } from './reviewSection';
+
+
 
 function Home() {
+
+    // Estado que define el resultado del filtrado
+    const [filterData, setFilterData] = useState([]);
+
+    // Estado que define el tipo de display (últimas o filtradas)
+    const [filterMode, setFilterMode] = useState(false);
+  
+    // Paginación
+    const [pagination, setPagination] = useState(5);
+  
+    // Página actual
+    const [page, setPage] = useState(1);
+  
+    // Valor de páginas máximo (definido por los componentes LatestQuestions y FilteredQuestions)
+    const [max, setMax] = useState(1);
+  
+    // Estado que define el filtro del título en el cliente
+    const [titleFilter, setTitleFilter] = useState();
+  
+    // Estado que define el filtro del contenido en el cliente
+    const [bodyFilter, setBodyFilter] = useState();
+  
+    // Estdo que define el filtro de fecha
+    const [timeFilter, setTimeFilter] = useState();
+
+      // Estado que define el tipo de ordenación
+  const [sortBy, setSortBy] = useState("");
+  
+  // Obtener listado de preguntas
+  let data = useFetch("http://localhost:3001/questions") || [];
+  
   return (
     <div className="home">
       <header>
@@ -45,6 +82,22 @@ function Home() {
           </div>
         </article>
       </div>
+      <ReviewsSection />
+      {/* <div className='last-cuestions-home'>
+        <h2>Últimas preguntas</h2>
+        <div className='home-questions'>
+        <LatestQuestions
+            setMax={(value) => setMax(value)}
+            pagination={pagination}
+            page={page}
+            titleFilter={titleFilter}
+            bodyFilter={bodyFilter}
+            timeFilter={timeFilter}
+            sortBy={sortBy}
+          />
+        </div>
+      </div> */}
+
     </div>
   );
 }
