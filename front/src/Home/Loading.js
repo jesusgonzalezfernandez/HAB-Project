@@ -13,7 +13,7 @@ const Loading = ({ query }) => {
     let interval = 2000;
     
     if (query) {
-      values = [`tags.contains('${query}')`, `tags.find('${query}')`, `tags.filter('${query}')`]
+      values = [`question.includes('${query}')`, `quyestion.find('${query}')`, `question.filter('${query}')`]
       interval = 10000
     }
 

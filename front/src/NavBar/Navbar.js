@@ -36,7 +36,6 @@ function Navbar() {
     imagen = login.email.includes('gmail') ? login.avatar : `http://localhost:3001/${login.avatar}`
   }
 
-
   return (
     <>
       <nav className='navbar'>

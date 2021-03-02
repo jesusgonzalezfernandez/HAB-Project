@@ -21,7 +21,7 @@ import Loading from "../Home/Loading";
 
 */
 
-function QuestionsPortal({ query }) {
+function QuestionsPortal({ queryTags, queryLanguages }) {
   // Estado que define el resultado del filtrado
   const [filterData, setFilterData] = useState([]);
 
@@ -69,11 +69,12 @@ function QuestionsPortal({ query }) {
         </div>
 
         <QuestionsFilter
-          query={query}
+          queryTags={queryTags}
+          queryLanguages={queryLanguages}
           reload={(data) => {
             setFilterData(data);
             setFilterMode(true);
-          }}
+        }}
         />
       </aside>
 
@@ -84,7 +85,7 @@ function QuestionsPortal({ query }) {
             {filterMode && filterData && (
               <div>
                 <h2 className="">
-                  Resultados: {query ? <Loading query={query} /> : "filtro"}{" "}
+                  Resultados: { (queryTags || queryLanguages) ? <Loading query={queryTags || queryLanguages} /> : "filtro"}{" "}
                 </h2>
               </div>
             )}

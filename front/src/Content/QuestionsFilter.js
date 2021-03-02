@@ -5,7 +5,7 @@ import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import './QuestionsFilter.css'
 import { useHistory } from 'react-router-dom';
 
-function QuestionsFilter({ query, reload }) {
+function QuestionsFilter({ queryTags, queryLanguages, reload }) {
 
     // Variables
     const [title, setTitle] = useState('')
@@ -28,10 +28,13 @@ function QuestionsFilter({ query, reload }) {
     */
 
     useEffect(() => {
-        if (query) {
-            handleSubmit('', query)
+        if (queryTags) {
+            handleSubmit('', queryTags)
         }
-    }, [query])
+        if (queryLanguages) {
+            handleSubmit('','', queryLanguages)
+        }
+    }, [queryTags, queryLanguages])
 
     // Obtener Lenguajes
     useEffect(async () => {
@@ -50,7 +53,7 @@ function QuestionsFilter({ query, reload }) {
     
     }, [])
 
-    const handleSubmit = async (e, query)  => {
+    const handleSubmit = async (e, tags, languages)  => {
 
         // Como el handleSubmit del useEffect no tiene evento 'e', hay que evitar el error
         e && e.preventDefault()
@@ -75,17 +78,20 @@ function QuestionsFilter({ query, reload }) {
 
         let queryData;
        
-        if(!query) {
+        if(!tags && !languages) {
 
             queryData = {
                 title, 
-                languages,  
+                languages: languages,  
                 tags: tags,
                 status, 
                 creationDate
             }
 
-        } else { queryData = { tags: query } }
+        } else { queryData = { 
+            tags: tags,
+            languages: languages
+        } }
 
         // Obtener URL a partir del objeto data
         const URL = filterQuestionsQuery(queryData)
@@ -98,7 +104,7 @@ function QuestionsFilter({ query, reload }) {
         .then(data => reload(data))
         
         // Si se ha hecho un filtrado desde el formulario, se elimina la query de la URL
-        !query && history.push('/questions')
+        !tags && !languages && history.push('/questions')
 
     }
     

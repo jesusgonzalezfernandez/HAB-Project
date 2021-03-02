@@ -32,7 +32,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/questions">
-          <QuestionsPortal query={query.get('tags')} />
+          <QuestionsPortal queryTags={query.get('tags')} queryLanguages={query.get('languages')} />
         </Route>
         <Route path="/question/:questionID">
           <Question />
