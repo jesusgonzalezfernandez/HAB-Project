@@ -14,7 +14,7 @@ function Home() {
           <p>A wan te voy a borrar el cerito a wan está la cosa muy malar ullamco caballo blanco caballo negroorl reprehenderit te va a hasé pupitaa. Dolor ut hasta luego Lucas ese que llega.</p>
           <div className='home-enlaces'>
             <Link to="/#steps"><div className='home-conocer'>Conocer más</div></Link>
-            <Link to="/#registro"><div className='home-registro'>Registrarse</div></Link>
+            <Link to="/register"><div className='home-registro'>Registrarse</div></Link>
           </div>
         </div>
         <div className='home-header-imagen'>
