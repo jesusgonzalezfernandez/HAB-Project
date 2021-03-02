@@ -8,7 +8,7 @@ import CreateQuestion from './Content/CreateQuestion';
 import Profile from './Profiles/Profile';
 import Question from './Content/Question'
 import QuestionsPortal from './Content/QuestionsPortal';
-import Loading from './Home/Loading';
+import Contact from './Content/Contact';
 import Register from './User/Register'
 import Navbar from './NavBar/Navbar';
 import Footer from './Home/Footer';
@@ -40,6 +40,9 @@ function App() {
         </Route>
         <Route path="/register">
           <Register/>
+        </Route>
+        <Route path="/contact">
+          <Contact/>
         </Route>
         <Route path="/recovery" exact>
           <Recovery />

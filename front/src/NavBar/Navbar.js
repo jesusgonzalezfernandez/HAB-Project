@@ -78,6 +78,14 @@ function Navbar() {
             >
               Preguntas
             </NavLink>
+            <NavLink
+              to='/contact'
+              className='nav-links'
+              activeClassName='selected'
+              onClick={closeMobileMenu}
+            >
+              Contacto
+            </NavLink>
           </li>
           {!login &&
             <li className='nav-item'>
