@@ -5,7 +5,9 @@ import { Link, NavLink } from 'react-router-dom';
 
 
 function QuestionPreview({ question }) {
+    
     let tags = []
+    
     // Generar array de tags para recorrerlo
     if(question.tags) {
         tags = question.tags.split(',')
@@ -39,6 +41,7 @@ function QuestionPreview({ question }) {
             <main className='question-preview'>
                 <h3>
                     <NavLink to={`/question/${question.id}`} className="question-preview-title"> {question.title} </NavLink>
+                    <NavLink to={`/question/${question.id}`} className="question-preview-languages"> {question.languages} </NavLink>
                 </h3>
                 <div className='question-preview-excerpt'>
                     {question.body.substring(0, 250) + ' ...'}

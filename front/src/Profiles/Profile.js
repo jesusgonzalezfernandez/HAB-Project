@@ -1,8 +1,7 @@
 // import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, Redirect, useParams } from 'react-router-dom';
-import QuestionPreview from '../Content/QuestionPreview';
+import { Redirect, useParams } from 'react-router-dom';
 import Loading from '../Home/Loading';
 import DeleteAcount from './DeleteAcount';
 import EditPassword from './EditPassword';
@@ -13,13 +12,9 @@ import UserActivity from './UserActivity';
 
 function Profile() {
   const [dataUser, setDataUser] = useState()
-  const [dataQuestions, setDataQuestions] = useState()
-  const [dataAnswers, setDataAnswers] = useState()
-
   const login = useSelector(state => state.login)
-  const [editMode, setEditMode] = useState(false)
   const [active, setActive] = useState('activity')
-
+  const [click, setClick] = useState(false);
 
   // Obtener id del usuario buscado
   const { userID } = useParams()
@@ -36,10 +31,8 @@ function Profile() {
         })
 
       const data = await res.json();
+
       setDataUser(data.user)
-      setDataQuestions(data.questions)
-      setDataAnswers(data.answers)
-      // console.log(`Resultado del perfil del usuario: ${JSON.stringify(data)}`)
     }
     fetchData()
   }, [])
@@ -65,16 +58,16 @@ function Profile() {
         </div>
         <div className='profile-menu'>
           <ul>
-            <li onClick={() => setActive('activity')}>
+            <li onClick={() => setActive('activity')} className='profile-menu-ul'>
               Actividad
             </li>
-            <li onClick={() => setActive('profile')}>
+            <li onClick={() => setActive('profile')} className='profile-menu-ul'>
               Editar perfil
             </li>
-            <li onClick={() => setActive('password')}>
+            <li onClick={() => setActive('password')} className='profile-menu-ul'>
               Cambiar contraseña
             </li>
-            <li onClick={() => setActive('delete')}>
+            <li onClick={() => setActive('delete')} className='profile-menu-ul'>
               Eliminar cuenta
             </li>
 
