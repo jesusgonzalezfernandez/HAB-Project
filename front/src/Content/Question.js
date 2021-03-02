@@ -65,7 +65,7 @@ function Question() {
                     <a href="http://localhost:3000/questions"><FontAwesomeIcon icon={faArrowCircleLeft} color="white" size="lg" /> Volver </a>
                 </div>
                 {/* El link no funciona, esa ruta no existe */}
-                <div className="question language">Posteado en: <span className="question language tag"><a href={`http://localhost:3000/questions?languages=${data.languages}`}> {data.languages} </a> </span></div>
+                <div className="question language">Posteado en: <span className="question language tag"><a href={`http://localhost:3000/questions?languages=${data.languages}`}> {data.languages[0]} </a> </span></div>
             </div>
             <div className="question box">
                 {/* Título */}

@@ -23,7 +23,9 @@
     text-decoration: none;
     color: var(--blanco);
     padding: 10px;
-    border-radius: 0px 10px 10px 10px / 0px 10px 10px 10px;}
+    border-radius: 0px 10px 10px 10px / 0px 10px 10px 10px;
+    display: inline-block;
+}
 
 .questions-portal .left-aside {
     width: 20%;
