@@ -22,7 +22,7 @@ const ReviewsContainer = styled(Element)`
 `;
 
 const StyledCarouselProvider = styled(CarouselProvider)`
-  width: 50%;
+  width: 70%;
   @media screen and (max-width: 480px) {
     width: 100%;
   }
