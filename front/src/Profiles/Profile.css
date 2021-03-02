@@ -70,6 +70,71 @@ img.profile-avatar {
     margin-bottom: 10px;
 }
 
+.edit-password {
+    background-color: rgba(255, 255, 255, 0.60);
+    padding: 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 10px;
+    box-sizing: border-box;
+    width: 60vw;
+}
+
+.edit-password input {
+    margin-bottom: 20px;
+    border: none;
+    border-bottom:  solid 1px rgba(0,0,0,.1);
+    border-radius: 15px;
+    background: transparent;
+    transition:  all .3s linear; 
+    color:  #000; 
+    font-weight:  600;
+    font-size:  14px; 
+    display: block;
+    font-family: 'Jost', sans-serif;
+}
+
+.delete-acount {
+    background-color: rgba(255, 255, 255, 0.60);
+    padding: 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 10px;
+    box-sizing: border-box;
+    width: 60vw;
+}
+
+.delete-acount input {
+    margin-bottom: 20px;
+    border: none;
+    border-bottom:  solid 1px rgba(0,0,0,.1);
+    border-radius: 15px;
+    background: transparent;
+    transition:  all .3s linear; 
+    color:  #000; 
+    font-weight:  600;
+    font-size:  14px; 
+    display: block;
+    font-family: 'Jost', sans-serif;
+}
+
+.delete-acount textarea {
+    margin-bottom: 20px;
+    border: none;
+    border-bottom:  solid 1px rgba(0,0,0,.1);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: transparent;
+    transition:  all .3s linear; 
+    color:  #000; 
+    font-weight:  600;
+    font-size:  14px; 
+    display: block;
+    font-family: 'Jost', sans-serif;
+    width: 20vw;
+    height: 10vh;
+}
+
 .form-buttons div {
     display: inline;
     margin: 20px;
