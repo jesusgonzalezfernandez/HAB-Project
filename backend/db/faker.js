@@ -380,7 +380,7 @@ const createFakeQuestions = async (u, q) => {
 
         languagesRandomNumber = Math.floor(Math.random()*languages.length);
 
-        const date = faker.date.between('2018-01-01', '2021-03-02')
+        const date = faker.date.between('2020-01-01', '2021-03-02')
 
         const timestamp = date.getTime() / 1000
 

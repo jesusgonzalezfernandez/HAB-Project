@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+import './ValidateUser.css'
 
 function ValidateUser() {
     const [data, setData] = useState([])
@@ -15,10 +17,14 @@ function ValidateUser() {
         setData(data)
     }, [])
 
-    if (data) return <Redirect to='/login' />
+    // if (data) return <Redirect to='/login' />
 
     return (
-        'Usuario validado correctamente'
+        <div className= "validate user">
+        <p>Usuario validado correctamente</p>
+        <p>¡Inicia sesión para unirte a la comunidad Howdoi!</p>
+        <Link to='/login' className="submit"> <p>Iniciar sesión</p></Link>
+        </div>        
     );
 }
 

@@ -12,15 +12,9 @@ import UserActivity from './UserActivity';
 
 function Profile() {
   const [dataUser, setDataUser] = useState()
-  const [dataQuestions, setDataQuestions] = useState()
-  const [dataAnswers, setDataAnswers] = useState()
-
   const login = useSelector(state => state.login)
-  const [editMode, setEditMode] = useState(false)
   const [active, setActive] = useState('activity')
   const [click, setClick] = useState(false);
-
-  const handleClick = () => setClick(!click);
 
   // Obtener id del usuario buscado
   const { userID } = useParams()
@@ -37,9 +31,8 @@ function Profile() {
         })
 
       const data = await res.json();
+
       setDataUser(data.user)
-      setDataQuestions(data.questions)
-      setDataAnswers(data.answers)
     }
     fetchData()
   }, [])
