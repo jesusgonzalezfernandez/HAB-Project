@@ -7,6 +7,7 @@ import Loading from '../Home/Loading';
 
 
 function UserActivity() {
+
   const [dataUser, setDataUser] = useState()
   const [dataQuestions, setDataQuestions] = useState()
   const [dataAnswers, setDataAnswers] = useState()
@@ -18,7 +19,9 @@ function UserActivity() {
 
   // Ejecutar fetch al cargar la página
   useEffect(() => {
+
     async function fetchData() {
+      
       const res = await fetch(
 
         `http://localhost:3001/users/profile/${userID}`,
@@ -28,11 +31,15 @@ function UserActivity() {
         })
 
       const data = await res.json();
+
       setDataUser(data.user)
       setDataQuestions(data.questions)
       setDataAnswers(data.answers)
+
     }
+  
     fetchData()
+  
   }, [])
 
   if (!login) return <Redirect to='/' />

@@ -32,11 +32,12 @@ const updatePasswordQuery = async data => {
 
 const updatePassword = async (req, res) => {
 
+    console.log('* Update Password *');
+
     // Obtener variables
     let { userID } = req.params;
     let reqData = req.body
-    console.log(reqData)
-
+console.log(reqData);
     try {
 
         // Obtener, validar y corregir datos
@@ -82,6 +83,13 @@ const updatePassword = async (req, res) => {
 
                 throw new Error ('Incorrect password')
             
+            }
+
+        // Comprobar si la nueva contraseña es diferente a la vieja
+        if (reqData.oldPassword === reqData.newPassword) {
+
+            throw new Error('La nueva contraseña no puede ser igual a la anterior contraseña')
+
             }
 
         // Actualizar la contraseña

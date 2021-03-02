@@ -107,7 +107,7 @@ const getQuestionsList = async (req, res) => {
 
     console.log('* Get Questions List *');
 
-    let questionsList = [];
+    let questionsComplete = [];
 
     // Obtener variables
     const reqData = req.query
@@ -115,11 +115,11 @@ const getQuestionsList = async (req, res) => {
     try {
 
         // Enviar a BD
-        const result = await getQuestionsListQuery (reqData)
-        console.log(`Has obtenido: ${result.length} resultados`);
+        const questions = await getQuestionsListQuery (reqData)
+        console.log(`Has obtenido: ${questions.length} resultados`);
 
         // Añadir lenguajes y respuestas a cada pregunta del resultado
-        for (let question of result) {
+        for (let question of questions) {
 
             // Crear dos campos languages y answers e inicializar a array vacío
             question = {...question, languages: [], answers: []}
@@ -141,13 +141,13 @@ const getQuestionsList = async (req, res) => {
             }
 
             // Añadir la pregunta al listado
-            questionsList.push(question)
+            questionsComplete.push(question)
 
         }
 
         // Si busca por lenguaje, filtrar los usuarios...
         if (reqData.languages) {
-            questionsList = questionsList
+            questionsComplete = questionsComplete
                 // Que entre sus lenguajes contengan el lenguaje buscado
                 .filter(question => ( question.languages
                     .filter(language => language
@@ -163,7 +163,7 @@ const getQuestionsList = async (req, res) => {
     
     }
 
-    res.send(questionsList)
+    res.send(questionsComplete)
 
 }
 

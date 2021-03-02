@@ -45,6 +45,35 @@ const getUserQuestionsQuery = async userID => {
 
 }
 
+const getQuestionLanguagesQuery = async questionID => {
+
+    let query =
+
+        `
+            SELECT languages.name FROM languages
+                JOIN questions_languages ON questions_languages.languageID = languages.id 
+                JOIN questions ON questions.id = questions_languages.questionID
+            WHERE questions.id = '${questionID}'
+        `
+
+    const result = await performQuery(query)
+    return result
+
+}
+
+const getQuestionAnswersQuery = async questionID => {
+
+    let query = 
+
+        `
+            SELECT * FROM answers WHERE questionID = ${questionID}
+        `
+    
+    const result = await performQuery(query)
+    return result
+    
+}
+
 const getUserAnswersQuery = async userID => {
 
     const query = 
@@ -65,7 +94,7 @@ const getUserProfileData = async (req, res) => {
 
     let userData;
     let userLanguages;
-    let userQuestions;
+    let userQuestionsComplete = [];
     let userAnswers;
     
     // Obtener variables
@@ -97,6 +126,31 @@ const getUserProfileData = async (req, res) => {
         // Obtener array de preguntas del usuario target
         userQuestions = await getUserQuestionsQuery(reqData.userID)
 
+        // Obtener el array de lenguajes y respuestas a cada pregunta
+        for (let question of userQuestions) {
+
+            // Crear dos campos languages y answers e inicializar a array vacío
+            question = {...question, languages:[], answers: []}
+            
+            // Obtener lenguajes de la pregunta
+            const languages = await getQuestionLanguagesQuery(question.id)
+
+            // Añadir cada lenguaje al array dentro del objeto question
+            for (language of languages) {
+                question.languages.push(language.name)
+            }
+
+            const answers = await getQuestionAnswersQuery(question.id)
+            
+            
+            for (answer of answers) {
+                question.answers.push(answer)
+            }
+
+            userQuestionsComplete.push(question)
+            
+        }
+
         // Obtener array de respuestas del usuario target
         userAnswers = await getUserAnswersQuery(reqData.userID)
 
@@ -110,11 +164,13 @@ const getUserProfileData = async (req, res) => {
     const response = {
         user: userData,
         languages: userLanguages.map(l => l.name),
-        questions: userQuestions,
+        questions: userQuestionsComplete,
         answers: userAnswers
     }
 
     console.log(response);
+
+    // console.log(response);
     res.send(response)
 }
 
