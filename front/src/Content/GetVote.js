@@ -2,10 +2,13 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 function GetVote({voteKey, parentID}) {
+
+console.log('votekey: ' + voteKey);
+
     const [data, setData] = useState([])
     const login = useSelector(state => state.login)
 
-    // Ejecutar fetch al cargar la página
+    // Ejecutar fetch al cargar la página o cambiar el voteKey
     useEffect(async () => {
 
         // Enviar consulta a la API
@@ -21,8 +24,9 @@ function GetVote({voteKey, parentID}) {
         console.log(data)
 
     }, [voteKey])
+
     return (
-        <div className="vote number">Votos: {data.value}</div>
+        <div className="vote number">Votos: {data.length}</div>
     )}
 
 

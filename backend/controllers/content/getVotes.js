@@ -1,27 +1,31 @@
 const performQuery = require('../../db/performQuery')
 
 getVoteDataQuery = async data => {
+
     const query =
 
         `
             SELECT
 
-            creationDate,
-            updateDate,
-            answerID,
-            userID,
-            value
+                creationDate,
+                updateDate,
+                answerID,
+                userID,
+                value
 
-        FROM votes WHERE answerID = ${data.answerID}
+            FROM votes WHERE answerID = ${data.answerID}
         
         `
 
-        const result = ( await performQuery(query) ) [0]
-        return result
+    const result = await performQuery(query)
+    return result
 
 }
 
 const getVotes = async (req, res) => {
+
+    console.log('* Get Votes *');
+
     let voteData;
 
     // Obtener variables
@@ -31,14 +35,14 @@ const getVotes = async (req, res) => {
     try {
 
         // Obtener información del voto
-        voteData = await getVoteDataQuery (reqData)
+        votes = await getVoteDataQuery (reqData)
 
         // Si el voto no existe, se envía un error
-        if (!voteData) {
+        if (!votes) {
 
             throw new Error ('Vote not found')
         
-        } 
+        }
         
     } catch (e) {
 
@@ -47,7 +51,7 @@ const getVotes = async (req, res) => {
 
     }
 
-    res.send(voteData)
+    res.send(votes)
 
 }
 

@@ -37,7 +37,7 @@ const castVoteQuery = async data => {
 
 const castVote = async (req, res) => {
 
-    console.log('*Caste Vote*');
+    console.log('* Cast Vote *');
 
     let query;
 

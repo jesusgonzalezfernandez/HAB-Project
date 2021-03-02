@@ -17,7 +17,8 @@ function GetAnswers({ key, reload }) {
     // Definir el estado del acordeon activo
     const [active, setActive] = useState()
 
-    const [voteKey, setVoteKey] = useState()
+    // Estado de recarga de las respuestas para obtener los votos
+    const [voteKey, setVoteKey] = useState(0)
 
     // Obtener información de login
     const login = useSelector(state => state.login)
@@ -35,11 +36,13 @@ function GetAnswers({ key, reload }) {
                 headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
                 method: 'GET'
             })
-
-        const data = await res.json();
-        setData(data)
-        console.log(`Resultado de la respuesta: ${JSON.stringify(data)}`)
-
+        
+        if(!res.ok) {
+            console.log('Se ha producido un error');
+        } else {
+            const data = await res.json()
+            setData(data)
+        }
 
     }, [key])
 

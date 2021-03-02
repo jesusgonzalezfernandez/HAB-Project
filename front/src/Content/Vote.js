@@ -1,15 +1,15 @@
 import './Vote.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGratipay } from '@fortawesome/free-brands-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 
 function Vote({ parentID, reload }) {
+
     const login = useSelector(state => state.login)
-    const dispatch = useDispatch()
 
-
-    const answerID = parentID
+    const [apiError, setApiError] = useState()
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -26,15 +26,27 @@ function Vote({ parentID, reload }) {
                 method: 'POST'
             })
 
-        console.log(`Res de value ${JSON.stringify(res)}`);
-        dispatch({ type: 'update', value })
-        // reload()
+        if(!res.ok) {
+            console.log('Se ha producido un error');
+            res.text().then(e => setApiError(e))
+        } else {
+            console.log('El voto se ha emitido correctamente');
+            setApiError('')
+            reload()
+        }
 
     }
 
+    console.log(apiError);
+
     return (
+
         <div>
-            <button className="vote button" onClick={handleSubmit}><FontAwesomeIcon className="vote icon" icon={faGratipay} /></button>
+
+            <div>
+                <button className="vote button" onClick={handleSubmit}><FontAwesomeIcon className="vote icon" icon={faGratipay} /></button>
+            </div>
+
         </div>
     )
 }
