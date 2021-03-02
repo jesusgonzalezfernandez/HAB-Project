@@ -43,6 +43,8 @@ function Contact() {
                 </form>
             </div>
             <div className="contact text">
+                <div className='imagen-contacto'>
+                </div>
             <h3>¿Quieres conocer más sobre Howdoi?</h3>
             <p>La mayor comunidad de expertos.
             Consúltanos tus dudas o contáctanos para conocer cómo puedes ayudar a nuestra comunidad de aprendizaje.</p>

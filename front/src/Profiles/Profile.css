@@ -214,3 +214,35 @@ div.panel-preguntas h3 {
 ul li {
     list-style: none;
 }
+
+.background-image-profile {
+    background-image: url('../imagenes/dashboard-student.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 50px;
+    width: 60vw;
+    height: 20vh;
+    border-radius: 10px;
+    position: relative;
+}
+
+img.profile-avatar-background {
+    width: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 80px;
+    left: 25vw;
+}
+
+.background-image-profile-expert {
+    background-image: url('../imagenes/dashboard-expert.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 50px;
+    width: 60vw;
+    height: 20vh;
+    border-radius: 10px;
+    position: relative;
+}

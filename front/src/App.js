@@ -13,6 +13,7 @@ import Register from './User/Register'
 import Navbar from './NavBar/Navbar';
 import Footer from './Home/Footer';
 import ValidateUser from './User/ValidateUser';
+import NotFound from './assets/components/NotFound';
 
 // Obtener query de la URL
 function useQuery() {
@@ -64,7 +65,7 @@ function App() {
           <Contact />
         </Route>
         <Route path="/">
-          Error 404
+          <NotFound />
         </Route>
       </Switch>
       <Footer />

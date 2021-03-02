@@ -50,3 +50,12 @@
     border-radius: 25px;
     line-height: 40px;
 }
+
+.imagen-contacto {
+    background-image: url('../imagenes/pregunta.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 30vw;
+    height: 30vh;
+}

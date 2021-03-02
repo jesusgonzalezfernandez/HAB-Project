@@ -75,6 +75,22 @@ function Profile() {
         </div>
       </div>
       <div className='profile-info'>
+        {login.isStudent &&
+          <div className='background-image-profile'>
+            <img src={imagen} alt="avatar" className='profile-avatar-background' />
+          </div>
+        }
+        {login.isAdmin &&
+          <div className='background-image-profile-expert'>
+            <img src={imagen} alt="avatar" className='profile-avatar-background' />
+          </div>
+        }
+        {login.isExpert &&
+          <div className='background-image-profile-expert'>
+            <img src={imagen} alt="avatar" className='profile-avatar-background' />
+          </div>
+        }
+
         {active === 'activity' && <UserActivity />}
         {active === 'profile' && <EditProfile reload={() => setActive(!active)} />}
         {active === 'password' && <EditPassword reload={() => setActive(!active)} />}
