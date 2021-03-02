@@ -32,15 +32,14 @@ function EditProfile({ reload }) {
   const [displayBirth, setDisplayBirth] = useState( date || "");
   const [displayCountry, setDisplayCountry] = useState(login.country || "");
   const [displayUsername, setDisplayUsername] = useState(login.username || "");
-  const [error, setError] = useState();
+  const [apiError, setApiError] = useState();
 
+  const handleSubmit = async e => {
 
-  console.log(displayBirth);
-
-  const handleSubmit = async (e) => {
     e.preventDefault();
-    const avatar = e.target.avatar.files[0];
-    console.log(avatar);
+    
+    const avatar = e.target.avatar.files[0]
+    
     const fd = new FormData();
     fd.append("avatar", avatar);
     fd.append("name", displayName);
@@ -57,15 +56,16 @@ function EditProfile({ reload }) {
 
     if (!res.ok) {
       // Si ha habido algún error, se guarda para mostrarlo
-      res.text().then((e) => setError(e));
       console.log("Se ha producido un error");
+      res.text().then((e) => setApiError(e));
     } else {
       const data = await res.json();
       // Enviar objeto action al redux, con el type y los datos obtenidos de la API
       dispatch({ type: "update", data });
+      setApiError();
+      reload();
     }
 
-    reload();
   };
 
   return (
@@ -109,9 +109,12 @@ function EditProfile({ reload }) {
           onChange={(e) => setDisplayBirth(e.target.value)}
         />
         <div className="form-buttons">
-          <div>Guardar</div>
+          <button>Guardar</button>
           <div onClick={() => reload()}>Cancelar</div>
         </div>
+        {apiError && 
+          <span>{apiError} - Inténtelo de Nuevo</span>
+        }
       </form>
     </div>
   );

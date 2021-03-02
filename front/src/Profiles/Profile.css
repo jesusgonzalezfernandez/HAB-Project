@@ -135,7 +135,7 @@ img.profile-avatar {
     height: 10vh;
 }
 
-.form-buttons div {
+.form-buttons button {
     display: inline;
     margin: 20px;
     padding: 15px;
@@ -144,7 +144,21 @@ img.profile-avatar {
     font-weight: 700;
     cursor: pointer;
     border-radius: 25px;
+}
 
+.form-buttons div, 
+.form-buttons button {
+    font-size: inherit;
+    font-family: inherit;
+    border: none;
+    display: inline;
+    margin: 20px;
+    padding: 15px;
+    background: #3307ad;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 25px;
 }
 
 .profile-menu {

@@ -32,7 +32,6 @@ const updateUserQuery = async data => {
 
 }
 
-
 const updateUser = async (req, res) => {
 
     console.log('*Update User*');
@@ -51,7 +50,7 @@ const updateUser = async (req, res) => {
 
             const fileID = uuid.v4()
             outputFileName = `${process.env.TARGET_FOLDER}/profile/${fileID}.jpg`
-            
+
             await fsPromises.writeFile(outputFileName, req.files.avatar.data)
         
         }
@@ -71,68 +70,72 @@ const updateUser = async (req, res) => {
         
         */
 
-        // Añadir ID del params (añadir avatar si lo hubiera)
-        reqData = { ...reqData, userID: userID, avatar: outputFileName || 'default' }
+        // Añadir ID del params
+        reqData = { ...reqData, userID: userID}
 
         // Comprobar si el username ya existe
-        console.log(reqData.user)
-        // Crear objeto userName
-        let username = reqData.username
-        username = { username }
+        
+            // Crear objeto userName
+            let username = reqData.username
+            username = { username }
 
-        // Obtener query (enviar objeto username)
-        query = getUserQuery(username)
+            // Obtener query (enviar objeto username)
+            query = getUserQuery(username)
 
-        // Procesar query
-        user = (await performQuery(query))[0]
+            // Procesar query
+            user = (await performQuery(query))[0]
 
-        // Enviar error si ya existe (Siempre y cuando sea diferente al nombre anterior)
-        if (user && user.username !== reqData.username) {
+            // Enviar error si ya existe (Siempre y cuando sea diferente al nombre anterior)
+            if (user && user.username !== reqData.username) {
 
-            throw new Error('Username Already in Use')
+                throw new Error('Username Already in Use')
 
-        }
+            }
 
-        // Comprobar si el usuario existe / Obtener sus datos
+        // Comprobar si el usuario existe / Obtener sus datos y avatar
 
-        // Crear objeto userID
-        userID = { userID }
+            // Crear objeto userID
+            userID = { userID }
 
-        // Obtener query (Enviar sólo ID)
-        query = getUserQuery(userID)
+            // Obtener query (Enviar sólo ID)
+            query = getUserQuery(userID)
 
-        // Procesar query
-        user = (await performQuery(query))[0]
+            // Procesar query
+            user = (await performQuery(query))[0]
 
-        // Error
-        if (!user) {
+            // Error
+            if (!user) {
 
-            throw new Error('User does not exists')
+                throw new Error('User does not exists')
 
-        }
+            }
 
         // Procesar los datos
 
         // Formatear y almacenar fecha de nacimiento
 
-        // Pasar la fecha del formato MM-DD-YYYY a timestamp
-        const timestamp = reqData.birthDate.getTime() / 1000
+            // Pasar la fecha del formato MM-DD-YYYY a timestamp
+            const timestamp = reqData.birthDate.getTime() / 1000
 
-        // Transformar de nuevo al formato de BD
-        reqData.birthDate = moment.unix(timestamp).format('YYYY-MM-DD')
+            // Transformar de nuevo al formato de BD
+            reqData.birthDate = moment.unix(timestamp).format('YYYY-MM-DD')
 
-        // Añadir email a reqData
-        reqData = { ...reqData, email: user.email }
+            // Añadir email a reqData
+            reqData = {...reqData, email: user.email }
 
-        // Enviar a BD
-        const result = await updateUserQuery(reqData)
+            // Añadir avatar a reqData
+            reqData = {...reqData, avatar: outputFileName || user.avatar }
+console.log('---------------------------------------------');
+console.log(reqData);
+            // Enviar a BD
+            const result = await updateUserQuery(reqData)
 
-        // Error
-        if (!result) {
+            // Error
+            if (!result) {
 
-            throw new Error('Database Error')
+                throw new Error('Database Error')
 
-        }
+            }
 
         console.log(`Successfully Updated. Affected Rows: ${result.affectedRows}`);
 
