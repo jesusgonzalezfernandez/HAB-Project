@@ -7,6 +7,15 @@
 .questions-portal .links {
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
+    margin-top: 100px;
+}
+
+.questions-portal .links a,
+.questions-portal .links h6 {
+    color: var(--morado);
+    margin-bottom: 5px;
+    font-size: small;
 }
 
 .questions-portal .create-question-button {
@@ -44,17 +53,23 @@
 .main-content-header-toolbar {
     margin-top: 50px;
     display: flex;
+    padding: 10px 0px;
+    width: 100%;
 }
 
-.main-content-header-toolbar div, input, button {
-    border: 1px solid black;
+.main-content-header-toolbar div, 
+.main-content-header-toolbar input, 
+.main-content-header-toolbar button {
     background-color: white;
-    border-radius: 2px;
-    padding: 5px;
+    padding: 15px 15px;
+    border: none;
+    max-width: 100px;
+    flex-grow: 1;
 }
 
 .main-content-header-toolbar button.active {
-    background-color: aquamarine;
+    background-color: var(--morado);
+    color: var(--amarillo);
 } 
 
 .main-content-header-options {
@@ -176,4 +191,5 @@
 @media only screen and (max-width: 1024px){
     .questions-portal .left-aside {display: none;}
     .questions-portal .right-aside {display: none;}
+    .main-content-header-toolbar {display: none;}
 }

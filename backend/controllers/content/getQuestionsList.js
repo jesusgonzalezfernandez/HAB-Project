@@ -155,7 +155,8 @@ const getQuestionsList = async (req, res) => {
                         .includes(reqData.languages
                             .toLowerCase()) ).length))
         }
-
+        console.log('-------------------------------------------');
+        console.log(req.query);
     } catch (e) {
 
         res.status(500).send(e.message)

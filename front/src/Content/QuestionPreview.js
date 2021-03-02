@@ -41,7 +41,11 @@ function QuestionPreview({ question }) {
             <main className='question-preview'>
                 <h3>
                     <NavLink to={`/question/${question.id}`} className="question-preview-title"> {question.title} </NavLink>
-                    <NavLink to={`/question/${question.id}`} className="question-preview-languages"> {question.languages} </NavLink>
+                    {/* {question.languages && 
+                        question.languages.map(language => 
+                            <Link to={'/questions?languages=' + language} className="question-preview-languages"> {language} </Link>
+                        )
+                    } */}
                 </h3>
                 <div className='question-preview-excerpt'>
                     {question.body.substring(0, 250) + ' ...'}

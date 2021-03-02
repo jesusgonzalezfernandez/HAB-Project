@@ -60,6 +60,7 @@ function QuestionsPortal({ query }) {
     <div className="questions-portal">
       <aside className="left-aside">
         <div className="links">
+          <h6>Otros:</h6>
           <a href="">Tags</a>
           <a href="">Users</a>
           <a href="">Jobs</a>
@@ -97,8 +98,9 @@ function QuestionsPortal({ query }) {
             </div>
           </div>
 
+          {/* Barra de Herramientas Para Filtrar/Ordenar Preguntas */}
           <div className="main-content-header-toolbar">
-            <button
+            <button className='sortby-views'
               onClick={(e) =>
                 setSortBy(sortBy === "views" ? "!views" : "views")
               }
@@ -110,7 +112,7 @@ function QuestionsPortal({ query }) {
                   : "^"
                 : ""}
             </button>
-            <button
+            <button className='sortby-answers'
               onClick={(e) =>
                 setSortBy(sortBy === "answers" ? "!answers" : "answers")
               }
@@ -122,7 +124,7 @@ function QuestionsPortal({ query }) {
                   : "^"
                 : ""}
             </button>
-            <button
+            <button className='sortby-date'
               onClick={(e) => setSortBy(sortBy === "date" ? "!date" : "date")}
             >
               Date{" "}
@@ -132,9 +134,9 @@ function QuestionsPortal({ query }) {
                   : "^"
                 : ""}
             </button>
-            <button
+            <button className='day-filter'
               onClick={(e) => setTimeFilter(timeFilter !== "day" ? "day" : "")}
-              className={timeFilter === "day" ? "active" : ""}
+              className={"day-filter " + (timeFilter === "day" ? "active" : "")}
             >
               Today
             </button>
@@ -142,26 +144,28 @@ function QuestionsPortal({ query }) {
               onClick={(e) =>
                 setTimeFilter(timeFilter !== "week" ? "week" : "")
               }
-              className={timeFilter === "week" ? "active" : ""}
+              className={"week-filter " + (timeFilter === "week" ? "active" : "")}
             >
-              Last Week
+              Week
             </button>
             <button
               onClick={(e) =>
                 setTimeFilter(timeFilter !== "month" ? "month" : "")
               }
-              className={timeFilter === "month" ? "active" : ""}
+              className={"month-filter  " + (timeFilter === "month" ? "active" : "")}
             >
-              Last Month
+              Month
             </button>
             <input
+              className="title-filter"
               type="text"
-              placeholder="Filtrar por Título..."
+              placeholder="Título..."
               onChange={(e) => setTitleFilter(e.target.value)}
             />
             <input
+              className='body-filter'
               type="text"
-              placeholder="Filtrar por Contenido..."
+              placeholder="Contenido..."
               onChange={(e) => setBodyFilter(e.target.value)}
             />
             <button

@@ -47,8 +47,8 @@ function Home() {
     <div className="home">
       <header>
         <div className='home-header-titulo'>
-          <h1>Lorem fistrum nostrud dolore no puedor exercitation.</h1>
-          <p>A wan te voy a borrar el cerito a wan está la cosa muy malar ullamco caballo blanco caballo negroorl reprehenderit te va a hasé pupitaa. Dolor ut hasta luego Lucas ese que llega.</p>
+          <h1>Aprende programación con los mejores expertos.</h1>
+          <p>La mayor comunidad de programación de habla hispana enfocada en los principales lenguajes de programación. Contacta con expertos del sector, con años de experiencia y un amplio bagaje profesional en el ámbito de las TIC.</p>
           <div className='home-enlaces'>
             <Link to="/#steps"><div className='home-conocer'>Conocer más</div></Link>
             <Link to="/register"><div className='home-registro'>Registrarse</div></Link>
@@ -64,7 +64,7 @@ function Home() {
         <img src={code} alt="experto" />
           <div className='home-section-titles-description'>
             <h2>Haz tu pregunta</h2>
-            <p>Por la gloria de mi madre te va a hasé pupitaa ese pedazo de ese que llega diodenoo pupita dolore amatomaa te va a hasé pupitaa incididunt te voy a borrar el cerito.</p>
+            <p>Te asignaremos un experto en el sector que podrá resolver tus dudas y ayudarte a avanzar en tu carrera profesional en el mundo de la programación. Por la gloria de mi madre te va a hasé pupitaa ese pedazo cerito.</p>
           </div>
         </article>
         <article className='home-articles'>
