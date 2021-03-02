@@ -95,7 +95,7 @@
     color: var(--morado);
 }
 
-.ql-syntax.ql-align-justify {
+.ql-syntax {
     background-color: #011627;
     padding: 20px;
     display: inline-block;

@@ -67,7 +67,7 @@ function GetAnswers({ key, reload }) {
                                 </div>
                             </div>
                             <main className="answer main">
-                                <div className="answer body">{answer.body}</div>
+                                <div dangerouslySetInnerHTML={{__html: answer.body}} className="answer body"></div>
                             </main>
                             <div className='get-comments'>
                                 {/* Obtener los comentarios a partir del id de respuesta */}

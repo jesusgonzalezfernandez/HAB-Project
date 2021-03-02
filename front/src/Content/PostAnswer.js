@@ -15,6 +15,9 @@ function PostAnswer({ reload }) {
 
     const [content, setContent] = useState('')
 
+    const [apiError, setApiError] = useState()
+    console.log(apiError);
+
     const modules = {
 
         // Opciones del toolbar
@@ -58,14 +61,17 @@ function PostAnswer({ reload }) {
                 body: JSON.stringify(answerData),
                 method: 'POST'
             })
-        
-        // Reiniciar el contenido
-        setContent('')
-        
-        reload()
 
-        console.log(res);
-
+        if(!res.ok) {
+            console.log('Se ha producido un error');
+            res.text().then(e => setApiError(e))
+        } else {
+            // Reiniciar el contenido
+            setContent('')
+            setApiError('')
+            reload()
+        }
+    
     }
 
     return (
@@ -87,6 +93,9 @@ function PostAnswer({ reload }) {
                     Enviar
                     <div class="success"></div>
                 </button>
+                {apiError && 
+                    <span>{apiError}</span>
+                }
             </form>
         </div>
     )

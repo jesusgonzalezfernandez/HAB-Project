@@ -33,6 +33,7 @@
 
 .answer.main {
     display: flex;
+    width: 100%;
 }
 
 .answer.vote {
@@ -48,6 +49,7 @@
 
 .answer.body {
     padding: 20px 30px;
+    width: 100%;
 }
 
 .answer.footer {

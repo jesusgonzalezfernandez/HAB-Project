@@ -8,7 +8,7 @@ const questionValidation = joi.object({
         .string()
         .trim()
         .max(200)
-        .min(50)
+        .min(10)
         .required()
         .messages(),
 

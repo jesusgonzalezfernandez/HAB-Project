@@ -42,7 +42,7 @@ function GetComments({ parentID }) {
                                     {data.creationDate}
                                 </Moment>
                             </div>
-                            <div key={data.id} className="comment body"> {comment.body} </div>
+                            <div key={data.id} dangerouslySetInnerHTML={{__html: comment.body}} className="comment body"></div>
                         </div>
                     )}
                 </div>

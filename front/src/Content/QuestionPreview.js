@@ -48,7 +48,7 @@ function QuestionPreview({ question }) {
                         )
                     } 
                 <div className='question-preview-excerpt'>
-                    {question.body.substring(0, 250) + ' ...'}
+                    <div dangerouslySetInnerHTML={{__html: question.body.substring(0, 250) + ' ...'}} className="answer body"></div>
                 </div>
                 <div className='question-preview-tags'>
                     {tags.length >= 1 && 

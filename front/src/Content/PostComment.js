@@ -15,6 +15,9 @@ function PostComment({ reload, parentID }) {
 
     const [content, setContent] = useState('')
 
+    const [apiError, setApiError] = useState()
+    console.log(apiError);
+
     const modules = {
 
         // Opciones del toolbar
@@ -44,22 +47,27 @@ function PostComment({ reload, parentID }) {
         }
 
         const res = await fetch(
+
             // Dirección
             `http://localhost:3001/questions/${questionID}/${parentID}`,
             // Contenido
             {
-                headers: { 'Content-Type': 'application/json', auth: login.token },
+                headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
                 body: JSON.stringify(commentData),
                 method: 'POST'
             })
-        
-        // Reiniciar el contenido
-        setContent('')
-        
-        reload()
 
-        console.log(`Res del fetch ${res}`);
-
+        if(!res.ok) {
+            console.log('Se ha producido un error');
+            res.text().then(e => setApiError(e))
+        } else {
+            // Reiniciar el contenido
+            setContent('')
+            // Reiniciar el error
+            setApiError('')
+            reload()
+        }
+    
     }
 
     return (
