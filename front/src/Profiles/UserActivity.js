@@ -39,29 +39,40 @@ function UserActivity() {
 
   if (!dataUser) return <Loading />
 
+  if (!dataAnswers) return <Loading />
+
+  if (!dataQuestions) return <Loading />
+
   return (
-      <div className='profile-data'>
-        <div className='panel-respuestas'>
-          <h3>Tus últimas respuestas</h3>
-          <ul>
-            {dataAnswers && dataAnswers.map((answer, i) =>
-              <li className='profile-lista-respuestas' key={i}>
-                <Link to={`/question/${answer.questionID}`}> {answer.body} </Link>
-              </li>
-            )}
-          </ul>
-        </div> 
-        <div className='panel-preguntas'>
-          <h3>Tus últimas preguntas</h3>
-          <ul>
-            {dataQuestions && dataQuestions.map((question, i) =>
-              <li className='profile-lista-preguntas' key={i}>
-                <QuestionPreview question={question} />
-              </li>
-            )}
-          </ul>
-        </div>
+    <div className='profile-data'>
+      <div className='panel-respuestas'>
+        <h3>Tus últimas respuestas</h3>
+        <ul>
+          {dataAnswers.length >= 1 && dataAnswers.map((answer, i) =>
+            <li className='profile-lista-respuestas' key={i}>
+              <Link to={`/question/${answer.questionID}`}> {answer.body} </Link>
+            </li>
+          )}
+          {dataAnswers.length < 1 &&
+            <div><i>Todavía no tienes respuestas</i></div>
+          }
+        </ul>
       </div>
+
+      <div className='panel-preguntas'>
+        <h3>Tus últimas preguntas</h3>
+        <ul>
+          {dataQuestions.length >= 1 && dataQuestions.map((question, i) =>
+            <li className='profile-lista-preguntas' key={i}>
+              <QuestionPreview question={question} />
+            </li>
+          )}
+          {dataAnswers.length < 1 &&
+            <div><i>Todavía no tienes preguntas</i></div>
+          }
+        </ul>
+      </div>
+    </div>
   )
 }
 

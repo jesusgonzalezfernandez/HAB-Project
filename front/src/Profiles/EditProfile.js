@@ -53,14 +53,16 @@ function EditProfile({ reload }) {
   return (
     <div className='profile-edit'>
       <form onSubmit={handleSubmit}>
-        <input name='avatar' type='file' accept='image/*' />
-        <input type="text" placeholder='Username...' value={displayUsername} onChange={e => setDisplayUsername(e.target.value)} minLength='3' />
-        <input type="text" placeholder='Nombre...' value={displayName} onChange={e => setDisplayName(e.target.value)} />
-        <input type="text" placeholder='Apellido...' value={displaySurname} onChange={e => setDisplaySurname(e.target.value)} />
-        <input type="text" placeholder='País...' value={displayCountry} onChange={e => setDisplayCountry(e.target.value)} />
-        <input type="date" placeholder='Fecha de nacimiento...' value={displayBirth} onChange={e => setDisplayBirth(e.target.value)} required />
-        <button>Guardar</button>
-        <button onClick={() => reload()}>Cancelar</button>
+        Avatar <input name='avatar' type='file' accept='image/*' />
+        Nombre de usuario <input type="text" placeholder='Username...' value={displayUsername} onChange={e => setDisplayUsername(e.target.value)} minLength='6' />
+        Nombre <input type="text" placeholder='Nombre...' value={displayName} onChange={e => setDisplayName(e.target.value)} />
+        Apellido <input type="text" placeholder='Apellido...' value={displaySurname} onChange={e => setDisplaySurname(e.target.value)} />
+        País <input type="text" placeholder='País...' value={displayCountry} onChange={e => setDisplayCountry(e.target.value)} />
+        Fecha de nacimiento <input type="date" placeholder='Fecha de nacimiento...' value={displayBirth} onChange={e => setDisplayBirth(e.target.value)} />
+        <div className='form-buttons'>
+        <div>Guardar</div>
+        <div onClick={() => reload()}>Cancelar</div>
+        </div>
       </form>
     </div>
   )
