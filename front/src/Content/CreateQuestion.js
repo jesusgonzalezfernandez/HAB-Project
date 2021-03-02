@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import './CreateQuestion.css'
 
 
@@ -99,7 +100,7 @@ function CreateQuestion() {
             'http://localhost:3001/questions', 
             // Contenido
             {
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
                 body: JSON.stringify(questionData),
                 method: 'POST'
             })
@@ -110,7 +111,7 @@ function CreateQuestion() {
             res.text().then(e => setApiError(e))
           
         } else {
-          
+          <Redirect to= "/questions"/>
             console.log('El fetch se ha realizado correctamente');
             
             // Resetear el posible error que se hubiera podido producir
