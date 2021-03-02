@@ -55,11 +55,13 @@ function EditPassword({ reload }) {
   return (
     <div className='edit-password'>
       <form onSubmit={handleSubmit}>
-        <input type="password" placeholder='Confirma tu antigua contraseña...' value={oldPassword} onChange={e => setOldPassword(e.target.value)} minLength='3' required/>
-        <input type="password" placeholder='Nueva contraseña...' value={password} onChange={e => setPassword(e.target.value)} minLength='3' required/>
-        <input type="password" placeholder='Confirma tu nueva contraseña...' value={confirmPass} onChange={e => setConfirmPass(e.target.value)} required/>
-        <button>Guardar</button>
-        <button onClick={() => reload()}>Cancelar</button>
+        Confirma tu antigua contraseña <input type="password" placeholder='Antigua contraseña...' value={oldPassword} onChange={e => setOldPassword(e.target.value)} minLength='3' required />
+        Nueva contraseña <input type="password" placeholder='Nueva contraseña...' value={password} onChange={e => setPassword(e.target.value)} minLength='3' required />
+        Confirma tu nueva contraseña <input type="password" placeholder='Nueva contraseña...' value={confirmPass} onChange={e => setConfirmPass(e.target.value)} required />
+        <div className='form-buttons'>
+          <div>Guardar</div>
+          <div onClick={() => reload()}>Cancelar</div>
+        </div>
       </form>
       {!passError &&
         <div>Error</div>

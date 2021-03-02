@@ -16,7 +16,7 @@ function DeleteAcount() {
   const [password, setPassword] = useState()
   const [repeatPassword, setRepeatPassword] = useState()
   const [error, setError] = useState()
-  
+
   const dispatch = useDispatch()
 
   const handleSubmit = async e => {
@@ -24,70 +24,75 @@ function DeleteAcount() {
     e.preventDefault()
 
     // Si la contraseña de confirmación no coincide se lanza un error y se detiene el proceso
-    if(repeatPassword !== password) {
-      setError('Las Contraseñas No Coinciden') 
+    if (repeatPassword !== password) {
+      setError('Las Contraseñas No Coinciden')
       return
     }
-    
+
     const res = await fetch(`http://localhost:3001/users/${userID}`,
       {
         headers: { 'Content-Type': 'application/json', auth: 'Bearer ' + login.token },
         method: 'DELETE',
-        body: JSON.stringify({reason, password})
+        body: JSON.stringify({ reason, password })
       })
 
-    if(!res.ok) {
+    if (!res.ok) {
       // Si ha habido algún error, se guarda para mostrarlo
       res.text().then(e => setError(e))
       console.log('Se ha producido un error');
     } else {
       // Si ha sido exitoso, se anula el login y se redirige al home
-      dispatch({type: 'logout'})
+      dispatch({ type: 'logout' })
       return <Redirect to='/' />
     }
-    
+
   }
 
 
   return (
-    <div className='expert-profile-edit'>
+    <div className='delete-acount'>
 
       <form onSubmit={handleSubmit}>
-        {error && 
+        {error &&
           <div className='delete-profile-error'>Se Ha Producido un Error: {error}</div>
         }
-        
-        <input 
-          type="text" 
-          placeholder='Razón...' 
-          value={reason} 
+
+        ¿Cuál es el motivo? Nos ayudarás a mejorar <textarea
+          type="text"
+          placeholder='Razón...'
+          value={reason}
           minLength='3'
-          onChange={ e => setReason(e.target.value)}
-        />
-        
-        <input 
-          type="password" 
-          placeholder='Contraseña...' 
-          value={password} 
-          onChange={e => setPassword(e.target.value)} 
+          onChange={e => setReason(e.target.value)}
         />
 
-        <input 
-          type="password" 
-          placeholder='Confirmar Contraseña...' 
-          value={repeatPassword} 
-          onChange={e => setRepeatPassword(e.target.value)} 
+        Confirma tu contraseña
+        <input
+          type="password"
+          placeholder='Contraseña...'
+          value={password}
+          onChange={e => setPassword(e.target.value)}
         />
 
-        <button>Enviar</button>
-        
+        Confirma tu contraseña para continuar. Será definitivo 
+        <input
+          type="password"
+          placeholder='Confirmar Contraseña...'
+          value={repeatPassword}
+          onChange={e => setRepeatPassword(e.target.value)}
+        />
+
+        <div className='form-buttons'>
+          <div>Guardar</div>
+          <div onClick={() => { setPassword(''); setRepeatPassword(''); setReason('') }}>Cancelar</div>
+        </div>
+
       </form>
 
-      <button 
+      {/* <button 
         onClick={() => {setPassword(''); setRepeatPassword(''); setReason('')}}>
           Cancelar
-      </button>
-      
+      </button> */}
+
     </div>
   )
 }
