@@ -7,15 +7,20 @@
 
 .profile-card {
     padding: 20px;
-    box-sizing: border-box;
 }
 
 .user-info {
+    max-width: 30vw;
     padding: 20px;
     display: flex;
     align-items: center;
     max-width: 300px;
     gap: 30px;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: 'Jost', sans-serif;
+    text-transform: capitalize;
+    color: #3307ad;
 }
 
 img.profile-avatar {
